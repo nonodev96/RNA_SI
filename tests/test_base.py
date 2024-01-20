@@ -1,5 +1,5 @@
-from project_name.base import NAME
+from tfm_sai.base import NAME
 
 
 def test_base():
-    assert NAME == "project_name"
+    assert NAME == "tfm_sai"
