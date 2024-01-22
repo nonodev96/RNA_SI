@@ -6,6 +6,7 @@ do
         n) name=${OPTARG};;
         u) urlname=${OPTARG};;
         d) description=${OPTARG};;
+        *) echo "DEFAULT";;
     esac
 done
 
@@ -18,7 +19,7 @@ echo "Renaming project..."
 
 original_author="nonodev96"
 original_name="tfm_sai"
-original_urlname="TFM-SAI"
+original_urlname="TFM_SAI"
 original_description="Awesome tfm_sai created by nonodev96"
 # for filename in $(find . -name "*.*") 
 for filename in $(git ls-files) 

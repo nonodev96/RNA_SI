@@ -53,8 +53,8 @@ See also
 ---
 # tfm_sai
 
-[![codecov](https://codecov.io/gh/nonodev96/TFM-SAI/branch/main/graph/badge.svg?token=TFM-SAI_token_here)](https://codecov.io/gh/nonodev96/TFM-SAI)
-[![CI](https://github.com/nonodev96/TFM-SAI/actions/workflows/main.yml/badge.svg)](https://github.com/nonodev96/TFM-SAI/actions/workflows/main.yml)
+[![codecov](https://codecov.io/gh/nonodev96/TFM_SAI/branch/main/graph/badge.svg?token=TFM_SAI_token_here)](https://codecov.io/gh/nonodev96/TFM_SAI)
+[![CI](https://github.com/nonodev96/TFM_SAI/actions/workflows/main.yml/badge.svg)](https://github.com/nonodev96/TFM_SAI/actions/workflows/main.yml)
 
 Awesome tfm_sai created by nonodev96
 

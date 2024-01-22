@@ -33,7 +33,7 @@ setup(
     name="tfm_sai",
     version=read("tfm_sai", "VERSION"),
     description="Awesome tfm_sai created by nonodev96",
-    url="https://github.com/nonodev96/TFM-SAI/",
+    url="https://github.com/nonodev96/TFM_SAI/",
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
     author="nonodev96",
