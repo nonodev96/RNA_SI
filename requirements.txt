@@ -8,3 +8,5 @@ tensorflow
 keras
 torch
 torchvision
+opencv-python
+matplotlib

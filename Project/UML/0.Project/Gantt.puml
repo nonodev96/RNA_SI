@@ -1,0 +1,40 @@
+@startgantt Gantt
+ganttscale daily zoom 1
+
+
+-- Planteamiento del proyecto --
+Project starts 2024-01-9
+
+[Capitulo 1] requires 4 days
+[Capitulo 2] requires 4 days
+[Capitulo 3] requires 4 days
+' Por aqui vamos 
+[Capitulo 4] requires 4 days
+[Capitulo 5] requires 4 days
+[Capitulo 6] requires 4 days
+[Capitulo 7] requires 4 days
+[Capitulo 8] requires 4 days
+[Capitulo 9] requires 4 days
+[Capitulo 10] requires 4 days
+[Capitulo 11] requires 4 days
+[Capitulo 12] requires 4 days
+[Capitulo 13] requires 4 days
+[Capitulo 14] requires 4 days
+
+
+[Capitulo 2] starts at [Capitulo 1]'s end
+[Capitulo 3] starts at [Capitulo 2]'s end
+[Capitulo 4] starts at [Capitulo 3]'s end
+[Capitulo 5] starts at [Capitulo 4]'s end
+[Capitulo 6] starts at [Capitulo 5]'s end
+[Capitulo 7] starts at [Capitulo 6]'s end
+[Capitulo 8] starts at [Capitulo 7]'s end
+[Capitulo 9] starts at [Capitulo 8]'s end
+[Capitulo 10] starts at [Capitulo 9]'s end
+[Capitulo 11] starts at [Capitulo 10]'s end
+[Capitulo 12] starts at [Capitulo 11]'s end
+[Capitulo 13] starts at [Capitulo 12]'s end
+[Capitulo 14] starts at [Capitulo 13]'s end
+
+
+@endgantt

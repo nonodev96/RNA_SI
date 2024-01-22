@@ -1,0 +1,323 @@
+Data Poisoning Attack
+
+Use colab.research.google.com via your gmail credentials
+
+The majority of this code was written by Xi Li.
+Changes to the Code
+Copy resnet.py from google drive to current directory of the runtime environment in order to import models from resnet.py. This is done by adding the line !cp [path to resnet.py] ., but before you can interact with your google drive folder, you have to "mount" it; go to "Files" tab on the left, then hit the "mount drive" button. Tip: right click on a folder or file in the file explorer tab in colab to copy its path to clipboard.
+Save poisoned models to google drive instead of a local repository
+Save image data to google drive instead of runtime environment local directory. This isn't necessary for running this code, but if you don't do this, you will have to redownload the data every time you leave colab and come back.
+Using a GPU in Colab
+
+By default, code is run on a CPU. To use a GPU, select Runtime > Change runtime type > Hardware accelerator > GPU
+
+see the program DP_attack_solution_colab.py
+
+Running the program:
+save the program DP_attack_solution_colab.py as 
+DataPoisoning.py ?
+
+DataPoisoning(N0=1, N1=1, N2=0, N3=0, N4=0)
+DataPoisoning(N0=0, N1=1, N2=1, N3=0, N4=0)
+
+Learning rate:  0.001
+0, avg_train_loss: 0.0, train_acc: 0.7164655172413793
+test acc: 0.8783810079782058
+Learning rate:  0.001
+1, avg_train_loss: 0.0, train_acc: 0.8953448275862069
+test acc: 0.9737302977232924
+Learning rate:  0.001
+2, avg_train_loss: 0.0, train_acc: 0.9371551724137931
+test acc: 0.9830706363105662
+Learning rate:  0.001
+3, avg_train_loss: 0.0, train_acc: 0.9405172413793104
+test acc: 0.9772329246935202
+Learning rate:  0.001
+4, avg_train_loss: 0.0, train_acc: 0.9412068965517242
+test acc: 0.9752870208211715
+Learning rate:  0.001
+5, avg_train_loss: 0.0, train_acc: 0.9446551724137932
+test acc: 0.9830706363105662
+Learning rate:  0.001
+6, avg_train_loss: 0.0, train_acc: 0.9444827586206896
+test acc: 0.9852111305701499
+Learning rate:  0.001
+7, avg_train_loss: 0.0, train_acc: 0.9468965517241379
+test acc: 0.9861840825063242
+Learning rate:  0.001
+8, avg_train_loss: 0.0, train_acc: 0.9514655172413793
+test acc: 0.9896867094765519
+Learning rate:  0.001
+9, avg_train_loss: 0.0, train_acc: 0.9520689655172414
+test acc: 0.9892975287020821
+Learning rate:  0.001
+10, avg_train_loss: 0.0, train_acc: 0.9537931034482758
+test acc: 0.9889083479276124
+Learning rate:  0.001
+11, avg_train_loss: 0.0, train_acc: 0.954051724137931
+test acc: 0.9871570344424986
+Learning rate:  0.001
+12, avg_train_loss: 0.0, train_acc: 0.9543103448275863
+test acc: 0.9916326133489005
+Learning rate:  0.001
+13, avg_train_loss: 0.0, train_acc: 0.9539655172413793
+test acc: 0.9840435882467407
+Learning rate:  0.001
+14, avg_train_loss: 0.0, train_acc: 0.955948275862069
+test acc: 0.9889083479276124
+Learning rate:  0.001
+15, avg_train_loss: 0.0, train_acc: 0.954396551724138
+test acc: 0.986573263280794
+Learning rate:  0.001
+16, avg_train_loss: 0.0, train_acc: 0.954396551724138
+test acc: 0.9875462152169683
+Learning rate:  0.001
+17, avg_train_loss: 0.0, train_acc: 0.9553448275862069
+test acc: 0.989492119089317
+Learning rate:  0.001
+18, avg_train_loss: 0.0, train_acc: 0.9553448275862069
+test acc: 0.9926055652850749
+Learning rate:  0.001
+19, avg_train_loss: 0.0, train_acc: 0.9579310344827586
+test acc: 0.99241097489784
+Learning rate:  0.001
+20, avg_train_loss: 0.0, train_acc: 0.9591379310344827
+test acc: 0.9908542517999611
+Learning rate:  0.0001
+21, avg_train_loss: 0.0, train_acc: 0.9597413793103449
+test acc: 0.99241097489784
+Learning rate:  0.0001
+22, avg_train_loss: 0.0, train_acc: 0.9601724137931035
+test acc: 0.99241097489784
+Learning rate:  0.0001
+23, avg_train_loss: 0.0, train_acc: 0.9604310344827586
+test acc: 0.9922163845106052
+Learning rate:  0.0001
+24, avg_train_loss: 0.0, train_acc: 0.9604310344827586
+test acc: 0.9918272037361354
+Learning rate:  0.0001
+25, avg_train_loss: 0.0, train_acc: 0.9608620689655173
+test acc: 0.9920217941233703
+Learning rate:  0.0001
+26, avg_train_loss: 0.0, train_acc: 0.9604310344827586
+test acc: 0.9918272037361354
+Learning rate:  0.0001
+27, avg_train_loss: 0.0, train_acc: 0.9605172413793104
+test acc: 0.9918272037361354
+Learning rate:  0.0001
+28, avg_train_loss: 0.0, train_acc: 0.9608620689655173
+test acc: 0.9916326133489005
+Learning rate:  0.0001
+29, avg_train_loss: 0.0, train_acc: 0.9605172413793104
+test acc: 0.9922163845106052
+Learning rate:  0.0001
+30, avg_train_loss: 0.0, train_acc: 0.9605172413793104
+test acc: 0.99241097489784
+Learning rate:  0.0001
+31, avg_train_loss: 0.0, train_acc: 0.9612931034482759
+test acc: 0.9929947460595446
+Learning rate:  0.0001
+32, avg_train_loss: 0.0, train_acc: 0.9603448275862069
+test acc: 0.9922163845106052
+Learning rate:  0.0001
+33, avg_train_loss: 0.0, train_acc: 0.9613793103448276
+test acc: 0.9928001556723098
+Learning rate:  0.0001
+34, avg_train_loss: 0.0, train_acc: 0.9610344827586207
+test acc: 0.99241097489784
+Learning rate:  0.0001
+35, avg_train_loss: 0.0, train_acc: 0.9606034482758621
+test acc: 0.9922163845106052
+Learning rate:  0.0001
+36, avg_train_loss: 0.0, train_acc: 0.9612068965517241
+test acc: 0.9914380229616657
+Learning rate:  0.0001
+37, avg_train_loss: 0.0, train_acc: 0.9612931034482759
+test acc: 0.9914380229616657
+Learning rate:  0.0001
+38, avg_train_loss: 0.0, train_acc: 0.9613793103448276
+test acc: 0.9929947460595446
+Learning rate:  0.0001
+39, avg_train_loss: 0.0, train_acc: 0.9614655172413793
+test acc: 0.9933839268340144
+Learning rate:  0.0001
+40, avg_train_loss: 0.0, train_acc: 0.9607758620689655
+test acc: 0.9933839268340144
+Learning rate:  1e-05
+41, avg_train_loss: 0.0, train_acc: 0.9620689655172414
+test acc: 0.9933839268340144
+Learning rate:  1e-05
+42, avg_train_loss: 0.0, train_acc: 0.9618103448275862
+test acc: 0.9929947460595446
+Learning rate:  1e-05
+43, avg_train_loss: 0.0, train_acc: 0.9623275862068965
+test acc: 0.9931893364467795
+Learning rate:  1e-05
+44, avg_train_loss: 0.0, train_acc: 0.9616379310344828
+test acc: 0.9933839268340144
+Learning rate:  1e-05
+45, avg_train_loss: 0.0, train_acc: 0.9618103448275862
+test acc: 0.9931893364467795
+Learning rate:  1e-05
+46, avg_train_loss: 0.0, train_acc: 0.9616379310344828
+test acc: 0.9920217941233703
+Learning rate:  1e-05
+47, avg_train_loss: 0.0, train_acc: 0.9623275862068965
+test acc: 0.9933839268340144
+Learning rate:  1e-05
+48, avg_train_loss: 0.0, train_acc: 0.9621551724137931
+test acc: 0.9920217941233703
+Learning rate:  1e-05
+49, avg_train_loss: 0.0, train_acc: 0.9627586206896551
+test acc: 0.99241097489784
+Learning rate:  0.001
+0, avg_train_loss: 0.0, train_acc: 0.6788793103448276
+test acc: 0.9165207238762405
+Learning rate:  0.001
+1, avg_train_loss: 0.0, train_acc: 0.8618965517241379
+test acc: 0.9696438995913602
+Learning rate:  0.001
+2, avg_train_loss: 0.0, train_acc: 0.9122413793103449
+test acc: 0.9661412726211325
+Learning rate:  0.001
+3, avg_train_loss: 0.0, train_acc: 0.9141379310344827
+test acc: 0.9219692547188169
+Learning rate:  0.001
+4, avg_train_loss: 0.0, train_acc: 0.9126724137931035
+test acc: 0.9813193228254524
+Learning rate:  0.001
+5, avg_train_loss: 0.0, train_acc: 0.9212931034482759
+test acc: 0.9817085035999221
+Learning rate:  0.001
+6, avg_train_loss: 0.0, train_acc: 0.9248275862068965
+test acc: 0.9859894921190894
+Learning rate:  0.001
+7, avg_train_loss: 0.0, train_acc: 0.9281034482758621
+test acc: 0.9871570344424986
+Learning rate:  0.001
+8, avg_train_loss: 0.0, train_acc: 0.9297413793103448
+test acc: 0.9867678536680288
+Learning rate:  0.001
+9, avg_train_loss: 0.0, train_acc: 0.9297413793103448
+test acc: 0.9898812998637867
+Learning rate:  0.001
+10, avg_train_loss: 0.0, train_acc: 0.9338793103448276
+test acc: 0.9892975287020821
+Learning rate:  0.001
+11, avg_train_loss: 0.0, train_acc: 0.9312068965517242
+test acc: 0.9892975287020821
+Learning rate:  0.001
+12, avg_train_loss: 0.0, train_acc: 0.9316379310344828
+test acc: 0.9887137575403775
+Learning rate:  0.001
+13, avg_train_loss: 0.0, train_acc: 0.9346551724137931
+test acc: 0.9935785172212492
+Learning rate:  0.001
+14, avg_train_loss: 0.0, train_acc: 0.9352586206896552
+test acc: 0.99241097489784
+Learning rate:  0.001
+15, avg_train_loss: 0.0, train_acc: 0.9338793103448276
+test acc: 0.9916326133489005
+Learning rate:  0.001
+16, avg_train_loss: 0.0, train_acc: 0.9364655172413793
+test acc: 0.9922163845106052
+Learning rate:  0.001
+17, avg_train_loss: 0.0, train_acc: 0.9360344827586207
+test acc: 0.9914380229616657
+Learning rate:  0.001
+18, avg_train_loss: 0.0, train_acc: 0.9380172413793103
+test acc: 0.9912434325744308
+Learning rate:  0.001
+19, avg_train_loss: 0.0, train_acc: 0.9376724137931034
+test acc: 0.9910488421871959
+Learning rate:  0.001
+20, avg_train_loss: 0.0, train_acc: 0.9381896551724138
+test acc: 0.9918272037361354
+Learning rate:  0.0001
+21, avg_train_loss: 0.0, train_acc: 0.9375
+test acc: 0.9920217941233703
+Learning rate:  0.0001
+22, avg_train_loss: 0.0, train_acc: 0.9384482758620689
+test acc: 0.99241097489784
+Learning rate:  0.0001
+23, avg_train_loss: 0.0, train_acc: 0.9393965517241379
+test acc: 0.9926055652850749
+Learning rate:  0.0001
+24, avg_train_loss: 0.0, train_acc: 0.9393965517241379
+test acc: 0.9937731076084841
+Learning rate:  0.0001
+25, avg_train_loss: 0.0, train_acc: 0.94
+test acc: 0.993967697995719
+Learning rate:  0.0001
+26, avg_train_loss: 0.0, train_acc: 0.9407758620689655
+test acc: 0.9933839268340144
+Learning rate:  0.0001
+27, avg_train_loss: 0.0, train_acc: 0.9401724137931035
+test acc: 0.993967697995719
+Learning rate:  0.0001
+28, avg_train_loss: 0.0, train_acc: 0.9398275862068965
+test acc: 0.9931893364467795
+Learning rate:  0.0001
+29, avg_train_loss: 0.0, train_acc: 0.9394827586206896
+test acc: 0.9941622883829538
+Learning rate:  0.0001
+30, avg_train_loss: 0.0, train_acc: 0.9399137931034482
+test acc: 0.9941622883829538
+Learning rate:  0.0001
+31, avg_train_loss: 0.0, train_acc: 0.9415517241379311
+test acc: 0.9933839268340144
+Learning rate:  0.0001
+32, avg_train_loss: 0.0, train_acc: 0.9411206896551724
+test acc: 0.9935785172212492
+Learning rate:  0.0001
+33, avg_train_loss: 0.0, train_acc: 0.9404310344827587
+test acc: 0.993967697995719
+Learning rate:  0.0001
+34, avg_train_loss: 0.0, train_acc: 0.940948275862069
+test acc: 0.9937731076084841
+Learning rate:  0.0001
+35, avg_train_loss: 0.0, train_acc: 0.9417241379310345
+test acc: 0.9933839268340144
+Learning rate:  0.0001
+36, avg_train_loss: 0.0, train_acc: 0.9412931034482759
+test acc: 0.993967697995719
+Learning rate:  0.0001
+37, avg_train_loss: 0.0, train_acc: 0.9412068965517242
+test acc: 0.9931893364467795
+Learning rate:  0.0001
+38, avg_train_loss: 0.0, train_acc: 0.9407758620689655
+test acc: 0.9933839268340144
+Learning rate:  0.0001
+39, avg_train_loss: 0.0, train_acc: 0.9397413793103448
+test acc: 0.9941622883829538
+Learning rate:  0.0001
+40, avg_train_loss: 0.0, train_acc: 0.9419827586206897
+test acc: 0.9941622883829538
+Learning rate:  1e-05
+41, avg_train_loss: 0.0, train_acc: 0.9418103448275862
+test acc: 0.9941622883829538
+Learning rate:  1e-05
+42, avg_train_loss: 0.0, train_acc: 0.9412068965517242
+test acc: 0.9941622883829538
+Learning rate:  1e-05
+43, avg_train_loss: 0.0, train_acc: 0.9415517241379311
+test acc: 0.9935785172212492
+Learning rate:  1e-05
+44, avg_train_loss: 0.0, train_acc: 0.9422413793103448
+test acc: 0.9935785172212492
+Learning rate:  1e-05
+45, avg_train_loss: 0.0, train_acc: 0.9418103448275862
+test acc: 0.993967697995719
+Learning rate:  1e-05
+46, avg_train_loss: 0.0, train_acc: 0.9413793103448276
+test acc: 0.9941622883829538
+Learning rate:  1e-05
+47, avg_train_loss: 0.0, train_acc: 0.9413793103448276
+test acc: 0.993967697995719
+Learning rate:  1e-05
+48, avg_train_loss: 0.0, train_acc: 0.9423275862068966
+test acc: 0.993967697995719
+Learning rate:  1e-05
+49, avg_train_loss: 0.0, train_acc: 0.9425
+test acc: 0.9941622883829538
+

@@ -1,0 +1,143 @@
+% !TeX root = main.tex
+\documentclass[12pt, a4paper, twoside]{report}   % Tamaño de papel, de fuente y márgenes
+\usepackage[spanish,es-ucroman]{babel}  % Idioma y codificación, para poder usar
+\usepackage[T1]{fontenc}
+% \usepackage[utf8x]{inputenc} % tildes, eñes, etc., sin problemas
+\usepackage{newunicodechar}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{setspace} % Para fijar el interlineado
+\usepackage{fancyhdr}                   % Para los encabezados y pies
+\usepackage{lipsum}                     % https://www.ctan.org/pkg/lipsum               Para generar texto como contenido de prueba, se puede eliminar en la memoria final
+\usepackage{helvet}                     % https://www.ctan.org/pkg/helvet               Para fuentes (Using common PostScript fonts with LaTeX)
+\usepackage{wallpaper}                  % https://www.ctan.org/pkg/wallpaper            Para introducir el PDF con la portada EPSJ
+\usepackage[absolute,overlay]{textpos}  % https://www.ctan.org/pkg/textpos              
+\usepackage{etoolbox}                   % https://www.ctan.org/pkg/etoolbox             Herramientas de logica, variables y condicionales y bibliografía
+\usepackage[numbers]{natbib}                     % https://www.ctan.org/pkg/natbib               Para gestionar la bibliografia
+\usepackage{csquotes}                   % https://www.ctan.org/pkg/csquotes             
+\usepackage{hyperref}                   % https://www.ctan.org/pkg/hyperref             Para URL como enlaces
+\usepackage{booktabs}                   % https://www.ctan.org/pkg/booktabs             Para tablas con mejor apariencia
+\usepackage{listings}                   % https://www.ctan.org/pkg/listings             Para incluir listados de código
+\usepackage{emoji}                      % https://www.ctan.org/pkg/emoji                 
+\usepackage{xcolor}                     % https://www.ctan.org/pkg/xcolor               El paquete parte de las facilidades básicas del paquete de color 
+\usepackage[ruled,vlined]{algorithm2e}  % https://www.ctan.org/pkg/algorithm2e          https://ctan.javinator9889.com/macros/latex/contrib/algorithm2e/doc/algorithm2e.pdf
+\usepackage[acronym]{glossaries}        % https://www.ctan.org/pkg/glossaries
+\usepackage{pdflscape}
+
+% \usepackage[acronym,nomain,toc,automake]{glossaries-extra}
+% \usepackage[acronym,toc=true,nomain,xindy]{glossaries-extra}
+% \setabbreviationstyle[acronym]{long-short} 
+
+\usepackage{csvsimple}                  % https://www.ctan.org/pkg/csvsimple
+\usepackage{amsmath}                    % https://www.ctan.org/pkg/amsmath
+\usepackage{actuarialangle}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{commath}
+\usepackage{tabularx}
+
+% VTimeline
+\usepackage{charter} 
+\usepackage{environ}
+\usepackage{tikz}
+\usetikzlibrary{calc,matrix}
+
+\usepackage{amsthm}
+\newtheorem{theorem}{Teoremas}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\usepackage{enumitem}
+\setlist{nolistsep}
+
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+\newcommand{\addterm}[7][]{%
+  \newglossaryentry{#2}{name={\textit{#3} (angl.\ \textit{#5})},
+     first={\textit{#3} (angl.\ \textit{#5})},
+     firstplural={\textit{#4} (angl.\ \textit{#6})},
+     text={#3},
+     plural={#4},
+     sort={#3},
+     description={#7},#1}%
+}
+
+
+\input{macros/config}
+\input{macros/config-lstlisting}
+\input{macros/config-vtimeline}
+\input{macros/PortadaMaster}
+\input{glossaries_1}
+
+\begin{document}
+% \setemojifont{Twemoji Mozilla}
+
+\Portada~
+
+
+\pagenumbering{roman}  % Numeración romana para los agradecimientos, dedicatoria y tablas de contenidos
+
+\input{0_Agradecimientos.tex} % Editar este archivo para introducir los agradecimientos/dedicatoria
+
+\cleardoublepage
+\tableofcontents  % Tabla de contenidos
+
+% ===== Comentar o eliminar las líneas de los índices que no deseen incluirse al inicio de la memoria
+
+% \clearpage\thispagestyle{empty}\cleardoublepage
+% \listoffigures		% Índice de figuras
+
+% \clearpage\thispagestyle{empty}\cleardoublepage
+% \listoftables 		% Índice de tablas
+
+% \clearpage\thispagestyle{empty}\cleardoublepage
+% \listofalgorithms
+
+% \clearpage\thispagestyle{empty}\cleardoublepage
+% \lstlistoflistings		% Índice de listados
+
+% \clearpage\thispagestyle{empty}\cleardoublepage
+\pagenumbering{arabic} % Numeración arábiga para el resto del documento
+
+% ===== Archivos LaTeX con los distintos capítulos que componen la memoria
+
+% \input{0__Tutorial} 
+% \clearpage\thispagestyle{empty}\cleardoublepage
+
+\input{0_0_Test.tex}
+\clearpage\thispagestyle{empty}\cleardoublepage
+
+\input{00_Notation.tex}
+\clearpage\thispagestyle{empty}\cleardoublepage
+
+\input{1_Introduccion.tex}
+\clearpage\thispagestyle{empty}\cleardoublepage
+
+\input{2_EstadoDelArte}
+\clearpage\thispagestyle{empty}\cleardoublepage
+
+\input{3_Objetivos.tex}
+\clearpage\thispagestyle{empty}\cleardoublepage
+
+\input{4_MaterialMetodos.tex}
+\clearpage\thispagestyle{empty}\cleardoublepage
+
+\input{5_Resultados.tex}
+\clearpage\thispagestyle{empty}\cleardoublepage
+
+\input{6_Conclusiones.tex}
+\clearpage\thispagestyle{empty}\cleardoublepage
+
+\clearpage
+
+\printglossaries
+% ===== Configuración de la bibliografía
+
+\pagenumbering{roman}  % Numeración romana para el índice
+\bibliographystyle{unsrtnat}
+\bibliography{bibliography.bib}
+\addcontentsline{toc}{chapter}{Bibliografía}
+\nocite{*}
+
+\end{document}

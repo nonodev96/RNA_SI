@@ -1,0 +1,10 @@
+Explicabilidad
+Backpropagation
+Multilayer
+Unit
+Logic
+Threshold
+Convolutional
+networks
+Recurent
+Perceptron

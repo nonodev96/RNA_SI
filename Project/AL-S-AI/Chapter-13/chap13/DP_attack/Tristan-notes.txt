@@ -1,0 +1,70 @@
+https://colab.research.google.com/drive/1V5uP-tthz3orRjlLyp8HpDotqOFWDmNo?usp=sharing#scrollTo=0vdwL_FBsqTF
+
+
+Data Poisoning Attack
+
+The majority of this code was written by Xi Li.
+
+Changes to the Code
+Copy resnet.py from google drive to current directory of the runtime environment in order to import models from resnet.py. This is done by adding the line !cp [path to resnet.py] ., but before you can interact with your google drive folder, you have to "mount" it; go to "Files" tab on the left, then hit the "mount drive" button. Tip: right click on a folder or file in the file explorer tab in colab to copy its path to clipboard.
+Save poisoned models to google drive instead of a local repository
+Save image data to google drive instead of runtime environment local directory. This isn't necessary for running this code, but if you don't do this, you will have to redownload the data every time you leave colab and come back.
+Using a GPU in Colab
+By default, code is run on a CPU. To use a GPU, select Runtime > Change runtime type > Hardware accelerator > GPU
+
+[ ]
+import numpy as np
+import os
+import torchvision.transforms as transforms
+import torchvision
+import torch.utils.data as Data
+import copy as cp
+import torch
+import torch.optim as optim
+!cp "/content/drive/MyDrive/Colab Notebooks/data_poisoning/resnet.py" .
+from resnet import ResNet18
+
+Running the program
+
+[ ]
+DataPoisoning(N0=1, N1=0, N2=0, N3=0, N4=0)
+Testing Poisoned Models
+The next step is to test the poisoned models that were trained earlier.
+
+[ ]
+
+
+def func():
+    # trainset = torch.load("/content/drive/MyDrive/Colab Notebooks/data_poisoning/trainset.pth")
+    testset = torch.load("/content/drive/MyDrive/Colab Notebooks/data_poisoning/testset.pth")
+    BATCH_SIZE=32
+    NC=5
+    Test_loader = Data.DataLoader(
+        dataset=testset,
+        batch_size=BATCH_SIZE,
+        shuffle=True, num_workers=1, )
+
+    base = "/content/drive/MyDrive/Colab Notebooks/data_poisoning/models/"
+    poisoned_models = [
+        "poisoned_0_0_0_0_0.pth",
+        # "poisoned_0_0_0_0_1.pth",
+        # "poisoned_0_0_0_1_0.pth",
+        # "poisoned_0_0_1_0_0.pth",
+        # "poisoned_0_1_0_0_0.pth",
+        # "poisoned_1_0_0_0_0.pth",
+        # "poisoned_0_1_1_0_0.pth",
+        # "poisoned_1_0_0_0_0.pth",
+        # "poisoned_1_1_0_0_0.pth",
+        # "poisoned_1_1_1_0_0.pth",
+        # "poisoned_1_1_1_1_1.pth",
+    ]
+    for m in poisoned_models:
+        print(m)
+        model = ResNet18(num_classes=NC)
+        model.to(device)
+        model.load_state_dict(torch.load(base + m))
+        model.eval()
+        test(model, Test_loader)
+
+func()
+

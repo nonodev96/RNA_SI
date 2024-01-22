@@ -1,0 +1,7 @@
+https://interactivechaos.com/es/manual/tutorial-de-machine-learning/tutorial-de-machine-learning
+https://people.idsia.ch/~juergen/who-invented-backpropagation-2014.html
+https://en.wikipedia.org/wiki/Glossary_of_artificial_intelligence
+
+https://en.wikipedia.org/wiki/Feedforward_neural_network
+https://www.techtarget.com/whatis/A-Timeline-of-Machine-Learning-History
+https://www.forbes.com/sites/gilpress/2021/05/19/114-milestones-in-the-history-of-artificial-intelligence-ai/

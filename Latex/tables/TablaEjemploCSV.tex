@@ -1,0 +1,14 @@
+\csvstyle{MyStyle}{
+late after line=\\,
+late after last line=\\\bottomrule,
+head to column names
+}
+
+
+\begin{tabularx}{\linewidth}{Xc}\toprule
+\textbf{Name} & \textbf{Given name}\\\midrule
+\csvreader[MyStyle]
+{tables/ejemplo.csv}
+{}
+{\name & \givenname}
+\end{tabularx}

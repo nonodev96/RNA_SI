@@ -116,7 +116,22 @@ init:             ## Initialize the project based on an application template.
 	@./.github/init.sh
 
 
-# This project has been generated from rochacbruno/python-project-template
+# This project has been generated from template rochacbruno/python-project-template
 # __author__ = 'rochacbruno'
 # __repo__ = https://github.com/rochacbruno/python-project-template
 # __sponsor__ = https://github.com/sponsors/rochacbruno/
+
+
+.PHONY: manual
+manual:             ## Build the manual.
+	@echo "building manual ..."
+	@pandoc manual/MANUAL.1.md -s -t man -o manual/tfm_sai.1
+	@gzip manual/tfm_sai.1
+	@sudo cp manual/tfm_sai.1.gz /usr/share/man/man1/
+	@sudo mandb
+
+.PHONY: manual-read
+manual-read:
+	@echo "building manual ..."
+	@pandoc manual/MANUAL.1.md -s -t man -o manual/tfm_sai.1
+	@man -l manual/tfm_sai.1
