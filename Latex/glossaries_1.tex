@@ -11,6 +11,7 @@
 
 
 \newglossaryentry{latex}        {name={latex},      description={Is a mark up language specially suited for scientific documents}}
+\newglossaryentry{AGI}          {name={AGI},        description={La abreviatura Inteligencia artificial general}}
 \newglossaryentry{SDLC}         {name={SDLC},       description={La abreviatura SDLC se refiere en ocasiones al ciclo de vida del desarrollo de sistema}}
 \newglossaryentry{SAST}         {name={SAST},       description={Las pruebas de seguridad de aplicaciones estáticas (SAST), también conocidas como Static Application Security Testing, de pruebas de seguridad}}
 \newglossaryentry{DAST}         {name={DAST},       description={Las pruebas de seguridad de aplicaciones dinámicas (DAST), también conocidas como Dynamic Application Security Testing, de pruebas de seguridad}}
@@ -19,29 +20,35 @@
 
 
 % Términos
-\newglossaryentry{ACC}    {name={ACC (Accuracy on a clean test/evaluation set)},    description={Precisión}}
-\newglossaryentry{AI}     {name={AI (Artifical Intelligence)},                      description={Inteligencia Artificial}}
-\newglossaryentry{ML}     {name={ML (Machine Learning)},                            description={Machine Learning}}
-\newglossaryentry{AL}     {name={AL (Active Learning)},                             description={Aprendizaje activo}}
-\newglossaryentry{AUC}    {name={AUC (Area Under the (ROC) Curve)},                 description={Área bajo la curva (ROC)}}
-\newglossaryentry{PAUC}   {name={PAUC (Partial (ROC) Area Under the Curve)},        description={Área parcial bajo la curva (ROC)}}
-\newglossaryentry{CS}     {name={CS (Cosine Similarity)},                           description={Similitud del coseno}}
-\newglossaryentry{ROC}    {name={CS (Receiver Operating Characteristic)},           description={Característica Operativa del Receptor}}
-\newglossaryentry{RL}     {name={RL (Aprendizaje reforzado)},                       description={Aprendizaje reforzado}}
+\newglossaryentry{ART-NN}   {name={ART (Adaptive Resonance Theory)},                description={Modelo de red neuronal que equilibra la adaptación a nueva información con la estabilidad frente a patrones familiares}}
+\newglossaryentry{BP-NN}    {name={BP (Backpropagation)},                           description={Método utilizado en redes neuronales para calcular el gradiente y el cálculo de los pesos, es una abreviarura de ``propagación de errores hacia atrás''}}
+\newglossaryentry{MLP}      {name={MLP (Multilayer Perceptron)},                    description={El Perceptron multicapa es una red neuronal artificial formada por capas local o totalmente conectadas}}
+
+\newglossaryentry{ACC}      {name={ACC (Accuracy on a clean test/evaluation set)},  description={Precisión}}
+\newglossaryentry{AI}       {name={AI (Artifical Intelligence)},                    description={Inteligencia Artificial}}
+\newglossaryentry{ML}       {name={ML (Machine Learning)},                          description={Machine Learning}}
+\newglossaryentry{AL}       {name={AL (Active Learning)},                           description={Aprendizaje activo}}
+\newglossaryentry{AUC}      {name={AUC (Area Under the (ROC) Curve)},               description={Área bajo la curva (ROC)}}
+\newglossaryentry{PAUC}     {name={PAUC (Partial (ROC) Area Under the Curve)},      description={Área parcial bajo la curva (ROC)}}
+\newglossaryentry{CS}       {name={CS (Cosine Similarity)},                         description={Similitud del coseno}}
+\newglossaryentry{ROC}      {name={CS (Receiver Operating Characteristic)},         description={Característica Operativa del Receptor}}
+\newglossaryentry{RL}       {name={RL (Aprendizaje reforzado)},                     description={Aprendizaje reforzado}}
 %-> Terminos del libro
 
 
 % Tipos de redes
-\newglossaryentry{NN}       {name={NN (Neural Network)},                            description={Red neuronal}}
-\newglossaryentry{DNN}      {name={DNN (Deep Neural Network)},                      description={Red neuronal profunda}}
-\newglossaryentry{CNN}      {name={CNN (Convolutional Neural Network)},             description={Red neuronal convolucional}}
-\newglossaryentry{GAN}      {name={GAN (Generative Adversarial Network)},           description={Red generativa adversarial}}
-\newglossaryentry{FNN}      {name={FNN (Feedforward Neural Network)},               description={Es una clase de redes neuronales}}
-\newglossaryentry{RNN}      {name={RNN (Recurrent Neural Network)},                 description={Es una clase de redes neuronales en la que las conexiones entre nodos forma un grafo dirigido a lo largo de una secuencia iterativa temporal. A diferencia de las FNN, las RNN puede usar sus pesos internos para procesar secuencias de entrada}}
-\newglossaryentry{GNN}      {name={GNN (Graph Neural Network)},                 description={Es una clase de redes neuronales especializada eb el procesamiento de datos que se puedan representar como gráficos}}
-\newglossaryentry{LSTM}     {name={LSTM (Long Short-Term Memory)},                  description={Memoria larga a corto plazo}}
-\newglossaryentry{ResNet-n} {name={ResNet-n (Residual Neural Network architecture with $n$ layers)},  description={Arquitectura de red neuronal residual con $n$ capas}}
-\newglossaryentry{LeNet-n}  {name={LeNet-n (Learnable Neural Network architecture with $n$ layers)},  description={Arquitectura de red neuronal aprendible con $n$ capas}}
+\newglossaryentry{NN}       {name={NN (Neural Network)},                                                description={Red neuronal}}
+\newglossaryentry{DNN}      {name={DNN (Deep Neural Network)},                                          description={Red neuronal profunda}}
+\newglossaryentry{CNN}      {name={CNN (Convolutional Neural Network)},                                 description={Red neuronal convolucional}}
+\newglossaryentry{GAN}      {name={GAN (Generative Adversarial Network)},                               description={Red generativa adversarial}}
+\newglossaryentry{FNN}      {name={FNN (Feedforward Neural Network)},                                   description={Es una clase de redes neuronales}}
+\newglossaryentry{RNN}      {name={RNN (Recurrent Neural Network)},                                     description={Es una clase de redes neuronales en la que las conexiones entre nodos forma un grafo dirigido a lo largo de una secuencia iterativa temporal. A diferencia de las FNN, las RNN puede usar sus pesos internos para procesar secuencias de entrada}}
+\newglossaryentry{GNN}      {name={GNN (Graph Neural Network)},                                         description={Es una clase de redes neuronales especializada eb el procesamiento de datos que se puedan representar como gráficos}}
+\newglossaryentry{LSTM}     {name={LSTM (Long Short-Term Memory)},                                      description={Memoria larga a corto plazo}}
+\newglossaryentry{ResNet-n} {name={ResNet-n (Residual Neural Network architecture with $n$ layers)},    description={Arquitectura de red neuronal residual con $n$ capas}}
+\newglossaryentry{LeNet-n}  {name={LeNet-n (Learnable Neural Network architecture with $n$ layers)},    description={Arquitectura de red neuronal aprendible con $n$ capas}}
+
+\newglossaryentry{StyleGAN}  {name={StyleGAN (Learnable Neural Network architecture with $n$ layers)},    description={Arquitectura de red neuronal aprendible con $n$ capas}}
 %-> Terminos del libro
 
 
@@ -74,7 +81,7 @@
 
 % Análisis
 \newglossaryentry{AD}       {name={AD (Anomaly Detection)}, description={Detección de anomalías}}
-\newglossaryentry{STRIDE}   {name={STRIDE},                 description={Spoofing, Tampering, Repudiation, Information, Denial, Elevation}}
+\newglossaryentry{STRIDE}   {name={STRIDE},                 description={Son las siglas de Suplantación de identidad, Manipulación, Repudio, Información, Denegación, Elevación de privilegios (Spoofing, Tampering, Repudiation, Information, Denial, Elevation)}}
 %-> Terminos del libro
 \newglossaryentry{ADA}  {name={ADA (Anomaly Detection of TTE Attacks)}, description={Detección de anomalías en ataques de tipo TTE}}
 
@@ -90,11 +97,11 @@
 
 % Defensas
 %-> Terminos del libro
-\newglossaryentry{PT}  {name={PT (Post-training))},   description={Posterior al entrenamiento}}
+\newglossaryentry{PT}  {name={PT (Post-training)},   description={Posterior al entrenamiento}}
 
 
 % Términos de internet
-\newglossaryentry{LotL}  {name={LotL (living-off-the-land))},   description={Ataques a través de programas confiables.}}
+\newglossaryentry{LotL}  {name={LotL (living-off-the-land)},   description={Ataques a través de programas confiables.}}
 
 % \newglossaryentry{AdvML}  {name={AdvML},      description={Aprendizaje automático adversarial}}
 % \newglossaryentry{BIM}    {name={BIM},        description={Método iterativo básico}}
@@ -121,7 +128,19 @@
 % \newglossaryentry{TAC}    {name={TAC},        description={Precisión total de la predicción}}
 % \newglossaryentry{PAU}    {name={PAU},        description={Perturbaciones Adversariales Universales}}
 
-\newacronym{gcd}{GCD}{Greatest Common Divisor}
+\newacronym{ann}{ANN}{Artificial Neural Network}
+\newacronym{dnn}{DNN}{Deep Neural Network}
+\newacronym{cnn}{CNN}{Convolutional Neural Network}
+\newacronym{mlp}{MLP}{Multilayer Perceptron}
+\newacronym{fnn}{FNN}{Feedforward Neural Network}
+\newacronym{rnn}{RNN}{Recurrent Neural Network}
+\newacronym{gan}{GAN}{Generative Adversarial Network}
+\newacronym{gnn}{GNN}{Graph Neural Network}
+\newacronym{bp}{BP}{Backpropagation}
+\newacronym{ai}{AI}{Artifical Intelligence}
+
+\newacronym{lstm}{LSTM}{Long Short-Term Memory Network}
+\newacronym{art-nn}{ART-NN}{}
 
 
 
@@ -132,8 +151,8 @@
 % GMM: Gaussian Mixture Model
 % HC: High Confidence
 % i.i.d.: independent and identically distributed
-% JSD: Jensen—Shannon Divergence
-% KL: KulIback—LeibIer divergence
+% JSD: Jensen Shannon Divergence
+% KL: KulIback LeibIer divergence
 % K NN: K Nearest Neighbors
 % LC: Low Confidence
 % PMM: Parsimonious Mixture Modeling

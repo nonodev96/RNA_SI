@@ -3,92 +3,81 @@
 % ==============================================================================================================
 \section{Introducción}
 
+
 \section{Antecedentes}
 
+
+\newpage
 \subsection{Historia, línea temporal}
 
-% \begin{table}[t]
-%     \begin{center}
-%         \begin{tabular}{l|l}\hline
-%             1943   & Threshold Logic Unit (TLU) \cite{mcculloch1943logical}                         \\
-%             1958   & Perceptron \cite{rosenblatt1958perceptron}                                     \\
-%             1965   & Multilayer Perceptron \cite{baum1988capabilities}                              \\
-%             1980’s & Neuronas Sigmoidales                                                           \\
-%             ~      & Feedforward neural network (FNN) \cite{rumelhart1985learning}                  \\
-%             ~      & Backpropagation \cite{rosenblatt1962principles,etde_5080493,lecun1985learning} \\
-%             1985   & Boltzmann Machine \cite{ACKLEY1985147}                                         \\
-%             1989   & Convolutional neural networks (CNN) \cite{lecun1989backpropagation}            \\
-%             ~      & Recurent neural networks (RNN)                                                 \\
-%             1997   & Long short term memory (LSTM)                                                  \\
-%             2006   & Deep Belief Networks (DBN) \cite{hinton2006fast}                               \\
-%             ~      & Restricted Boltzmann Machine \cite{hinton2006reducing}                         \\
-%             ~      & Encoder / Decoder (Auto-encoder) \cite{hinton2006reducing}                     \\
-%             2014   & Generative Adversarial Networks (GAN) \cite{6294131,goodfellow2014generative}  \\\hline
-%         \end{tabular}
-%         \caption{Hitos en las redes neuronales artuficiales}
-%         \label{tab:fruta}
-%     \end{center}
-% \end{table}
-
+A continuación se describe una línea de temporal con los hitos más relevantes en el desarrollo de las redes neuronales adjuntando con referencias las investigaciones, articulos y publicaciones realizadas.
+En este caso se trata de referencias en hitos de logros a nivel teórico como práctico.
 
 \begin{vtimeline}[timeline color=cyan!80!blue, add bottom line, line offset=2pt, use timeline header,timeline title={Hitos de las redes neuronales artificiales}]
-    1943   & Threshold Logic Unit (TLU) \cite{mcculloch1943logical}                         \endlr
-    1958   & Perceptron \cite{rosenblatt1958perceptron}                                     \endlr
-    1965   & Multilayer Perceptron \cite{baum1988capabilities}                              \endlr
-    1980’s & Neuronas Sigmoidales                                                           \endlr
-    ~      & Feedforward neural network (FNN) \cite{rumelhart1985learning}                  \endlr
-    ~      & Backpropagation \cite{rosenblatt1962principles,etde_5080493,lecun1985learning} \endlr
-    1985   & Boltzmann Machine \cite{ACKLEY1985147}                                         \endlr
-    1989   & Convolutional neural networks (CNN) \cite{lecun1989backpropagation}            \endlr
-    ~      & Recurent neural networks (RNN)                                                 \endlr
-    1997   & Long short term memory (LSTM) \cite{Hochreiter1997LongSM}                                            \endlr
-    2006   & Deep Belief Networks (DBN) \cite{hinton2006fast}                               \endlr
-    ~      & Restricted Boltzmann Machine \cite{hinton2006reducing}                         \endlr
-    ~      & Encoder / Decoder (Auto-encoder) \cite{hinton2006reducing}                     \endlr
-    2014   & Generative Adversarial Networks (GAN) \cite{6294131,goodfellow2014generative}  \endlr
+    1943        & Threshold Logic Unit (TLU) \cite{mcculloch1943logical}                                    \endlr
+    1949        & Teoría Hebbiana                                                                           \endlr
+    1958        & Perceptron \cite{rosenblatt1958perceptron}                                                \endlr
+    1959-1960   & Adaline y Madaline \cite{rosenblatt1958perceptron}                                        \endlr
+    1965        & Multilayer Perceptron (MLP) \cite{baum1988capabilities}                                   \endlr
+    1967-1968   & Deep Learning by Stochastic Gradient Descent \cite{karplus19671967}                       \endlr
+    1980’s      & Neuronas Sigmoidales                                                                      \endlr
+    ~           & Feedforward neural network (FNN) \cite{rumelhart1985learning}                             \endlr
+    ~           & Backpropagation (BP) \cite{rosenblatt1962principles,etde_5080493,lecun1985learning}       \endlr
+    1985        & Boltzmann Machine \cite{ACKLEY1985147}                                                    \endlr
+    1987        & Adaptive resonance theory (ART) \cite{grossberg1987competitive}                           \endlr
+    1989        & Convolutional neural networks (CNN) \cite{lecun1989backpropagation}                       \endlr
+    ~           & Recurent neural networks (RNN) \cite{schmidhuber1993habilitation}                         \endlr
+    1990        & Generative Adversarial Networks (GAN) as Game \cite{schmidhuberunsupervised}              \endlr
+    1997        & Long short term memory (LSTM) \cite{Hochreiter1997LongSM}                                 \endlr
+    2006        & Deep Belief Networks (DBN) \cite{hinton2006fast}                                          \endlr
+    ~           & Restricted Boltzmann Machine \cite{hinton2006reducing}                                    \endlr
+    ~           & Encoder / Decoder (Auto-encoder) \cite{hinton2006reducing}                                \endlr
+    2014        & Generative Adversarial Networks (GAN) Moderns \cite{6294131,goodfellow2014generative}     \endlr
+    2018        & Style Generative Adversarial Networks (Style-GAN) \cite{karras2019stylebased}             \endlr
 \end{vtimeline}
 
-Las \gls{RNN} se basaron en el trabajo de David Rumelhart \cite{rumelhart1985learning}
 
-% \begin{vtimeline}[description={text width=0.75\linewidth},
-%         use timeline header,
-%         timeline color=black,
-%         timeline title={Hitos de las redes neuronales artificiales}]
-%     1943   & Threshold Logic Unit (TLU) Neuronas de McCulloch y Pitts \cite{mcculloch1943logical}   \endlr
-%     1958   & Perceptron \cite{rosenblatt1958perceptron}                                             \endlr
-%     1965   & Multilayer Perceptron \cite{baum1988capabilities}                                      \endlr
-%     1980’s & Neuronas Sigmoidales                                                                   \endlr
-%     ~      & Feedforward neural network (FNN) \cite{rumelhart1985learning}                          \endlr
-%     ~      & Backpropagation \cite{rosenblatt1962principles,etde_5080493,lecun1985learning}         \endlr
-%     % ~      & Adaptative resonance thory (ART) \cite{grossberg1987competitive} \endlr
-%     1989   & Convolutional neural networks (CNN) \cite{lecun1989backpropagation}                    \endlr
-%     ~      & Recurent neural networks (RNN)                                                         \endlr
-%     ~      & Boltzmann Machine or Recurent neural networks estocastic (RNN)   \cite{}              \endlr
-%     1997   & Long short term memory (LSTM)                                                          \endlr
-%     2006   & Deep Belief Networks (DBN) \cite{hinton2006fast}                                       \endlr
-%     ~      & Restricted Boltzmann Machine                                                           \endlr
-%     ~      & Encoder / Decoder (Auto-encoder)                                                       \endlr
-%     2014   & Generative Adversarial Networks (GAN) \cite{goodfellow2014generative}                  \endlr
-% \end{vtimeline}
-
+\newpage
 \subsection{Historia}
+La historia comienza en 1943 con la investigación de \textit{Warren McCulloch} y \textit{Walter Pitss}, publicaron el artículo \textit{A logical calculus of the ideas immanent in nervous activity} \cite{mcculloch1943logical}.
+Dicho artículo creó distintas ramas de investigación (ordenadores digitales, inteligencia artificial, funcionamiento del perceptron).
 
-\subsection{Hitos}
+En dicha conferencia (\textit{Nathaural Rochester}) presento el modelo de una red neuronal que fue el resultado de la investigación desarrollada por el equipo de investigación de IBM.
+En 1956 en la primera conferencia de inteligencia artificial organizada por la fundación \textit{Rochester}, se reunen los investigadores fundadores de los conceptos actuales de la IA (\textit{Minsky, McCarthy, Rochester, Shanon}), gran parte de la bibliografia se refiere a este punto como el origen y contacto de las redes neuronales artificiales.
+En 1957 se presenta el ``Perceptron'' por \textit{Frank Rosenblatt}, dicho elemento es un sistema clasificador de patrones, además contaba con la capacidad de aprender, de ser robusto matemáticamente y poder adaptarse si algún componente se dañaba.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/perceptron.png}
+    \caption{Conexiones del Mark I Perceptron}
+    \label{fig:perceptron}
+\end{figure}
+Diseñado originalmente para el reconocimiento óptico usando un sistema de 400 fotocélulas en rejilla, también se describio el problema de no-linealidad que presentaban los perceptrones (Problema XOR) \cite{cuevastello2018apuntes}.
+
+De 1959 a 1960 \textit{Bernard Widrow} y \textit{Ted Hoff} desarollaron ``Adaline'' y ``Madaline'' \cite{widrow1960adaptive} que resolvia el problema de la no-linealidad y que tenía aplicación en el reconocimiento de voz, series temporales, carácteres, etc.
+
+Posteriormente el MIT realizo una investigación mátematica muy crítica de todos los problemas que presentaba el Perceptron llegando a la conclusión que tenian grandes problemas que no podrian ser resueltos, por lo que en la proxima década (años 60) se redujo drasticamente las investigaciones sobre el campo de las redes neuronales.
+
+Durante la década de los 70 se hacen aportes a la teoría Hebbiana, se aportan logros en al análisis y descripción de reglas adaptativas, además de otros aportes al principio de aprendizaje competitivo.
+En 1979 presentó \textit{Kunihiko Fukushima} la primera red neuronal \acrshort{CNN}, la llamó Neocognitron \cite{fukushima1979neural}, dicho trabajo en un futuro se mejoraría con técnicas de \gls{BP-NN}.
+
+En la década de los 80 se realizaron aportes como el algoritmo de \gls{BP-NN} que surgio del artículo de \textit{Hopfield} \cite{hopfield1982neural} que desperto la curiosidad de muchos investigadores a volver al campo de las redes neuronales. Se realizaron aportes como las redes \acrshort{gnn}
+La investigación continuó con \textit{Stephen Grossberg} que realizo aportes derivados de estudios fisiológicos de como funcionaban las neuronas y la plasticidad, lo que permitio la creación de reglas y postulados, esto se ve en los trabajos de las redes \gls{ART-NN} \cite{grossberg1987competitive}.
+La investigación de \textit{Hopfield} basada en el trabajo de \textit{Stephen Grossberg} creo un sistema computacional neuronal interconectado que tiende a un mínimo de energia.
+En 1985 \textit{David E. Rumelhart} basandose en la investigación realizada por \textit{Paul Werbos} \cite{etde_5080493} realizo un análisis experimental del algoritmo \gls{BP-NN} y su aplicación en redes \acrshort{fnn} \cite{rumelhart1985learning}.
+\textit{Yann LeCun} junto a su equipo, en 1989 crearon la primera aplicación \acrshort{cnn} con técnicas \acrshort{bp} dicha aplicación podia reconocer números a partir de imágenes.
+
+
+En la decada de los 90 se presentaron multiples investigaciones y muchos avances en el campo, uno de los más importantes fue la presentación de la primera \acrshort{gan} como una curiosdidad, ya que se presentó como un duelo entre dos redes neuronales, en un principio fue un generador probabilistico y un predictor con el objetivo de maximizar la pérdida de cada uno en un juego minimax.
+En 1991 se presentó el trabajo \textit{Predictability Minimization} \cite{urgen1991learning} Dichas técnicas sirvieron de inspiración para el aprendizaje por refuerzo,
+En marzo de 1991 se hizo una aproximación a los \textit{transformers} actuales, lograron separar el conocimiento del control como una máquina clásica, pero de una forma completamente neuronal, además de gestionar actualizaciones de los pesos de forma muy rápida y eficiente.
+
+Durante la decada de 1990 las redes neuronales tendian a ser muy sencillas, con pocas capas y no muy complejas por las limitaciones téncicas de la época.
+Por lo que muchos investigadores propusieron soluciones similares a las redes \acrshort{rnn} que permitian una retroalimentación, además de aceptar secuencias de información arbitraria.
+
+% Las \gls{RNN} se basaron en el trabajo de David Rumelhart \cite{rumelhart1985learning}
+
 
 \section{Estado del arte}
-
-\subsection{Defensas contra los ataques adversarios}
-
-\subsection{Privacidad}
-
-\subsection{Explicabilidad}
-
-\subsection{Normativa y estándares}
-% https://eur-lex.europa.eu/resource.html?uri=cellar:e0649735-a372-11eb-9585-01aa75ed71a1.0008.02/DOC_1&format=PDF
-% https://eur-lex.europa.eu/resource.html?uri=cellar:e0649735-a372-11eb-9585-01aa75ed71a1.0008.02/DOC_2&format=PDF
-
-% Segun la unión europea toda la seguridad es este apartado :ok: 
-% (51) La ciberseguridad es fundamental para garantizar que los sistemas de IA resistan a las actuaciones de terceros maliciosos que, aprovechando las vulnerabilidades del sistema, traten de alterar su uso, conducta o funcionamiento o de poner en peligro sus propiedades de seguridad. Los ciberataques contra sistemas de IA pueden dirigirse contra elementos específicos de la IA, como los conjuntos de datos de entrenamiento (p. ej., contaminación de datos) o los modelos entrenados (p. ej., ataques adversarios), o aprovechar las vulnerabilidades de los elementos digitales del sistema de IA o la infraestructura de TIC subyacente. Por lo tanto, para asegurar un nivel de ciberseguridad adecuado a los riesgos, los proveedores de sistemas de IA de alto riesgo deben adoptar medidas adecuadas teniendo también en cuenta, cuando proceda, la infraestructura de TIC subyacente.
 
 \subsection{Métodos técnicos}
 \begin{itemize}
@@ -108,6 +97,21 @@ Las \gls{RNN} se basaron en el trabajo de David Rumelhart \cite{rumelhart1985lea
     \item Marcos de gobernanza.
 \end{itemize}
 
+\subsection{Defensas contra los ataques adversarios}
+
+\subsection{Privacidad}
+
+\subsection{Explicabilidad}
+
+\subsection{Normativa y estándares}
+% https://eur-lex.europa.eu/resource.html?uri=cellar:e0649735-a372-11eb-9585-01aa75ed71a1.0008.02/DOC_1&format=PDF
+% https://eur-lex.europa.eu/resource.html?uri=cellar:e0649735-a372-11eb-9585-01aa75ed71a1.0008.02/DOC_2&format=PDF
+
+% Segun la unión europea toda la seguridad es este apartado :ok: 
+% (51) La ciberseguridad es fundamental para garantizar que los sistemas de IA resistan a las actuaciones de terceros maliciosos que, aprovechando las vulnerabilidades del sistema, traten de alterar su uso, conducta o funcionamiento o de poner en peligro sus propiedades de seguridad. Los ciberataques contra sistemas de IA pueden dirigirse contra elementos específicos de la IA, como los conjuntos de datos de entrenamiento (p. ej., contaminación de datos) o los modelos entrenados (p. ej., ataques adversarios), o aprovechar las vulnerabilidades de los elementos digitales del sistema de IA o la infraestructura de TIC subyacente. Por lo tanto, para asegurar un nivel de ciberseguridad adecuado a los riesgos, los proveedores de sistemas de IA de alto riesgo deben adoptar medidas adecuadas teniendo también en cuenta, cuando proceda, la infraestructura de TIC subyacente.
+
+
+
 \section{Desafíos futuros}
 
 
@@ -118,3 +122,16 @@ Las \gls{RNN} se basaron en el trabajo de David Rumelhart \cite{rumelhart1985lea
 
 % https://www.youtube.com/@felipebravom
 
+
+
+% Feb 1990: Generative Adversarial Networks / Curiosity Generative Adversarial Networks (GANs) have become very popular.[MOST] They were first published in 1990 in Munich under the moniker Artificial Curiosity. [AC90-20][GAN1] Two dueling NNs (a probabilistic generator and a predictor) are trying to maximize each other's loss in a minimax game.[AC](Sec. 1) The generator (called the controller) generates probabilistic outputs (using stochastic units[AC90] like in the much later StyleGANs[GAN2]). The predictor (called the world model) sees the outputs of the controller and predicts environmental reactions to them. Using gradient descent, the predictor NN minimizes its error, while the generator NN tries to make outputs that maximize this error: one net's loss is the other net's gain.[AC90] (The world model can also be used for continual online action planning.[AC90][PLAN2-3][PLAN])
+
+% 4 years before a 2014 paper on GANs,[GAN1] my well-known 2010 survey[AC10] summarised the generative adversarial NNs of 1990 as follows: a "neural network as a predictive world modelis used to maximize the controller's intrinsic reward, which is proportional to the model's prediction errors" (which are minimized).
+
+% The 2014 GANs are an instance of this where the trials are very short (like in bandit problems) and the environment simply returns 1 or 0 depending on whether the controller's (or generator's) output is in a given set.[AC20][AC][T22](Sec. XVII)
+
+% Other early adversarial machine learning settings[S59][H90] were very different—they neither involved unsupervised NNs nor were about modeling data nor used gradient descent.
+
+% The 1990 principle has been widely used for exploration in Reinforcement Learning[SIN5][OUD13] [PAT17][BUR18] and for synthesis of realistic images,[GAN1,2] although the latter domain was recently taken over by Rombach et al.'s Latent Diffusion, another method published in Munich,[DIF1] building on Jarzynski's earlier work in physics from the previous millennium[DIF2]  and more recent papers.[DIF3-5]
+
+% In 1991, I published yet another ML method based on two adversarial NNs called Predictability Minimization for creating disentangled representations of partially redundant data, applied to images in 1996.

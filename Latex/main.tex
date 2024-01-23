@@ -2,28 +2,43 @@
 \documentclass[12pt, a4paper, twoside]{report}   % Tamaño de papel, de fuente y márgenes
 \usepackage[spanish,es-ucroman]{babel}  % Idioma y codificación, para poder usar
 \usepackage[T1]{fontenc}
-% \usepackage[utf8x]{inputenc} % tildes, eñes, etc., sin problemas
-\usepackage{newunicodechar}
-\usepackage[margin=2.5cm]{geometry}
+% \usepackage[utf8x]{inputenc} % tildes, eñes, etc., sin problemas\usepackage{newunicodechar}
 \usepackage{array}
 \usepackage{tabularx}
 \usepackage{setspace} % Para fijar el interlineado
 \usepackage{fancyhdr}                   % Para los encabezados y pies
+\usepackage{float}                      % Para las imágenes
 \usepackage{lipsum}                     % https://www.ctan.org/pkg/lipsum               Para generar texto como contenido de prueba, se puede eliminar en la memoria final
 \usepackage{helvet}                     % https://www.ctan.org/pkg/helvet               Para fuentes (Using common PostScript fonts with LaTeX)
 \usepackage{wallpaper}                  % https://www.ctan.org/pkg/wallpaper            Para introducir el PDF con la portada EPSJ
 \usepackage[absolute,overlay]{textpos}  % https://www.ctan.org/pkg/textpos              
 \usepackage{etoolbox}                   % https://www.ctan.org/pkg/etoolbox             Herramientas de logica, variables y condicionales y bibliografía
-\usepackage[numbers]{natbib}                     % https://www.ctan.org/pkg/natbib               Para gestionar la bibliografia
+\usepackage[numbers]{natbib}            % https://www.ctan.org/pkg/natbib               Para gestionar la bibliografia
 \usepackage{csquotes}                   % https://www.ctan.org/pkg/csquotes             
 \usepackage{hyperref}                   % https://www.ctan.org/pkg/hyperref             Para URL como enlaces
 \usepackage{booktabs}                   % https://www.ctan.org/pkg/booktabs             Para tablas con mejor apariencia
 \usepackage{listings}                   % https://www.ctan.org/pkg/listings             Para incluir listados de código
-\usepackage{emoji}                      % https://www.ctan.org/pkg/emoji                 
+% \usepackage{emoji}                     % https://www.ctan.org/pkg/emoji                 
+\usepackage{twemojis}                   % https://www.ctan.org/pkg/twemojis                 
 \usepackage{xcolor}                     % https://www.ctan.org/pkg/xcolor               El paquete parte de las facilidades básicas del paquete de color 
 \usepackage[ruled,vlined]{algorithm2e}  % https://www.ctan.org/pkg/algorithm2e          https://ctan.javinator9889.com/macros/latex/contrib/algorithm2e/doc/algorithm2e.pdf
 \usepackage[acronym]{glossaries}        % https://www.ctan.org/pkg/glossaries
-\usepackage{pdflscape}
+\usepackage{pdflscape}                  % https://www.ctan.org/pkg/pdflscape
+% Gestion de los tamaños de las páginas
+\usepackage{geometry}                   % https://www.ctan.org/pkg/geometry
+\usepackage{fancyhdr}                   % https://www.ctan.org/pkg/geometry
+\usepackage{setspace} %for doublespacing
+
+\doublespacing %double spacing
+\geometry{
+  a4paper,
+  left=1.5in,
+  right=1.5in,
+  top=1in,
+  bottom=1in,
+  margin=2.5cm,
+  heightrounded,
+}
 
 % \usepackage[acronym,nomain,toc,automake]{glossaries-extra}
 % \usepackage[acronym,toc=true,nomain,xindy]{glossaries-extra}
@@ -36,6 +51,7 @@
 \usepackage{mathtools}
 \usepackage{commath}
 \usepackage{tabularx}
+\usepackage{bookmark} 
 
 % VTimeline
 \usepackage{charter} 
