@@ -2,48 +2,77 @@
 \label{ch:1}
 
 % Descripción de los objetivo del aprendizaje adversario:
-
 \section{Introducción}
 
 El objetivo principal de este trabajo es el análisis de los distintos tipos de ataques y defensas que se pueden aplicar a un proceso de aprendizaje automático, nos referimos principalmente al aprendizaje profundo.
 Este trabajo tratará principalmente de clasificar y explorar la seguridad que cuentan los modelos de \gls{AI} actuales.
-Existen una gran variedad de modelos y objetivos en redes neuronales, los ataques que se pueden hacer sobre estos modelos están orientados en las siguientes categorías (engañar, evadir, errar, explorar o denegar) el modelo.
+Existen una gran variedad de modelos y objetivos en redes neuronales, los ataques que se pueden hacer sobre estos modelos están orientados en las siguientes categorías (evadir, envenenar, explorar o denegar) el modelo.
 
 Debemos comprender que debemos saber que la seguridad repercute en todo el proceso de creación del modelo, desde la recogida de los datos, tratamiento, diseño y creación del modelo.
 Un ataque puede estar dirigido al conjunto de datos con el que se entrenará el modelo o a la red neuronal una vez entrenada.
 Además, un ataque puede dirigirse a descubrir muestras que produzcan resultados erróneos, por lo que los posibles vectores de ataque son muy variados y complejos.
 
+La idea de hacer robustos los modelos es que las defensas detecten ataques a la vez que se mejora la solidez del aprendizaje, para no cometer fallos al introducir valores anómalos.
+
 Cada uno de estos tipos de ataques tiene su nomenclatura y debe definirse correctamente, ya que de lo contrario puede ser muy ambiguo el tipo de ataque que se está realizando, el objetivo que busca y los métodos que están empleando.
 
 Lo que buscaremos en este trabajo será definir, analizar y estructurar los distintos tipos de ataques y sus posibles defensas, con el objetivo final de proteger y defender los modelos de inteligencia artificial para hacerlos más robustos.
+Además de la construcción de una guía que pueda orientar a modelos más seguros y eticos.
 
-La idea de hacer robustos los modelos es que las defensas detecten ataques a la vez que se mejora la solidez del aprendizaje, para no cometer fallos al introducir valores anómalos.
 
 \section{Motivación}
 
-% https://ec.europa.eu/commission/presscorner/detail/en/ip_23_6473
-% Etica 
+En la última década, se han logrado significativos avances en el campo de la inteligencia artificial. Sin embargo, a lo largo de este proceso, como suele ser habitual, se ha descuidado  aspectos cruciales relacionados con la seguridad. Esto ha dado lugar a la creación de productos que implementan la inteligencia artificial, pero presentan vulnerabilidades, riesgos potenciales, como redes neuronales poco robustas, filtraciones de datos, incumplimiento normativo, modelos que presentaban respuestas ofensivas, discriminantes ante etnias, etc. Además de presentar poca o ninguna explicabilidad de los resultados que presentan.
 
-La necesidad de desarrollar un marco de inteligencia artificial fiable
-
-Categorías
+Esto lleva a muchos problemas de seguridad y riesgos que pueden afectar a productos que apliquen inteligencia artificial sin las medidas de adecuadas.
 
 \begin{itemize}
-    \item Riesgo mínimo:
-    \item Riesgo alto:
-    \item Riesgo inaceptable:
+    \item Alineación de la inteligencia artificial.
+    \item Recopilación de datos.
+    \item Bias y discriminación.
+    \item Modelos poco robustos.
+    \item Transparencia y explicabilidad.
+    \item Escala de los modelos.
+    \item Cumplimiento legal y normativo.
+    \item Actualización continua.
+    \item Detección de usos malitencionados.
 \end{itemize}
 
+Esto ha llevado a la creación de regulaciones de la inteligencia artificial que son muy vagas en sus conceptos de implementación. Una primera aproximación fue el libro blanco\footnote{Se conoce como libros blancos a los documentos que publican los gobiernos en determinados casos para informar a los órganos legislativos o a la opinión pública con el objetivo de ayudar a los lectores a comprender un tema, resolver o afrontar un problema (por ejemplo diseñando una política gubernamental a largo plazo), o tomar una decisión. \href{https://es.wikipedia.org/wiki/Libro_blanco}{Enlace.}} de la inteligencia artifical en 2018 \cite{whitebook2020AI}
+
+
+En este trabajo propondremos una guía similar a la matriz \gls{MITRE} con buenas prácticas para la construcción de modelos más robustos y que cumplan con nuestros objetivos.
+
+% https://ec.europa.eu/commission/presscorner/detail/en/ip_23_6473
+La necesidad de desarrollar un marco de inteligencia artificial fiable para todos los miembros de la unión europea llevo a la comisión europea a la creación de nuevas normativas con un efoque basado en el riesgo.
 
 
 \section{Propósitos del proyecto}
 
 \section{Objetivos}
-% Estandares
+% Describir los estandares de seguridad actuales
+% Estudiar la seguridad en la IA
+% Experimentar con modelos inseguros
+% Mejorar los modelos inseguros para una mejor robustez
+% Desarrollar un marco matriz como mitre con buenas prácticas
 
 \section{Metodología y planificación del proyecto}
 
+
 \subsection{Metodología}
+\newgeometry{a2paper,includefoot,includehead,centering,twoside,top=10pt}
+
+\begin{landscape}
+
+    \begin{figure}[H]
+        \centerline{\includesvg[width=0.75\columnwidth]{figures/UML/Gantt.svg}}
+        \caption{Diagrama Gantt con la planificación temporal del proyecto}
+        \label{fig:diagrama-gantt}
+    \end{figure}
+
+\end{landscape}
+\restoregeometry
+
 
 
 
@@ -82,7 +111,7 @@ Durante el transcurso del trabajo discutiremos los siguientes ataques y defensas
     \item Evasión.
 \end{itemize}
 
-Un buen símil con la seguridad clásica puede ser categorizar la seguridad de los modelos con el modelo \gls{STRIDE} de microsoft \footnote{Modelado de amenazas de microsoft \url{https://learn.microsoft.com/es-es/azure/security/develop/threat-modeling-tool-threats}}.
+Un buen símil con la seguridad clásica puede ser categorizar la seguridad de los modelos con el modelo \gls{STRIDE} de microsoft\footnote{Modelado de amenazas de microsoft \href{https://learn.microsoft.com/es-es/azure/security/develop/threat-modeling-tool-threats}{STRIDE}} o con la matriz \gls{MITRE}.
 
 \newgeometry{margin=2cm} % modify this if you need even more space
 \begin{landscape}

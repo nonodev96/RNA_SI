@@ -7,3 +7,5 @@ https://www.techtarget.com/whatis/A-Timeline-of-Machine-Learning-History
 https://www.forbes.com/sites/gilpress/2021/05/19/114-milestones-in-the-history-of-artificial-intelligence-ai/
 https://towardsdatascience.com/the-mostly-complete-chart-of-neural-networks-explained-3fb6f2367464
 https://arxiv.org/ftp/arxiv/papers/2212/2212.11279.pdf
+
+https://anishathalye.com/synthesizing-adversarial-examples/

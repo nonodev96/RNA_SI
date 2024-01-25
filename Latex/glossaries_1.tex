@@ -1,25 +1,29 @@
 \makeglossaries
 
 
-\addterm
-{sample}% label
-{slovene translation of the term}%
-{plural form of slovene translation of the term}%
-{english term}%
-{plural english term}%
-{slovene description of the term}
+% \addterm
+% {sample}% label
+% {slovene translation of the term}%
+% {plural form of slovene translation of the term}%
+% {english term}%
+% {plural english term}%
+% {slovene description of the term}
+% Términos de seguridad clásica
+\newglossaryentry{STRIDE}   {name={STRIDE},     description={Son las siglas de Suplantación de identidad, Manipulación, Repudio, Información, Denegación, Elevación de privilegios (Spoofing, Tampering, Repudiation, Information, Denial, Elevation)}}
+\newglossaryentry{MITRE}    {name={MITRE},      description={La abreviatura de (Tácticas, Técnicas y Conocimiento Amplio de Enemigos) es un marco de trabajo para la evaluación de la seguridad en las organizaciones. \href{https://attack.mitre.org/}{Enlace}}}
 
-
+% Generales
 \newglossaryentry{latex}        {name={latex},      description={Is a mark up language specially suited for scientific documents}}
 \newglossaryentry{AGI}          {name={AGI},        description={La abreviatura Inteligencia artificial general}}
 \newglossaryentry{SDLC}         {name={SDLC},       description={La abreviatura SDLC se refiere en ocasiones al ciclo de vida del desarrollo de sistema}}
 \newglossaryentry{SAST}         {name={SAST},       description={Las pruebas de seguridad de aplicaciones estáticas (SAST), también conocidas como Static Application Security Testing, de pruebas de seguridad}}
 \newglossaryentry{DAST}         {name={DAST},       description={Las pruebas de seguridad de aplicaciones dinámicas (DAST), también conocidas como Dynamic Application Security Testing, de pruebas de seguridad}}
 \newglossaryentry{IAST}         {name={IAST},       description={Las pruebas de seguridad de aplicaciones dinámicas (IAST), también conocidas como Interactive Application Security Testing, de pruebas de seguridad}}
+\newglossaryentry{KDD}          {name={KDD},        description={El KDD viene de las siglas KDD (Knowledge Discovery in Databases), esto es el proceso utilizado para extraer de forma eficiente y automática información \textbf{útil} a partir de grandes volumenes de datos}}
 %-> Terminos del libro
 
 
-% Términos
+% Términos IA general
 \newglossaryentry{ART-NN}   {name={ART (Adaptive Resonance Theory)},                description={Modelo de red neuronal que equilibra la adaptación a nueva información con la estabilidad frente a patrones familiares}}
 \newglossaryentry{BP-NN}    {name={BP (Backpropagation)},                           description={Método utilizado en redes neuronales para calcular el gradiente y el cálculo de los pesos, es una abreviarura de ``propagación de errores hacia atrás''}}
 \newglossaryentry{MLP}      {name={MLP (Multilayer Perceptron)},                    description={El Perceptron multicapa es una red neuronal artificial formada por capas local o totalmente conectadas}}
@@ -81,7 +85,6 @@
 
 % Análisis
 \newglossaryentry{AD}       {name={AD (Anomaly Detection)}, description={Detección de anomalías}}
-\newglossaryentry{STRIDE}   {name={STRIDE},                 description={Son las siglas de Suplantación de identidad, Manipulación, Repudio, Información, Denegación, Elevación de privilegios (Spoofing, Tampering, Repudiation, Information, Denial, Elevation)}}
 %-> Terminos del libro
 \newglossaryentry{ADA}  {name={ADA (Anomaly Detection of TTE Attacks)}, description={Detección de anomalías en ataques de tipo TTE}}
 
@@ -142,7 +145,7 @@
 \newacronym{ai}{AI}{Artifical Intelligence}
 
 \newacronym{lstm}{LSTM}{Long Short-Term Memory Network}
-\newacronym{art-nn}{ART-NN}{}
+\newacronym{art-nn}{ART}{Adaptive Resonance Theory}
 
 
 
