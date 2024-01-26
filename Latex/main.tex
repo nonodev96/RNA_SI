@@ -14,9 +14,15 @@
 % Para fijar el interlineado
 \usepackage{setspace} 
 
-\usepackage{fancyhdr}                   % Para los encabezados y pies
-\usepackage{lipsum}                     % Para generar texto como contenido de prueba, se puede eliminar en la memoria final
-\usepackage{helvet}                     % Para fuentes (Using common PostScript fonts with LaTeX)
+% Para los encabezados y pies
+\usepackage{fancyhdr}
+
+% Para generar texto como contenido de prueba, se puede eliminar en la memoria final
+\usepackage{lipsum}
+\usepackage{blindtext}
+
+% Para fuentes (Using common PostScript fonts with LaTeX)
+\usepackage{helvet}
 \usepackage{wallpaper}                  % Para introducir el PDF con la portada EPSJ
 \usepackage[absolute,overlay]{textpos}  % 
 \usepackage{etoolbox}                   % Herramientas de logica, variables y condicionales y bibliografía
@@ -147,7 +153,7 @@
 
 % ===== Archivos LaTeX con los distintos capítulos que componen la memoria
 
-% \input{0__Tutorial} 
+% \input{0__Tutorial}
 % \clearpage\thispagestyle{empty}\cleardoublepage
 
 % \input{0_0_Test.tex}
@@ -159,7 +165,7 @@
 \input{1_Introduccion.tex}
 \clearpage\thispagestyle{empty}\cleardoublepage
 
-\input{2_EstadoDelArte}
+\input{2_EstadoDelArte.tex}
 \clearpage\thispagestyle{empty}\cleardoublepage
 
 % \input{3_Objetivos.tex}

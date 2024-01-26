@@ -62,16 +62,6 @@ En este caso se trata de referencias en hitos de logros a nivel teórico como pr
 \newpage
 \subsection{Historia de la Inteligencia Artificial}
 
-% \begin{wrapfigure}{R}{0.25\textwidth}
-%     \vspace{-20pt}
-%     \begin{center}
-%         \includegraphics[width=0.25\textwidth]{figures/Gottfried_Wilhelm_Leibniz,_Bernhard_Christoph_Francke.jpg}
-%         \label{fig:Gottfried-Leibniz}
-%     \end{center}
-%     \caption{Retrato de Gottfried Leibniz, por Christoph Bernhard Francke. \\Fuente: \href{https://es.wikipedia.org/wiki/Gottfried_Leibniz}{Wikipedia}}
-%     \vspace{-20pt}
-% \end{wrapfigure}
-
 Todo surge en 1676 por {Gottfried Wilhelm Leibniz} \ref{fig:gottfried-leibniz} publicó la regla de la cadena del cálculo diferencial, esencial para el análisis matemático, es la esencial para calcular como cambiará la función final si se cambian los pesos de funciones anteriores.
 
 La regla de la cadena es fundamental para técnicas como el descenso de gradiente, propuesto por {Augustin-Louis Cauchy} en 1847 y utilizado para ajustar iterativamente los pesos de una NN durante el entrenamiento.
@@ -122,17 +112,6 @@ De 1959 a 1960 {Bernard Widrow} y {Ted Hoff} desarollaron ``Adaline'' y ``Madali
 Posteriormente el MIT realizo una investigación mátematica muy crítica de todos los problemas que presentaba el Perceptron llegando a la conclusión que tenian grandes problemas que no podrian ser resueltos, por lo que en la proxima década (años 60) se redujo drasticamente las investigaciones sobre el campo de las redes neuronales.
 Esto llevo a uno de los famosos inviernos de la inteligencia artificial (1974 - 1980).
 
-
-% \begin{wrapfigure}{R}{0.25\textwidth}
-%     \vspace{-20pt}
-%     \begin{center}
-%         \includegraphics[width=0.25\textwidth]{figures/Kunihiko Fukushima.jpg}
-%         \label{fig:kunihiko-fukushima}
-%     \end{center}
-%     \vspace{-20pt}
-%     \caption{Kunihiko Fukushima. \\Fuente: \href{https://www.ieice.org/eng/about_ieice/new_honorary_members_award_winners/2017/meiyo_05e.html}{IEICE}}
-% \end{wrapfigure}
-
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.25\textwidth]{figures/Kunihiko Fukushima.jpg}
@@ -172,7 +151,6 @@ Comienzan a proponerse redes similares a las que en un futuro se llamarian \acrs
 
 En junio de 1991 {Sepp Hochreiter} \ref{fig:sepp-hochreiter} implemento el primer compresor de redes neuronales, además demostró uno de los principales problemas de las \acrshort{nn} el llamado problema del desvanecimiento o explosión del gradiente que hacía que el aprendizaje fallará.
 Un analisis posterior condujo a los investigadores a una primera aproximación \acrshort{lstm}, aunque no sería hasta 1997 con la revisión por pares´y publicación del artículo \textit{Long short-term memory} \cite{hochreiter1997long} que se solucionaria parcialmente el problema.
-% Las \gls{RNN} se basaron en el trabajo de David Rumelhart \cite{rumelhart1985learning}
 
 \begin{figure}[H]
   \centering
@@ -180,17 +158,6 @@ Un analisis posterior condujo a los investigadores a una primera aproximación \
   \caption{Sepp Hochreiter. \\Fuente: \href{https://people.idsia.ch/~juergen/fundamentaldeeplearningproblem.html}{IDSIA}}
   \label{fig:sepp-hochreiter}
 \end{figure}
-
-
-% \begin{wrapfigure}{R}{0.25\textwidth}
-%     \vspace{-20pt}
-%     \begin{center}
-%         \includegraphics[width=0.25\textwidth]{figures/gan-goodfellow.png}
-%         \label{fig:gan-ian-goodfellow}
-%     \end{center}
-%     \vspace{-20pt}
-%     \caption{Ian Goodfellow. \\Fuente: \href{https://www.technologyreview.es/s/10016/el-senor-de-las-gan-el-hombre-que-dio-imaginacion-las-maquinas}{MIT Technology Review}}
-% \end{wrapfigure}
 
 Más adelante en el 2014 {Goodfellow} \ref{fig:gan-ian-goodfellow} presento la primera red neuronal \acrshort{gan} pura para la generación de imágenes mediante el enfrentamiento de una red neuronal generativa contra una red neuronal discriminante entrenadas con el mismo conjunto de datos \cite{goodfellow2014generative}.
 Durante los proximos años se realizaron muchos aportes a las redes neuronales generativas, principalmente de paralelización de los calculos, técnicas de estabilización, generación condiciona, arquitecturas más eficientes, funciones de pérdidas más adecuadas, aplicaciones específicas (cambiar el estilo de pintura), redes apiladas, etc.
@@ -253,3 +220,49 @@ Fruto de todo ello {NVIDIA} en 2018 presento \gls{StyleGAN} \cite{karras2019styl
 \subsection{Machine Learning}
 \subsection{Deep Learning}
 \subsection{Generative Adversarial Networks (GAN)}
+
+
+
+\section{Vectores de ataque}
+
+La idea detrás del aprendizaje automático es la de poder predecir modelos predictivos, para ello se usan conjuntos de datos para el entrenamiento.
+
+Los conjuntos de datos se han de procesar, ya que suelen contener mucho ruido, es decir, información muy poco valiosa, errónea o, por el contrario, una alta dimensionalidad de los datos que puede ser contraproducente por no poder reproducir esas medidas o por la poca información que aportan.
+
+Los ataques al aprendizaje automático o profundo suelen estar dirigidos a las distintas etapas de creación y uso de un modelo.
+
+\begin{itemize}
+  \item Alteración de los datos de entrada.
+  \item Alteración del proceso de aprendizaje.
+  \item Extración de los datos de entrenamiento.
+  \item Bloqueo del modelo.
+\end{itemize}
+
+Durante el transcurso del trabajo discutiremos los siguientes ataques y defensas que se pueden usar en los modelos.
+
+\begin{itemize}
+  \item Envenenamiento de datos.
+  \item Puerta trasera.
+  \item Extracción de datos
+  \item Ingeniería inversa.
+  \item Evasión.
+\end{itemize}
+
+Un buen símil con la seguridad clásica puede ser categorizar la seguridad de los modelos con el modelo \gls{STRIDE} de microsoft\footnote{Modelado de amenazas de microsoft \href{https://learn.microsoft.com/es-es/azure/security/develop/threat-modeling-tool-threats}{STRIDE}} o con la matriz \gls{MITRE}.
+
+\begin{table}[ht!]
+  \centering
+  \small
+  \def\arraystretch{1.5}
+  \begin{tabular}{lp{10cm}}
+    \toprule
+    \textbf{Amenaza}    & \textbf{Tipo de ataque}                                           \\
+    \midrule
+    Corrupción de datos & Ataques de envenenamiento de datos, ataques de puerta trasera     \\
+    Extracción de datos & Ataques de inferencia de membresía, ataques de ingeniería inversa \\
+    Denegación          & Ataques de envenenamiento de datos                                \\
+    \bottomrule
+  \end{tabular}
+  \caption{Amenazas STRIDE relacionadas con la seguridad de la IA}
+  \label{tab.amenazas}
+\end{table}
