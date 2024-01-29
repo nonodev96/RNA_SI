@@ -1,7 +1,7 @@
 \chapter{INTRODUCCIÓN}
 \label{ch:1}
 
-% Descripción de los objetivo del aprendizaje adversario:
+% Descripción de los objetivos del aprendizaje adversario:
 \section{Introducción}
 
 El objetivo principal de este trabajo es el análisis de los distintos tipos de ataques y defensas que se pueden aplicar a un proceso de aprendizaje automático, nos referimos principalmente al aprendizaje profundo.
@@ -17,7 +17,7 @@ La idea de hacer robustos los modelos es que las defensas detecten ataques a la 
 Cada uno de estos tipos de ataques tiene su nomenclatura y debe definirse correctamente, ya que de lo contrario puede ser muy ambiguo el tipo de ataque que se está realizando, el objetivo que busca y los métodos que están empleando.
 
 Lo que buscaremos en este trabajo será definir, analizar y estructurar los distintos tipos de ataques y sus posibles defensas, con el objetivo final de proteger y defender los modelos de inteligencia artificial para hacerlos más robustos.
-Además de la construcción de una guía que pueda orientar a modelos más seguros y eticos.
+Además de la construcción de una guía que pueda orientar a modelos más seguros y éticos.
 
 
 \section{Motivación}
@@ -35,15 +35,16 @@ Esto lleva a muchos problemas de seguridad y riesgos que pueden afectar a produc
     \item Escala de los modelos.
     \item Cumplimiento legal y normativo.
     \item Actualización continua.
-    \item Detección de usos malitencionados.
+    \item Detección de usos malintencionados.
 \end{itemize}
 
-Esto ha llevado a la creación de regulaciones de la inteligencia artificial que son muy vagas en sus conceptos de implementación. Una primera aproximación fue el libro blanco\footnote{Se conoce como libros blancos a los documentos que publican los gobiernos en determinados casos para informar a los órganos legislativos o a la opinión pública con el objetivo de ayudar a los lectores a comprender un tema, resolver o afrontar un problema (por ejemplo diseñando una política gubernamental a largo plazo), o tomar una decisión. \href{https://es.wikipedia.org/wiki/Libro_blanco}{Enlace.}} de la inteligencia artifical en 2018 \cite{whitebook2020AI}
+Esto ha llevado a la creación de regulaciones de la inteligencia artificial que son muy vagas en sus conceptos de implementación.
+Una primera aproximación fue el libro blanco\footnote{Se conoce como libros blancos a los documentos que publican los gobiernos en determinados casos para informar a los órganos legislativos o a la opinión pública con el objetivo de ayudar a los lectores a comprender un tema, resolver o afrontar un problema (por ejemplo diseñando una política gubernamental a largo plazo), o tomar una decisión. \href{https://es.wikipedia.org/wiki/Libro_blanco}{Enlace.}} de la inteligencia artificial en 2018 \cite{whitebook2020AI}
 
 En este trabajo propondremos una guía similar a la matriz \gls{MITRE} con buenas prácticas para la construcción de modelos más robustos y que cumplan con nuestros objetivos.
 
 % https://ec.europa.eu/commission/presscorner/detail/en/ip_23_6473
-La necesidad de desarrollar un marco de inteligencia artificial fiable para todos los miembros de la unión europea llevo a la comisión europea a la creación de nuevas normativas con un efoque basado en el riesgo.
+La necesidad de desarrollar un marco de inteligencia artificial fiable para todos los miembros de la unión europea llevo a la comisión europea a la creación de nuevas normativas con un enfoque basado en el riesgo.
 Por lo que exploraremos el análisis de seguridad y posibles soluciones.
 
 
@@ -51,27 +52,38 @@ Por lo que exploraremos el análisis de seguridad y posibles soluciones.
 % Estudiar la seguridad en la IA
 % Experimentar con modelos inseguros
 % Mejorar los modelos inseguros para una mejor robustez
-El objetivo principal de este trabajo es el estudio actual de la seguridad en modelos de inteligencia artificial en redes neuronales profundas, busqueda de vectores de ataque en modelos, posibles formas de auditar los distintos modelos y costes de ataques por distintos modelos adversariales que proponemos en la sección \ref{TODO}.
+El objetivo principal de este trabajo es el estudio actual de la seguridad en modelos de inteligencia artificial en redes neuronales profundas, búsqueda de vectores de ataque en modelos, posibles formas de auditar los distintos modelos y costes de ataques por distintos modelos adversariales que proponemos en la sección \ref{TODO}.
 
 
 \section{Objetivos secundarios}
 % Desarrollar un marco matriz como mitre con buenas prácticas
-% Describir los estandares de seguridad actuales
-Como objetivos secundarios se ha planteado el análisis y creación de un marco de trabajo para la implementación de modelos de inteligencia artificial fiable siguiendo los estandares normativos, legislativos y éticos que propone la unión europea, con el objetivo de facilitar la implementación de modelos fiables en los distintos estados miembros.
+% Describir los estándares de seguridad actuales
+Como objetivos secundarios se ha planteado el análisis y creación de un marco de trabajo para la implementación de modelos de inteligencia artificial fiable siguiendo los estándares normativos, legislativos y éticos que propone la unión europea, con el objetivo de facilitar la implementación de modelos fiables en los distintos estados miembros.
 
 \section{Metodología y planificación del proyecto}
 
+Una vez definidos los objetivos del tema de investigación y desarrollo, deberemos definir el alcance para estimar el tiempo requerido y el prosupuesto para el proyecto.
+Recordemos que en la investigación puede ser del tipo exploratorio, buscando nuevos campos para alcanzar nuevos logros técnicos, confirmatoria para validar los resultados obtenidos en otras investigaciones o desarrollos, tambien puede ser una combinación de los tipos menecionados previamente.
+En nuestro caso se tratará de un proyecto híbrido, tanto de exploración como de confirmación.
 
-\subsection{Metodología}
-
+Haremos un repaso breve de las metodologias que recomienda la bibliografía existente, recordemos que las metodologias más comunes en las áreas de las ingenierias es una metodología cuantitativa.
 
 \subsection{Planificación y costes}
 
 Se ha de hacer una planificación estricta de las tareas, objetivos, hitos y dependencias, para ello usaremos los diagramas Gantt\footnote{Representación gráfica de la evolución de un proyecto. \href{https://asana.com/es/resources/gantt-chart-basics}{ASANA}} con el objetivo de representar los hitos de la investigación y del proyecto.
-Seguiremos una métodologia \textit{Scrum} y \textit{Lean} fijando reuniones cada semana para tener un control sobre el avance de la investigación y el desarrollo de este proyecto.
+Seguiremos una metodología \textit{Scrum} y \textit{Lean} fijando reuniones cada semana para tener un control sobre el avance de la investigación y el desarrollo de este proyecto.
 
-Primero definiremos en la tabla la lista de tareas, fecha de inicio, duración, fecha de fin y el coste de trabajo usando la tecnica de tallas de camisetas.
+Primero definiremos en la tabla la lista de tareas, fecha de inicio, duración, fecha de fin y el coste de trabajo usando la técnica de tallas de camisetas.
 
 
 \section{Estructura de la memoria}
 
+% TODO
+
+\subsection{Metodología}
+
+% TODO
+
+\subsection{Presupuesto}
+
+% TODO

@@ -1,3 +1,4 @@
+import os
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
@@ -5,6 +6,7 @@ import matplotlib.pyplot as plt
 from art.estimators.object_detection import PyTorchFasterRCNN
 from art.attacks.evasion import ProjectedGradientDescent
 
+CURRENT_WORKING_DIRECTORY = os.getcwd()
 COCO_INSTANCE_CATEGORY_NAMES = [
     "__background__",
     "person",
@@ -113,7 +115,7 @@ def extract_predictions(predictions_):
     print("predicted score:", predictions_score)
 
     # Get a list of index with score greater than threshold
-    threshold = 0.5
+    threshold = 0.05
     predictions_t = [predictions_score.index(x) for x in predictions_score if x > threshold][-1]
 
     predictions_boxes = predictions_boxes[: predictions_t + 1]
@@ -126,6 +128,7 @@ def plot_image_with_boxes(img, boxes, pred_cls):
     text_size = 5
     text_th = 5
     rect_th = 6
+    img = img.reshape(img.shape[1], img.shape[2], img.shape[0])
 
     for i in range(len(boxes)):
         # Draw Rectangle with the coordinates
@@ -159,12 +162,12 @@ def main():
     )
 
     # Load image 1
-    image_0 = cv2.imread("data/10best-cars-group-cropped-1542126037.jpg")
+    image_0 = cv2.imread(CURRENT_WORKING_DIRECTORY + "/examples/data/10best-cars-group-cropped.jpg")
     image_0 = cv2.cvtColor(image_0, cv2.COLOR_BGR2RGB)  # Convert to RGB
     print("image_0.shape:", image_0.shape)
 
     # Load image 2
-    image_1 = cv2.imread("data/banner-diverse-group-of-people-2.jpg")
+    image_1 = cv2.imread(CURRENT_WORKING_DIRECTORY + "/examples/data/banner-diverse-group-of-people-2.jpg")
     image_1 = cv2.cvtColor(image_1, cv2.COLOR_BGR2RGB)  # Convert to RGB
     image_1 = cv2.resize(image_1, dsize=(image_0.shape[1], image_0.shape[0]), interpolation=cv2.INTER_CUBIC)
     print("image_1.shape:", image_1.shape)
@@ -173,13 +176,14 @@ def main():
     image = np.stack([image_0, image_1], axis=0).astype(np.float32)
     print("image.shape:", image.shape)
 
-    for i in range(image.shape[0]):
-        plt.axis("off")
-        plt.title("image {}".format(i))
-        plt.imshow(image[i].astype(np.uint8), interpolation="nearest")
-        # plt.show()
+    # for i in range(image.shape[0]):
+    #     plt.axis("off")
+    #     plt.title("image {}".format(i))
+    #     plt.imshow(image[i].astype(np.uint8), interpolation="nearest")
+    #     plt.show()
 
-    # Make prediction on benign samples
+    # Make prediction on benign samples (canales, alto, ancho)
+    image = image.reshape(-1, image.shape[3], image.shape[1], image.shape[2])
     predictions = frcnn.predict(x=image)
 
     for i in range(image.shape[0]):
