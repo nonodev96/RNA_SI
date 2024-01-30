@@ -12,3 +12,4 @@
 {"rule":"WHITESPACE_RULE","sentence":"^\\QResultado que devuelve algoritmo inicialización condición instrucciones condición instrucciones1 instrucciones2  instrucciones3 Título del algoritmo descrito\\E$"}
 {"rule":"A_NIVEL_DE","sentence":"^\\QEl sistema utiliza una combinación de imágenes de la vena del dedo y de huellas dactilares de baja resolución y combina estas dos pruebas mediante una novedosa estrategia de combinación a nivel de puntuación.\\E$"}
 {"rule":"A_NIVEL_DE","sentence":"^\\QSe proponen dos nuevos métodos de combinación a nivel de puntuación, fusión holística y no lineal.\\E$"}
+{"rule":"VOSEO","sentence":"^\\Q\\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q - Create a new project.\\E$"}

@@ -93,6 +93,11 @@ docs:             ## Build the documentation.
 	@$(ENV_PREFIX)mkdocs build
 	URL="site/index.html"; xdg-open $$URL || sensible-browser $$URL || x-www-browser $$URL || gnome-open $$URL || open $$URL
 
+.PHONY: docs-serve
+docs-serve:      ## Enable the serve of mkdocs
+	@echo "building documentation ..."
+	@$(ENV_PREFIX)mkdocs serve
+
 .PHONY: switch-to-poetry
 switch-to-poetry: ## Switch to poetry package manager.
 	@echo "Switching to poetry ..."
