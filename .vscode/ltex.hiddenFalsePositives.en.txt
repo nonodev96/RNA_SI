@@ -1,0 +1,1 @@
+{"rule":"HAND_COMPOUNDS","sentence":"^\\QThis distance is shown to be a more reliable classification criterion than the hand crafted feature sets used by previous systems.\\E$"}
