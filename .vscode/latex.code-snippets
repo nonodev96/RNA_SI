@@ -1,0 +1,78 @@
+{
+    "Figure": {
+        "scope": "latex",
+        "prefix": [
+            "figure",
+        ],
+        "body": [
+            "\\begin{figure}[H]",
+            "\t\\centering",
+            "\t\\includegraphics[width=1\\linewidth]{figures/$1}",
+            "\t\\caption{$2\\\\\\Fuente: Elaboración propia}",
+            "\t\\label{fig:$3}",
+            "\\end{figure}",
+        ],
+        "description": "Figure"
+    },
+    "FigureSVG": {
+        "scope": "latex",
+        "prefix": [
+            "figureSVG",
+        ],
+        "body": [
+            "\\begin{figure}[H]",
+            "\t\\centering",
+            "\t\\centerline{\\includesvg[width=1\\linewidth]{figures/$1}}",
+            "\t\\caption{$2\\\\\\Fuente: Elaboración propia}",
+            "\t\\label{fig:$3}",
+            "\\end{figure}",
+        ],
+        "description": "Figure"
+    },
+    "Table":{
+        "scope": "latex",
+        "prefix": [
+            "table",
+        ],
+        "body": [
+        "\\begin{table}[H]",
+        "\t\\centering",
+        "\t\\small",
+        "\t\\def\\arraystretch{1.5}",
+        "\t\\begin{tabular}{lp{10cm}}",
+        "\t\t\\toprule",
+        "\t\t\\textbf{$2} & \\textbf{$3} \\\\\\",
+        "\t\t\\midrule",
+        "\t\t$2          & $3          \\\\\\",
+        "\t\t\\bottomrule",
+        "\t\\end{tabular}",
+        "\t\\caption{$1}",
+        "\t\\label{tab:$1}",
+        "\\end{table}",
+        ],
+        "description": "Table"
+    },
+    "TableX":{
+        "scope": "latex",
+        "prefix": [
+            "tableX",
+        ],
+        "body": [
+            "\\begin{table}[H]",
+            "\t\\begin{center}",
+            "\t\t\\begin{tabularx}{\\textwidth}{|l|X|}",
+            "\t\t\t\\toprule",
+            "\t\t\t\\textbf{$2} & \\textbf{$3} \\\\\\",
+            "\t\t\t\\midrule",
+            "\t\t\t$2          & $3          \\\\\\",
+            "\t\t\t$2          & $3          \\\\\\",
+            "\t\t\t\\bottomrule",
+            "\t\t\\end{tabularx}",
+            "\t\t\\caption{$1}",
+            "\t\t\\label{tab:$1}",
+            "\t\\end{center}",
+            "\\end{table}",
+        ],
+        "description": "TableX"
+    }
+}

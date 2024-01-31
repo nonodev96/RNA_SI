@@ -8,10 +8,10 @@ El proyecto que desarrollamos se encuentra en una frontera muy difusa de múltip
 Por lo que debemos explicar que es la ciencia de datos, el proceso \gls{KDD}, la inteligencia artificial generativa y la seguridad de la información.
 
 \begin{figure}[H]
-  \centering
-  \centerline{\includesvg[width=0.75\columnwidth]{figures/ciencia-de-datos.drawio.svg}}
-  \caption{Ciencia de datos como campo interdisciplinar.\\Fuente: Elaboración propia}
-  \label{fig:ciencia-de-datos}
+    \centering
+    \centerline{\includesvg[width=0.75\columnwidth]{figures/ciencia-de-datos.drawio.svg}}
+    \caption{Ciencia de datos como campo interdisciplinar.\\Fuente: Elaboración propia}
+    \label{fig:ciencia-de-datos}
 \end{figure}
 
 Podemos dividir este trabajo en dos secciones muy relacionadas, la primera la inteligencia artificial y de segundo punto de importancia la seguridad de la información.
@@ -25,7 +25,6 @@ Ya que alterando cualquiera de estos componentes de forma se verá enormemente a
 % Deep Learning
 % GANs
 
-
 \section{Antecedentes}
 \label{ch:2:section:background}
 
@@ -35,28 +34,28 @@ A continuación se describe una línea de temporal con los hitos más relevantes
 En este caso se trata de referencias en hitos de logros a nivel teórico como práctico.
 
 \begin{vtimeline}[timeline color=cyan!80!blue, add bottom line, line offset=2pt, use timeline header,timeline title={Hitos de las redes neuronales artificiales}]
-  1676        & The Chain Rule \cite{leibniz2012early}                                                    \endlr
-  1847        & Augustin-Louis Cauchy \cite{lemarechal2012cauchy}                                         \endlr
-  1943        & Threshold Logic Unit (TLU) \cite{mcculloch1943logical}                                    \endlr
-  1949        & Teoría Hebbiana                                                                           \endlr
-  1958        & Perceptron \cite{rosenblatt1958perceptron}                                                \endlr
-  1959-1960   & Adaline y Madaline \cite{rosenblatt1958perceptron}                                        \endlr
-  1965        & Multilayer Perceptron (MLP) \cite{baum1988capabilities}                                   \endlr
-  1967-1968   & Deep Learning by Stochastic Gradient Descent \cite{karplus19671967}                       \endlr
-  1980’s      & Neuronas Sigmoidales                                                                      \endlr
-  ~           & Feedforward neural network (FNN) \cite{rumelhart1985learning}                             \endlr
-  ~           & Backpropagation (BP) \cite{rosenblatt1962principles,etde_5080493,lecun1985learning}       \endlr
-  1985        & Boltzmann Machine \cite{ACKLEY1985147}                                                    \endlr
-  1987        & Adaptive resonance theory (ART) \cite{grossberg1987competitive}                           \endlr
-  1989        & Convolutional neural networks (CNN) \cite{lecun1989backpropagation}                       \endlr
-  ~           & Recurent neural networks (RNN) \cite{schmidhuber1993habilitation}                         \endlr
-  1990        & Generative Adversarial Networks (GAN) as Game \cite{schmidhuberunsupervised}              \endlr
-  1997        & Long short term memory (LSTM) \cite{Hochreiter1997LongSM, hochreiter1997long}                                 \endlr
-  2006        & Deep Belief Networks (DBN) \cite{hinton2006fast}                                          \endlr
-  ~           & Restricted Boltzmann Machine \cite{hinton2006reducing}                                    \endlr
-  ~           & Encoder / Decoder (Auto-encoder) \cite{hinton2006reducing}                                \endlr
-  2014        & Generative Adversarial Networks (GAN) Moderns \cite{6294131,goodfellow2014generative}     \endlr
-  2018        & Style Generative Adversarial Networks (Style-GAN) \cite{karras2019stylebased}             \endlr
+    1676        & The Chain Rule \cite{leibniz2012early}                                                    \endlr
+    1847        & Augustin-Louis Cauchy \cite{lemarechal2012cauchy}                                         \endlr
+    1943        & Threshold Logic Unit (TLU) \cite{mcculloch1943logical}                                    \endlr
+    1949        & Teoría Hebbiana                                                                           \endlr
+    1958        & Perceptron \cite{rosenblatt1958perceptron}                                                \endlr
+    1959-1960   & Adaline y Madaline \cite{rosenblatt1958perceptron}                                        \endlr
+    1965        & Multilayer Perceptron (MLP) \cite{baum1988capabilities}                                   \endlr
+    1967-1968   & Deep Learning by Stochastic Gradient Descent \cite{karplus19671967}                       \endlr
+    1980’s      & Neuronas Sigmoidales                                                                      \endlr
+    ~           & Feedforward neural network (FNN) \cite{rumelhart1985learning}                             \endlr
+    ~           & Backpropagation (BP) \cite{rosenblatt1962principles,etde_5080493,lecun1985learning}       \endlr
+    1985        & Boltzmann Machine \cite{ACKLEY1985147}                                                    \endlr
+    1987        & Adaptive resonance theory (ART) \cite{grossberg1987competitive}                           \endlr
+    1989        & Convolutional neural networks (CNN) \cite{lecun1989backpropagation}                       \endlr
+    ~           & Recurent neural networks (RNN) \cite{schmidhuber1993habilitation}                         \endlr
+    1990        & Generative Adversarial Networks (GAN) as Game \cite{schmidhuberunsupervised}              \endlr
+    1997        & Long short term memory (LSTM) \cite{Hochreiter1997LongSM, hochreiter1997long}                                 \endlr
+    2006        & Deep Belief Networks (DBN) \cite{hinton2006fast}                                          \endlr
+    ~           & Restricted Boltzmann Machine \cite{hinton2006reducing}                                    \endlr
+    ~           & Encoder / Decoder (Auto-encoder) \cite{hinton2006reducing}                                \endlr
+    2014        & Generative Adversarial Networks (GAN) Moderns \cite{6294131,goodfellow2014generative}     \endlr
+    2018        & Style Generative Adversarial Networks (Style-GAN) \cite{karras2019stylebased}             \endlr
 \end{vtimeline}
 
 
@@ -70,20 +69,20 @@ Posteriormente en 1805 {Adrien-Marie Legendre} y {Johann Carl Friedrich Gauss} d
 Esto lo uso {Gauss} para redescubrir el planeta enano Ceres.
 
 \begin{figure}[H]
-  \centering
-  \includegraphics[width=0.45\textwidth]{figures/Gottfried_Wilhelm_Leibniz,_Bernhard_Christoph_Francke.jpg}
-  \caption{Retrato de Gottfried Leibniz. \\Fuente: \href{https://es.wikipedia.org/wiki/Gottfried_Leibniz}{Wikipedia}}
-  \label{fig:gottfried-leibniz}
+    \centering
+    \includegraphics[width=0.45\textwidth]{figures/Gottfried_Wilhelm_Leibniz,_Bernhard_Christoph_Francke.jpg}
+    \caption{Retrato de Gottfried Leibniz.\\Fuente: \href{https://es.wikipedia.org/wiki/Gottfried_Leibniz}{Wikipedia}}
+    \label{fig:gottfried-leibniz}
 \end{figure}
 
 Aunque realmente la historia comienza en 1943 con la investigación de {Warren McCulloch} y {Walter Pitss}, publicaron el artículo \textit{A logical calculus of the ideas immanent in nervous activity} \cite{mcculloch1943logical}.
 Dicho artículo creó distintas ramas de investigación (ordenadores digitales, inteligencia artificial, funcionamiento del perceptron).
 
 \begin{figure}[H]
-  \centering
-  \includegraphics[width=0.65\textwidth]{figures/Warren Sturgis McCulloch Interview.png}
-  \caption{Warren Sturgis McCulloch Interview. \\Fuente: \href{https://www.youtube.com/watch?v=8Wdz1Tj5084}{Entrevista en 1969}}
-  \label{fig:Warren Sturgis McCulloch}
+    \centering
+    \includegraphics[width=0.65\textwidth]{figures/Warren Sturgis McCulloch Interview.png}
+    \caption{Warren Sturgis McCulloch Interview.\\Fuente: \href{https://www.youtube.com/watch?v=8Wdz1Tj5084}{Entrevista en 1969}}
+    \label{fig:Warren Sturgis McCulloch}
 \end{figure}
 
 
@@ -91,19 +90,19 @@ En 1956 en la primera conferencia de inteligencia artificial organizada por la f
 En dicha conferencia (\textit{Nathaural Rochester}) presento el modelo de una red neuronal que fue el resultado de la investigación desarrollada por el equipo de investigación de IBM.
 
 \begin{figure}[H]
-  \centering
-  \includegraphics[width=0.75\textwidth]{figures/conferecia 1956 - 1689170718524.png}
-  \caption{Los padres de la inteligencia artificial. \\Fuente: \href{https://www.linkedin.com/pulse/first-ever-ai-conference-tracing-evolution-history-ofai-nicky-verd}{Linkedin}}
-  \label{fig:conferencia-1956}
+    \centering
+    \includegraphics[width=0.75\textwidth]{figures/conferecia 1956 - 1689170718524.png}
+    \caption{Los padres de la inteligencia artificial.\\Fuente: \href{https://www.linkedin.com/pulse/first-ever-ai-conference-tracing-evolution-history-ofai-nicky-verd}{Linkedin}}
+    \label{fig:conferencia-1956}
 \end{figure}
 
 En 1957 se presenta el ``\textit{Perceptron}'' por {Frank Rosenblatt}, dicho elemento es un sistema clasificador de patrones, además contaba con la capacidad de aprender, de ser robusto matemáticamente y poder adaptarse si algún componente se dañaba.
 
 \begin{figure}[H]
-  \centering
-  \includegraphics[width=0.4\textwidth]{figures/perceptron.png}
-  \caption{Mark I Perceptron. \\Fuente: \href{https://en.wikipedia.org/wiki/Perceptron}{Wikipedia}}
-  \label{fig:perceptron}
+    \centering
+    \includegraphics[width=0.4\textwidth]{figures/perceptron.png}
+    \caption{Mark I Perceptron.\\Fuente: \href{https://en.wikipedia.org/wiki/Perceptron}{Wikipedia}}
+    \label{fig:perceptron}
 \end{figure}
 
 El \textit{Perceptron} fue diseñado originalmente para el reconocimiento óptico usando un sistema de 400 fotocélulas en rejilla.
@@ -115,10 +114,10 @@ Posteriormente el \textit{MIT} realizo una investigación matemática muy críti
 Esto llevo a uno de los famosos inviernos de la inteligencia artificial (1974 - 1980).
 
 \begin{figure}[H]
-  \centering
-  \includegraphics[width=0.25\textwidth]{figures/Kunihiko Fukushima.jpg}
-  \caption{Kunihiko Fukushima. \\Fuente: \href{https://www.ieice.org/eng/about_ieice/new_honorary_members_award_winners/2017/meiyo_05e.html}{IEICE}}
-  \label{fig:kunihiko-fukushima}
+    \centering
+    \includegraphics[width=0.25\textwidth]{figures/Kunihiko Fukushima.jpg}
+    \caption{Kunihiko Fukushima.\\Fuente: \href{https://www.ieice.org/eng/about_ieice/new_honorary_members_award_winners/2017/meiyo_05e.html}{IEICE}}
+    \label{fig:kunihiko-fukushima}
 \end{figure}
 
 Durante la década de los 70 se hacen aportes a la teoría \textit{Hebbiana}, se aportan logros en al análisis y descripción de reglas adaptativas, además de otros aportes al principio de aprendizaje competitivo.
@@ -133,10 +132,10 @@ En 1985 {David E. Rumelhart} basandose en la investigación realizada por {Paul 
 {Yann LeCun} junto a su equipo, en 1989 crearon la primera aplicación \acrshort{cnn} con técnicas \acrshort{bp} dicha aplicación podía reconocer números a partir de imágenes.
 
 \begin{figure}[H]
-  \centering
-  \includegraphics[width=0.65\textwidth]{figures/yann-lecun - EyIwmEDW8AIQs1C.jpeg}
-  \caption{Adaptive Systems Research Department at Bell Labs 1989.\\Fuente: \href{https://twitter.com/ylecun/status/1378718317695934465}{Twitter Yann Lecun}}
-  \label{fig:adaptive-systems-research-department-at-bell-labs}
+    \centering
+    \includegraphics[width=0.65\textwidth]{figures/yann-lecun - EyIwmEDW8AIQs1C.jpeg}
+    \caption{Adaptive Systems Research Department at Bell Labs 1989.\\Fuente: \href{https://twitter.com/ylecun/status/1378718317695934465}{Twitter Yann Lecun}}
+    \label{fig:adaptive-systems-research-department-at-bell-labs}
 \end{figure}
 
 En la década de los 90 se presentaron múltiples investigaciones y muchos avances en el campo, uno de los más importantes fue la presentación de la primera \acrshort{gan} como una curiosidad, ya que se presentó como un duelo entre dos redes neuronales, en un principio fue un generador probabilístico y un predictor con el objetivo de maximizar la pérdida de cada uno en un juego \textit{minimax}.
@@ -153,10 +152,10 @@ En junio de 1991 {Sepp Hochreiter} \ref{fig:sepp-hochreiter} implemento el prime
 Un análisis posterior condujo a los investigadores a una primera aproximación \acrshort{lstm}, aunque no sería hasta 1997 con la revisión por pares y publicación del artículo \textit{Long short-term memory} \cite{hochreiter1997long} que se solucionaría parcialmente el problema.
 
 \begin{figure}[H]
-  \centering
-  \includegraphics[width=0.65\textwidth]{figures/Sepp Hochreiter.jpg}
-  \caption{Sepp Hochreiter. \\Fuente: \href{https://people.idsia.ch/~juergen/fundamentaldeeplearningproblem.html}{IDSIA}}
-  \label{fig:sepp-hochreiter}
+    \centering
+    \includegraphics[width=0.65\textwidth]{figures/Sepp Hochreiter.jpg}
+    \caption{Sepp Hochreiter.\\Fuente: \href{https://people.idsia.ch/~juergen/fundamentaldeeplearningproblem.html}{IDSIA}}
+    \label{fig:sepp-hochreiter}
 \end{figure}
 
 Más adelante en el 2014 {Goodfellow} \ref{fig:gan-ian-goodfellow} presento la primera red neuronal \acrshort{gan} pura para la generación de imágenes mediante el enfrentamiento de una red neuronal generativa contra una red neuronal discriminante entrenadas con el mismo conjunto de datos \cite{goodfellow2014generative}.
@@ -164,10 +163,10 @@ Durante los próximos años se realizaron muchos aportes a las redes neuronales 
 Fruto de todo ello {NVIDIA} en 2018 presento \gls{StyleGAN} \cite{karras2019stylebased} aunque publicaron el código en 2019 con fuertes mejoras.
 
 \begin{figure}[H]
-  \centering
-  \includegraphics[width=0.2\textwidth]{figures/gan-goodfellow.png}
-  \caption{Ian Goodfellow. \\Fuente: \href{https://www.technologyreview.es/s/10016/el-senor-de-las-gan-el-hombre-que-dio-imaginacion-las-maquinas}{MIT Technology Review}}
-  \label{fig:gan-ian-goodfellow}
+    \centering
+    \includegraphics[width=0.2\textwidth]{figures/gan-goodfellow.png}
+    \caption{Ian Goodfellow.\\Fuente: \href{https://www.technologyreview.es/s/10016/el-senor-de-las-gan-el-hombre-que-dio-imaginacion-las-maquinas}{MIT Technology Review}}
+    \label{fig:gan-ian-goodfellow}
 \end{figure}
 
 
@@ -221,7 +220,18 @@ Fruto de todo ello {NVIDIA} en 2018 presento \gls{StyleGAN} \cite{karras2019styl
 % KDD
 
 \subsection{Aprendizaje automático - \textit{Machine Learning}}
+
+
 % TODO
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{figures/chapter02/machine-learning.drawio.png}
+    \caption{Clasificación de los algoritmos de aprendijaze automático.\\Fuente: Elaboración propia}
+    \label{fig:machine-learning}
+\end{figure}
+
+
 
 \subsection{Aprendizaje profundo - \textit{Deep Learning}}
 % TODO
@@ -233,37 +243,74 @@ Fruto de todo ello {NVIDIA} en 2018 presento \gls{StyleGAN} \cite{karras2019styl
 \label{ch:2:section:state-of-the-art:computer-security-in-neural-networks}
 
 El estado del arte de la seguridad es muy complejo por la constante evolución, las ciberamenazas están en constante evolución, los delincuentes informaticos adoptan nuevas técnicas y tácticas para eludir las medidas de seguridad tradicionales.
-Limitaremos el alcance del estado del arte de la seguridad informática a los campos relacionados con la inteligencia artificial.
 
-Amenazas de las redes neuronales.
-% TODO
+Dentro de la inteligencia artificial encontramos \gls{AI} el aprendizaje automático \gls{ML} y dentro el aprendijaze profundo \gls{DL}
+Para el desarrollo de este capítulo limitaremos el alcance del estado del arte de la seguridad informática a los campos relacionados con la inteligencia artificial.
 
+\begin{figure}[H]
+    \centering
+    \centerline{\includesvg[width=1\columnwidth]{figures/chapter02/adversarial-threats.drawio.svg}}
+    \caption{Amenazas adversariales.\\Fuente: Elaboración propia}
+    \label{fig:art-adversarial-threats}
+\end{figure}
+
+Como podemos observar en la figura \ref{fig:art-adversarial-threats} existen multitud de amenazas a redes neuronales.
+
+% Eficiencia
+% Invisivilidad
+% Efectividad
+
+
+\subsubsection{Ataques en \textit{deep learning}}
+
+Existen cuatro grandes formas de clasificar los ataques en \gls{ML}
+
+% 
+\textbf{Evasión}: busca explotar las vulnerabilidades de la red neuronal para inducir errores en la capacidad de clasificar o de predecir. Se envia información con perturbaciones minimas que alteren notablemente la respuesta del modelo.
 \begin{itemize}
-  \item Envenenamiento:
-  \item Inferencia:
-  \item Extracción:
-  \item Evasión:
+    \item Caja blanca: se conoce todo sobre el modelo, arquitectura, pesos, umbrales, formato de entreada de datos y salida, etc. \cite{learning-machine-learning-part-3-attacking}
+    \item Caja negra: se desconoce el modelo, arquitectura, pesos, umbrales, pero se conoce el formato de entrada de datos y la respuesta del modelo. \cite{learning-machine-learning-part-3-attacking}
 \end{itemize}
 
+% 
+\textbf{Envenenamiento}: los atacantes intentan manipular los datos de entrenamiento con el objetivo de influir en el resultado del aprendijaze del modelo, esto pueden hacerlo desde distintas etapas.
+
+$$\sum_{r a n d}(x)=\left\{c l i p\left(x+\delta\right)|\delta\in[-5,5]^{H\times W\times3}\right\}$$
+\begin{itemize}
+    \item Ataques de cambio de etiquetas \textit{Label Flipping Attacks}
+    \item Ataque de envenenamiento de datos de etiquetado limpio \textit{Clean Label Data Poisoning Attack}
+    \item Ataque de puerta trasera \textit{Backdoor Attack}
+\end{itemize}
+
+% 
+\textbf{Extracción}: se busca extraer un funcionamiento interno equivalente de la red neuronal, se puede considerar un ataque de ingeniería inversa.
+
+% 
+\textbf{Inferencia}:
+\begin{itemize}
+    \item Atributos
+    \item Pertenencia
+    \item Inversión de modelos
+    \item Reconstrucción
+\end{itemize}
+
+
+\subsubsection{Defensas contra los ataques en \textit{deep learning}}
+
+
+\subsubsection{Metricas en los ataques adversariales}
+
+\subsubsection{Red team y blue team en Rede}
+
+Un buen simil entre la seguridad informática clásica y la seguridad en redes neuronales son los conceptos de equipos de ataque y defensa (``red team'' y ``blue team'').
+
 \begin{figure}[H]
-  \centering
-  \centerline{\includesvg[width=1\columnwidth]{figures/adversarial-threats.drawio.svg}}
-  \caption{Amenazas adversariales. \\Fuente: Elaboración propia}
-  \label{fig:art-adversarial-threats}
+    \centering
+    \centerline{\includesvg[width=1\columnwidth]{figures/chapter02/ART-for-red-and-blue-teams.drawio.svg}}
+    \caption{Ataques y defensas en redes neuronales.\\Fuente: Elaboración propia}
+    \label{fig:art-for-red-and-blue-teams}
 \end{figure}
 
-
-% TODO Red and Blue team
-
-\begin{figure}[H]
-  \centering
-  \centerline{\includesvg[width=1\columnwidth]{figures/ART-for-red-and-blue-teams.drawio.svg}}
-  \caption{Ataques y defensas en redes neuronales. \\Fuente: Elaboración propia}
-  \label{fig:art-for-red-and-blue-teams}
-\end{figure}
-
-
-\subsubsection{Vectores de ataque en \textit{deep learning}}
 
 La idea detrás del aprendizaje automático es la de poder predecir modelos predictivos, para ello se usan conjuntos de datos para el entrenamiento.
 
@@ -272,39 +319,39 @@ Los conjuntos de datos se han de procesar, ya que suelen contener mucho ruido, e
 Los ataques al aprendizaje automático o profundo suelen estar dirigidos a las distintas etapas de creación y uso de un modelo.
 
 \begin{itemize}
-  \item Alteración de los datos de entrada.
-  \item Alteración del proceso de aprendizaje.
-  \item Extración de los datos de entrenamiento.
-  \item Bloqueo del modelo.
+    \item Alteración de los datos de entrada.
+    \item Alteración del proceso de aprendizaje.
+    \item Extración de los datos de entrenamiento.
+    \item Bloqueo del modelo.
 \end{itemize}
 
 Durante el transcurso del trabajo discutiremos los siguientes ataques y defensas previamente en la sección \nameref{ch:2:section:state-of-the-art:computer-security-in-neural-networks} que se pueden usar en los modelos.
 
 \begin{itemize}
-  \item Envenenamiento de datos.
-  \item Puerta trasera.
-  \item Extracción de datos
-  \item Ingeniería inversa.
-  \item Evasión.
+    \item Envenenamiento de datos.
+    \item Puerta trasera.
+    \item Extracción de datos
+    \item Ingeniería inversa.
+    \item Evasión.
 \end{itemize}
 
-Un buen símil con la seguridad clásica puede ser categorizar la seguridad de los modelos con el modelo \gls{STRIDE} de microsoft\footnote{Modelado de amenazas de microsoft \href{https://learn.microsoft.com/es-es/azure/security/develop/threat-modeling-tool-threats}{STRIDE}} o con la matriz \gls{MITRE}.
+Se puede ser categorizar la seguridad de los modelos con el modelado \gls{STRIDE} de microsoft\footnote{Modelado de amenazas de microsoft \href{https://learn.microsoft.com/es-es/azure/security/develop/threat-modeling-tool-threats}{STRIDE}} o con la matriz \gls{MITRE}.
 
 \begin{table}[H]
-  \centering
-  \small
-  \def\arraystretch{1.5}
-  \begin{tabular}{lp{10cm}}
-    \toprule
-    \textbf{Amenaza}    & \textbf{Tipo de ataque}                                           \\
-    \midrule
-    Corrupción de datos & Ataques de envenenamiento de datos, ataques de puerta trasera     \\
-    Extracción de datos & Ataques de inferencia de membresía, ataques de ingeniería inversa \\
-    Denegación          & Ataques de envenenamiento de datos                                \\
-    \bottomrule
-  \end{tabular}
-  \caption{Amenazas STRIDE relacionadas con la seguridad de la IA}
-  \label{tab.amenazas}
+    \centering
+    \small
+    \def\arraystretch{1.5}
+    \begin{tabular}{lp{10cm}}
+        \toprule
+        \textbf{Amenaza}    & \textbf{Tipo de ataque}                                           \\
+        \midrule
+        Corrupción de datos & Ataques de envenenamiento de datos, ataques de puerta trasera     \\
+        Extracción de datos & Ataques de inferencia de membresía, ataques de ingeniería inversa \\
+        Denegación          & Ataques de envenenamiento de datos                                \\
+        \bottomrule
+    \end{tabular}
+    \caption{Amenazas STRIDE relacionadas con la seguridad de la IA}
+    \label{tab:amenazas}
 \end{table}
 
-\subsubsection{Defensas contra los ataques adversarios}
+table

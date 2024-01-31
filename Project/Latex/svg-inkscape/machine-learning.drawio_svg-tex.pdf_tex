@@ -1,6 +1,6 @@
 %% Creator: Inkscape 1.1.2 (0a00cf5339, 2022-02-04), www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'Adversarial Threats.drawio_svg-tex.pdf' (pdf, eps, ps)
+%% Accompanies image file 'machine-learning.drawio_svg-tex.pdf' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -38,7 +38,7 @@
   \newcommand*\fsize{\dimexpr\f@size pt\relax}%
   \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{453.06bp}%
+    \setlength{\unitlength}{691.125bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -50,9 +50,22 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.75238379)%
+  \begin{picture}(1,0.31633207)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{Adversarial Threats.drawio_svg-tex.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{machine-learning.drawio_svg-tex.pdf}}%
+    \put(0.49918611,0.26641346){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Machine Learning\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{machine-learning.drawio_svg-tex.pdf}}%
+    \put(0.08681498,0.14921324){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}- Clasificación...\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{machine-learning.drawio_svg-tex.pdf}}%
+    \put(0.91155724,0.14921324){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}- Reducción...\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{machine-learning.drawio_svg-tex.pdf}}%
+    \put(0.30385242,0.14812805){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Aprendizaje super...\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{machine-learning.drawio_svg-tex.pdf}}%
+    \put(0.69451981,0.14812805){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Aprendizaje...\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{machine-learning.drawio_svg-tex.pdf}}%
+    \put(0.6945198,0.01790559){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Aprendizaje refor...\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{machine-learning.drawio_svg-tex.pdf}}%
+    \put(0.30385242,0.01790559){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Aprendizaje...\end{tabular}}}}%
   \end{picture}%
 \endgroup%
