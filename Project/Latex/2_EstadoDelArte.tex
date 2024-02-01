@@ -171,53 +171,58 @@ Fruto de todo ello {NVIDIA} en 2018 presento \gls{StyleGAN} \cite{karras2019styl
 
 
 
-
-\subsection{Privacidad}
-
-\subsection{Explicabilidad}
-
-\subsection{Normativa y estándares}
-% https://eur-lex.europa.eu/resource.html?uri=cellar:e0649735-a372-11eb-9585-01aa75ed71a1.0008.02/DOC_1&format=PDF
-% https://eur-lex.europa.eu/resource.html?uri=cellar:e0649735-a372-11eb-9585-01aa75ed71a1.0008.02/DOC_2&format=PDF
-
-% Según la unión europea toda la seguridad es este apartado :ok: 
-% (51) La ciberseguridad es fundamental para garantizar que los sistemas de IA resistan a las actuaciones de terceros maliciosos que, aprovechando las vulnerabilidades del sistema, traten de alterar su uso, conducta o funcionamiento o de poner en peligro sus propiedades de seguridad. Los ciberataques contra sistemas de IA pueden dirigirse contra elementos específicos de la IA, como los conjuntos de datos de entrenamiento (p. ej., contaminación de datos) o los modelos entrenados (p. ej., ataques adversarios), o aprovechar las vulnerabilidades de los elementos digitales del sistema de IA o la infraestructura de TIC subyacente. Por lo tanto, para asegurar un nivel de ciberseguridad adecuado a los riesgos, los proveedores de sistemas de IA de alto riesgo deben adoptar medidas adecuadas teniendo también en cuenta, cuando proceda, la infraestructura de TIC subyacente.
-
-
-
-
-
-
-
-
-
-% https://www.youtube.com/@felipebravom
-
-
-
-% Feb 1990: Generative Adversarial Networks / Curiosity Generative Adversarial Networks (GANs) have become very popular.[MOST] They were first published in 1990 in Munich under the moniker Artificial Curiosity. [AC90-20][GAN1] Two dueling NNs (a probabilistic generator and a predictor) are trying to maximize each other's loss in a minimax game.[AC](Sec. 1) The generator (called the controller) generates probabilistic outputs (using stochastic units[AC90] like in the much later StyleGANs[GAN2]). The predictor (called the world model) sees the outputs of the controller and predicts environmental reactions to them. Using gradient descent, the predictor NN minimizes its error, while the generator NN tries to make outputs that maximize this error: one net's loss is the other net's gain.[AC90] (The world model can also be used for continual online action planning.[AC90][PLAN2-3][PLAN])
-
-% 4 years before a 2014 paper on GANs,[GAN1] my well-known 2010 survey[AC10] summarised the generative adversarial NNs of 1990 as follows: a "neural network as a predictive world modelis used to maximize the controller's intrinsic reward, which is proportional to the model's prediction errors" (which are minimized).
-
-% The 2014 GANs are an instance of this where the trials are very short (like in bandit problems) and the environment simply returns 1 or 0 depending on whether the controller's (or generator's) output is in a given set.[AC20][AC][T22](Sec. XVII)
-
-% Other early adversarial machine learning settings[S59][H90] were very different—they neither involved unsupervised NNs nor were about modeling data nor used gradient descent.
-
-% The 1990 principle has been widely used for exploration in Reinforcement Learning[SIN5][OUD13] [PAT17][BUR18] and for synthesis of realistic images,[GAN1,2] although the latter domain was recently taken over by Rombach et al.'s Latent Diffusion, another method published in Munich,[DIF1] building on Jarzynski's earlier work in physics from the previous millennium[DIF2]  and more recent papers.[DIF3-5]
-
-% In 1991, I published yet another ML method based on two adversarial NNs called Predictability Minimization for creating disentangled representations of partially redundant data, applied to images in 1996.
-
 \section{Estado del arte}
 \label{ch:2:section:state-of-the-art}
 % TODO
 
 \subsection{La ciencia de datos}
 % TODO
+La ciencia de datos (\textit{Data Science}) es el estudio de los datos con el objetivo de extraer información útil, se usa principalmente para dar información útil a empresas. Es un campo multidisciplinar, ya que combina campos de las matemáticas, estadistica e inteligencia artificial para analizar grandes cantidades de datos. Esto tiene como objetivo responder a las siguientes cuestiones: \textit{¿Qué paso?, ¿Por qué pasó?, ¿Qué pasará? o ¿Qué se puede hacer con los resultados?} \cite{aws-data-science}
 
-\subsection{La extracción del conocimiento}
-% TODO
+La ciencia de datos analiza los datos de distintas formas.
+
+\begin{enumerate}
+    \item Análisis descriptivo
+    \item Análisis de diagnóstico
+    \item Análisis predictivo
+    \item Análisis prescriptivo
+\end{enumerate}
+
+
+\subsection{El proceso de la ciencia de datos}
 % Fases de la extraccón del conocimiento 
-% KDD
+% Dentro del KDD está la {Mineria de datos}
+\begin{enumerate}
+    \item Obtener datos
+    \item Depurar datos
+    \item Explorar datos
+    \item Modelar datos
+    \item Interpretar los resultados
+\end{enumerate}
+
+Este proceso \gls{KDD} \cite{maimon2005data, rokach2010data}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{figures/chapter02/KDD.jpg}
+    \caption{El proceso de descubrimiento de conocimiento en bases de datos\\Fuente: Página 24 \cite{rokach2010data}}
+    \label{fig:}
+\end{figure}
+
+
+\begin{enumerate}
+    \item \textbf{1 Comprensión del Dominio de Aplicación}: se debe comprender los datos que se tratan y el campo de obtención con el objetivo de preparar los datos.
+    \item \textbf{2 Selección y Creación de Conjunto de Datos}: se han de seleccionar los datos relevates (Selección de características)
+    \item \textbf{3 Preprocesamiento y Limpieza de Datos}: se han de eliminar las características no relevantes, datos perturbados, entradas incoherentes o tratar datos faltantes, etc. con el objetivo de obtener datos más limpio
+    \item \textbf{4 Transformación de Datos}: se deben tratar los datos, reduciendo la dimensionalidad, filtración, descomponiendo, etc. para que sea más sencillo el consumo de estos datos por una aplicación.
+    \item \textbf{5 Elección de Tarea de Minería de Datos}: en función de los datos y del objetivo deberemos realizar una tarea (clasificación, regresión o agrupación), ya que en la mineria de datos hay dos objetivos principales, \textbf{predicción} y \textbf{descripción}.
+    \item \textbf{6 Elección del Algoritmo de Minería de Datos}:
+    \item \textbf{7 Implementación del Algoritmo de Minería de Datos}:
+    \item \textbf{8 Evaluación de Patrones Minados}:
+    \item \textbf{9 Utilización del Conocimiento Descubierto}:
+\end{enumerate}
+
+% TODO hay que hablar de la taxonomia de la mineria de datos
 
 \subsection{Aprendizaje automático - \textit{Machine Learning}}
 
@@ -261,46 +266,82 @@ Como podemos observar en la figura \ref{fig:art-adversarial-threats} existen mul
 % Efectividad
 
 
-\subsubsection{Ataques en \textit{deep learning}}
+\subsection{Ataques en \textit{deep learning}}
 
 Existen cuatro grandes formas de clasificar los ataques en \gls{ML}
 
 % 
-\textbf{Evasión}: busca explotar las vulnerabilidades de la red neuronal para inducir errores en la capacidad de clasificar o de predecir. Se envia información con perturbaciones minimas que alteren notablemente la respuesta del modelo.
-\begin{itemize}
-    \item Caja blanca: se conoce todo sobre el modelo, arquitectura, pesos, umbrales, formato de entreada de datos y salida, etc. \cite{learning-machine-learning-part-3-attacking}
-    \item Caja negra: se desconoce el modelo, arquitectura, pesos, umbrales, pero se conoce el formato de entrada de datos y la respuesta del modelo. \cite{learning-machine-learning-part-3-attacking}
-\end{itemize}
+\subsubsection{Evasión}
+
+Busca explotar las vulnerabilidades de la red neuronal para inducir errores en la capacidad de clasificar o de predecir. Se envia información con perturbaciones minimas que alteren notablemente la respuesta del modelo.
+
+\begin{enumerate}
+    \item \textbf{Caja blanca}: se conoce todo sobre el modelo, arquitectura, pesos, umbrales, formato de entreada de datos y salida, etc. \cite{learning-machine-learning-part-3-attacking}
+    \item \textbf{Caja negra}: se desconoce el modelo, arquitectura, pesos, umbrales, pero se conoce el formato de entrada de datos y la respuesta del modelo. \cite{learning-machine-learning-part-3-attacking}
+\end{enumerate}
 
 % 
-\textbf{Envenenamiento}: los atacantes intentan manipular los datos de entrenamiento con el objetivo de influir en el resultado del aprendijaze del modelo, esto pueden hacerlo desde distintas etapas.
+\subsubsection{Envenenamiento}
 
-$$\sum_{r a n d}(x)=\left\{c l i p\left(x+\delta\right)|\delta\in[-5,5]^{H\times W\times3}\right\}$$
-\begin{itemize}
-    \item Ataques de cambio de etiquetas \textit{Label Flipping Attacks}
-    \item Ataque de envenenamiento de datos de etiquetado limpio \textit{Clean Label Data Poisoning Attack}
-    \item Ataque de puerta trasera \textit{Backdoor Attack}
-\end{itemize}
+Los atacantes intentan manipular los datos de entrenamiento con el objetivo de influir en el resultado del aprendijaze del modelo, esto pueden hacerlo desde distintas etapas.
+
+% $$ \sum_{rand}(x)=\left\{clip\left(x+\delta\right)|\delta\in[-5,5]^{H\times W\times3}\right\} $$
+
+\begin{enumerate}
+    \item \textit{Label Flipping Attacks} - Ataques de cambio de etiquetas:
+    \item \textit{Clean Label Data Poisoning Attack} - Ataques de envenenamiento de datos de etiquetado limpio:
+    \item \textit{Backdoor Attack} - Ataques de puerta trasera: los ataques de puerta trasera, ataques que contienen un disparador, estos se pueden clasificar en tres tipos de escenarios.
+          \begin{enumerate}
+              \item Aprendizaje d
+              \item Aprendizaje por transferencia
+              \item Aprendizaje federado
+          \end{enumerate}
+\end{enumerate}
+
+\paragraph{Label Flipping Attacks}
+
+\paragraph{Clean Label Data Poisoning Attack}
+
+
+\subparagraph{Feature Collision Attack}
+$$x_{p}={\underset{x}{\mathrm{argmin}}}||f\left(x\right)-f\left(x_{t}\right)||_{2}^{2}+\beta||x-x_{b}||_{2}^{2}\,,$$
+% 
+
+
+\subparagraph{Convex Polytope Attack and Bullseye Polytope Attack}
+
+\paragraph{Backdoor Attack}
+
+
+\subsubsection{Extracción}
+
+Se busca extraer un funcionamiento interno equivalente de la red neuronal, se puede considerar un ataque de ingeniería inversa.
 
 % 
-\textbf{Extracción}: se busca extraer un funcionamiento interno equivalente de la red neuronal, se puede considerar un ataque de ingeniería inversa.
+\subsubsection{Inferencia}
 
-% 
-\textbf{Inferencia}:
-\begin{itemize}
-    \item Atributos
-    \item Pertenencia
-    \item Inversión de modelos
-    \item Reconstrucción
-\end{itemize}
+\paragraph{Inferencia por Atributos}
+\paragraph{Inferencia por Pertenencia}
+\paragraph{Inversión de modelos}
+\paragraph{Reconstrucción}
 
 
-\subsubsection{Defensas contra los ataques en \textit{deep learning}}
+\subsection{Defensas contra los ataques en \textit{deep learning}}
+
+\subsubsection{Pre procesamiento}
+\subsubsection{Post procesamiento}
+\subsubsection{Entrenamiento}
+\subsubsection{Transformación}
+\paragraph{Evasión}
+\paragraph{Envenenamiento}
+\subsubsection{Detector}
+\paragraph{Evasión}
+\paragraph{Envenenamiento}
 
 
-\subsubsection{Metricas en los ataques adversariales}
+\subsection{Metricas en los ataques adversariales}
 
-\subsubsection{Red team y blue team en Rede}
+\subsection{\textit{Red team} - \textit{Blue team} en redes neuronales}
 
 Un buen simil entre la seguridad informática clásica y la seguridad en redes neuronales son los conceptos de equipos de ataque y defensa (``red team'' y ``blue team'').
 
@@ -335,7 +376,7 @@ Durante el transcurso del trabajo discutiremos los siguientes ataques y defensas
     \item Evasión.
 \end{itemize}
 
-Se puede ser categorizar la seguridad de los modelos con el modelado \gls{STRIDE} de microsoft\footnote{Modelado de amenazas de microsoft \href{https://learn.microsoft.com/es-es/azure/security/develop/threat-modeling-tool-threats}{STRIDE}} o con la matriz \gls{MITRE}.
+Se puede ser categorizar la seguridad de los modelos con el modelado \gls{STRIDE} de microsoft\footnote{Modelado de amenazas de microsoft \href{https://learn.microsoft.com/es-es/azure/security/develop/threat-modeling-tool-threats}{Enlace}} o con la matriz \gls{MITRE}.
 
 \begin{table}[H]
     \centering
@@ -354,4 +395,45 @@ Se puede ser categorizar la seguridad de los modelos con el modelado \gls{STRIDE
     \label{tab:amenazas}
 \end{table}
 
-table
+
+
+
+\subsection{La inteligencia artificial para la seguridad informática}
+
+
+
+
+\subsection{Privacidad}
+
+\subsection{Explicabilidad}
+
+\subsection{Normativa y estándares}
+% https://eur-lex.europa.eu/resource.html?uri=cellar:e0649735-a372-11eb-9585-01aa75ed71a1.0008.02/DOC_1&format=PDF
+% https://eur-lex.europa.eu/resource.html?uri=cellar:e0649735-a372-11eb-9585-01aa75ed71a1.0008.02/DOC_2&format=PDF
+
+% Según la unión europea toda la seguridad es este apartado :ok: 
+% (51) La ciberseguridad es fundamental para garantizar que los sistemas de IA resistan a las actuaciones de terceros maliciosos que, aprovechando las vulnerabilidades del sistema, traten de alterar su uso, conducta o funcionamiento o de poner en peligro sus propiedades de seguridad. Los ciberataques contra sistemas de IA pueden dirigirse contra elementos específicos de la IA, como los conjuntos de datos de entrenamiento (p. ej., contaminación de datos) o los modelos entrenados (p. ej., ataques adversarios), o aprovechar las vulnerabilidades de los elementos digitales del sistema de IA o la infraestructura de TIC subyacente. Por lo tanto, para asegurar un nivel de ciberseguridad adecuado a los riesgos, los proveedores de sistemas de IA de alto riesgo deben adoptar medidas adecuadas teniendo también en cuenta, cuando proceda, la infraestructura de TIC subyacente.
+
+
+
+
+
+
+
+
+
+% https://www.youtube.com/@felipebravom
+
+
+
+% Feb 1990: Generative Adversarial Networks / Curiosity Generative Adversarial Networks (GANs) have become very popular.[MOST] They were first published in 1990 in Munich under the moniker Artificial Curiosity. [AC90-20][GAN1] Two dueling NNs (a probabilistic generator and a predictor) are trying to maximize each other's loss in a minimax game.[AC](Sec. 1) The generator (called the controller) generates probabilistic outputs (using stochastic units[AC90] like in the much later StyleGANs[GAN2]). The predictor (called the world model) sees the outputs of the controller and predicts environmental reactions to them. Using gradient descent, the predictor NN minimizes its error, while the generator NN tries to make outputs that maximize this error: one net's loss is the other net's gain.[AC90] (The world model can also be used for continual online action planning.[AC90][PLAN2-3][PLAN])
+
+% 4 years before a 2014 paper on GANs,[GAN1] my well-known 2010 survey[AC10] summarised the generative adversarial NNs of 1990 as follows: a "neural network as a predictive world modelis used to maximize the controller's intrinsic reward, which is proportional to the model's prediction errors" (which are minimized).
+
+% The 2014 GANs are an instance of this where the trials are very short (like in bandit problems) and the environment simply returns 1 or 0 depending on whether the controller's (or generator's) output is in a given set.[AC20][AC][T22](Sec. XVII)
+
+% Other early adversarial machine learning settings[S59][H90] were very different—they neither involved unsupervised NNs nor were about modeling data nor used gradient descent.
+
+% The 1990 principle has been widely used for exploration in Reinforcement Learning[SIN5][OUD13] [PAT17][BUR18] and for synthesis of realistic images,[GAN1,2] although the latter domain was recently taken over by Rombach et al.'s Latent Diffusion, another method published in Munich,[DIF1] building on Jarzynski's earlier work in physics from the previous millennium[DIF2]  and more recent papers.[DIF3-5]
+
+% In 1991, I published yet another ML method based on two adversarial NNs called Predictability Minimization for creating disentangled representations of partially redundant data, applied to images in 1996.

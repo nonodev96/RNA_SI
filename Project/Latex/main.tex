@@ -35,10 +35,18 @@
 % Para los emojis, debes compilar el paquete
 \usepackage{twemojis}
 
-\usepackage{xcolor}                     % El paquete parte de las facilidades básicas del paquete de color 
+% El paquete parte de las facilidades básicas del paquete de color 
+\usepackage{xcolor}                     
 \usepackage[ruled,vlined]{algorithm2e}  % https://ctan.javinator9889.com/macros/latex/contrib/algorithm2e/doc/algorithm2e.pdf
 \usepackage[acronym]{glossaries}        %
 \usepackage{pdflscape}                  %
+
+% Controlar la enumeración de los titu
+\usepackage{titlesec}
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}\titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 
 % 
 \usepackage{ifluatex}

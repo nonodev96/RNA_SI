@@ -14,3 +14,5 @@
 {"rule":"A_NIVEL_DE","sentence":"^\\QSe proponen dos nuevos métodos de combinación a nivel de puntuación, fusión holística y no lineal.\\E$"}
 {"rule":"VOSEO","sentence":"^\\Q\\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q - Create a new project.\\E$"}
 {"rule":"ESPACIO_DESPUES_DE_PUNTO","sentence":"^\\Qcs.LG\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\Q.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qen redes neuronales.\\E$"}
