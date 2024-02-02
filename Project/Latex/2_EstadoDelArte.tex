@@ -201,33 +201,41 @@ La ciencia de datos analiza los datos de distintas formas.
 \end{enumerate}
 
 Este proceso \gls{KDD} \cite{maimon2005data, rokach2010data}
+% TODO 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\linewidth]{figures/chapter02/KDD.jpg}
-    \caption{El proceso de descubrimiento de conocimiento en bases de datos\\Fuente: Página 24 \cite{rokach2010data}}
-    \label{fig:}
+    \includegraphics[angle=90,width=0.8\textwidth]{figures/chapter02/KDD.jpg}
+    \caption{El proceso de descubrimiento de conocimiento en bases de datos.\\Fuente: Sección \textit{Introduction to Knowledge Discovery and Data Mining} \cite{rokach2010data}}
+    \label{fig:kdd}
 \end{figure}
 
 
 \begin{enumerate}
-    \item \textbf{1 Comprensión del Dominio de Aplicación}: se debe comprender los datos que se tratan y el campo de obtención con el objetivo de preparar los datos.
-    \item \textbf{2 Selección y Creación de Conjunto de Datos}: se han de seleccionar los datos relevates (Selección de características)
-    \item \textbf{3 Preprocesamiento y Limpieza de Datos}: se han de eliminar las características no relevantes, datos perturbados, entradas incoherentes o tratar datos faltantes, etc. con el objetivo de obtener datos más limpio
-    \item \textbf{4 Transformación de Datos}: se deben tratar los datos, reduciendo la dimensionalidad, filtración, descomponiendo, etc. para que sea más sencillo el consumo de estos datos por una aplicación.
-    \item \textbf{5 Elección de Tarea de Minería de Datos}: en función de los datos y del objetivo deberemos realizar una tarea (clasificación, regresión o agrupación), ya que en la mineria de datos hay dos objetivos principales, \textbf{predicción} y \textbf{descripción}.
-    \item \textbf{6 Elección del Algoritmo de Minería de Datos}:
-    \item \textbf{7 Implementación del Algoritmo de Minería de Datos}:
-    \item \textbf{8 Evaluación de Patrones Minados}:
-    \item \textbf{9 Utilización del Conocimiento Descubierto}:
+    \item \textbf{Comprensión del Dominio de Aplicación}: se debe comprender los datos que se tratan y el campo de obtención con el objetivo de preparar los datos.
+    \item \textbf{Selección y Creación de Conjunto de Datos}: se han de seleccionar los datos relevates (Selección de características).
+    \item \textbf{Preprocesamiento y Limpieza de Datos}: se han de eliminar las características no relevantes, datos perturbados, entradas incoherentes o tratar datos faltantes, etc. con el objetivo de obtener datos más limpio.
+    \item \textbf{Transformación de Datos}: se deben tratar los datos, reduciendo la dimensionalidad, filtración, descomponiendo, etc. para que sea más sencillo el consumo de estos datos por una aplicación.
+    \item \textbf{Elección de Tarea de Minería de Datos}: en función de los datos y del objetivo deberemos realizar una tarea (clasificación, regresión o agrupación), ya que en la mineria de datos hay dos objetivos principales, \textbf{predicción} y \textbf{descripción}.
+    \item \textbf{Elección del Algoritmo de Minería de Datos}: deberemos elegir entre los distintos algoritmos que se usan en la mineria de datos, si buscamos precisión podemos usar redes neuronales, si buscamos explicabilidad podemos usar arboles de decisión.
+    \item \textbf{Implementación del Algoritmo de Minería de Datos}: emplearemos el algoritmo seleccionado ajustando las parámetros para que nos de el mejor resultado.
+    \item \textbf{Evaluación de Patrones Minados}: debemos interpretar los resultados (reglas, confiabilidad, etc) si no cumplen los objetivos que se buscaban en el primer paso deberemos reajustar toda la metodologia, desde ajustar la selección de características a la interpretación o compresibilidad del modelo.
+    \item \textbf{Utilización del Conocimiento Descubierto}: por último debemos incorporar el conocimiento a los sistemas de toma de decisiones, este es el paso más importante, ya que con el podemos medir los efectos del conocimiento obtenido. Puede suceder que una vez implementado el modelo en sistema de producción pierda eficiencia si las condiciones reales son distintas a las de la creación del modelo.
 \end{enumerate}
 
-% TODO hay que hablar de la taxonomia de la mineria de datos
+La mineria de datos puede estár orientada a la verificación o al descubrimiento de patrones, se debe automatizar su identificación, puediendo usar un efoque predictictivo o descriptivo. Para el descubrimiento se usa el aprendijaze inductivo, mientras que en la verificación se ha de evaluar la hipótesis externas usando métodos estádisticos clásicos. La terminología clásica del aprendizaje automatico está clasificado en supervisado (clasificación y regresión) y no supervisado (agrupamiento), aunque existen muchos más términos en la terminología moderna.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/chapter02/data-mining-taxonomy.drawio.png}
+    \caption{Taxonomía de minería de datos.\\Fuente: Elaboración propia, inspirado en la sección \textit{Introduction to Knowledge Discovery and Data Mining} \cite{maimon2005data}}
+    \label{fig:data-mining-taxonomy}
+\end{figure}
 
 \subsection{Aprendizaje automático - \textit{Machine Learning}}
-
-
 % TODO
+
+
 
 \begin{figure}[H]
     \centering
@@ -241,8 +249,19 @@ Este proceso \gls{KDD} \cite{maimon2005data, rokach2010data}
 \subsection{Aprendizaje profundo - \textit{Deep Learning}}
 % TODO
 
+\subsection{Redes adversariales - \textit{Adversarial Networks}}
+% TODO
+
 \subsection{Redes generativas adversariales - \textit{Generative Adversarial Networks (GAN)}}
 % TODO
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{figures/chapter02/GANs.drawio.png}
+    \caption{Arquitectura de las redes neuronales generativas adversariales.\\Fuente: Elaboración propia}
+    \label{fig:gans-architecture}
+\end{figure}
+
 
 \subsection{La seguridad informática en redes neuronales}
 \label{ch:2:section:state-of-the-art:computer-security-in-neural-networks}
