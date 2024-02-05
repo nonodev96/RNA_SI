@@ -10,7 +10,7 @@ Por lo que debemos explicar que es la ciencia de datos, el proceso \gls{KDD}, la
 \begin{figure}[H]
     \centering
     \centerline{\includesvg[width=0.75\columnwidth]{figures/ciencia-de-datos.drawio.svg}}
-    \caption{Ciencia de datos como campo interdisciplinar.\\Fuente: Elaboración propia}
+    \caption{Ciencia de datos como campo interdisciplinar.\\Fuente: Elaboración propia.}
     \label{fig:ciencia-de-datos}
 \end{figure}
 
@@ -176,32 +176,36 @@ Fruto de todo ello {NVIDIA} en 2018 presento \gls{StyleGAN} \cite{karras2019styl
 % TODO
 
 \subsection{La ciencia de datos}
-% TODO
 La ciencia de datos (\textit{Data Science}) es el estudio de los datos con el objetivo de extraer información útil, se usa principalmente para dar información útil a empresas. Es un campo multidisciplinar, ya que combina campos de las matemáticas, estadistica e inteligencia artificial para analizar grandes cantidades de datos. Esto tiene como objetivo responder a las siguientes cuestiones: \textit{¿Qué paso?, ¿Por qué pasó?, ¿Qué pasará? o ¿Qué se puede hacer con los resultados?} \cite{aws-data-science}
 
 La ciencia de datos analiza los datos de distintas formas.
 
 \begin{enumerate}
-    \item Análisis descriptivo
-    \item Análisis de diagnóstico
-    \item Análisis predictivo
-    \item Análisis prescriptivo
+    \item \textbf{Análisis descriptivo}: examina datos con visualizaciones (gráficos, tablas) para entender eventos pasados o actuales.
+    \item \textbf{Análisis de diagnóstico}: profundiza en los datos para entender las razones detrás del evento. Emplea técnicas cómo descubrimiento de datos o correlaciones.
+    \item \textbf{Análisis predictivo}: utiliza datos históricos y técnicas como machine learning para hacer predicciones precisas sobre patrones futuros.
+    \item \textbf{Análisis prescriptivo}: busca la mejor respuesta para un resultado esperado. Utiliza técnicas como simulación y redes neuronales para recomendar el mejor curso de acción entre varias alternativas.
 \end{enumerate}
 
 
-\subsection{El proceso de la ciencia de datos}
+\subsection{La mineria de datos}
 % Fases de la extraccón del conocimiento 
 % Dentro del KDD está la {Mineria de datos}
+
+La minería de datos, es una técnica asistida por computadora, procesa grandes conjuntos de datos para descubrir patrones y relaciones ocultas. Este conocimiento resultante se aplica en la resolución de problemas, análisis de decisiones empresariales, etc. Esta técnica tiene distintas fases para procesar y extraer información útil.
+
 \begin{enumerate}
-    \item Obtener datos
-    \item Depurar datos
-    \item Explorar datos
-    \item Modelar datos
-    \item Interpretar los resultados
+    \item Comprender, identificar y definir el alcance del proyecto.
+    \item Comprender los datos.
+    \item Depurar datos (limpiar, integrar y dar formato).
+    \item Modelar datos.
+    \item Evaluar los resultados.
+    \item Implementar resultados.
 \end{enumerate}
 
-Este proceso \gls{KDD} \cite{maimon2005data, rokach2010data}
-% TODO 
+La mineria de datos es distinta en función de los datos y el objetivo, la mayoria del estado del arte segmenta la mineria en tres tipos, mineria de procesos, mineria de textos y mineria predictiva.
+
+El Descubrimiento de Conocimientos en Bases de Datos \gls{KDD} es un proceso que utiliza algoritmos de minería de datos para explorar y extraer conocimientos útiles de grandes bases de datos. Con el avance tecnológico, se emplean técnicas de inteligencia artificial para este propósito, con el objetivo final de obtener conocimiento de alto nivel a partir de datos de bajo nivel. La Figura \ref{fig:kdd} esquematiza el proceso general del \textit{KDD}.
 
 \begin{figure}[H]
     \centering
@@ -223,34 +227,66 @@ Este proceso \gls{KDD} \cite{maimon2005data, rokach2010data}
     \item \textbf{Utilización del Conocimiento Descubierto}: por último debemos incorporar el conocimiento a los sistemas de toma de decisiones, este es el paso más importante, ya que con el podemos medir los efectos del conocimiento obtenido. Puede suceder que una vez implementado el modelo en sistema de producción pierda eficiencia si las condiciones reales son distintas a las de la creación del modelo.
 \end{enumerate}
 
-La mineria de datos puede estár orientada a la verificación o al descubrimiento de patrones, se debe automatizar su identificación, puediendo usar un efoque predictictivo o descriptivo. Para el descubrimiento se usa el aprendijaze inductivo, mientras que en la verificación se ha de evaluar la hipótesis externas usando métodos estádisticos clásicos. La terminología clásica del aprendizaje automatico está clasificado en supervisado (clasificación y regresión) y no supervisado (agrupamiento), aunque existen muchos más términos en la terminología moderna.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/chapter02/data-mining-taxonomy.drawio.png}
+    \includegraphics[width=\textwidth]{figures/chapter02/data-mining-taxonomy.drawio.png}
     \caption{Taxonomía de minería de datos.\\Fuente: Elaboración propia, inspirado en la sección \textit{Introduction to Knowledge Discovery and Data Mining} \cite{maimon2005data}}
     \label{fig:data-mining-taxonomy}
 \end{figure}
 
+La mineria de datos puede estár orientada a la verificación o al descubrimiento de patrones, se debe automatizar su identificación, puediendo usar un efoque predictictivo o descriptivo. Para el descubrimiento se usa el aprendijaze inductivo, mientras que en la verificación se ha de evaluar la hipótesis externas usando métodos estádisticos clásicos. La terminología clásica del aprendizaje automatico está clasificado en supervisado (clasificación y regresión) y no supervisado (agrupamiento), aunque existen muchos más términos en la terminología moderna esto podemos analizarlo más en profundidad en el libro \textit{Data Mining and Knowledge Discovery Handbook} \cite{maimon2005data}.
+
+
 \subsection{Aprendizaje automático - \textit{Machine Learning}}
-% TODO
+% TODO: Explicar el Machine Learning
 
-
+El \textit{machine learning} es la ciencia o rama de la inteligencia artificial que desarrolla, modelos estadisticos, desarrolla algoritmos que generalizan comportamientos y reconocen patrones. Es decir hace posible el aprendijaze autónomo de las máquinas para realizar tareas sin la necesidad programar las instrucciones explícitamente. El \textit{machine learning} busca procesar grandes cantidades de datos e identificar patrones de datos de forma automática.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\linewidth]{figures/chapter02/machine-learning.drawio.png}
-    \caption{Clasificación de los algoritmos de aprendijaze automático.\\Fuente: Elaboración propia}
+    \centerline{\includesvg[width=0.75\linewidth]{figures/chapter02/machine-learning-rules.drawio.svg}}
+    \caption{El \textit{Machine Learning} como paradigma de programación.\newline{}Fuente: Elaboración propia.}
+    \label{fig:machine-learning-rules}
+\end{figure}
+
+Como podemos ver en la figura \ref{fig:machine-learning-rules} el paradigma clásico se necesitaba conocer el dominio de los datos y las reglas en profundidad y programar los descriptores de forma manual para procesar los datos. En el paradigma del \textit{machine learning} permite extraer esas reglas y patrones para procesar nuevos datos a partir de respuestas que conociamos previamente, estas respuestas previas deben ser extraidas o validadas por expertos.
+
+Una clásificación de las tareas del \textit{machine learning} lo podemos ver en la figura \ref{fig:machine-learning}, esta clasificación está dividida en función de como se realiza el aprendijaze del modelo.
+
+\begin{figure}[H]
+    \centering
+    \centerline{\includesvg[width=1\linewidth]{figures/chapter02/machine-learning.drawio.svg}}
+    \caption{Clasificación de los algoritmos de aprendijaze automático.\\Fuente: Elaboración propia.}
     \label{fig:machine-learning}
 \end{figure}
 
-
-
 \subsection{Aprendizaje profundo - \textit{Deep Learning}}
-% TODO
+% TODO: Explicar el Deep Learning https://idus.us.es/bitstream/handle/11441/90004/Centeno%20Franco%20Alba%20TFG.pdf
+
+El \textit{Deep Learning} es una subrama del \textit{machine learning} que usa las redes neuronales artificiales para analizar datos no lineales imitando el comportamiento del cerebro humano, para esto suelen contar con arquitecturas complejas interconectadas con capas de entrada, salida y muchas capas ocultas con distintas funciones de activación que ponderan los pesos de cada neurona. \cite{ibm-deep-learning}
+
+Las redes neuronales profundas tienen multitud de capas con nodos interconectados entre sí cada uno
+
+\subsection{Redes neuronales - \textit{Neuronal Networks}}
+% TODO: 
+
+\begin{figure}[H]
+    \centering
+    \centerline{\includesvg[width=1\linewidth]{figures/chapter02/neuronal-network.drawio.svg}}
+    \caption{Red neuronal artificial\\Fuente: Elaboración propia}
+    \label{fig:artificial-neuronal-network}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \centerline{\includesvg[width=1\linewidth]{figures/chapter02/artificial-neuron.drawio.svg}}
+    \caption{Partes de una neurona artificial bioinspiradas en neuronas biológicas\\Fuente: Elaboración propia}
+    \label{fig:artificial-neuron}
+\end{figure}
 
 \subsection{Redes adversariales - \textit{Adversarial Networks}}
-% TODO
+% TODO: 
 
 \subsection{Redes generativas adversariales - \textit{Generative Adversarial Networks (GAN)}}
 % TODO
@@ -258,7 +294,7 @@ La mineria de datos puede estár orientada a la verificación o al descubrimient
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\linewidth]{figures/chapter02/GANs.drawio.png}
-    \caption{Arquitectura de las redes neuronales generativas adversariales.\\Fuente: Elaboración propia}
+    \caption{Arquitectura de las redes neuronales generativas adversariales.\\Fuente: Elaboración propia.}
     \label{fig:gans-architecture}
 \end{figure}
 
@@ -268,13 +304,13 @@ La mineria de datos puede estár orientada a la verificación o al descubrimient
 
 El estado del arte de la seguridad es muy complejo por la constante evolución, las ciberamenazas están en constante evolución, los delincuentes informaticos adoptan nuevas técnicas y tácticas para eludir las medidas de seguridad tradicionales.
 
-Dentro de la inteligencia artificial encontramos \gls{AI} el aprendizaje automático \gls{ML} y dentro el aprendijaze profundo \gls{DL}
+Dentro de la inteligencia artificial encontramos \gls{AI} el aprendizaje automático \gls{ML} y dentro el aprendijaze profundo \gls{DL}.
 Para el desarrollo de este capítulo limitaremos el alcance del estado del arte de la seguridad informática a los campos relacionados con la inteligencia artificial.
 
 \begin{figure}[H]
     \centering
     \centerline{\includesvg[width=1\columnwidth]{figures/chapter02/adversarial-threats.drawio.svg}}
-    \caption{Amenazas adversariales.\\Fuente: Elaboración propia}
+    \caption{Amenazas adversariales.\\Fuente: Elaboración propia.}
     \label{fig:art-adversarial-threats}
 \end{figure}
 
@@ -367,7 +403,7 @@ Un buen simil entre la seguridad informática clásica y la seguridad en redes n
 \begin{figure}[H]
     \centering
     \centerline{\includesvg[width=1\columnwidth]{figures/chapter02/ART-for-red-and-blue-teams.drawio.svg}}
-    \caption{Ataques y defensas en redes neuronales.\\Fuente: Elaboración propia}
+    \caption{Ataques y defensas en redes neuronales.\\Fuente: Elaboración propia.}
     \label{fig:art-for-red-and-blue-teams}
 \end{figure}
 
@@ -418,13 +454,16 @@ Se puede ser categorizar la seguridad de los modelos con el modelado \gls{STRIDE
 
 
 \subsection{La inteligencia artificial para la seguridad informática}
-
-
+% TODO: aplicaciones reales de ciberseguridad que usan inteligencia artificial
 
 
 \subsection{Privacidad}
+% TODO: 
+
 
 \subsection{Explicabilidad}
+
+
 
 \subsection{Normativa y estándares}
 % https://eur-lex.europa.eu/resource.html?uri=cellar:e0649735-a372-11eb-9585-01aa75ed71a1.0008.02/DOC_1&format=PDF

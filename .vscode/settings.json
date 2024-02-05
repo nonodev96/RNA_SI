@@ -1,4 +1,8 @@
 {
+    "editor.wordWrap": "on",
+    "[scminput]": {
+        "editor.wordWrap": "off"
+    },
     "gitlens.codeLens.recentChange.enabled": false,
     "gitlens.codeLens.authors.enabled": false,
     "gitlens.currentLine.enabled": false,

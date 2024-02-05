@@ -1,0 +1,94 @@
+\documentclass{beamer}
+%Information to be included in the title page:
+\usepackage[T1, T2A]{fontenc}% T2A for Cyrillic font encoding
+\usepackage[spanish, english]{babel}
+\usepackage{tikz}
+\usepackage{multimedia}
+
+\usetheme{Madrid}
+% \usecolortheme{beaver}
+\usecolortheme{default}
+ 
+
+
+\title[SAI] %optional
+{Redes neuronales adversarias en seguridad informática}
+
+\subtitle{SAI}
+
+\author[Antonio, Mudarra Machuca] % (optional, for multiple authors)
+{M.~M.~Antonio\inst{1}}
+
+\institute[UJAEN] % (optional)
+{
+  \inst{1}%
+  Sistemas Inteligentes y Minería de Datos\\
+  Escuela Politécnica Superior de Jaén\\
+  Universidad de Jaén
+}
+
+\date[SAI 2024] % (optional)
+{Seminario Seguridad en redes neuronales, April 2024}
+
+\logo{\includegraphics[height=1cm]{figures/UJA.png}}
+
+
+% https://es.overleaf.com/learn/latex/Beamer_Presentations%3A_A_Tutorial_for_Beginners_(Part_1)%E2%80%94Getting_Started
+% https://es.overleaf.com/learn/latex/Beamer_Presentations%3A_A_Tutorial_for_Beginners_(Part_2)%E2%80%94Lists%2C_Columns%2C_Pictures%2C_Descriptions_and_Tables
+% https://es.overleaf.com/learn/latex/Beamer_Presentations%3A_A_Tutorial_for_Beginners_(Part_3)%E2%80%94Blocks%2C_Code%2C_Hyperlinks_and_Buttons
+% https://es.overleaf.com/learn/latex/Beamer_Presentations%3A_A_Tutorial_for_Beginners_(Part_4)%E2%80%94Overlay_Specifications
+% https://es.overleaf.com/learn/latex/Beamer_Presentations%3A_A_Tutorial_for_Beginners_(Part_5)%E2%80%94Themes_and_Handouts
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+    \frametitle{Sample frame title}
+    This is some text in the first frame. \\
+    This is some text in the first frame. \\
+    This is some text in the first frame.
+\end{frame}
+
+\begin{frame}
+    \frametitle{There Is No Largest Prime Number}
+    \framesubtitle{The proof uses \textit{reductio ad absurdum}.}
+    \begin{theorem}
+        There is no largest prime number.
+    \end{theorem}
+    \begin{proof}
+        \begin{enumerate}
+            \item<1-| alert@1> Suppose $p$ were the largest prime number.
+            \item<2-> Let $q$ be the product of the first $p$ numbers.
+            \item<3-> Then $q+1$ is not divisible by any of them.
+            \item<1-> Thus $q+1$ is also prime and greater than $p$.\qedhere
+        \end{enumerate}
+    \end{proof}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{There Is No Largest Prime Number}
+    \framesubtitle{The proof uses \textit{reductio ad absurdum}.}
+
+    \begin{block}{Mi texto}
+        \begin{enumerate}
+            \item<1-| alert@1> Suppose $p$ were the largest prime number.
+            \item<2-> Let $q$ be the product of the first $p$ numbers.
+            \item<3-> Then $q+1$ is not divisible by any of them.
+            \item<4-> Thus $q+1$ is also prime and greater than $p$.\qedhere
+        \end{enumerate}
+    \end{block}
+
+    \pause[4]
+    \begin{example}
+        Texto de ejemplo
+    \end{example}
+\end{frame}
+
+\begin{frame}
+    \centering
+    % \movie[borderwidth=5pt,height=0.6\textwidth,width=0.8\textwidth,poster,showcontrols,autostart]{}{figures/output.avi}
+\end{frame}
+
+\end{document}
