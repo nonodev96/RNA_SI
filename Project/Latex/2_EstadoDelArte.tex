@@ -28,6 +28,7 @@ Ya que alterando cualquiera de estos componentes de forma se verá enormemente a
 \section{Antecedentes}
 \label{ch:2:section:background}
 
+% region historia
 \subsection{Historia, línea temporal}
 
 A continuación se describe una línea de temporal con los hitos más relevantes en el desarrollo de las redes neuronales adjuntando con referencias las investigaciones, articulos y publicaciones realizadas.
@@ -50,7 +51,7 @@ En este caso se trata de referencias en hitos de logros a nivel teórico como pr
     1989        & Convolutional neural networks (CNN) \cite{lecun1989backpropagation}                       \endlr
     ~           & Recurent neural networks (RNN) \cite{schmidhuber1993habilitation}                         \endlr
     1990        & Generative Adversarial Networks (GAN) as Game \cite{schmidhuberunsupervised}              \endlr
-    1997        & Long short term memory (LSTM) \cite{Hochreiter1997LongSM, hochreiter1997long}                                 \endlr
+    1997        & Long short term memory (LSTM) \cite{Hochreiter1997LongSM, hochreiter1997long}             \endlr
     2006        & Deep Belief Networks (DBN) \cite{hinton2006fast}                                          \endlr
     ~           & Restricted Boltzmann Machine \cite{hinton2006reducing}                                    \endlr
     ~           & Encoder / Decoder (Auto-encoder) \cite{hinton2006reducing}                                \endlr
@@ -148,7 +149,7 @@ Por lo que muchos investigadores propusieron soluciones similares a las redes \a
 Otros propusieron soluciones como la jerarquía de \acrshort{rnn} autosupervisada que aprende representaciones en distintos niveles de abstracción.
 Comienzan a proponerse redes similares a las que en un futuro se llamarían \acrshort{dbn} como un método no supervisado para \acrshort{fnn}.
 
-En junio de 1991 {Sepp Hochreiter} \ref{fig:sepp-hochreiter} implemento el primer compresor de redes neuronales, además demostró uno de los principales problemas de las \acrshort{nn} el llamado problema del desvanecimiento o explosión del gradiente que hacía que el aprendizaje fallará.
+En junio de 1991 {Sepp Hochreiter} Figura \ref{fig:sepp-hochreiter} implemento el primer compresor de redes neuronales, además demostró uno de los principales problemas de las \acrshort{nn} el llamado problema del desvanecimiento o explosión del gradiente \ref{gradient-descent} que hacía que el aprendizaje fallará.
 Un análisis posterior condujo a los investigadores a una primera aproximación \acrshort{lstm}, aunque no sería hasta 1997 con la revisión por pares y publicación del artículo \textit{Long short-term memory} \cite{hochreiter1997long} que se solucionaría parcialmente el problema.
 
 \begin{figure}[H]
@@ -158,7 +159,7 @@ Un análisis posterior condujo a los investigadores a una primera aproximación 
     \label{fig:sepp-hochreiter}
 \end{figure}
 
-Más adelante en el 2014 {Goodfellow} \ref{fig:gan-ian-goodfellow} presento la primera red neuronal \acrshort{gan} pura para la generación de imágenes mediante el enfrentamiento de una red neuronal generativa contra una red neuronal discriminante entrenadas con el mismo conjunto de datos \cite{goodfellow2014generative}.
+Más adelante en el 2014 {Goodfellow} Figura \ref{fig:gan-ian-goodfellow} presento la primera red neuronal \acrshort{gan} pura para la generación de imágenes mediante el enfrentamiento de una red neuronal generativa contra una red neuronal discriminante entrenadas con el mismo conjunto de datos \cite{goodfellow2014generative}.
 Durante los próximos años se realizaron muchos aportes a las redes neuronales generativas, principalmente de paralelización de los cálculos, técnicas de estabilización, generación condiciona, arquitecturas más eficientes, funciones de pérdidas más adecuadas, aplicaciones específicas (cambiar el estilo de pintura), redes apiladas, etc.
 Fruto de todo ello {NVIDIA} en 2018 presento \gls{StyleGAN} \cite{karras2019stylebased} aunque publicaron el código en 2019 con fuertes mejoras.
 
@@ -168,13 +169,13 @@ Fruto de todo ello {NVIDIA} en 2018 presento \gls{StyleGAN} \cite{karras2019styl
     \caption{Ian Goodfellow.\\Fuente: \href{https://www.technologyreview.es/s/10016/el-senor-de-las-gan-el-hombre-que-dio-imaginacion-las-maquinas}{MIT Technology Review}}
     \label{fig:gan-ian-goodfellow}
 \end{figure}
-
+% endregion
 
 
 \section{Estado del arte}
 \label{ch:2:section:state-of-the-art}
-% TODO
 
+% region Teoría
 \subsection{La ciencia de datos}
 La ciencia de datos (\textit{Data Science}) es el estudio de los datos con el objetivo de extraer información útil, se usa principalmente para dar información útil a empresas. Es un campo multidisciplinar, ya que combina campos de las matemáticas, estadistica e inteligencia artificial para analizar grandes cantidades de datos. Esto tiene como objetivo responder a las siguientes cuestiones: \textit{¿Qué paso?, ¿Por qué pasó?, ¿Qué pasará? o ¿Qué se puede hacer con los resultados?} \cite{aws-data-science}
 
@@ -261,50 +262,137 @@ Una clásificación de las tareas del \textit{machine learning} lo podemos ver e
     \label{fig:machine-learning}
 \end{figure}
 
+El \textit{machine learning} puede trabajar con datos estructurados y no estructurados aunque estos últimos requieren un procesamiento previo para adapatarlos en un formato estructurado.
+
 \subsection{Aprendizaje profundo - \textit{Deep Learning}}
 % TODO: Explicar el Deep Learning https://idus.us.es/bitstream/handle/11441/90004/Centeno%20Franco%20Alba%20TFG.pdf
 
-El \textit{Deep Learning} es una subrama del \textit{machine learning} que usa las redes neuronales artificiales para analizar datos no lineales imitando el comportamiento del cerebro humano, para esto suelen contar con arquitecturas complejas interconectadas con capas de entrada, salida y muchas capas ocultas con distintas funciones de activación que ponderan los pesos de cada neurona. \cite{ibm-deep-learning}
+El \textit{deep learning} es una subrama del \textit{machine learning} que usa redes neuronales artificiales para analizar datos no lineales, estas redes imitan el comportamiento del cerebro humano, para esto suelen contar con arquitecturas complejas.
 
-Las redes neuronales profundas tienen multitud de capas con nodos interconectados entre sí cada uno
+El \textit{deep learning} se distingue del \textit{machine learning} por los tipos de datos con los que puede trabajar y por los métodos con los que hace que los modelos aprendan.
 
-\subsection{Redes neuronales - \textit{Neuronal Networks}}
-% TODO: 
+Otra de las carácteristicas que diferencia al \textit{deep learning} del \textit{machine learning} es que elimina parte del procesamiento previo de datos, ya que sus algoritmos puede ingerir y procesar datos no estructurados.
 
-\begin{figure}[H]
-    \centering
-    \centerline{\includesvg[width=1\linewidth]{figures/chapter02/neuronal-network.drawio.svg}}
-    \caption{Red neuronal artificial\\Fuente: Elaboración propia}
-    \label{fig:artificial-neuronal-network}
-\end{figure}
+\subsubsection{Redes neuronales - \textit{Neuronal Networks}}
+% TODO: \cite{ibm-deep-learning}
+El \textit{deep learning} emplea principalmente redes neuronales para reconocer, clasificar y describir con precisión patrones de datos. Estas redes tienen una capa de entrada, una capa de salida y multiples capas ocultas con distintas funciones de activación que ponderan los pesos de cada neurona. \cite{ibm-deep-learning}
+
+En la Figura \ref{fig:artificial-neuron} podemos ver las distintas partes de una única neurona artificial y sus partes equivalentes con una neurona biológica. Nos referimos a nodo de la red a una unidad de neurona artificial.
 
 \begin{figure}[H]
     \centering
     \centerline{\includesvg[width=1\linewidth]{figures/chapter02/artificial-neuron.drawio.svg}}
-    \caption{Partes de una neurona artificial bioinspiradas en neuronas biológicas\\Fuente: Elaboración propia}
+    \caption{Partes de una neurona artificial bioinspiradas en neuronas biológicas.\\Fuente: Elaboración propia}
     \label{fig:artificial-neuron}
 \end{figure}
 
-\subsection{Redes adversariales - \textit{Adversarial Networks}}
-% TODO: 
+Las redes neuronales profundas tienen multitud de capas con nodos interconectados, cada capa sobre la capa anterior con el objetivo de optimizar la precisión de una predición o clasificación. A esta progresión de calculos se le denomina ``propagación hacia delante''.
 
-\subsection{Redes generativas adversariales - \textit{Generative Adversarial Networks (GAN)}}
-% TODO
+El proceso de ``propagación inversa'' es el encargado de calcular errores de precisión, ajustar sesgos y ponderaciones usando algoritmos como el descenso de gradiente \ref{gradient-descent}.
+La capa de entrada es por donde el modelo \textit{deep learning} ingiere los datos, y la capa de salida es donde el modelo responderá con la predicción o clasificación.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\linewidth]{figures/chapter02/GANs.drawio.png}
+    \centerline{\includesvg[width=1\linewidth]{figures/chapter02/neuronal-network.drawio.svg}}
+    \caption{Red neuronal artificial.\\Fuente: Elaboración propia}
+    \label{fig:artificial-neuronal-network}
+\end{figure}
+
+En la Figura \ref{fig:artificial-neuronal-network} podemos ver una arquitectura simple de una red neuronal que cuenta con la capa de entrada, la capa de salida y dos capas ocultas. Se muestra el vector de consumo de datos $X = {X\in \mathbf{R} }$
+
+\subsubsection{Redes adversariales - \textit{Adversarial Networks}}
+% TODO: 
+
+\subsubsection{Redes generativas adversariales - \textit{Generative Adversarial Networks (GAN)}}
+% TODO
+
+
+\subsection{Funcionamiento de una red neuronal \label{neural-network}}
+
+\begin{itemize}
+    \item \textbf{Capa de entrada}:
+    \item \textbf{Capas ocultas}:
+    \item \textbf{Capa de salida}:
+\end{itemize}
+
+\paragraph*{\textit{Non-linear Activations}}
+\begin{enumerate}
+    \item \textbf{ReLu}:
+    \item[] \begin{equation} \varphi(x) = \operatorname*{max}(0,x) \end{equation}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.5\textwidth]{figures/equations/ReLu.png}
+            \caption{Función de activación ReLu\\Fuente: \href{https://pytorch.org/docs/stable/generated/torch.nn.ReLu.html}{Pytorch torch.nn.ReLu}}
+            \label{fig:torch.nn.ReLu}
+        \end{figure}
+
+    \item \textbf{Sigmoid}:
+    \item[] \begin{equation} \varphi(x) = \frac{1}{1+e^{-x}} \end{equation}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.5\textwidth]{figures/equations/Sigmoid.png}
+            \caption{Función de activación Sigmoid\\Fuente: \href{https://pytorch.org/docs/stable/generated/torch.nn.Sigmoid.html}{Pytorch torch.nn.Sigmoid}}
+            \label{fig:torch.nn.Sigmoid}
+        \end{figure}
+
+    \item \textbf{Softplus}:
+    \item[] \begin{equation} \varphi(x) = \frac{1}{\beta} \operatorname*{log}(1+e^{\beta x}) \end{equation}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.5\textwidth]{figures/equations/Softplus.png}
+            \caption{Función de activación Softplus\\Fuente: \href{https://pytorch.org/docs/stable/generated/torch.nn.Softplus.html}{Pytorch torch.nn.Softplus}}
+            \label{fig:torch.nn.Softplus}
+        \end{figure}
+
+    \item \textbf{Tanh}: text.
+    \item[] \begin{equation} \varphi(x) = \frac{e^{x}-e^{-x}}{e^{x}+e^{-x}} \end{equation}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.5\textwidth]{figures/equations/Tanh.png}
+            \caption{Función de activación Tanh\\Fuente: \href{https://pytorch.org/docs/stable/generated/torch.nn.Tanh.html}{Pytorch torch.nn.Tanh}}
+            \label{fig:torch.nn.Tanh}
+        \end{figure}
+
+    \item \textbf{SoftSign}:
+    \item[] \begin{equation} \varphi(x) = \frac{x}{1+\lvert x \rvert} \end{equation}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.5\textwidth]{figures/equations/Softsign.png}
+            \caption{Función de activación Softsign\\Fuente: \href{https://pytorch.org/docs/stable/generated/torch.nn.Softsign.html}{Pytorch torch.nn.Softsign}}
+            \label{fig:torch.nn.Softsign}
+        \end{figure}
+\end{enumerate}
+
+
+\subsubsection{El descenso de gradiente \label{gradient-descent}}
+
+El problema de desvanecimiento y explosión de gradiente
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/chapter02/GANs.drawio.png}
     \caption{Arquitectura de las redes neuronales generativas adversariales.\\Fuente: Elaboración propia.}
     \label{fig:gans-architecture}
 \end{figure}
 
+\subsection{Topologias de redes neuronales}
+% TODO: imagen
 
-\subsection{La seguridad informática en redes neuronales}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/NeuralNetworkZo19High.png}
+    \caption{Topologias de redes neuronales.\\Fuente: \href{https://www.asimovinstitute.org/neural-network-zoo/}{The neural network zoo}}
+    \label{fig:}
+\end{figure}
+% endregion
+
+% region subsection La seguridad de las redes neuronales
+\subsection{La seguridad de las redes neuronales}
 \label{ch:2:section:state-of-the-art:computer-security-in-neural-networks}
 
 El estado del arte de la seguridad es muy complejo por la constante evolución, las ciberamenazas están en constante evolución, los delincuentes informaticos adoptan nuevas técnicas y tácticas para eludir las medidas de seguridad tradicionales.
 
-Dentro de la inteligencia artificial encontramos \gls{AI} el aprendizaje automático \gls{ML} y dentro el aprendijaze profundo \gls{DL}.
+Dentro de la inteligencia artificial \gls{AI} encontramos el aprendizaje automático \gls{ML} y dentro el aprendijaze profundo \gls{DL}.
 Para el desarrollo de este capítulo limitaremos el alcance del estado del arte de la seguridad informática a los campos relacionados con la inteligencia artificial.
 
 \begin{figure}[H]
@@ -320,12 +408,10 @@ Como podemos observar en la figura \ref{fig:art-adversarial-threats} existen mul
 % Invisivilidad
 % Efectividad
 
-
 \subsection{Ataques en \textit{deep learning}}
+% TODO
+Existen cuatro formas de clasificar las amenazas de las redes neuronales en \gls{DL}
 
-Existen cuatro grandes formas de clasificar los ataques en \gls{ML}
-
-% 
 \subsubsection{Evasión}
 
 Busca explotar las vulnerabilidades de la red neuronal para inducir errores en la capacidad de clasificar o de predecir. Se envia información con perturbaciones minimas que alteren notablemente la respuesta del modelo.
@@ -335,8 +421,8 @@ Busca explotar las vulnerabilidades de la red neuronal para inducir errores en l
     \item \textbf{Caja negra}: se desconoce el modelo, arquitectura, pesos, umbrales, pero se conoce el formato de entrada de datos y la respuesta del modelo. \cite{learning-machine-learning-part-3-attacking}
 \end{enumerate}
 
-% 
 \subsubsection{Envenenamiento}
+% 
 
 Los atacantes intentan manipular los datos de entrenamiento con el objetivo de influir en el resultado del aprendijaze del modelo, esto pueden hacerlo desde distintas etapas.
 
@@ -380,7 +466,6 @@ Se busca extraer un funcionamiento interno equivalente de la red neuronal, se pu
 \paragraph{Inversión de modelos}
 \paragraph{Reconstrucción}
 
-
 \subsection{Defensas contra los ataques en \textit{deep learning}}
 
 \subsubsection{Pre procesamiento}
@@ -392,7 +477,6 @@ Se busca extraer un funcionamiento interno equivalente de la red neuronal, se pu
 \subsubsection{Detector}
 \paragraph{Evasión}
 \paragraph{Envenenamiento}
-
 
 \subsection{Metricas en los ataques adversariales}
 
@@ -406,7 +490,6 @@ Un buen simil entre la seguridad informática clásica y la seguridad en redes n
     \caption{Ataques y defensas en redes neuronales.\\Fuente: Elaboración propia.}
     \label{fig:art-for-red-and-blue-teams}
 \end{figure}
-
 
 La idea detrás del aprendizaje automático es la de poder predecir modelos predictivos, para ello se usan conjuntos de datos para el entrenamiento.
 
@@ -450,18 +533,15 @@ Se puede ser categorizar la seguridad de los modelos con el modelado \gls{STRIDE
     \label{tab:amenazas}
 \end{table}
 
+% endregion
+
+% region subsection Las redes neuronales para la seguridad informática
+\subsection{Las redes neuronales para la seguridad informática}
+% TODO: aplicaciones reales de ciberseguridad que usan inteligencia artificial 
 
 
+% endregion
 
-\subsection{La inteligencia artificial para la seguridad informática}
-% TODO: aplicaciones reales de ciberseguridad que usan inteligencia artificial
-
-
-\subsection{Privacidad}
-% TODO: 
-
-
-\subsection{Explicabilidad}
 
 
 

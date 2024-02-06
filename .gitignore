@@ -134,3 +134,7 @@ manual/tfm_sai.1
 manual/tfm_sai.1.gz
 
 **/*Zone.Identifier
+Project/LatexSlide/figures/input.webm
+Project/LatexSlide/figures/output.avi
+Project/LatexSlide/figures/output.mkv
+Project/LatexSlide/figures/output.mp4
