@@ -240,7 +240,6 @@ La mineria de datos puede estár orientada a la verificación o al descubrimient
 
 
 \subsection{Aprendizaje automático - \textit{Machine Learning}}
-% TODO: Explicar el Machine Learning
 
 El \textit{machine learning} es la ciencia o rama de la inteligencia artificial que desarrolla, modelos estadisticos, desarrolla algoritmos que generalizan comportamientos y reconocen patrones. Es decir hace posible el aprendijaze autónomo de las máquinas para realizar tareas sin la necesidad programar las instrucciones explícitamente. El \textit{machine learning} busca procesar grandes cantidades de datos e identificar patrones de datos de forma automática.
 
@@ -264,6 +263,8 @@ Una clásificación de las tareas del \textit{machine learning} lo podemos ver e
 
 El \textit{machine learning} puede trabajar con datos estructurados y no estructurados aunque estos últimos requieren un procesamiento previo para adapatarlos en un formato estructurado.
 
+
+
 \subsection{Aprendizaje profundo - \textit{Deep Learning}}
 % TODO: Explicar el Deep Learning https://idus.us.es/bitstream/handle/11441/90004/Centeno%20Franco%20Alba%20TFG.pdf
 
@@ -273,23 +274,48 @@ El \textit{deep learning} se distingue del \textit{machine learning} por los tip
 
 Otra de las carácteristicas que diferencia al \textit{deep learning} del \textit{machine learning} es que elimina parte del procesamiento previo de datos, ya que sus algoritmos puede ingerir y procesar datos no estructurados.
 
-\subsubsection{Redes neuronales - \textit{Neuronal Networks}}
-% TODO: \cite{ibm-deep-learning}
-El \textit{deep learning} emplea principalmente redes neuronales para reconocer, clasificar y describir con precisión patrones de datos. Estas redes tienen una capa de entrada, una capa de salida y multiples capas ocultas con distintas funciones de activación que ponderan los pesos de cada neurona. \cite{ibm-deep-learning}
 
-En la Figura \ref{fig:artificial-neuron} podemos ver las distintas partes de una única neurona artificial y sus partes equivalentes con una neurona biológica. Nos referimos a nodo de la red a una unidad de neurona artificial.
+%  ==============================================================================
+%  ==============================================================================
+%  ==============================================================================
+
+\subsection{Redes neuronales - \textit{Neuronal Networks}}
+% TODO: \cite{ibm-deep-learning}
+% Explicar uso de multiples neuronas artificiales para crear capas y luego redes
+El \textit{deep learning} emplea principalmente redes neuronales para reconocer, clasificar y describir con precisión patrones de datos. Estas redes están inspiradas en el funcionamiento del cerebro humano.  \cite{ibm-deep-learning}
+
+Las redes neuronales es un conjunto de neuronas artificiales que están organizadas generalmente por capas. Estas redes tienen una capa de entrada, una capa de salida y multiples capas ocultas con distintas funciones de activación que ponderan los pesos de cada neurona.
+
+Las redes neuronales cuentan con formas muy variadas de componer las capas, a esto se le denomina \textbf{topologia de red neuronal}, en función del objetivo que se busque, la topologia será muy distinta.
+
+\subsubsection{Elementos de una neurona artificial}
+
+Como se ha comentado previamente las neuronas artificiales están inspiradas en las neuronas biologicas del cerebro humanos, fueron los investigadores \textit{McCulloch} y \textit{Pitts} \cite{mcculloch1943logical} los que sentaron las bases de lo que es una neurona artificial, demostrando que su modelo de red neuronal podía realizar cálculos que se correspondían con la lógica proposicional.
 
 \begin{figure}[H]
     \centering
     \centerline{\includesvg[width=1\linewidth]{figures/chapter02/artificial-neuron.drawio.svg}}
-    \caption{Partes de una neurona artificial bioinspiradas en neuronas biológicas.\\Fuente: Elaboración propia}
+    \caption{Partes de una neurona artificial bioinspirada en una neurona biológica.\\Fuente: Elaboración propia}
     \label{fig:artificial-neuron}
 \end{figure}
+
+En la Figura \ref{fig:artificial-neuron} podemos ver las distintas partes de una única neurona artificial y sus partes equivalentes con una neurona biológica. El axón opera como la entrada de información a la neurona,
+
+
+
+% Perceptron
+%% LTU 
+
+% Perceptron simple: %% solo dos capas, la red es unidireccional, la primera capa no realiza calculos, solo consume los datos de entrada, la segunda capa unicamente aplica una f. de activación de paso o signo 
+% Perceptrón múltiple
+
+\subsubsection{Funcionamiento de una red neuronal \label{neural-network}}
 
 Las redes neuronales profundas tienen multitud de capas con nodos interconectados, cada capa sobre la capa anterior con el objetivo de optimizar la precisión de una predición o clasificación. A esta progresión de calculos se le denomina ``propagación hacia delante''.
 
 El proceso de ``propagación inversa'' es el encargado de calcular errores de precisión, ajustar sesgos y ponderaciones usando algoritmos como el descenso de gradiente \ref{gradient-descent}.
-La capa de entrada es por donde el modelo \textit{deep learning} ingiere los datos, y la capa de salida es donde el modelo responderá con la predicción o clasificación.
+
+La capa de entrada es por donde el modelo ingiere los datos, y la capa de salida es donde el modelo responderá con la predicción o clasificación.
 
 \begin{figure}[H]
     \centering
@@ -298,16 +324,37 @@ La capa de entrada es por donde el modelo \textit{deep learning} ingiere los dat
     \label{fig:artificial-neuronal-network}
 \end{figure}
 
-En la Figura \ref{fig:artificial-neuronal-network} podemos ver una arquitectura simple de una red neuronal que cuenta con la capa de entrada, la capa de salida y dos capas ocultas. Se muestra el vector de consumo de datos $X = {X\in \mathbf{R} }$
+En la Figura \ref{fig:artificial-neuronal-network} podemos ver una arquitectura simple de una red neuronal que cuenta con la capa de entrada, la capa de salida y dos capas ocultas.
 
-\subsubsection{Redes adversariales - \textit{Adversarial Networks}}
-% TODO: 
-
-\subsubsection{Redes generativas adversariales - \textit{Generative Adversarial Networks (GAN)}}
-% TODO
+El vector de entrada $X = (x_{1}, x_{2}, ..., x_{n})$ será la información suministrada a nuestro red a través de la capa de entrada, este vector será de tamaño $n$.
 
 
-\subsection{Funcionamiento de una red neuronal \label{neural-network}}
+\begin{figure}[H]
+    \centering
+    \centerline{\includesvg[width=1\linewidth]{figures/equations/Notation.drawio.svg}}
+    \caption{Calculo de los pesos de la red neuronal artificial\\Fuente: Elaboración propia}
+    \label{fig:notation}
+\end{figure}
+
+% region: el descenso de gradiente
+\subsubsection{El descenso de gradiente \label{gradient-descent}}
+% TODO: explicar el descenso de gradiente
+
+El problema de desvanecimiento y explosión de gradiente
+
+
+% endregion
+
+
+% Multicapa
+% Capas
+% Funciones de optimización
+% Funciones de activación
+% Funciones de perdida
+% Topologias
+
+\subsubsection{Tipos de capas}
+
 
 \begin{itemize}
     \item \textbf{Capa de entrada}:
@@ -315,7 +362,12 @@ En la Figura \ref{fig:artificial-neuronal-network} podemos ver una arquitectura 
     \item \textbf{Capa de salida}:
 \end{itemize}
 
-\paragraph*{\textit{Non-linear Activations}}
+
+
+
+
+\paragraph*{\textit{Non-linear Activations (weighted sum, nonlinearity)} \cite{pytorch2024github}}
+
 \begin{enumerate}
     \item \textbf{ReLu}:
     \item[] \begin{equation} \varphi(x) = \operatorname*{max}(0,x) \end{equation}
@@ -363,27 +415,58 @@ En la Figura \ref{fig:artificial-neuronal-network} podemos ver una arquitectura 
         \end{figure}
 \end{enumerate}
 
+\subparagraph{\textit{Non-linear Activations (other)} \cite{pytorch2024github}}
+% TODO: explicar las funciones de activación no lineales más importantes
 
-\subsubsection{El descenso de gradiente \label{gradient-descent}}
+\begin{enumerate}
+    \item \textbf{Softmax}: Aplica la función Softmax a un Tensor de entrada $n$-dimensional reescalándolos para que los elementos del Tensor de salida $n$-dimensional se encuentren en el rango [0,1]. \cite{pytorch2024github}
+    \item[] \begin{equation} \varphi(x_{i}) = \frac{e^{x_{i}}}{\sum_{j}{e_{j}}} \end{equation}
+\end{enumerate}
 
-El problema de desvanecimiento y explosión de gradiente
 
+
+% region funciones de activación
+
+% endregion
+
+% region topologias
+\subsubsection{Topologias de redes neuronales}
+% TODO: explicar la existencia de distintas formas de aplicar las capas de neuronas artificiales y sus resultados
+
+\begin{itemize}
+    % \item[] 
+    \item \textbf{Capas totalmente conectadas}
+    \item \textbf{Capas localmente conectadas}
+    \item \textbf{Capas convolucional}
+    \item \textbf{Capas reductora \textit{pooling} y \textit{dropout}}
+\end{itemize}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/NeuralNetworkZo19High.png}
+    \caption{Topologias de redes neuronales.\\Fuente: \href{https://www.asimovinstitute.org/neural-network-zoo/}{The neural network zoo}}
+    \label{fig:NeuralNetworkZo19High}
+\end{figure}
+% endregion
+
+% region AN
+\subsection{Redes adversariales - \textit{Adversarial Networks}}
+% TODO: 
+% endregion
+
+% region GAN
+\subsection{Redes generativas adversariales - \textit{Generative Adversarial Networks (GAN)}}
+% TODO:
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{figures/chapter02/GANs.drawio.png}
     \caption{Arquitectura de las redes neuronales generativas adversariales.\\Fuente: Elaboración propia.}
     \label{fig:gans-architecture}
 \end{figure}
+% endregion
 
-\subsection{Topologias de redes neuronales}
-% TODO: imagen
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{figures/NeuralNetworkZo19High.png}
-    \caption{Topologias de redes neuronales.\\Fuente: \href{https://www.asimovinstitute.org/neural-network-zoo/}{The neural network zoo}}
-    \label{fig:}
-\end{figure}
 % endregion
 
 % region subsection La seguridad de las redes neuronales
@@ -408,9 +491,9 @@ Como podemos observar en la figura \ref{fig:art-adversarial-threats} existen mul
 % Invisivilidad
 % Efectividad
 
-\subsection{Ataques en \textit{deep learning}}
+\subsection{Amenazas en \textit{deep learning}}
 % TODO
-Existen cuatro formas de clasificar las amenazas de las redes neuronales en \gls{DL}
+Existen cuatro formas de clasificar las amenazas de las redes neuronales en \gls{DL} en función de como se altera el comportamiento del modelo.
 
 \subsubsection{Evasión}
 
