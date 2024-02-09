@@ -332,14 +332,31 @@ El vector de entrada $X = (x_{1}, x_{2}, ..., x_{n})$ será la información sumi
 \begin{figure}[H]
     \centering
     \centerline{\includesvg[width=1\linewidth]{figures/equations/Notation.drawio.svg}}
-    \caption{Calculo de los pesos de la red neuronal artificial\\Fuente: Elaboración propia}
+    \caption{Calculo de los pesos de la red neuronal artificial.\\Fuente: Elaboración propia}
     \label{fig:notation}
 \end{figure}
 
+\begin{enumerate}
+    \item Función de la red neuronal: $f(x) = W x + b$
+    \item Matriz de pesos: $W = \left[w_{0,n}, w_{1,n}, ...,w_{m,n}\right]$
+    \item Vector de pesos: $w_{n} \in \mathbb{R}^{D}$
+    \item Vector de entrada: $x \in \mathbb{R}^{D}$
+    \item Vector del bias: $b \in \mathbb{R}^{C}$
+\end{enumerate}
+
+% El proceso de reducción de dimensionalidad se lleva a cabo, para convertir el vector de características del espacio original en un nuevo espacio con un conjunto más pequeño, linealmente no correlacionadas mediante la siguiente función $f: \mathbb{R}^{D} \rightarrow \mathbb{R}^{C}$ con $C \ll D$, donde la red neuronal está expresada como $f(x) = W x + b$. Está red cuenta con las siguientes partes $\mathbf{W} = \left[w_{0}^{T}, w_{1}^{T}, ..., w_{C}^{T}\right]$ es la matriz de vectores de peso, que viene dada la expresión $\mathbf{w_{j}} \in \mathbb{R}^{D}$. El vector de entrada es $\mathbf{x} \in \mathbb{R}^{D}$ y el $bias$ es un vector que está definido en el espacio $\mathbf{b} \in \mathbb{R}^{C}$
+
+\paragraph*{El perceptron simple}
+\paragraph*{El perceptron multicapa}
+
+
 % region: el descenso de gradiente
 \subsubsection{El descenso de gradiente \label{gradient-descent}}
-% TODO: explicar el descenso de gradiente
+% TODO: explicar el descenso de gradiente y su problema
 
+% Definición:
+
+% Problema:
 El problema de desvanecimiento y explosión de gradiente
 
 

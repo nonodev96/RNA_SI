@@ -77,7 +77,7 @@ $$ C = {(x,y) \in \mathbb{R}^{2} | \phi(x,y) = 0} $$
 De este modo, el problema de adaptar $C$ a los datos de entrada (en nuestro caso, la forma de la mano) se reduce a modificar $\phi$. Una elección conveniente para $\phi$ es la función de distancia con signo (SDF), que da la distancia al punto más cercano en C, con signo negativo si estamos dentro del contorno:
 
 <!-- \label{eq:2} -->
-$$ \phi({\chi},{\bf{y}})=(-1)^{\mathrm{i}({\chi},{\bf{y}})\epsilon\mathrm{int}({\zeta}))}\operatorname*{min}_{({\chi}^{\prime},{\bf{y}}^{\prime})\epsilon C}||({\chi},{\bf{y}})-({\chi}^{\prime},{\bf{y}}^{\prime})|| $$
+$$ \phi({\chi},{\bf{y}})=(-1)^{\mathrm{i}({\chi},{\bf{y}})\epsilon\mathrm{int}({\zeta}))}\mathrm{min}_{({\chi}^{\prime},{\bf{y}}^{\prime})\epsilon C}||({\chi},{\bf{y}})-({\chi}^{\prime},{\bf{y}}^{\prime})|| $$
 
 donde $I$ es la función indicadora, e $int(C)$ representa el interior de $C$. De este modo, tenemos:
 
@@ -209,10 +209,10 @@ $$ d_{Sumdard}(\mathbf{x},\mathbf{y})={\sqrt{\sum_{j=1}^{D}{\frac{({\boldsymbol{
 donde $D$ es el número de características, $C$ es la matriz de covarianza y $r_{j}$ es la desviación estándar de la $j$-ésima característica. Tenga en cuenta que $C$ y $r_{j}$ se calculan sobre el conjunto de entrenamiento. Ahora calculamos el mínimo de estas distancias para formar un vector de dos componentes $z$ que mide lo cerca que está $x$ de la clase $i$; cuanto más bajos sean los componentes de $z$, más cerca estará la muestra de prueba $x$ de la clase $i$:
 
 <!-- \label{eq:22} -->
-$$ Z_{1}=\operatorname*{min}_{{\bf y}\in C_{i}}d_{Mahal}({\bf x},{\bf y}), $$
+$$ Z_{1}=\mathrm{min}_{{\bf y}\in C_{i}}d_{Mahal}({\bf x},{\bf y}), $$
 
 <!-- \label{eq:23} -->
-$$ Z_{2}=\operatorname*{min}_{{\bf y}\in C_{i}}d_{S t a n d a r d}({\bf x},{\bf y}), $$
+$$ Z_{2}=\mathrm{min}_{{\bf y}\in C_{i}}d_{S t a n d a r d}({\bf x},{\bf y}), $$
 
 donde $C_{i}$ es el conjunto de muestras de entrenamiento para la clase $i$.
 
