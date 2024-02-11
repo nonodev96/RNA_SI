@@ -1,6 +1,6 @@
 \chapter{ANTECEDENTES Y ESTADO DEL ARTE}
 \label{ch:2}
-% ==============================================================================================================
+% ============================================================================================================== 
 \section{Introducción}
 \label{ch:2:section:introduction}
 
@@ -250,7 +250,7 @@ El \textit{machine learning} es la ciencia o rama de la inteligencia artificial 
     \label{fig:machine-learning-rules}
 \end{figure}
 
-Como podemos ver en la figura \ref{fig:machine-learning-rules} el paradigma clásico se necesitaba conocer el dominio de los datos y las reglas en profundidad y programar los descriptores de forma manual para procesar los datos. En el paradigma del \textit{machine learning} permite extraer esas reglas y patrones para procesar nuevos datos a partir de respuestas que conociamos previamente, estas respuestas previas deben ser extraidas o validadas por expertos.
+Como podemos ver en la Figura \ref{fig:machine-learning-rules} en el paradigma clásico se necesitaba conocer el dominio de los datos y las reglas en profundidad y programar los descriptores de forma manual para procesar los datos. En el paradigma del \textit{machine learning} permite extraer esas reglas y patrones para procesar nuevos datos a partir de respuestas que conociamos previamente, estas respuestas previas deben ser extraidas o validadas por expertos.
 
 Una clásificación de las tareas del \textit{machine learning} lo podemos ver en la figura \ref{fig:machine-learning}, esta clasificación está dividida en función de como se realiza el aprendijaze del modelo.
 
@@ -286,11 +286,13 @@ El \textit{deep learning} emplea principalmente redes neuronales para reconocer,
 
 Las redes neuronales es un conjunto de neuronas artificiales que están organizadas generalmente por capas. Estas redes tienen una capa de entrada, una capa de salida y multiples capas ocultas con distintas funciones de activación que ponderan los pesos de cada neurona.
 
-Las redes neuronales cuentan con formas muy variadas de componer las capas, a esto se le denomina \textbf{topologia de red neuronal}, en función del objetivo que se busque, la topologia será muy distinta.
+Existen formas muy variadas de componer las capas, a esto se le denomina \textbf{topologia de red neuronal}, en función del objetivo que se busque, la topologia será muy distinta.
 
 \subsubsection{Elementos de una neurona artificial}
 
 Como se ha comentado previamente las neuronas artificiales están inspiradas en las neuronas biologicas del cerebro humanos, fueron los investigadores \textit{McCulloch} y \textit{Pitts} \cite{mcculloch1943logical} los que sentaron las bases de lo que es una neurona artificial, demostrando que su modelo de red neuronal podía realizar cálculos que se correspondían con la lógica proposicional.
+
+% TODO explicar las partes que propusieron \textit{McCulloch} y \textit{Pitts} 
 
 \begin{figure}[H]
     \centering
@@ -300,8 +302,6 @@ Como se ha comentado previamente las neuronas artificiales están inspiradas en 
 \end{figure}
 
 En la Figura \ref{fig:artificial-neuron} podemos ver las distintas partes de una única neurona artificial y sus partes equivalentes con una neurona biológica. El axón opera como la entrada de información a la neurona,
-
-
 
 % Perceptron
 %% LTU 
@@ -313,9 +313,11 @@ En la Figura \ref{fig:artificial-neuron} podemos ver las distintas partes de una
 
 Las redes neuronales profundas tienen multitud de capas con nodos interconectados, cada capa sobre la capa anterior con el objetivo de optimizar la precisión de una predición o clasificación. A esta progresión de calculos se le denomina ``propagación hacia delante''.
 
-El proceso de ``propagación inversa'' es el encargado de calcular errores de precisión, ajustar sesgos y ponderaciones usando algoritmos como el descenso de gradiente \ref{gradient-descent}.
+El proceso de ``propagación inversa'' es el encargado de calcular errores de precisión, ajustar sesgos y ponderaciones usando algoritmos como el descenso de gradiente.
 
-La capa de entrada es por donde el modelo ingiere los datos, y la capa de salida es donde el modelo responderá con la predicción o clasificación.
+% TODO: Fases por la que se pasa una red neuronal
+
+La capa de entrada es por donde el modelo ingiere los datos, y la capa de salida es donde el modelo responderá con la predicción o clasificación una vez se haya completado la fase de aprendizaje.
 
 \begin{figure}[H]
     \centering
@@ -326,7 +328,7 @@ La capa de entrada es por donde el modelo ingiere los datos, y la capa de salida
 
 En la Figura \ref{fig:artificial-neuronal-network} podemos ver una arquitectura simple de una red neuronal que cuenta con la capa de entrada, la capa de salida y dos capas ocultas.
 
-El vector de entrada $X = (x_{1}, x_{2}, ..., x_{n})$ será la información suministrada a nuestro red a través de la capa de entrada, este vector será de tamaño $n$.
+El vector de entrada $X = (x_{1}, x_{2}, ..., x_{n})$ será la información suministrada a nuestra red a través de la capa de entrada, este vector será de tamaño $n$.
 
 
 \begin{figure}[H]
@@ -485,11 +487,18 @@ El problema de desvanecimiento y explosión de gradiente
 \subsection{La seguridad de las redes neuronales}
 \label{ch:2:section:state-of-the-art:computer-security-in-neural-networks}
 
-El estado del arte de la seguridad es muy complejo por la constante evolución, las ciberamenazas están en constante evolución, los delincuentes informaticos adoptan nuevas técnicas y tácticas para eludir las medidas de seguridad tradicionales.
+% Dentro de la inteligencia artificial \gls{AI} encontramos el aprendizaje automático \gls{ML} y dentro el aprendijaze profundo \gls{DL}.
+% Para el desarrollo de este capítulo limitaremos el alcance del estado del arte de la seguridad informática a los campos relacionados con la inteligencia artificial.
 
-Dentro de la inteligencia artificial \gls{AI} encontramos el aprendizaje automático \gls{ML} y dentro el aprendijaze profundo \gls{DL}.
-Para el desarrollo de este capítulo limitaremos el alcance del estado del arte de la seguridad informática a los campos relacionados con la inteligencia artificial.
+El estado del arte de la seguridad informática es muy complejo por la constante evolución, las ciberamenazas están en constante evolución, los delincuentes informaticos adoptan nuevas técnicas y tácticas para eludir las medidas de seguridad tradicionales, esto tambien le amenaza a las tecnologias que emplean la inteligencia artificial y redes neuronales.
 
+A continuación se explicarán las distintas amenazas que tiene una red neuronal y como puede ser atacada para alterar su comportamiento, posteriormente analizaremos el estado del arte de la inteligencia artificial que se emplea para mejorar la seguridad informática de los dispositivos y de los usuarios.
+
+% Eficiencia
+% Invisivilidad
+% Efectividad
+
+\subsection{Amenazas de \textit{deep learning}}
 \begin{figure}[H]
     \centering
     \centerline{\includesvg[width=1\columnwidth]{figures/chapter02/adversarial-threats.drawio.svg}}
@@ -497,15 +506,7 @@ Para el desarrollo de este capítulo limitaremos el alcance del estado del arte 
     \label{fig:art-adversarial-threats}
 \end{figure}
 
-Como podemos observar en la figura \ref{fig:art-adversarial-threats} existen multitud de amenazas a redes neuronales.
-
-% Eficiencia
-% Invisivilidad
-% Efectividad
-
-\subsection{Amenazas en \textit{deep learning}}
-% TODO
-Existen cuatro formas de clasificar las amenazas de las redes neuronales en \gls{DL} en función de como se altera el comportamiento del modelo.
+Como podemos observar en la Figura \ref{fig:art-adversarial-threats} existen multitud de amenazas, existen cuatro formas de clasificar las amenazas, está clasificación es en función de como se altera el comportamiento del modelo.
 
 \subsubsection{Evasión}
 
