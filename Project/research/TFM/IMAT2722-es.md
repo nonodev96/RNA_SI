@@ -105,19 +105,19 @@ En esta sección se presenta el conjunto de características de la mano extraíd
 Además, también se calcula un conjunto de siete momentos invariantes, denominados $Hu-moments$. Los momentos de imagen representan importantes propiedades estadísticas de una imagen y se ha demostrado su utilidad para describir objetos tras la segmentación (Liao & Pawlak, 1996). Estos siete momentos invariantes son invariantes frente a traslaciones, cambios de escala, rotaciones y transformaciones especulares. Vienen dados por las siguientes ecuaciones:
 
 <!-- \label{eq:4} -->
-$$ \phi_{1}=\eta_{20}+\eta_{02} $$
+$$ \varphi_{1} = \eta_{20}+\eta_{02} $$
 
 <!-- \label{eq:5} -->
-$$ \varphi_{2}=(\eta_{20}-\eta_{02})^{2}+4\eta_{11}^{2} $$
+$$ \varphi_{2} = \left(\eta_{20} - \eta_{02}\right)^{2} + 4\eta_{11}^{2} $$
 
 <!-- \label{eq:6} -->
-$$ \varphi_{3}=(\eta_{30}-3\eta_{12})^{2}+\left(3\eta_{21}-\eta_{03}\right)^{2} $$
+$$ \varphi_{3} = (\eta_{30}-3\eta_{12})^{2}+\left(3\eta_{21}-\eta_{03}\right)^{2} $$
 
 <!-- \label{eq:7} -->
-$$ \varphi_{4}=(\eta_{30}+\eta_{12})^{2}+(\eta_{21}+\eta_{03})^{2} $$
+$$ \varphi_{4} = (\eta_{30}+\eta_{12})^{2}+(\eta_{21}+\eta_{03})^{2} $$
 
 <!-- \label{eq:8} -->
-$$ \phi_{5}=\left(\eta_{30}-3\eta_{12}\right)(\eta_{30}+\eta_{12})+\left[(\eta_{30}+\eta_{12})^{2}-3(\eta_{21}+\eta_{03})^{2}\right] + (3\eta_{21}-\eta_{03})[\eta_{21}+\eta_{03}](3(\eta_{30}+\eta_{12})^{2}-(\eta_{21}+\eta_{03})^{2}) $$
+$$ \phi_{5} = \left(\eta_{30}-3\eta_{12}\right)\left(\eta_{30}+\eta_{12}\right)+\left[(\eta_{30}+\eta_{12})^{2}-3\left(\eta_{21}+\eta_{03}\right)^{2}\right] + (3\eta_{21}-\eta_{03})(\eta_{21}+\eta_{03})\left[3(\eta_{30}+\eta_{12})^{2}-(\eta_{21}+\eta_{03})^{2}\right] $$
 
 <!-- \label{eq:9} -->
 $$ \varphi_{6} = \left(\eta_{20} - 3\eta_{02}\right)\left[(\eta_{30}+\eta_{12})^{2}-(\eta_{21}+\eta_{03})^{2}\right] + 4\eta_{11}(\eta_{30}+\eta_{12})(\eta_{21}+\eta_{03}) $$
