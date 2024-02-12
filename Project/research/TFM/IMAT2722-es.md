@@ -206,10 +206,10 @@ donde $fitness(x)$ es el valor de fitness del subconjunto de características re
 Supongamos que una imagen de una mano con un vector de características x se ha clasificado en la clase $i$. Entonces necesitamos un procedimiento de verificación para comprobar si esta mano pertenece realmente a la clase $i$, es decir, si la imagen corresponde a la $i$-ésima persona de la base de datos de manos. Para ello, consideramos la distancia de Mahalanobis y la distancia euclídea normalizada del vector **x** a un vector de características **y** que pertenece a las muestras de entrenamiento correspondientes a la clase $i$, es decir, sabemos con certeza que y corresponde a la $i$-ésima persona:
 
 <!-- \label{eq:20} -->
-$$ d_{Mahal}(\mathbf{x},\mathbf{y}) = {\sqrt{(\mathbf{x}-\mathbf{y})^{T} \mathbf{C}^{-1}(\mathbf{x}-\mathbf{y})}} $$
+$$ d_{Mahal}\left(\mathbf{x},\mathbf{y}\right) = {\sqrt{(\mathbf{x}-\mathbf{y})^{T} \mathbf{C}^{-1}(\mathbf{x}-\mathbf{y})}} $$
 
 <!-- \label{eq:21} -->
-$$ d_{Sumdard}(\mathbf{x},\mathbf{y}) = \sqrt{\sum_{j=1}^{D}{\frac{\left(\mathbf{x}_{j} - \mathbf{y}_{j}\right)^{2}}{\sigma_{j}^{2}}}} $$
+$$ d_{Sumdard}\left(\mathbf{x},\mathbf{y}\right) = \sqrt{\sum_{j=1}^{D}{\frac{\left( x_j - y_j \right)^{2}}{\sigma_j^2}}} $$
 
 donde $D$ es el número de características, $C$ es la matriz de covarianza y $r_{j}$ es la desviación estándar de la $j$-ésima característica. Tenga en cuenta que $C$ y $r_{j}$ se calculan sobre el conjunto de entrenamiento. Ahora calculamos el mínimo de estas distancias para formar un vector de dos componentes $z$ que mide lo cerca que está $x$ de la clase $i$; cuanto más bajos sean los componentes de $z$, más cerca estará la muestra de prueba $x$ de la clase $i$:
 
