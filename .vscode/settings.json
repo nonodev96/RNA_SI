@@ -1,11 +1,28 @@
 {
     "editor.wordWrap": "on",
+    "editor.formatOnSave": true,
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true
+    },
+    "black-formatter.args": [
+        "-l 79"
+    ],
     "[scminput]": {
         "editor.wordWrap": "off"
     },
     "[latex]": {
         "editor.foldingStrategy": "indentation"
     },
+    // "emeraldwalk.runonsave": {
+    //     "commands": [
+    //         {
+    //             "match": "\\.py$",
+    //             "cmd": "make fmt",
+    //             "isAsync": false
+    //         }
+    //     ]
+    // },
     "gitlens.codeLens.recentChange.enabled": false,
     "gitlens.codeLens.authors.enabled": false,
     "gitlens.currentLine.enabled": false,

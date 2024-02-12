@@ -117,13 +117,13 @@ $$ \varphi_{3} = (\eta_{30}-3\eta_{12})^{2}+\left(3\eta_{21}-\eta_{03}\right)^{2
 $$ \varphi_{4} = (\eta_{30}+\eta_{12})^{2}+(\eta_{21}+\eta_{03})^{2} $$
 
 <!-- \label{eq:8} -->
-$$ \phi_{5} = \left(\eta_{30}-3\eta_{12}\right)\left(\eta_{30}+\eta_{12}\right)+\left[(\eta_{30}+\eta_{12})^{2}-3\left(\eta_{21}+\eta_{03}\right)^{2}\right] + (3\eta_{21}-\eta_{03})(\eta_{21}+\eta_{03})\left[3(\eta_{30}+\eta_{12})^{2}-(\eta_{21}+\eta_{03})^{2}\right] $$
+$$ \varphi_{5} = \left(\eta_{30}-3\eta_{12}\right)\left(\eta_{30}+\eta_{12}\right)+\left[(\eta_{30}+\eta_{12})^{2}-3\left(\eta_{21}+\eta_{03}\right)^{2}\right] + (3\eta_{21}-\eta_{03})(\eta_{21}+\eta_{03})\left[3(\eta_{30}+\eta_{12})^{2}-(\eta_{21}+\eta_{03})^{2}\right] $$
 
 <!-- \label{eq:9} -->
 $$ \varphi_{6} = \left(\eta_{20} - 3\eta_{02}\right)\left[(\eta_{30}+\eta_{12})^{2}-(\eta_{21}+\eta_{03})^{2}\right] + 4\eta_{11}(\eta_{30}+\eta_{12})(\eta_{21}+\eta_{03}) $$
 
 <!-- \label{eq:10} -->
-$$ \phi_{7} = (3\eta_{21}-3\eta_{03})(\eta_{30}+\eta_{12})
+$$ \varphi_{7} = (3\eta_{21}-3\eta_{03})(\eta_{30}+\eta_{12})
 \left[(\eta_{30}+\eta_{12})^{2}-3(\eta_{21}+\eta_{03})^{2}\right]+(3\eta_{12}-\eta_{03})(\eta_{21}+\eta_{03})
 \left[3(\eta_{30}+\eta_{12})^{2}-(\eta_{21}+\eta_{03})^{2}\right] $$
 
@@ -132,17 +132,17 @@ donde $\eta_{ij}$ denota el momento invariante tanto a la traslación como a los
 <!-- \label{eq:11} -->
 $$ \eta_{i j}=\frac{\mu_{i j}}{\mu_{00}^{\left(1+{\frac{i+j}{2}}\right)}} $$
 
-The central moment $\mu_{i j}$ is defined as follows:
+El momento central $\mu_{i j}$ está definido de la siguiente forma:
 
 <!-- \label{eq:12} -->
 $$ \mu_{i j}=\sum_{x}\sum_{y}(x-{\bar{x}})^{i}(y-{\bar{y}})^{j}f(x,y) $$
 
-donde $f(x, y)$ es el valor de los componentes x e y en la imagen binaria de la mano. Una silueta cerrada definida como $(x(t), y(t))$ puede representarse en términos de descriptores de Fourier, donde $t$ es la longitud de la curva desde el punto de partida. Tras seleccionar un número de puntos equidistantes, N, de la curva
+donde $f(x, y)$ es el valor de los componentes $x$ e $y$ en la imagen binaria de la mano. Una silueta cerrada definida como $(x(t), y(t))$ puede representarse en términos de descriptores de Fourier, donde $t$ es la longitud de la curva desde el punto de partida. Tras seleccionar un número de puntos equidistantes, $N$, de la curva
 
 <!-- \label{eq:13} -->
 $$ (x(t),y(t)),\quad n=0,1,2,...,N-1 $$
 
-it is possible to obtain the complex vector
+es posible obtener el vector complejo
 
 $$ \mathbf{Z}=\mathbf{X}+i\mathbf{y} $$
 
@@ -158,11 +158,11 @@ En este trabajo se aplica una metodología que consta de dos pasos; en primer lu
 
 ### Identification
 
-La fase de identificación se divide en un proceso de entrenamiento inicial cuando se está registrando un nuevo usuario en el sistema biométrico y un proceso de prueba asociado a la actuación normal, donde el objetivo es determinar la identidad de una muestra de mano. La Fig. 7 muestra un esquema que integra las dos alternativas. El objetivo del módulo de entrenamiento es seleccionar el menor número de características que consigan obtener la mejor tasa de clasificación utilizando la totalidad de los datos de entrenamiento, es decir, todas las muestras asociadas a los usuarios registrados en el sistema. Se utiliza una metodología de selección de características basada en algoritmos genéticos (AG) para encontrar el mejor subconjunto de características que proporcione altos índices de precisión en la tarea de clasificación. En la parte derecha de la Fig. 7 se muestra el marco del enfoque propuesto. Aunque puede ser una propuesta que consuma mucho tiempo (dependiendo del clasificador), el AG se aplica sólo en la etapa de entrenamiento, que se realiza fuera de línea y no afecta al rendimiento en tiempo real del sistema. Esto reduce los recursos y la complejidad temporal. Por lo tanto, el principal objetivo del proceso de entrenamiento es seleccionar las variables más relevantes para definir un conjunto estándar de características, que depende en gran medida del conjunto de datos utilizado. Las condiciones del entorno y la calidad de la imagen en otros conjuntos de datos podrían cambiar y producir otro subconjunto, como podemos observar en la sección de resultados experimentales. No obstante, esta metodología de selección de características puede extrapolarse a diferentes conjuntos de datos, sin limitación en el tipo de descriptores a aplicar.
+La fase de identificación se divide en un proceso de entrenamiento inicial cuando se está registrando un nuevo usuario en el sistema biométrico y un proceso de prueba asociado a la actuación normal, donde el objetivo es determinar la identidad de una muestra de mano. La Fig. 7 muestra un esquema que integra las dos alternativas. El objetivo del módulo de entrenamiento es seleccionar el menor número de características que consigan obtener la mejor tasa de clasificación utilizando la totalidad de los datos de entrenamiento, es decir, todas las muestras asociadas a los usuarios registrados en el sistema. **Se utiliza una metodología de selección de características basada en algoritmos genéticos (AG) para encontrar el mejor subconjunto de características que proporcione altos índices de precisión en la tarea de clasificación.** En la parte derecha de la Fig. 7 se muestra el marco del enfoque propuesto. Aunque puede ser una propuesta que consuma mucho tiempo (dependiendo del clasificador), el AG se aplica sólo en la etapa de entrenamiento, que se realiza fuera de línea y no afecta al rendimiento en tiempo real del sistema. Esto reduce los recursos y la complejidad temporal. Por lo tanto, el principal objetivo del proceso de entrenamiento es seleccionar las variables más relevantes para definir un conjunto estándar de características, que depende en gran medida del conjunto de datos utilizado. Las condiciones del entorno y la calidad de la imagen en otros conjuntos de datos podrían cambiar y producir otro subconjunto, como podemos observar en la sección de resultados experimentales. No obstante, esta metodología de selección de características puede extrapolarse a diferentes conjuntos de datos, sin limitación en el tipo de descriptores a aplicar.
 
 ### Evolutionary strategy
 
-Los algoritmos genéticos (Raymer et al., 2000; Sun et al., 2004) son una clase de procedimiento de optimización inspirado en los mecanismos biológicos de reproducción. En este tipo de problemas de optimización, una función de adecuación f(x) debe maximizarse o minimizarse en un espacio dado X de dimensión arbitraria. En este caso, la función de adecuación combina el objetivo de minimizar el número de características y la tasa de error de clasificación. Si el número de variables no es demasiado grande, una búsqueda exhaustiva podría ser adecuada, pero en problemas de optimización con una cantidad considerable de características, esto es inviable.
+Los algoritmos genéticos (Raymer et al., 2000; Sun et al., 2004) son una clase de procedimiento de optimización inspirado en los mecanismos biológicos de reproducción. En este tipo de problemas de optimización, una función de adecuación $f(x)$ debe maximizarse o minimizarse en un espacio dado $X$ de dimensión arbitraria. En este caso, la función de adecuación combina el objetivo de minimizar el número de características y la tasa de error de clasificación. Si el número de variables no es demasiado grande, una búsqueda exhaustiva podría ser adecuada, pero en problemas de optimización con una cantidad considerable de características, esto es inviable.
 
 #### Encoding and initial population
 
@@ -176,11 +176,14 @@ Además, se consideró un operador de mutación tradicional que voltea un bit es
 
 #### Fitness function
 
-La función de aptitud evalúa cada cromosoma de la población para poder compararlo con los demás cromosomas. El objetivo principal de la selección de subconjuntos de características es utilizar menos características para lograr el mismo o mejor rendimiento. Además, se ha descubierto que la combinación de características con poca redundancia entre ellas, es decir, que proporcionen información diferente sobre la clase objetivo y que tengan cierto parecido con ella, puede mejorar los índices de rendimiento (Chow & Huang, 2005; Peng, Long, & Ding, 2005). Por lo tanto, la función de adecuación debe contener tres términos: el error de clasificación errónea, el número de características seleccionadas y una medida de redundancia entre ellas. Para cada cromosoma, se selecciona un subconjunto de la base de datos con las características activas que queremos analizar. Para evaluar la precisión del subconjunto propuesto en términos de predicción, el conjunto de datos reducido se divide en conjuntos de entrenamiento y de prueba. El análisis discriminante lineal (LDA), k-nearest neighbours (kNN) y las máquinas de vectores de apoyo (SVM) son los clasificadores supervisados utilizados para evaluar la idoneidad del subconjunto. Las características seleccionadas dependen en gran medida de este método de clasificación utilizado en la función de adecuación. El clasificador se entrena con el primer conjunto y se valida con el segundo. El porcentaje de datos de cada conjunto se ponderó con 0,3 para el entrenamiento y 0,7 para las pruebas.
+La función de aptitud evalúa cada cromosoma de la población para poder compararlo con los demás cromosomas. El objetivo principal de la selección de subconjuntos de características es utilizar menos características para lograr el mismo o mejor rendimiento. **Además, se ha descubierto que la combinación de características con poca redundancia entre ellas, es decir, que proporcionen información diferente sobre la clase objetivo y que tengan cierto parecido con ella, puede mejorar los índices de rendimiento** (Chow & Huang, 2005; Peng, Long, & Ding, 2005). Por lo tanto, la función de adecuación debe contener tres términos: el error de clasificación errónea, el número de características seleccionadas y una medida de redundancia entre ellas. Para cada cromosoma, se selecciona un subconjunto de la base de datos con las características activas que queremos analizar. Para evaluar la precisión del subconjunto propuesto en términos de predicción, el conjunto de datos reducido se divide en conjuntos de entrenamiento y de prueba. **El análisis discriminante lineal (LDA), k-nearest neighbours (kNN) y las máquinas de vectores de apoyo (SVM) son los clasificadores supervisados utilizados para evaluar la idoneidad del subconjunto.** Las características seleccionadas dependen en gran medida de este método de clasificación utilizado en la función de adecuación. El clasificador se entrena con el primer conjunto y se valida con el segundo. El porcentaje de datos de cada conjunto se ponderó con 0,3 para el entrenamiento y 0,7 para las pruebas.
 
-Técnicas estadísticas como la información mutua (Guo y Nixon, 2009; Leung y Gong, 2005) nos dan una idea de la correlación entre un par de características. La información mutua entre dos variables aleatorias continuas x e y viene dada por
+Técnicas estadísticas como la información mutua (Guo y Nixon, 2009; Leung y Gong, 2005) nos dan una idea de la correlación entre un par de características. La información mutua entre dos variables aleatorias continuas $x$ e $y$ viene dada por
 
-$$ I(y,z)=\iint p(y,z)\log\left({\frac{p(y,z)}{p(y)p(z)}}\right)d y\,d z $$
+<!-- $I(y,z)$ es la función de evaluación de información -->
+<!-- $p(y,z)$ es  la probabilidad conjunta de $y$ y $z$ -->
+<!-- $p(y)$  -->
+$$ I(y,z) = \iint p(y,z)\log\left({\frac{p(y,z)}{p(y)p(z)}}\right)d y\,d z $$
 
 donde $p(y, z)$ es la función de densidad de probabilidad conjunta de $y$ y $z$, y $p(y)$ y $p(z)$ son las funciones de densidad de probabilidad marginales de $y$ y $z$ respectivamente. La información mutua es simétrica:
 
@@ -196,17 +199,17 @@ donde $k$ es el número de características seleccionadas, $C$ es la clase objet
 
 $$ fitness(\mathbf{x}) = error(\mathbf{x}) + \lambda{\frac{k}{\mathcal{N}}} + \beta corr(\mathbf{x}) $$
 
-donde $fitness(x)$ es el valor de fitness del subconjunto de características representado por $x$; $error(x)$ es la tasa de clasificación errónea obtenida por el clasificador (LDA, SVM o kNN) utilizando el conjunto de prueba; $N$ es el número total de características extraídas; por último, $corr(x)$ define la correlación entre las características activas del cromosoma x y la clase objetivo, con el objetivo de evitar la redundancia en el vector de características (Ec. (18)). Los valores $k$ y $b$ están en el intervalo (0,1) y se asignan empíricamente a 0,4 y 0,25, respectivamente. Por lo tanto, si dos subconjuntos alcanzan el mismo rendimiento, aunque contengan un número diferente de características, se prefiere el subconjunto con menos características. También estimulamos la mezcla de características menos redundante entre ellas, lo que se considera una buena cualidad para las tareas de clasificación. No obstante, entre los tres términos, error, tamaño del subconjunto de características y correlación, el primero es el que más nos preocupa (véase la Fig. 9).
+donde $fitness(x)$ es el valor de fitness del subconjunto de características representado por $x$; $error(x)$ es la tasa de clasificación errónea obtenida por el clasificador (LDA, SVM o kNN) utilizando el conjunto de prueba; $N$ es el número total de características extraídas; por último, $corr(x)$ define la correlación entre las características activas del cromosoma $x$ y la clase objetivo, con el objetivo de evitar la redundancia en el vector de características (Ec. (18)). Los valores $k$ y $b$ están en el intervalo (0,1) y se asignan empíricamente a 0,4 y 0,25, respectivamente. Por lo tanto, **si dos subconjuntos alcanzan el mismo rendimiento, aunque contengan un número diferente de características, se prefiere el subconjunto con menos características.** También estimulamos la mezcla de características menos redundante entre ellas, lo que se considera una buena cualidad para las tareas de clasificación. No obstante, entre los tres términos, error, tamaño del subconjunto de características y correlación, el primero es el que más nos preocupa (véase la Fig. 9).
 
 ### Verification
 
 Supongamos que una imagen de una mano con un vector de características x se ha clasificado en la clase $i$. Entonces necesitamos un procedimiento de verificación para comprobar si esta mano pertenece realmente a la clase $i$, es decir, si la imagen corresponde a la $i$-ésima persona de la base de datos de manos. Para ello, consideramos la distancia de Mahalanobis y la distancia euclídea normalizada del vector **x** a un vector de características **y** que pertenece a las muestras de entrenamiento correspondientes a la clase $i$, es decir, sabemos con certeza que y corresponde a la $i$-ésima persona:
 
 <!-- \label{eq:20} -->
-$$ d_{Mahal}(\mathbf{X},\mathbf{y}) = {\sqrt{(\mathbf{x}-\mathbf{y})^{T} \mathbf{C}^{-1}(\mathbf{x}-\mathbf{y})}} $$
+$$ d_{Mahal}(\mathbf{x},\mathbf{y}) = {\sqrt{(\mathbf{x}-\mathbf{y})^{T} \mathbf{C}^{-1}(\mathbf{x}-\mathbf{y})}} $$
 
 <!-- \label{eq:21} -->
-$$ d_{Sumdard}(\mathbf{x},\mathbf{y})={\sqrt{\sum_{j=1}^{D}{\frac{({\boldsymbol{x}}_{j}-{\boldsymbol{y}}_{j})^{2}}{\sigma_{j}^{2}}}}} $$
+$$ d_{Sumdard}(\mathbf{x},\mathbf{y}) = \sqrt{\sum_{j=1}^{D}{\frac{\left({\boldsymbol{x}}_{j}-{\boldsymbol{y}}_{j}\right)^{2}}{\sigma_{j}^{2}}}} $$
 
 donde $D$ es el número de características, $C$ es la matriz de covarianza y $r_{j}$ es la desviación estándar de la $j$-ésima característica. Tenga en cuenta que $C$ y $r_{j}$ se calculan sobre el conjunto de entrenamiento. Ahora calculamos el mínimo de estas distancias para formar un vector de dos componentes $z$ que mide lo cerca que está $x$ de la clase $i$; cuanto más bajos sean los componentes de $z$, más cerca estará la muestra de prueba $x$ de la clase $i$:
 

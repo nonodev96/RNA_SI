@@ -34,3 +34,10 @@ https://ieeexplore.ieee.org/abstract/document/9435191
 
 ## Conjuntos de datos GPDS
 https://gpds.ulpgc.es/downloadnew/download.htm
+
+
+## Librerias para seleccion de caracteristicas
+
+* https://deap.readthedocs.io/en/master/
+* https://sklearn-genetic-opt.readthedocs.io/en/stable/
+* https://github.com/BiDAlab/GeneticAlgorithm?tab=readme-ov-file#example
