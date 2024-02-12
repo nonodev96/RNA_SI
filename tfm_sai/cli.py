@@ -9,7 +9,7 @@ Be creative! do whatever you want!
 """
 
 
-def main():  # pragma: no cover
+def main(opt):  # pragma: no cover
     """
     The main function executes on commands:
     `python -m tfm_sai` and `$ tfm_sai `.

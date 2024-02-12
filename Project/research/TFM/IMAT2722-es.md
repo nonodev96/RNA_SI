@@ -91,16 +91,18 @@ La mano podría tener cualquier orientación en la imagen, ya que el sistema de 
 
 En este trabajo, el enfoque de orientación es el mismo que el utilizado en Amayeh, Bebis, Erol y Nicolescu (2009). Se basa en operadores morfológicos de cierre y apertura con el objetivo de detectar el dedo corazón para rotar la mano, lo que requiere mucho tiempo debido al uso de un algoritmo morfológico iterativo. Suponiendo que la mano cubra la mayor parte de la imagen, los pasos principales pueden resumirse como sigue:
 
-1. Inicializar el radio del elemento estructurante circular D a un valor que esté relacionado con el tamaño de la imagen (por ejemplo, R = 0,1 ⁄ dimx).
-2. Aplicar un cierre morfológico sobre la imagen binaria, B, utilizando D para eliminar los dedos. Además, se requiere un operador de dilatación para agrandar el puño de la mano. Esto es necesario para mantener los dedos separados en el siguiente paso.
-3. Extraer los dedos separados individualmente tras restar la imagen B y la imagen resultante anterior, B0 . También es aconsejable eliminar algunos ruidos y objetos pequeños espurios. Si no se han localizado los cinco dedos o algunos de ellos están muy próximos entre sí, el algoritmo descartará la imagen actual y solicitará una nueva captura de la mano.
+1. Inicializar el radio del elemento estructurante circular $D$ a un valor que esté relacionado con el tamaño de la imagen (por ejemplo, $R = 0,1 ⁄ dim_{x}$).
+2. Aplicar un cierre morfológico sobre la imagen binaria, $B$, utilizando $D$ para eliminar los dedos. Además, se requiere un operador de dilatación para agrandar el puño de la mano. Esto es necesario para mantener los dedos separados en el siguiente paso.
+3. Extraer los dedos separados individualmente tras restar la imagen $B$ y la imagen resultante anterior, $B'$ . También es aconsejable eliminar algunos ruidos y objetos pequeños espurios. Si no se han localizado los cinco dedos o algunos de ellos están muy próximos entre sí, el algoritmo descartará la imagen actual y solicitará una nueva captura de la mano.
 4. Tras clasificar los dedos utilizando su centroide, el último paso consiste en aislar el dedo corazón (considerado el tercer dedo) y calcular la matriz de covarianza de la región para obtener el ángulo principal de rotación.
 
 El enfoque de orientación completo se muestra en la Fig. 3. Por último, tomando una línea vertical para obtener el píxel de la mano del borde inferior y tomando una línea horizontal desde este punto para obtener la parte binaria superior, se obtiene una región binaria invariante de la mano.
 
 ## Biometrical feature extraction
 
-TEn esta sección se presenta el conjunto de características de la mano extraídas de la imagen binaria. Sólo se han extraído características geométricas ya que son más sencillas de calcular y han demostrado su utilidad en problemas de reconocimiento biométrico (Faundez-Zanuy et al., 2007). Estos descriptores geométricos se describen en la Tabla 1. Cada descriptor se ha aplicado tanto a la mano como a cada dedo individualmente (Fig. 5). Cabe destacar que este proceso se realiza automáticamente analizando la silueta de la mano y la región binaria invariante de la mano obtenida en el apartado anterior. Observando la Tabla 1, podemos ver cómo los cinco primeros descriptores (área (a), perímetro (p), anchura, altura y proporción de aspecto) son los descriptores geométricos más típicos. Para cada dedo se calculan tres medidas de anchura (una por falange). La proporción de aspecto se calcula dividiendo la anchura por la altura. Si B es la imagen binaria resultante que se muestra en la Fig. 3(d), la solidez puede calcularse fácilmente tras obtener el área convexa como s = a/ConvexB, la proporción de compacidad de una región se define como c = 4p(a/p2 ), y la medida de rectangularidad hace uso de la caja delimitadora de la región que se va a delinear como s = a/BoundingBoxB. Además, también se calcula un conjunto de siete momentos invariantes, denominados momentos Hu. Los momentos de imagen representan importantes propiedades estadísticas de una imagen y se ha demostrado su utilidad para describir objetos tras la segmentación (Liao & Pawlak, 1996). Estos siete momentos invariantes son invariantes frente a traslaciones, cambios de escala, rotaciones y transformaciones especulares. Vienen dados por las siguientes ecuaciones:
+En esta sección se presenta el conjunto de características de la mano extraídas de la imagen binaria. Sólo se han extraído características geométricas ya que son más sencillas de calcular y han demostrado su utilidad en problemas de reconocimiento biométrico (Faundez-Zanuy et al., 2007). Estos descriptores geométricos se describen en la Tabla 1. Cada descriptor se ha aplicado tanto a la mano como a cada dedo individualmente (Fig. 5). Cabe destacar que este proceso se realiza automáticamente analizando la silueta de la mano y la región binaria invariante de la mano obtenida en el apartado anterior. Observando la Tabla 1, podemos ver cómo los cinco primeros descriptores (*área* (a), *perímetro* (p), *anchura*, *altura* y *proporción de aspecto*) son los descriptores geométricos más típicos. Para cada dedo se calculan tres medidas de *anchura* (una por falange). La proporción de aspecto se calcula dividiendo la *anchura* por la *altura*. Si $B$ es la imagen binaria resultante que se muestra en la Fig. 3(d), la solidez puede calcularse fácilmente tras obtener el área convexa como $s = a/Convex_{B}$, la proporción de compacidad de una región se define como $c = 4p(a/p^{2})$, y la medida de rectangularidad hace uso de la caja delimitadora de la región que se va a delinear como $s = a/BoundingBox_{B}$.
+
+Además, también se calcula un conjunto de siete momentos invariantes, denominados $Hu-moments$. Los momentos de imagen representan importantes propiedades estadísticas de una imagen y se ha demostrado su utilidad para describir objetos tras la segmentación (Liao & Pawlak, 1996). Estos siete momentos invariantes son invariantes frente a traslaciones, cambios de escala, rotaciones y transformaciones especulares. Vienen dados por las siguientes ecuaciones:
 
 <!-- \label{eq:4} -->
 $$ \phi_{1}=\eta_{20}+\eta_{02} $$
@@ -118,12 +120,12 @@ $$ \varphi_{4}=(\eta_{30}+\eta_{12})^{2}+(\eta_{21}+\eta_{03})^{2} $$
 $$ \phi_{5}=\left(\eta_{30}-3\eta_{12}\right)(\eta_{30}+\eta_{12})+\left[(\eta_{30}+\eta_{12})^{2}-3(\eta_{21}+\eta_{03})^{2}\right] + (3\eta_{21}-\eta_{03})[\eta_{21}+\eta_{03}](3(\eta_{30}+\eta_{12})^{2}-(\eta_{21}+\eta_{03})^{2}) $$
 
 <!-- \label{eq:9} -->
-$$ \varphi_{6}=[\eta_{20}-3\eta_{02}]((\eta_{30}+\eta_{12})^{2}-(\eta_{21}+\eta_{03})^{2})+4\eta_{11}(\eta_{30}+\eta_{12})(\eta_{21}+\eta_{03}) $$
+$$ \varphi_{6} = \left(\eta_{20} - 3\eta_{02}\right)\left[(\eta_{30}+\eta_{12})^{2}-(\eta_{21}+\eta_{03})^{2}\right] + 4\eta_{11}(\eta_{30}+\eta_{12})(\eta_{21}+\eta_{03}) $$
 
 <!-- \label{eq:10} -->
-$$ \phi_{7}=(3\eta_{21}-3\eta_{03})(\eta_{30}+\eta_{12})
-[(\eta_{30}+\eta_{12})^{2}-3(\eta_{21}+\eta_{03})^{2}]+(3\eta_{12}-\eta_{03})(\eta_{21}+\eta_{03})
-[3(\eta_{30}+\eta_{12})^{2}-(\eta_{21}+\eta_{03})^{2}] $$
+$$ \phi_{7} = (3\eta_{21}-3\eta_{03})(\eta_{30}+\eta_{12})
+\left[(\eta_{30}+\eta_{12})^{2}-3(\eta_{21}+\eta_{03})^{2}\right]+(3\eta_{12}-\eta_{03})(\eta_{21}+\eta_{03})
+\left[3(\eta_{30}+\eta_{12})^{2}-(\eta_{21}+\eta_{03})^{2}\right] $$
 
 donde $\eta_{ij}$ denota el momento invariante tanto a la traslación como a los cambios de escala dividiendo el momento central $\mu_{ij}$ por el área de la región ($\mu_{00}$) (Hu, 1962):
 
