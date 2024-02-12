@@ -214,10 +214,10 @@ $$ d_{Sumdard}\left(\mathbf{x},\mathbf{y}\right) = \sqrt{\sum_{j=1}^{D}{\frac{\l
 donde $D$ es el número de características, $C$ es la matriz de covarianza y $r_{j}$ es la desviación estándar de la $j$-ésima característica. Tenga en cuenta que $C$ y $r_{j}$ se calculan sobre el conjunto de entrenamiento. Ahora calculamos el mínimo de estas distancias para formar un vector de dos componentes $z$ que mide lo cerca que está $x$ de la clase $i$; cuanto más bajos sean los componentes de $z$, más cerca estará la muestra de prueba $x$ de la clase $i$:
 
 <!-- \label{eq:22} -->
-$$ Z_{1}=\mathrm{min}_{{\bf y}\in C_{i}}d_{Mahal}({\bf x},{\bf y}), $$
+$$ Z_{1} = \underset{y \in C_{i}}{\mathrm{min}}~d_{Mahal}(x,y) $$
 
 <!-- \label{eq:23} -->
-$$ Z_{2}=\mathrm{min}_{{\bf y}\in C_{i}}d_{S t a n d a r d}({\bf x},{\bf y}), $$
+$$ Z_{2} = \underset{y \in C_{i}}{\mathrm{min}}~d_{Standard}(x,y) $$
 
 donde $C_{i}$ es el conjunto de muestras de entrenamiento para la clase $i$.
 
