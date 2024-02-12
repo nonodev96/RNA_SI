@@ -209,7 +209,7 @@ Supongamos que una imagen de una mano con un vector de características x se ha 
 $$ d_{Mahal}(\mathbf{x},\mathbf{y}) = {\sqrt{(\mathbf{x}-\mathbf{y})^{T} \mathbf{C}^{-1}(\mathbf{x}-\mathbf{y})}} $$
 
 <!-- \label{eq:21} -->
-$$ d_{Sumdard}(\mathbf{x},\mathbf{y}) = \sqrt{\sum_{j=1}^{D}{\frac{\left({\boldsymbol{x}}_{j}-{\boldsymbol{y}}_{j}\right)^{2}}{\sigma_{j}^{2}}}} $$
+$$ d_{Sumdard}(\mathbf{x},\mathbf{y}) = \sqrt{\sum_{j=1}^{D}{\frac{\left(\mathbf{x}_{j} - \mathbf{y}_{j}\right)^{2}}{\sigma_{j}^{2}}}} $$
 
 donde $D$ es el número de características, $C$ es la matriz de covarianza y $r_{j}$ es la desviación estándar de la $j$-ésima característica. Tenga en cuenta que $C$ y $r_{j}$ se calculan sobre el conjunto de entrenamiento. Ahora calculamos el mínimo de estas distancias para formar un vector de dos componentes $z$ que mide lo cerca que está $x$ de la clase $i$; cuanto más bajos sean los componentes de $z$, más cerca estará la muestra de prueba $x$ de la clase $i$:
 
