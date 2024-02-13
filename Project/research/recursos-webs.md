@@ -32,6 +32,10 @@ https://www.mdpi.com/2072-4292/15/4/936
 https://ieeexplore.ieee.org/abstract/document/9435191
 
 
+## Teoria GANs
+
+* https://www.mdpi.com/2072-4292/14/4/816
+
 ## Conjuntos de datos GPDS
 https://gpds.ulpgc.es/downloadnew/download.htm
 

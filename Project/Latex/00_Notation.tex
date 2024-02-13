@@ -1,16 +1,19 @@
-\chapter{Notación}
+\chapter*{Notación}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Notación}
 
 \begin{table}[ht!]
     \begin{center}
-        \begin{tabularx}{\textwidth}{|l|X|}\hline
-            \textbf{Simbolo}                                                                                                     & \textbf{Definición}                                                                                                                                                         \\ \hline
-            $\mathbb{Z}$                                                                                                         & Números enteros                                                                                                                                                             \\
-            $\mathbb{Z^{+}}$                                                                                                     & Números enteros positivos                                                                                                                                                   \\
-            $\mathbb{N}$                                                                                                         & Números naturales                                                                                                                                                           \\
-            $\mathbb{R}$                                                                                                         & Números reales                                                                                                                                                              \\
-            $\mathbb{C}$                                                                                                         & Números complejos                                                                                                                                                           \\
-            $R^{n}$                                                                                                              & Espacio vectorial $n$-dimensional de números reales                                                                                                                         \\
-            $\mathcal{X}$                                                                                                        & Conjunto de datos de entrada que es usado para entrenar la red neuronal (\gls{DNN}), donde $\mathcal{X} \in \mathbb{R}^{N}$                                                 \\
+        \begin{tabularx}{\textwidth}{|l|X|}
+            \hline
+            \textbf{Simbolo}                                  & \textbf{Definición}                                                                                                         \\
+            \hline
+            $ \mathbb{Z} $                                    & Números enteros. \newline i.e. $ \scriptstyle{ \mathbb{Z}  = \left\{ \ldots, -2, -1, 0, +1, +2, \ldots \right\} } $         \\
+            $ \mathbb{Z}^{+} $                                & Números enteros positivos. \newline i.e. $ \scriptstyle{ \mathbb{Z}^{+}  = \left\{ 0, +1, +2, \ldots \right\} } $           \\
+            $ \mathbb{Z}^{++} $                               & Números enteros positivos sin el cero. \newline i.e. $ \scriptstyle{ \mathbb{Z}^{++}  = \left\{ +1, +2, \ldots \right\} } $ \\
+            $ \mathbb{N} $                                    & Números naturales                                                                                                           \\
+            $ \mathbb{R} $                                    & Números reales                                                                                                              \\
+            $ \mathbb{C} $                                    & Números complejos                                                                                                           \\
+            $ R^{n} $                                         & Espacio vectorial $n$-dimensional de números reales                                                                         \\
 
             % $\mathcal{A} \backslash \mathcal{B}  $ & $\mathcal{A}$ sin $\mathcal{B}$, el conjunto de elementos de $\mathcal{A}$, pero no en $\mathcal{B} $                       \\
             % $\exists{x}$                           & Existe $x$                                                                                                                  \\
@@ -18,56 +21,138 @@
             % $ g \circ f $                          & Función composición (g después de f)                                                                                        \\
             % $ a := b $                             & $a$ se define como $b$                                                                                                      \\
             % $ a \propto  b $                       & $a$ proporcional a $b$                                                                                                      \\
-            $I_{m}$                                                                                                              & Matriz identidad de tamaño $ m \times m$                                                                                                                                    \\
-            $0_{m,n}$                                                                                                            & Matriz de ceros de tamaño $ m \times n$                                                                                                                                     \\
-            $\underline{0}_{n}$                                                                                                  & Vector de ceros de tamaño $n$                                                                                                                                               \\
-            $1_{m,n}$                                                                                                            & Matriz de unos de tamaño $ m \times n$                                                                                                                                      \\
-            $\underline{1}_{n}$                                                                                                  & Vector de unos de tamaño $n$                                                                                                                                                \\
-            $e_{i}$                                                                                                              & Vector estandar o vector canonico. i.e. ${\scriptscriptstyle v_{x} = (1,0,0), v_{y} = (0,1,0), v_{z} = (0,0,1)}$                                                            \\
-            $rk(\textbf{\textit{A}})$                                                                                            & Rango de la matriz $\textit{\textbf{A}}$                                                                                                                                    \\
-            $Im(\Phi)$                                                                                                           & Imagen del mapeo lineal $\Phi$                                                                                                                                              \\
-            $ker(\Phi)$                                                                                                          & Núcleo (espacio nulo) de un mapeo lineal $\Phi$                                                                                                                             \\
-            $span[\textbf{b}_{1}]$                                                                                               & Sistema generador de $\textbf{b}_{1}$                                                                                                                                       \\
-            $tr(\textbf{\textit{A}})$                                                                                            & Traza de $\textit{\textbf{A}}$                                                                                                                                              \\
-            $det(\textbf{\textit{A}})$                                                                                           & Determinante de $\textit{\textbf{A}}$                                                                                                                                       \\
-            $\lvert·\rvert$                                                                                                      & Determinante o valor absoluto                                                                                                                                               \\
-            $\lvert\lvert·\rvert\rvert$                                                                                          & Norma euclidiana                                                                                                                                                            \\
-            $\underline{x} \odot \underline{m}$                                                                                  & Operación por elementos de los vectores o matrices                                                                                                                          \\
-            $\langle \underline{z}, \underline{y}\rangle  = \underline{z}' \underline{y} = \textstyle{\sum_{j=1}^{N}{z_j y_j}} $ & Producto escalar de vectores por columnas $\underline{z}, \underline{y} \in \mathbb{R}^{N}$                                                                                 \\
-            ${\Vert \underline{x} - \underline{y} \Vert}_{q}$                                                                    & Distancia en la misma dimensión entre $\underline{x}$ e $\underline{y}$                                                                                                     \\\hline
+            $ \epsilon $                                      & Para cantidades positivas, artbitrariamente pequeñas                                                                        \\
 
-            ${x_{1}, x_{2},...,x_{n}}$                                                                                           & Es el conjunto con $n$ elementos                                                                                                                                            \\\hline
-            $x_{i}: a \in A$                                                                                                     & TODO                                                                                                                                                                        \\
+            \hline % Notación de vectores y matrices
+            $ \mathbf{v} = [v_{i}]_{i=1,...,n} $              & Vectores definidos en negrita y minuscula                                                                                   \\
+            $ \mathbf{V} = [v_{i,j}]_{i=1,...,n, j=1,...,m} $ & Matrices definidas en negrita y mayúscula                                                                                   \\
+            $ I_{m} $                                         & Matriz identidad de tamaño $ m \times m $                                                                                   \\
+            $ 0_{m,n} $                                       & Matriz de ceros de tamaño $ m \times n $                                                                                    \\
+            $ \underline{0}_{n} $                             & Vector de ceros de tamaño $n $                                                                                              \\
+            $ 1_{m,n} $                                       & Matriz de unos de tamaño $ m \times n $                                                                                     \\
+            $ \underline{1}_{n} $                             & Vector de unos de tamaño $n $                                                                                               \\
+            $ e_{i} $                                         & Vector estandar o vector canonico.\newline i.e. $\scriptstyle{ v_{x} = (1,0,0), v_{y} = (0,1,0), v_{z} = (0,0,1)} $         \\
+            $ \text{rk}\left(\mathbf{A}\right) $              & Rango de la matriz $\mathbf{A}$                                                                                             \\
+            $ \text{tr}\left(\mathbf{A}\right) $              & Traza de la matriz $\mathbf{A}$                                                                                             \\
+            $ \text{det}\left(\mathbf{A}\right) $             & Determinante de la matriz $\mathbf{A}$                                                                                      \\
+            $ \text{Im}\left(\Phi\right) $                    & Imagen del mapeo lineal $\Phi$                                                                                              \\
+            $ \text{ker}\left(\Phi\right) $                   & Núcleo (espacio nulo) de un mapeo lineal $\Phi$                                                                             \\
+            $ \text{span}\left[\mathbf{b}_{1}\right] $        & Sistema generador de $\mathbf{b}_{1}$                                                                                       \\
 
-            $\textbf{v} = [v_{i}]_{i=1,...,n}$                                                                                   & Vectores definidos en negrita y minuscula                                                                                                                                   \\
-            $\textbf{V} = [v_{i,j}]_{i=1,...,n, j=1,...,m}$                                                                      & Matrices definidas en negrita y mayúscula                                                                                                                                   \\
-            $N$                                                                                                                  & Dimensión del espacio muestral de entrada                                                                                                                                   \\
-            $T = \lvert \mathcal{X} \rvert < \infty$                                                                             & Número finito de instancias del conjunto de datos $\mathcal{X}$                                                                                                             \\
-            $K$                                                                                                                  & Número finito de clases de conjunto de datos $\mathcal{X}$ en problemas de clasificación                                                                                    \\
-            $H$                                                                                                                  & Conjunto de validación, este conjunto contiene muestras de todas las clases                                                                                                 \\
-            $\mathcal{Y}$                                                                                                        & Conjunto de clases del conjunto de datos $\mathcal{X}$, esto es, $\textit{K} = \lvert \mathcal{Y} \rvert$. i.e. ${\scriptscriptstyle \mathcal{Y} = \{1,2,...,\textit{K}\}}$ \\
-            $f_{*} = \text{min}_x~f(x)$                                                                                          & El valor de función más pequeño de $f$                                                                                                                                      \\
-            ${x}_x \in \text{arg min}_{x}~f(x) $                                                                                 & El valor $x_{*}$ que minimiza $f$ (conjunto de valores)                                                                                                                     \\
-            $\mathcal{L}$                                                                                                        &                                                                                                                                                                             \\
-                                                                                                                                 &                                                                                                                                                                             \\
-                                                                                                                                 &                                                                                                                                                                             \\
-                                                                                                                                 &                                                                                                                                                                             \\
-                                                                                                                                 &                                                                                                                                                                             \\
-                                                                                                                                 &                                                                                                                                                                             \\
-                                                                                                                                 &                                                                                                                                                                             \\
-                                                                                                                                 &                                                                                                                                                                             \\ \hline
+
+            \hline
         \end{tabularx}
-        \caption{Notación}
-        \label{tab:nnotation}
+        \caption{Notación Parte 1}
+        \label{tab:nnotation-part-1}
+    \end{center}
+\end{table}
+
+
+\begin{table}[H]
+    \begin{center}
+        \begin{tabularx}{\textwidth}{|l|X|}
+            \hline
+            \textbf{Simbolo}                                                                                                     & \textbf{Definición}                                                                         \\
+            \hline
+            % Notación matemática de operaciones con vectores y matrices
+            $ \lvert \cdot \rvert $                                                                                              & Determinante o valor absoluto                                                               \\
+            $ \left\lVert \cdot \right\rVert $                                                                                   & Norma euclidiana                                                                            \\
+            $ {\Vert \underline{x} - \underline{y} \Vert}_{q} $                                                                  & Distancia en la misma dimensión entre $\underline{x}$ e $\underline{y}$                     \\
+            $ \underline{x} \odot \underline{m} $                                                                                & Operación por elementos de los vectores o matrices                                          \\
+            $ \left\langle \underline{z}, \underline{y} \right\rangle = \underline{z}' \underline{y} = \sum_{j=1}^{N}{z_j y_j} $ & Producto escalar de vectores por columnas $\underline{z}, \underline{y} \in \mathbb{R}^{N}$ \\
+            $ {x_{1}, x_{2}, \ldots ,x_{n}} $                                                                                    & Es el conjunto con $n$ elementos                                                            \\
+
+            \hline
+        \end{tabularx}
+        \caption{Notación Parte 2}
+        \label{tab:nnotation-part-2}
+    \end{center}
+\end{table}
+
+
+\begin{table}[H]
+    \begin{center}
+        \begin{tabularx}{\textwidth}{|l|X|}
+            \hline
+            \textbf{Simbolo}                                                                                                                                                                                                                  & \textbf{Definición}                                                                                   \\
+            \hline
+            % Notación matemática de gradientes, funciones a minimizar, operador
+            $ \nabla f = \left( \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \frac{\partial f}{\partial z} \right) $                                                                                                         & Gradiente, es un vector que indica la dirección de mayor pendiente de una superficie en un punto dado \\
+            $ \nabla \cdot f =  \frac{\partial f}{\partial x} + \frac{\partial f}{\partial y} + \frac{\partial f}{\partial z} $                                                                                                               & Divergencia                                                                                           \\
+            $ \nabla \times f =  \left( \frac{\partial f}{\partial y} - \frac{\partial f}{\partial z}, \frac{\partial f}{\partial z} - \frac{\partial f}{\partial x}, \frac{\partial f}{\partial x} - \frac{\partial f}{\partial y}  \right)$ & Rotación                                                                                              \\
+            $ f_{*} = \text{min}_x~f(x) $                                                                                                                                                                                                     & El valor de función más pequeño de $f$                                                                \\
+            $ {x}_x \in \text{arg min}_{x}~f(x) $                                                                                                                                                                                             & El valor $x_{*}$ (conjunto de valores) que minimiza $f$                                               \\
+
+            \hline
+        \end{tabularx}
+        \caption{Notación Parte 3}
+        \label{tab:nnotation-part-3}
+    \end{center}
+\end{table}
+
+
+\begin{table}[H]
+    \begin{center}
+        \begin{tabularx}{\textwidth}{|l|X|}
+            \hline
+            \textbf{Simbolo}                           & \textbf{Definición}                                                                                                                                                            \\
+            \hline % Notación de ANN (redes neuronales, conjunto de datos, entrada, salida, clases, etc)
+            $ N $                                      & Dimensión del espacio muestral de entrada                                                                                                                                      \\
+            $ \mathcal{X} $                            & Conjunto de datos, donde $\mathcal{X} \in \mathbb{R}^{N}$                                                                                                                      \\
+            $ \mathcal{D} $                            & Subconjunto de datos que se usan para el entrenamiento, donde $\mathcal{D} \subset \mathcal{X}$                                                                                \\
+            % $ \mathcal{D} $                            & Subconjunto de datos que se usan para la validación, donde $\mathcal{D} \subset \mathcal{X}$                                                                                         \\
+            $ T = \lvert \mathcal{X} \rvert < \infty $ & Número finito de instancias del conjunto de datos $\mathcal{X}$                                                                                                                \\
+            $ K $                                      & Número finito de clases del conjunto de datos $\mathcal{X}$ (para problemas de clasificación)                                                                                  \\
+            $ \mathcal{Y} $                            & Conjunto de clases del conjunto de datos $\mathcal{X}$, esto es, $\textit{K} = \lvert \mathcal{Y} \rvert$. \newline i.e. ${\scriptstyle \mathcal{Y} = \{1,2,...,\textit{K}\}}$ \\
+            $ H $                                      & Conjunto de validación, este conjunto contiene muestras de todas las clases                                                                                                    \\
+            $ \hat{y} $                                & Predicción del modelo                                                                                                                                                          \\
+            $ \theta $                                 & parámetros del modelo                                                                                                                                                          \\
+            $ \mathcal{L} $                            & Función de perdida                                                                                                                                                             \\
+            $ \phi ,\varphi $                          & Función de activación                                                                                                                                                          \\
+            $ f\left(\cdot\right) $                    & Modelo                                                                                                                                                                         \\
+
+            \hline
+        \end{tabularx}
+        \caption{Notación Parte 4}
+        \label{tab:nnotation-part-4}
+    \end{center}
+\end{table}
+
+\begin{table}[H]
+    \begin{center}
+        \begin{tabularx}{\textwidth}{|l|X|}
+            \hline
+            \textbf{Simbolo} & \textbf{Definición}                                 \\
+            \hline % Notación de GANS (redes neuronales adversariales)
+            $ x $            & Entrada original (limpia, sin modificar) de un dato \\
+            $ x^{\prime} $   & Dato adversarial                                    \\
+            $ y^{\prime} $   & Clase objetivo de ejemplo adversario                \\
+            $ \delta $       & Perturbación generada por el algoritmo adversarial  \\
+            % $ \Delta, \epsilon  $ & Restricción en la perturbación                                                   \\
+            \hline
+        \end{tabularx}
+        \caption{Notación Parte 5}
+        \label{tab:nnotation-part-5}
     \end{center}
 \end{table}
 
 
 
+% \newpage
+% \KOMAoptions{paper=landscape,pagesize}
+% \recalctypearea
+% \section{This is my Landscape Page}
+% Text in my landscape section\footnote{Footnote in Landscape}
+
+% \newpage
+% \KOMAoptions{paper=portrait,pagesize}
+% \recalctypearea
+
+
 \begin{enumerate}
 
 
-    \item $y$ es el conjunto de clases del conjunto $\mathcal{X}$.
+    \item $\mathcal{Y}$ es el conjunto de clases del conjunto de datos $\mathcal{X}$.
     \item $\hat{c}(\mathcal{X})$ es el término que nos referimos al clasificador del conjunto $\mathcal{X}$
     \item $P(C|A)$ nos referimos a la probabilidad condicionada ($P$) de la clase ($C$) con los atributos ($A$).
           % \item $ a \gg b$ `a' mucho mayor que `b'.
@@ -76,6 +161,7 @@
 
 
 \chapter*{Teoremas}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Teoremas}
 
 % Maldición de la dimensionalidad -> clasificación basaa en naive bayes 
 % Clasificador de Naïve Bayes

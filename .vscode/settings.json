@@ -1,6 +1,8 @@
 {
     "editor.wordWrap": "on",
     "editor.formatOnSave": true,
+    "editor.tabCompletion": "onlySnippets",
+    "editor.snippetSuggestions": "top",
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter",
         "editor.formatOnSave": true

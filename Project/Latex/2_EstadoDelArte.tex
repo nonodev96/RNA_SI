@@ -4,8 +4,8 @@
 \section{Introducción}
 \label{ch:2:section:introduction}
 
-El proyecto que desarrollamos se encuentra en una frontera muy difusa de múltiples ramas del conocimiento, siendo muy interdisciplinar, se trata de una revisión de los ataques, seguridad y robustez a las redes neuronales.
-Por lo que debemos explicar que es la ciencia de datos, el proceso \gls{KDD}, la inteligencia artificial generativa y la seguridad de la información.
+El proyecto que desarrollamos se encuentra en una frontera muy difusa de múltiples ramas del conocimiento, siendo muy interdisciplinar, se trata de una revisión de los ataques, seguridad y robustez a las redes neuronales centrandonos en ataques adversariales.
+Por lo que debemos explicar que es la ciencia de datos, el proceso \gls{KDD}, la inteligencia artificial generativa y la seguridad informática.
 
 \begin{figure}[H]
     \centering
@@ -16,7 +16,7 @@ Por lo que debemos explicar que es la ciencia de datos, el proceso \gls{KDD}, la
 
 Podemos dividir este trabajo en dos secciones muy relacionadas, la primera la inteligencia artificial y de segundo punto de importancia la seguridad de la información.
 Desde sus inicios la inteligencia artificial, aunque con buenos resultados en muchos campos de aplicación resultaba en grandes fallos de seguridad, fiabilidad y robustez.
-Por cómo están entrenadas las inteligencias artificiales (\acrshort{nn}) tiene múltiples puntos de ataque que son susceptibles de ser atacados, los principales son los datos, las arquitecturas o los pesos.
+Por cómo están entrenadas las inteligencias artificiales (\acrshort{ann}) tiene múltiples puntos de ataque que son susceptibles de ser atacados, los principales son los datos, las arquitecturas o los pesos.
 Ya que alterando cualquiera de estos componentes de forma se verá enormemente afectada el comportamiento.
 
 % Ciencia de la computación
@@ -231,7 +231,7 @@ El Descubrimiento de Conocimientos en Bases de Datos \gls{KDD} es un proceso que
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{figures/chapter02/data-mining-taxonomy.drawio.png}
+    \centerline{\includesvg[width=1\linewidth]{figures/chapter02/data-mining-taxonomy.drawio.svg}}
     \caption{Taxonomía de minería de datos.\\Fuente: Elaboración propia, inspirado en la sección \textit{Introduction to Knowledge Discovery and Data Mining} \cite{maimon2005data}}
     \label{fig:data-mining-taxonomy}
 \end{figure}
@@ -252,7 +252,7 @@ El \textit{machine learning} es la ciencia o rama de la inteligencia artificial 
 
 Como podemos ver en la Figura \ref{fig:machine-learning-rules} en el paradigma clásico se necesitaba conocer el dominio de los datos y las reglas en profundidad y programar los descriptores de forma manual para procesar los datos. En el paradigma del \textit{machine learning} permite extraer esas reglas y patrones para procesar nuevos datos a partir de respuestas que conociamos previamente, estas respuestas previas deben ser extraidas o validadas por expertos.
 
-Una clásificación de las tareas del \textit{machine learning} lo podemos ver en la figura \ref{fig:machine-learning}, esta clasificación está dividida en función de como se realiza el aprendijaze del modelo.
+Una clásificación de las tareas del \textit{machine learning} lo podemos ver en la Figura \ref{fig:machine-learning}, esta clasificación está dividida en función de como se realiza el aprendijaze del modelo.
 
 \begin{figure}[H]
     \centering
@@ -269,17 +269,16 @@ El \textit{machine learning} puede trabajar con datos estructurados y no estruct
 % TODO: Explicar el Deep Learning https://idus.us.es/bitstream/handle/11441/90004/Centeno%20Franco%20Alba%20TFG.pdf
 
 El \textit{deep learning} es una subrama del \textit{machine learning} que usa redes neuronales artificiales para analizar datos no lineales, estas redes imitan el comportamiento del cerebro humano, para esto suelen contar con arquitecturas complejas.
-
-El \textit{deep learning} se distingue del \textit{machine learning} por los tipos de datos con los que puede trabajar y por los métodos con los que hace que los modelos aprendan.
+Se distingue del \textit{machine learning} por los tipos de datos con los que puede trabajar y por los métodos con los que hace que los modelos aprendan.
 
 Otra de las carácteristicas que diferencia al \textit{deep learning} del \textit{machine learning} es que elimina parte del procesamiento previo de datos, ya que sus algoritmos puede ingerir y procesar datos no estructurados.
 
 
-%  ==============================================================================
-%  ==============================================================================
-%  ==============================================================================
+%  ============================================================================================================================================================
+%  ============================================================================================================================================================
+%  ============================================================================================================================================================
 
-\subsection{Redes neuronales - \textit{Neuronal Networks}}
+\subsection{Redes neuronales artificiales - \textit{Artificial Neuronal Networks}}
 % TODO: \cite{ibm-deep-learning}
 % Explicar uso de multiples neuronas artificiales para crear capas y luego redes
 El \textit{deep learning} emplea principalmente redes neuronales para reconocer, clasificar y describir con precisión patrones de datos. Estas redes están inspiradas en el funcionamiento del cerebro humano.  \cite{ibm-deep-learning}
@@ -352,87 +351,90 @@ El vector de entrada $X = (x_{1}, x_{2}, ..., x_{n})$ será la información sumi
 \paragraph*{El perceptron multicapa}
 
 
-% region: el descenso de gradiente
-\subsubsection{El descenso de gradiente \label{gradient-descent}}
-% TODO: explicar el descenso de gradiente y su problema
-
-% Definición:
-
-% Problema:
-El problema de desvanecimiento y explosión de gradiente
-
-
-% endregion
-
-
 % Multicapa
-% Capas
 % Funciones de optimización
 % Funciones de activación
 % Funciones de perdida
+% Capas
 % Topologias
-
-\subsubsection{Tipos de capas}
-
-
-\begin{itemize}
-    \item \textbf{Capa de entrada}:
-    \item \textbf{Capas ocultas}:
-    \item \textbf{Capa de salida}:
-\end{itemize}
+% Descenso de gradiente
 
 
 
+\subsubsection{Funciones de activación}
+% region Funciones de activación
+% TODO: definición, explicación y tipos, solo mostramos las más importantes
+Existen muchas funciones de acttivación que modifican las neuronas
 
 
 \paragraph*{\textit{Non-linear Activations (weighted sum, nonlinearity)} \cite{pytorch2024github}}
 
 \begin{enumerate}
-    \item \textbf{ReLu}:
+    \item \textbf{ReLU}:
     \item[] \begin{equation} \varphi(x) = \operatorname*{max}(0,x) \end{equation}
-        \begin{figure}[H]
-            \centering
-            \includegraphics[width=0.5\textwidth]{figures/equations/ReLu.png}
-            \caption{Función de activación ReLu\\Fuente: \href{https://pytorch.org/docs/stable/generated/torch.nn.ReLu.html}{Pytorch torch.nn.ReLu}}
-            \label{fig:torch.nn.ReLu}
-        \end{figure}
-
-    \item \textbf{Sigmoid}:
-    \item[] \begin{equation} \varphi(x) = \frac{1}{1+e^{-x}} \end{equation}
-        \begin{figure}[H]
-            \centering
-            \includegraphics[width=0.5\textwidth]{figures/equations/Sigmoid.png}
-            \caption{Función de activación Sigmoid\\Fuente: \href{https://pytorch.org/docs/stable/generated/torch.nn.Sigmoid.html}{Pytorch torch.nn.Sigmoid}}
-            \label{fig:torch.nn.Sigmoid}
-        \end{figure}
+    \item \textbf{LeakyReLU}:
+    \item[] \begin{equation} \varphi(x) = \operatorname*{max}\left(0,x\right) + \operatorname*{negative\_slope} * \operatorname*{min}\left(0,x\right)  \end{equation}
 
     \item \textbf{Softplus}:
-    \item[] \begin{equation} \varphi(x) = \frac{1}{\beta} \operatorname*{log}(1+e^{\beta x}) \end{equation}
-        \begin{figure}[H]
-            \centering
-            \includegraphics[width=0.5\textwidth]{figures/equations/Softplus.png}
-            \caption{Función de activación Softplus\\Fuente: \href{https://pytorch.org/docs/stable/generated/torch.nn.Softplus.html}{Pytorch torch.nn.Softplus}}
-            \label{fig:torch.nn.Softplus}
-        \end{figure}
-
-    \item \textbf{Tanh}: text.
-    \item[] \begin{equation} \varphi(x) = \frac{e^{x}-e^{-x}}{e^{x}+e^{-x}} \end{equation}
-        \begin{figure}[H]
-            \centering
-            \includegraphics[width=0.5\textwidth]{figures/equations/Tanh.png}
-            \caption{Función de activación Tanh\\Fuente: \href{https://pytorch.org/docs/stable/generated/torch.nn.Tanh.html}{Pytorch torch.nn.Tanh}}
-            \label{fig:torch.nn.Tanh}
-        \end{figure}
-
+    \item[] \begin{equation} \varphi(x) = \frac{1}{\beta} \operatorname*{log}\left(1+e^{\beta x}\right) \end{equation}
     \item \textbf{SoftSign}:
     \item[] \begin{equation} \varphi(x) = \frac{x}{1+\lvert x \rvert} \end{equation}
-        \begin{figure}[H]
-            \centering
-            \includegraphics[width=0.5\textwidth]{figures/equations/Softsign.png}
-            \caption{Función de activación Softsign\\Fuente: \href{https://pytorch.org/docs/stable/generated/torch.nn.Softsign.html}{Pytorch torch.nn.Softsign}}
-            \label{fig:torch.nn.Softsign}
-        \end{figure}
+
+    \item \textbf{Tanh}:
+    \item[] \begin{equation} \varphi(x) = \frac{e^{x}-e^{-x}}{e^{x}+e^{-x}} \end{equation}
+    \item \textbf{Sigmoid}:
+    \item[] \begin{equation} \varphi(x) = \frac{1}{1+e^{-x}} \end{equation}
 \end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \captionsetup{justification=centering}
+
+    \begin{subfigure}{.475\linewidth}
+        \centering
+        \includegraphics[width=0.75\linewidth]{figures/equations/ReLU.png}
+        \caption{Función de activación ReLU.\newline{}Fuente: \href{https://pytorch.org/docs/stable/generated/torch.nn.ReLU.html}{Pytorch torch.nn.ReLU}}
+        \label{subfig:torch.nn.ReLU}
+    \end{subfigure}\hfill % <-- "\hfill"
+    \begin{subfigure}{.475\linewidth}
+        \centering
+        \includegraphics[width=0.75\linewidth]{figures/equations/LeakyReLU.png}
+        \caption{Función de activación LeakyReLU.\newline{}Fuente: \href{https://pytorch.org/docs/stable/generated/torch.nn.LeakyReLU.html}{Pytorch torch.nn.LeakyReLU}}
+        \label{subfig:torch.nn.LeakyReLU}
+    \end{subfigure}
+
+    \medskip % create some *vertical* separation between the graphs
+    \begin{subfigure}{.475\linewidth}
+        \centering
+        \includegraphics[width=0.75\linewidth]{figures/equations/Softplus.png}
+        \caption{Función de activación Softplus.\newline{}Fuente: \href{https://pytorch.org/docs/stable/generated/torch.nn.Softplus.html}{Pytorch torch.nn.Softplus}}
+        \label{subfig:torch.nn.Softplus}
+    \end{subfigure}\hfill % <-- "\hfill"
+    \begin{subfigure}{.475\linewidth}
+        \centering
+        \includegraphics[width=0.75\linewidth]{figures/equations/Softsign.png}
+        \caption{Función de activación Softsign.\newline{}Fuente: \href{https://pytorch.org/docs/stable/generated/torch.nn.Softsign.html}{Pytorch torch.nn.Softsign}}
+        \label{subfig:torch.nn.Softsign}
+    \end{subfigure}
+
+    \medskip % create some *vertical* separation between the graphs
+    \begin{subfigure}{.475\linewidth}
+        \centering
+        \includegraphics[width=0.75\linewidth]{figures/equations/Tanh.png}
+        \caption{Función de activación Tanh.\newline{}Fuente: \href{https://pytorch.org/docs/stable/generated/torch.nn.Tanh.html}{Pytorch torch.nn.Tanh}}
+        \label{subfig:torch.nn.Tanh}
+    \end{subfigure}\hfill % <-- "\hfill"
+    \begin{subfigure}{.475\linewidth}
+        \centering
+        \includegraphics[width=0.75\linewidth]{figures/equations/Sigmoid.png}
+        \caption{Función de activación Sigmoid.\newline{}Fuente: \href{https://pytorch.org/docs/stable/generated/torch.nn.Sigmoid.html}{Pytorch torch.nn.Sigmoid}}
+        \label{subfig:torch.nn.Sigmoid}
+    \end{subfigure}
+
+    \caption{Funciones de activación no lineales}
+    \label{fig:equations--Non-linear-Activations}
+\end{figure}
+
 
 \subparagraph{\textit{Non-linear Activations (other)} \cite{pytorch2024github}}
 % TODO: explicar las funciones de activación no lineales más importantes
@@ -443,13 +445,25 @@ El problema de desvanecimiento y explosión de gradiente
 \end{enumerate}
 
 
+% endregion Funciones de activación
 
-% region funciones de activación
+\subsubsection{Tipos de capas}
+% region Tipos de capas
 
-% endregion
 
-% region topologias
+\begin{itemize}
+    \item \textbf{Capa de entrada}:
+    \item \textbf{Capas ocultas}:
+    \item \textbf{Capa de salida}:
+\end{itemize}
+
+% endregion Tipos de capas 
+
+
+
+
 \subsubsection{Topologias de redes neuronales}
+% region topologias
 % TODO: explicar la existencia de distintas formas de aplicar las capas de neuronas artificiales y sus resultados
 
 \begin{itemize}
@@ -460,16 +474,26 @@ El problema de desvanecimiento y explosión de gradiente
     \item \textbf{Capas reductora \textit{pooling} y \textit{dropout}}
 \end{itemize}
 
-
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/NeuralNetworkZo19High.png}
     \caption{Topologias de redes neuronales.\\Fuente: \href{https://www.asimovinstitute.org/neural-network-zoo/}{The neural network zoo}}
     \label{fig:NeuralNetworkZo19High}
 \end{figure}
-% endregion
+% endregion topologias
 
-% region GAN
+
+\subsubsection{El descenso de gradiente \label{gradient-descent}}
+% region El descenso de gradiente
+% TODO: definición
+% TODO: explicar el descenso de gradiente y su problema
+% TODO: problema
+El problema de desvanecimiento y explosión de gradiente
+
+% endregion El descenso de gradiente
+
+
+% region GANs
 \subsection{Redes generativas adversariales - \textit{Generative Adversarial Networks (GAN)}}
 % TODO:
 \begin{figure}[H]
@@ -478,7 +502,7 @@ El problema de desvanecimiento y explosión de gradiente
     \caption{Arquitectura de las redes neuronales generativas adversariales.\\Fuente: Elaboración propia.}
     \label{fig:gans-architecture}
 \end{figure}
-% endregion
+% endregion GANs
 
 
 % endregion
@@ -615,16 +639,15 @@ Se puede ser categorizar la seguridad de los modelos con el modelado \gls{STRIDE
 \begin{table}[H]
     \centering
     \small
-    \def\arraystretch{1.5}
-    \begin{tabular}{lp{10cm}}
-        \toprule
+    \begin{tabularx}{\textwidth}{|l|X|}
+        \hline
         \textbf{Amenaza}    & \textbf{Tipo de ataque}                                           \\
-        \midrule
+        \hline
         Corrupción de datos & Ataques de envenenamiento de datos, ataques de puerta trasera     \\
         Extracción de datos & Ataques de inferencia de membresía, ataques de ingeniería inversa \\
         Denegación          & Ataques de envenenamiento de datos                                \\
-        \bottomrule
-    \end{tabular}
+        \hline
+    \end{tabularx}
     \caption{Amenazas STRIDE relacionadas con la seguridad de la IA}
     \label{tab:amenazas}
 \end{table}
