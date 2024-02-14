@@ -3,19 +3,22 @@
     "editor.formatOnSave": true,
     "editor.tabCompletion": "onlySnippets",
     "editor.snippetSuggestions": "top",
-    "[python]": {
-        "editor.defaultFormatter": "ms-python.black-formatter",
-        "editor.formatOnSave": true
-    },
-    "black-formatter.args": [
-        "-l 79"
-    ],
     "[scminput]": {
         "editor.wordWrap": "off"
     },
     "[latex]": {
         "editor.foldingStrategy": "indentation"
     },
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true
+    },
+    "[markdown]": {
+        "editor.quickSuggestions": true
+    },
+    "black-formatter.args": [
+        "-l 79"
+    ],
     // "emeraldwalk.runonsave": {
     //     "commands": [
     //         {
@@ -25,6 +28,7 @@
     //         }
     //     ]
     // },
+    "ltex.language": "es",
     "gitlens.codeLens.recentChange.enabled": false,
     "gitlens.codeLens.authors.enabled": false,
     "gitlens.currentLine.enabled": false,

@@ -514,15 +514,24 @@ El problema de desvanecimiento y explosión de gradiente
 % Dentro de la inteligencia artificial \gls{AI} encontramos el aprendizaje automático \gls{ML} y dentro el aprendijaze profundo \gls{DL}.
 % Para el desarrollo de este capítulo limitaremos el alcance del estado del arte de la seguridad informática a los campos relacionados con la inteligencia artificial.
 
-El estado del arte de la seguridad informática es muy complejo por la constante evolución, las ciberamenazas están en constante evolución, los delincuentes informaticos adoptan nuevas técnicas y tácticas para eludir las medidas de seguridad tradicionales, esto tambien le amenaza a las tecnologias que emplean la inteligencia artificial y redes neuronales.
+El estado del arte de la seguridad informática es muy complejo, ya que los delincuentes informaticos adoptan nuevas técnicas y tácticas para eludir las medidas de seguridad, esto hace que las ciberamenazas están en constante evolución, tambien amenaza a las tecnologias que emplean la inteligencia artificial y redes neuronales.
 
-A continuación se explicarán las distintas amenazas que tiene una red neuronal y como puede ser atacada para alterar su comportamiento, posteriormente analizaremos el estado del arte de la inteligencia artificial que se emplea para mejorar la seguridad informática de los dispositivos y de los usuarios.
+A continuación se explicarán las distintas amenazas que tiene una red neuronal y como puede ser atacada o implementar defensas, posteriormente analizaremos el estado del arte de la inteligencia artificial que se emplea para mejorar la seguridad informática de los dispositivos y de los usuarios.
 
+\begin{figure}[H]
+    \centering
+    \centerline{\includesvg[width=1\linewidth]{figures/chapter02/art-architecture.drawio.svg}}
+    \caption{Arquitectura de ART.\newline{}Fuente: \href{https://github.com/Trusted-AI/adversarial-robustness-toolbox/wiki/ART-Architecture-and-Roadmap}{GitHub @Trusted-AI/adversarial-robustness-toolbox}}
+    \label{fig:art-architecture}
+\end{figure}
+
+ART \cite{art2018} consta con 6 modulos especificos para ataque, defensas, etimadores, evaluaciones, métricas y preprocesamiento. Esto podemos verlo en la Figura \ref{fig:art-architecture}
 % Eficiencia
 % Invisivilidad
 % Efectividad
 
 \subsection{Amenazas de \textit{deep learning}}
+% region Amenazas de \textit{deep learning}
 \begin{figure}[H]
     \centering
     \centerline{\includesvg[width=1\columnwidth]{figures/chapter02/adversarial-threats.drawio.svg}}
@@ -542,7 +551,6 @@ Busca explotar las vulnerabilidades de la red neuronal para inducir errores en l
 \end{enumerate}
 
 \subsubsection{Envenenamiento}
-% 
 
 Los atacantes intentan manipular los datos de entrenamiento con el objetivo de influir en el resultado del aprendijaze del modelo, esto pueden hacerlo desde distintas etapas.
 
@@ -563,11 +571,8 @@ Los atacantes intentan manipular los datos de entrenamiento con el objetivo de i
 
 \paragraph{Clean Label Data Poisoning Attack}
 
-
 \subparagraph{Feature Collision Attack}
 $$x_{p}={\underset{x}{\mathrm{argmin}}}||f\left(x\right)-f\left(x_{t}\right)||_{2}^{2}+\beta||x-x_{b}||_{2}^{2}\,,$$
-% 
-
 
 \subparagraph{Convex Polytope Attack and Bullseye Polytope Attack}
 
@@ -585,6 +590,8 @@ Se busca extraer un funcionamiento interno equivalente de la red neuronal, se pu
 \paragraph{Inferencia por Pertenencia}
 \paragraph{Inversión de modelos}
 \paragraph{Reconstrucción}
+
+% endregion 
 
 \subsection{Defensas contra los ataques en \textit{deep learning}}
 
@@ -684,13 +691,8 @@ Se puede ser categorizar la seguridad de los modelos con el modelado \gls{STRIDE
 
 
 % Feb 1990: Generative Adversarial Networks / Curiosity Generative Adversarial Networks (GANs) have become very popular.[MOST] They were first published in 1990 in Munich under the moniker Artificial Curiosity. [AC90-20][GAN1] Two dueling NNs (a probabilistic generator and a predictor) are trying to maximize each other's loss in a minimax game.[AC](Sec. 1) The generator (called the controller) generates probabilistic outputs (using stochastic units[AC90] like in the much later StyleGANs[GAN2]). The predictor (called the world model) sees the outputs of the controller and predicts environmental reactions to them. Using gradient descent, the predictor NN minimizes its error, while the generator NN tries to make outputs that maximize this error: one net's loss is the other net's gain.[AC90] (The world model can also be used for continual online action planning.[AC90][PLAN2-3][PLAN])
-
 % 4 years before a 2014 paper on GANs,[GAN1] my well-known 2010 survey[AC10] summarised the generative adversarial NNs of 1990 as follows: a "neural network as a predictive world modelis used to maximize the controller's intrinsic reward, which is proportional to the model's prediction errors" (which are minimized).
-
 % The 2014 GANs are an instance of this where the trials are very short (like in bandit problems) and the environment simply returns 1 or 0 depending on whether the controller's (or generator's) output is in a given set.[AC20][AC][T22](Sec. XVII)
-
 % Other early adversarial machine learning settings[S59][H90] were very different—they neither involved unsupervised NNs nor were about modeling data nor used gradient descent.
-
 % The 1990 principle has been widely used for exploration in Reinforcement Learning[SIN5][OUD13] [PAT17][BUR18] and for synthesis of realistic images,[GAN1,2] although the latter domain was recently taken over by Rombach et al.'s Latent Diffusion, another method published in Munich,[DIF1] building on Jarzynski's earlier work in physics from the previous millennium[DIF2]  and more recent papers.[DIF3-5]
-
 % In 1991, I published yet another ML method based on two adversarial NNs called Predictability Minimization for creating disentangled representations of partially redundant data, applied to images in 1996.

@@ -1,0 +1,8 @@
+{
+  "Paste without spaces markdown": {
+    "scope": "markdown",
+    "prefix": "Paste",
+    "body": ["${CLIPBOARD/[\r\n]+/ /g}"],
+    "description": "Log output to console"
+  }
+}

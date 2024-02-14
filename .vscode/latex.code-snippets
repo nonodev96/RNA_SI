@@ -1,4 +1,10 @@
 {
+  "Paste without spaces": {
+    "scope": "latex",
+    "prefix": "Paste",
+    "body": ["${CLIPBOARD/^(.*)$/$1 -- /gm}"],
+    "description": "Log output to console"
+  },
   "Figure": {
     "scope": "latex",
     "prefix": ["figure"],
