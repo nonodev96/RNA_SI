@@ -14,7 +14,11 @@
         "editor.formatOnSave": true
     },
     "[markdown]": {
-        "editor.quickSuggestions": true
+        "editor.quickSuggestions": {
+            "comments": "on",
+            "strings": "on",
+            "other": "on"
+        }
     },
     "black-formatter.args": [
         "-l 79"

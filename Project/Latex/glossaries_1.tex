@@ -9,106 +9,115 @@
 % {plural english term}%
 % {slovene description of the term}
 % Términos de seguridad clásica
-\newglossaryentry{latex}        {name={latex},      description={Is a mark up language specially suited for scientific documents}}
+\newglossaryentry{latex}    {name={latex},      description={Is a mark up language specially suited for scientific documents}}
 
-\newglossaryentry{STRIDE}   {name={STRIDE},     description={Son las siglas de Suplantación de identidad, Manipulación, Repudio, Información, Denegación, Elevación de privilegios (Spoofing, Tampering, Repudiation, Information, Denial, Elevation)}}
+\newglossaryentry{STRIDE}   {name={STRIDE},     description={Son las siglas de las amenazas de \textit{Spoofing}, \textit{Tampering}, \textit{Repudiation}, \textit{Information}, \textit{Denial}, \textit{Elevation} que violan las propiedades de \textbf{Autenticidad}, \textbf{Integridad}, \textbf{No Repudio}, \textbf{Información}, \textbf{Disponibilidad} y \textbf{Autorización} respectivamente}}
 \newglossaryentry{MITRE}    {name={MITRE},      description={La abreviatura de (Tácticas, Técnicas y Conocimiento Amplio de Enemigos) es un marco de trabajo para la evaluación de la seguridad en las organizaciones. \href{https://attack.mitre.org/}{Enlace}}}
 
 % Generales
-\newglossaryentry{AGI}          {name={AGI},        description={Inteligencia artificial general}}
-\newglossaryentry{SDLC}         {name={SDLC},       description={Ciclo de vida del desarrollo de sistema}}
-\newglossaryentry{SAST}         {name={SAST},       description={Las pruebas de seguridad de aplicaciones estáticas (SAST), también conocidas como Static Application Security Testing, de pruebas de seguridad}}
-\newglossaryentry{DAST}         {name={DAST},       description={Las pruebas de seguridad de aplicaciones dinámicas (DAST), también conocidas como Dynamic Application Security Testing, de pruebas de seguridad}}
-\newglossaryentry{IAST}         {name={IAST},       description={Las pruebas de seguridad de aplicaciones dinámicas (IAST), también conocidas como Interactive Application Security Testing, de pruebas de seguridad}}
-\newglossaryentry{KDD}          {name={KDD},        description={KDD (Knowledge Discovery in Databases), esto es el proceso utilizado para extraer de forma eficiente y automática \textbf{información útil} a partir de grandes volumenes de datos}}
+\newglossaryentry{SDLC}     {name={SDLC},   first={Systems Development Life Cycle (SDLC)},           description={Ciclo de vida del desarrollo de sistema}}
+\newglossaryentry{SAST}     {name={SAST},   first={Static application security testing (SAST)},      description={Las pruebas de seguridad de aplicaciones estáticas (SAST), también conocidas como Static Application Security Testing, de pruebas de seguridad}}
+\newglossaryentry{DAST}     {name={DAST},   first={Dynamic Application Security Testing (DAST)},     description={Las pruebas de seguridad de aplicaciones dinámicas (DAST), también conocidas como Dynamic Application Security Testing, de pruebas de seguridad}}
+\newglossaryentry{IAST}     {name={IAST},   first={Interactive Application Security Testing (IAST)}, description={Las pruebas de seguridad de aplicaciones interactivas (IAST), también conocidas como Interactive Application Security Testing, de pruebas de seguridad}}
 %-> Terminos del libro
 
 
 % Términos IA general
-\newglossaryentry{ART-NN}   {name={ART (Adaptive Resonance Theory)},                description={Modelo de red neuronal que equilibra la adaptación a nueva información con la estabilidad frente a patrones familiares}}
-\newglossaryentry{BP-NN}    {name={BP (Backpropagation)},                           description={Método utilizado en redes neuronales para calcular el gradiente y el cálculo de los pesos, es una abreviarura de ``propagación de errores hacia atrás''}}
-\newglossaryentry{MLP}      {name={MLP (Multilayer Perceptron)},                    description={El Perceptron multicapa es una red neuronal artificial formada por capas local o totalmente conectadas}}
+\newglossaryentry{AGI}      {name={AGI},        first={Artificial general intelligence (AGI)},          description={Inteligencia artificial general}}
+\newglossaryentry{AI}       {name={AI},         first={Artifical Intelligence (AI)},                    description={La inteligencia artificial (IA), también conocida por su nombre inglés, Artificial Intelligence (AI), es una tecnología que trata de realizar las tareas y tomar las decisiones empresariales de forma automática y autónoma, aprendiendo de forma continua. \cite{glosario-tic-artificial-intelligence}}}
+\newglossaryentry{ML}       {name={ML},         first={Machine Learning (ML)},                          description={El machine learning es la tecnología que permite que un sistema aprenda de forma continua. El sistema recibe un input, un humano reacciona y, así, la próxima vez que el sistema reciba ese input, sabrá cómo actuar sin necesidad de acudir al humano. \cite{glosario-tic-machine-learning}}}
+\newglossaryentry{DL}       {name={DL},         first={Deep Learning (DL)},                             description={Deep learning (DL), también conocido como aprendizaje profundo, es un tipo de machine learning que se estructura inspirándose en el cerebro humano y sus redes neuronales. El aprendizaje profundo procesa datos para detectar objetos, reconocer conversaciones, traducir idiomas y tomar decisiones. Al ser un tipo de machine learning, esta tecnología sirve para que la inteligencia artificial aprenda de forma continua. \cite{glosario-tic-deep-learning}}}
+\newglossaryentry{KDD}      {name={KDD},        first={Knowledge Discovery in Databases (KDD)},         description={Es el proceso utilizado para extraer de forma eficiente y automática \textbf{información útil} a partir de grandes volumenes de datos}}
+\newglossaryentry{RL}       {name={RL},         first={Reinforcer learn (RL)},                          description={Aprendizaje reforzado}}
 
-\newglossaryentry{ACC}      {name={ACC (Accuracy on a clean test/evaluation set)},  description={Precisión}}
-\newglossaryentry{AI}       {name={AI (Artifical Intelligence)},                    description={La inteligencia artificial (IA), también conocida por su nombre inglés, Artificial Intelligence (AI), es una tecnología que trata de realizar las tareas y tomar las decisiones empresariales de forma automática y autónoma, aprendiendo de forma continua. \cite{glosario-tic-artificial-intelligence}}}
-\newglossaryentry{ML}       {name={ML (Machine Learning)},                          description={El machine learning es la tecnología que permite que un sistema aprenda de forma continua. El sistema recibe un input, un humano reacciona y, así, la próxima vez que el sistema reciba ese input, sabrá cómo actuar sin necesidad de acudir al humano. \cite{glosario-tic-machine-learning}}}
-\newglossaryentry{DL}       {name={DL (Deep Learning)},                             description={Deep learning (DL), también conocido como aprendizaje profundo, es un tipo de machine learning que se estructura inspirándose en el cerebro humano y sus redes neuronales. El aprendizaje profundo procesa datos para detectar objetos, reconocer conversaciones, traducir idiomas y tomar decisiones. Al ser un tipo de machine learning, esta tecnología sirve para que la inteligencia artificial aprenda de forma continua. \cite{glosario-tic-deep-learning}}}
-\newglossaryentry{AL}       {name={AL (Active Learning)},                           description={Aprendizaje activo}}
-\newglossaryentry{AUC}      {name={AUC (Area Under the (ROC) Curve)},               description={Área bajo la curva (ROC)}}
-\newglossaryentry{PAUC}     {name={PAUC (Partial (ROC) Area Under the Curve)},      description={Área parcial bajo la curva (ROC)}}
-\newglossaryentry{CS}       {name={CS (Cosine Similarity)},                         description={Similitud del coseno}}
-\newglossaryentry{ROC}      {name={CS (Receiver Operating Characteristic)},         description={Característica Operativa del Receptor}}
-\newglossaryentry{RL}       {name={RL (Reinforcer learn)},                          description={Aprendizaje reforzado}}
-\newglossaryentry{LDA }     {name={LDA (Linear discriminant analysis)},             description={Es un método de discriminación lineal que se usa para encontrar una combinación lineal de rasgos que caracterizan a dos o más clases}}
+\newglossaryentry{LTU}      {name={LTU},        first={Linear Threshold Unit (TLU)},                    description={La unidad de umbral lineal es una neurona artificial muy simple cuya salida es la sumatoria de la entrada total umbralizada. Es decir, una \texttt{LTU} con umbral \texttt{T} calcula la suma ponderada de sus entradas y, a continuación, emite \textbf{0} si esta suma es inferior a \texttt{T} y \textbf{1} si la suma es superior a \texttt{T}. Las \texttt{LTU} constituyen la base de los perceptrones. \cite{mldict}}}
+\newglossaryentry{AL}       {name={AL},         first={Active Learning (AL)},                           description={Aprendizaje activo}}
+\newglossaryentry{BP-NN}    {name={BP},         first={Backpropagation (BP)},                           description={Método utilizado en redes neuronales para calcular el gradiente y el cálculo de los pesos, es una abreviarura de ``propagación de errores hacia atrás''}}
+\newglossaryentry{MLP}      {name={MLP},        first={Multilayer Perceptron (MLP)},                    description={El Perceptron multicapa es una red neuronal artificial formada por capas local o totalmente conectadas}}
+\newglossaryentry{ART-NN}   {name={ART},        first={Adaptive Resonance Theory (ART)},                description={Modelo de red neuronal que equilibra la adaptación a nueva información con la estabilidad frente a patrones familiares}}
+\newglossaryentry{LDA}      {name={LDA},        first={Linear discriminant analysis (LDA)},             description={Es un método de discriminación lineal que se usa para encontrar una combinación lineal de rasgos que caracterizan a dos o más clases}}
+\newglossaryentry{ACC}      {name={ACC},        first={Accuracy on a clean test/evaluation set (ACC)},  description={Precisión}}
+\newglossaryentry{AUC}      {name={AUC},        first={Area Under the (ROC) Curve (AUC)},               description={Área bajo la curva (ROC)}}
+\newglossaryentry{PAUC}     {name={PAUC},       first={Partial (ROC) Area Under the Curve (PAUC)},      description={Área parcial bajo la curva (ROC)}}
 %-> Terminos del libro
 
 
 % Tipos de redes
-\newglossaryentry{NN}       {name={NN}, first={Neural Network (NN)},                                                description={Red neuronal}}
-\newglossaryentry{ANN}      {name={ANN}, first={Artificial Neural Network (ANN)},                                                description={Red neuronal}}
-\newglossaryentry{DNN}      {name={DNN}, first={Deep Neural Network (DNN)},                                          description={Red neuronal profunda}}
-\newglossaryentry{CNN}      {name={CNN}, first={Convolutional Neural Network (CNN)},                                 description={Red neuronal convolucional}}
-\newglossaryentry{GAN}      {name={GAN}, first={Generative Adversarial Network (GAN)},                               description={Red generativa adversarial}}
-\newglossaryentry{FNN}      {name={FNN}, first={Feedforward Neural Network (FNN)},                                   description={Es una clase de redes neuronales}}
-\newglossaryentry{RNN}      {name={RNN}, first={Recurrent Neural Network (RNN)},                                     description={Es una clase de redes neuronales en la que las conexiones entre nodos forma un grafo dirigido a lo largo de una secuencia iterativa temporal. A diferencia de las FNN, las RNN puede usar sus pesos internos para procesar secuencias de entrada}}
-\newglossaryentry{GNN}      {name={GNN}, first={Graph Neural Network (GNN)},                                         description={Es una clase de redes neuronales especializada eb el procesamiento de datos que se puedan representar como gráficos}}
-\newglossaryentry{LSTM}     {name={LSTM}, first={Long Short-Term Memory (LSTM)},                                      description={Memoria larga a corto plazo}}
-\newglossaryentry{ResNet-n} {name={ResNet-n}, first={Residual Neural Network architecture with $n$ layers (ResNet-n)},    description={Arquitectura de red neuronal residual con $n$ capas}}
-\newglossaryentry{LeNet-n}  {name={LeNet-n}, first={Learnable Neural Network architecture with $n$ layers (LeNet-n)},    description={Arquitectura de red neuronal aprendible con $n$ capas}}
-
-\newglossaryentry{StyleGAN}  {name={Learnable Neural Network architecture with $n$ layers (StyleGAN)},    description={Arquitectura de red neuronal aprendible con $n$ capas}}
+\newglossaryentry{NN}       {name={NN},         first={Neural Network (NN)},                                                description={Red neuronal}}
+\newglossaryentry{ANN}      {name={ANN},        first={Artificial Neural Network (ANN)},                                    description={Red neuronal artificial}}
+\newglossaryentry{DNN}      {name={DNN},        first={Deep Neural Network (DNN)},                                          description={Red neuronal profunda}}
+\newglossaryentry{CNN}      {name={CNN},        first={Convolutional Neural Network (CNN)},                                 description={Red neuronal convolucional}}
+\newglossaryentry{GAN}      {name={GAN},        first={Generative Adversarial Network (GAN)},                               description={Red generativa adversarial}}
+\newglossaryentry{FNN}      {name={FNN},        first={Feedforward Neural Network (FNN)},                                   description={Es una clase de redes neuronales}}
+\newglossaryentry{RNN}      {name={RNN},        first={Recurrent Neural Network (RNN)},                                     description={Es una clase de redes neuronales en la que las conexiones entre nodos forma un grafo dirigido a lo largo de una secuencia iterativa temporal. A diferencia de las FNN, las RNN puede usar sus pesos internos para procesar secuencias de entrada}}
+\newglossaryentry{GNN}      {name={GNN},        first={Graph Neural Network (GNN)},                                         description={Es una clase de redes neuronales especializada eb el procesamiento de datos que se puedan representar como gráficos}}
+\newglossaryentry{LSTM}     {name={LSTM},       first={Long Short-Term Memory (LSTM)},                                      description={Memoria larga a corto plazo}}
+\newglossaryentry{ResNet-n} {name={ResNet-n},   first={Residual Neural Network architecture with $n$ layers (ResNet-n)},    description={Arquitectura de red neuronal residual con $n$ capas}}
+\newglossaryentry{LeNet-n}  {name={LeNet-n},    first={Learnable Neural Network architecture with $n$ layers (LeNet-n)},    description={Arquitectura de red neuronal aprendible con $n$ capas}}
+\newglossaryentry{StyleGAN} {name={StyleGAN},   first={Learnable Neural Network architecture with $n$ layers (StyleGAN)},   description={Arquitectura de red neuronal aprendible con $n$ capas}}
 %-> Terminos del libro
 
 
 % Estadistica
-\newglossaryentry{OOD}  {name={Out-Of-Distribution (OOD)},                  description={Fuera de distribución}}
-\newglossaryentry{OODD} {name={Out-Of-Distribution Detection (OODD)},       description={Detección fuera de distribución}}
-\newglossaryentry{pdf}  {name={probability density function (pdf)},         description={función de densidad de probabilidad}}
-\newglossaryentry{pmf}  {name={probability mass function (pmf)},            description={función de masa de probabilidad}}
-\newglossaryentry{LR}   {name={Logistic Regression (LR)},                   description={Regresión logística}}
-\newglossaryentry{BIC}  {name={Bayesian Information Criterion (BIC)},       description={Criterio de información bayesiano}}
-\newglossaryentry{LEM}  {name={Local Error Maximizer (LEM)},                description={Maximizador de errores locales}}
-\newglossaryentry{MAD}  {name={Median Absolute Deviation (MAD)},            description={Desviación absoluta mediana}}
-\newglossaryentry{MAE}  {name={Mean Absolute Error (MAE)},                  description={Error absoluto medio}}
-\newglossaryentry{MAP}  {name={Maximum a posteriori (MAP)},                 description={Máximo a posteriori}}
-\newglossaryentry{MLE}  {name={Maximum Likelihood Estimation (MLE)},        description={Estimación de máxima verosimilitud}}
-\newglossaryentry{MM}   {name={Mixture Model (MM)},                         description={Modelo de mezcla}}
-\newglossaryentry{MSE}  {name={Mean-Squared Error (MSE)},                   description={Error medio cuadratico}}
-\newglossaryentry{NB}   {name={Native Bayes (NB)},                          description={Bayes ingenuo}}
+\newglossaryentry{OOD}  {name={OOD},        first={Out-Of-Distribution (OOD)},                  description={Fuera de distribución}}
+\newglossaryentry{OODD} {name={OODD},       first={Out-Of-Distribution Detection (OODD)},       description={Detección fuera de distribución}}
+\newglossaryentry{pdf}  {name={pdf},        first={probability density function (pdf)},         description={función de densidad de probabilidad}}
+\newglossaryentry{pmf}  {name={pmf},        first={probability mass function (pmf)},            description={función de masa de probabilidad}}
+\newglossaryentry{LR}   {name={LR},         first={Logistic Regression (LR)},                   description={Regresión logística}}
+\newglossaryentry{BIC}  {name={BIC},        first={Bayesian Information Criterion (BIC)},       description={Criterio de información bayesiano}}
+\newglossaryentry{LEM}  {name={LEM},        first={Local Error Maximizer (LEM)},                description={Maximizador de errores locales}}
+\newglossaryentry{MAD}  {name={MAD},        first={Median Absolute Deviation (MAD)},            description={Desviación absoluta mediana}}
+\newglossaryentry{MAE}  {name={MAE},        first={Mean Absolute Error (MAE)},                  description={Error absoluto medio}}
+\newglossaryentry{MAP}  {name={MAP},        first={Maximum a posteriori (MAP)},                 description={Máximo a posteriori}}
+\newglossaryentry{MLE}  {name={MLE},        first={Maximum Likelihood Estimation (MLE)},        description={Estimación de máxima verosimilitud}}
+\newglossaryentry{MM}   {name={MM},         first={Mixture Model (MM)},                         description={Modelo de mezcla}}
+\newglossaryentry{MSE}  {name={MSE},        first={Mean-Squared Error (MSE)},                   description={Error medio cuadratico}}
+\newglossaryentry{NB}   {name={NB},         first={Native Bayes (NB)},                          description={Bayes ingenuo}}
 %-> Terminos del libro
 
 
 % Ingenieria inversa
-\newglossaryentry{RE}       {name={RE (Reverse-Engineering)},                           description={Ingeniería inversa}}
-\newglossaryentry{RE-AP}    {name={RE-AP (Reverse-Engineering Additive Perturbation)},  description={Perturbación aditiva de ingeniería inversa}}
-\newglossaryentry{RE-PR}    {name={RE-PR (Reverse-Engineering Patch Replacement)},      description={Reemplazo de parches de ingeniería inversa}}
-\newglossaryentry{REA}      {name={REA (Reverse-Engineering Attack)},                   description={Ataques de ingeniería inversa}}
-\newglossaryentry{RED}      {name={RED (Reverse-Engineering Defense)},                  description={Defensas frente ingeniería inversa}}
+% \newglossaryentry{RE}       {name={RE (Reverse-Engineering)},                           description={Ingeniería inversa}}
+% \newglossaryentry{RE-AP}    {name={RE-AP (Reverse-Engineering Additive Perturbation)},  description={Perturbación aditiva de ingeniería inversa}}
+% \newglossaryentry{RE-PR}    {name={RE-PR (Reverse-Engineering Patch Replacement)},      description={Reemplazo de parches de ingeniería inversa}}
+% \newglossaryentry{REA}      {name={REA (Reverse-Engineering Attack)},                   description={Ataques de ingeniería inversa}}
+% \newglossaryentry{RED}      {name={RED (Reverse-Engineering Defense)},                  description={Defensas frente ingeniería inversa}}
+\newglossaryentry{RE}       {name={RE},     first={Reverse-Engineering (RE)},                           description={Ingeniería inversa}}
+\newglossaryentry{RE-AP}    {name={RE-AP},  first={Reverse-Engineering Additive Perturbation (RE-AP)},  description={Perturbación aditiva de ingeniería inversa}}
+\newglossaryentry{RE-PR}    {name={RE-PR},  first={Reverse-Engineering Patch Replacement (RE-PR)},      description={Reemplazo de parches de ingeniería inversa}}
+\newglossaryentry{REA}      {name={REA},    first={Reverse-Engineering Attack (REA)},                   description={Ataques de ingeniería inversa}}
+\newglossaryentry{RED}      {name={RED},    first={Reverse-Engineering Defense (RED)},                  description={Defensas frente ingeniería inversa}}
+
 %-> Terminos del libro
 
 
 % Análisis
-\newglossaryentry{AD}       {name={AD (Anomaly Detection)}, description={Detección de anomalías}}
-%-> Terminos del libro
-\newglossaryentry{ADA}  {name={ADA (Anomaly Detection of TTE Attacks)}, description={Detección de anomalías en ataques de tipo TTE}}
+\newglossaryentry{AD} {name={AD}, first={Anomaly Detection (AD)}, description={Detección de anomalías}}
 
+%-> Terminos del libro
+\newglossaryentry{ADA} {name={ADA}, first={Anomaly Detection of TTE Attacks (ADA)}, description={Detección de anomalías en ataques de tipo TTE}}
 
 % Ataques
-\newglossaryentry{ASR}  {name={ASR (Attack Success Rate)},          description={Tasa de éxito del ataque}}
-\newglossaryentry{BA}   {name={BA (Backdoor Attack (Trojan))},      description={Ataque de puerta trasera (troyano)}}
-\newglossaryentry{DP}   {name={DP (Data Poisoning (attack))},       description={Envenanimiento de los datos}}
-\newglossaryentry{BP}   {name={BP (Backdoor Pattern)},              description={Patrones de puerta trasera}}
-\newglossaryentry{TTE}  {name={TTE (Test-Time Evasion (attack))},   description={Evasión en el tiempo de prueba}}
+% \newglossaryentry{ASR}  {name={ASR (Attack Success Rate)},          description={Tasa de éxito del ataque}}
+% \newglossaryentry{BA}   {name={BA (Backdoor Attack (Trojan))},      description={Ataque de puerta trasera (troyano)}}
+% \newglossaryentry{DP}   {name={DP (Data Poisoning (attack))},       description={Envenanimiento de los datos}}
+% \newglossaryentry{BP}   {name={BP (Backdoor Pattern)},              description={Patrones de puerta trasera}}
+% \newglossaryentry{TTE}  {name={TTE (Test-Time Evasion (attack))},   description={Evasión en el tiempo de prueba}}
+\newglossaryentry{ASR}  {name={ASR},    first={Attack Success Rate (ASR)}, description={Tasa de éxito del ataque}}
+\newglossaryentry{BA}   {name={BA},     first={Backdoor Attack (Trojan) (BA)}, description={Ataque de puerta trasera (troyano)}}
+\newglossaryentry{DP}   {name={DP},     first={Data Poisoning (DP)}, description={Envenenamiento de los datos}}
+\newglossaryentry{BP}   {name={BP},     first={Backdoor Pattern (BP)}, description={Ataque por patrones de puerta trasera}}
+\newglossaryentry{TTE}  {name={TTE},    first={Test-Time Evasion (TTE)}, description={Evasión en el tiempo de prueba}}
 %-> Terminos del libro
 
 
 % Defensas
 %-> Terminos del libro
-\newglossaryentry{PT}  {name={PT (Post-training)},   description={Posterior al entrenamiento}}
+\newglossaryentry{PT}  {name={PT}, first={Post-training (PT)},   description={Posterior al entrenamiento}}
 
 
 % Términos de internet
-\newglossaryentry{LotL}  {name={LotL (living-off-the-land)},   description={Ataques a través de programas confiables.}}
+\newglossaryentry{LotL}  {name={LotL}, first={living-off-the-land (LotL)},   description={Ataques a través de programas confiables.}}
 
 % \newglossaryentry{AdvML}  {name={AdvML},      description={Aprendizaje automático adversarial}}
 % \newglossaryentry{BIM}    {name={BIM},        description={Método iterativo básico}}
@@ -123,7 +132,7 @@
 % \newglossaryentry{GMM}    {name={GMM},        description={Modelo de mezcla gaussiana}}
 % \newglossaryentry{HIDS}   {name={HIDS},       description={IDS en casa}}
 % \newglossaryentry{HSJ}    {name={HSJ},        description={Hop Skip Jump}}
-\newglossaryentry{IDS}    {name={IDS},          description={Sistema de detección de intrusos}}
+\newglossaryentry{IDS}    {name={IDS}, first={Intrusion Detection System (IDS)},          description={Sistema de detección de intrusos}}
 % \newglossaryentry{NIDS}   {name={NIDS},       description={IDS en red}}
 % \newglossaryentry{IoT}    {name={IoT},        description={Internet de los objetos}}
 % \newglossaryentry{JSMA}   {name={JSMA},       description={Ataque al mapa de saliencia basado en jacobianos}}
@@ -134,7 +143,6 @@
 % \newglossaryentry{SVM}    {name={SVM},        description={Máquina de vectores soporte}}
 % \newglossaryentry{TAC}    {name={TAC},        description={Precisión total de la predicción}}
 % \newglossaryentry{PAU}    {name={PAU},        description={Perturbaciones Adversariales Universales}}
-\newglossaryentry{LTU}    {name={Linear Threshold Unit (LTU)},        description={La unidad de umbral lineal es una neurona artificial muy simple cuya salida es la sumatoria de la entrada total umbralizada. Es decir, una \texttt{LTU} con umbral \texttt{T} calcula la suma ponderada de sus entradas y, a continuación, emite \textbf{0} si esta suma es inferior a \texttt{T} y \textbf{1} si la suma es superior a \texttt{T}. Las \texttt{LTU} constituyen la base de los perceptrones. \cite{mldict}}}
 
 \newacronym{nn}{NN}{Neural Network}
 \newacronym{ann}{ANN}{Artificial Neural Network}
