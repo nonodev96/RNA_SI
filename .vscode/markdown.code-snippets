@@ -1,8 +1,59 @@
 {
-  "Paste without spaces markdown": {
+  // Encabezados
+  "Markdown Header 1": {
+    "prefix": "h1",
+    "body": ["# $1"],
+    "description": "Markdown Header 1"
+  },
+  "Markdown Header 2": {
     "scope": "markdown",
-    "prefix": "Paste",
-    "body": ["${CLIPBOARD/[\r\n]+/ /g}"],
-    "description": "Log output to console"
+    "prefix": "h2",
+    "body": ["## $1"],
+    "description": "Markdown Header 2"
+  },
+  "Markdown Header 3": {
+    "scope": "markdown",
+    "prefix": "h3",
+    "body": ["### $1"],
+    "description": "Markdown Header 3"
+  },
+  // Listas
+  "Markdown Lista Ordenada": {
+    "scope": "markdown",
+    "prefix": "ol",
+    "body": ["1. $1", "2. $2", "3. $3"],
+    "description": "Markdown Lista Ordenada"
+  },
+  "Markdown Lista No Ordenada": {
+    "scope": "markdown",
+    "prefix": "ul",
+    "body": ["- $1", "- $2", "- $3"],
+    "description": "Markdown Lista No Ordenada"
+  },
+  // Texto en Negrita, Cursiva y Enlace:
+  "Markdown Negrita": {
+    "scope": "markdown",
+    "prefix": "bold",
+    "body": ["**$1**"],
+    "description": "Markdown Negrita"
+  },
+  "Markdown Cursiva": {
+    "scope": "markdown",
+    "prefix": "italic",
+    "body": ["*$1*"],
+    "description": "Markdown Cursiva"
+  },
+  "Markdown Enlace": {
+    "scope": "markdown",
+    "prefix": "link",
+    "body": ["[$1]($2)"],
+    "description": "Markdown Enlace"
+  },
+  // Bloques de Código
+  "Markdown Bloque de Código": {
+    "scope": "markdown",
+    "prefix": "code",
+    "body": ["```$1", "$2", "```"],
+    "description": "Markdown Bloque de Código"
   }
 }
