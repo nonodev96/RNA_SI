@@ -7,11 +7,7 @@
         "editor.wordWrap": "off"
     },
     "[latex]": {
-        "editor.foldingStrategy": "indentation"
-    },
-    "[python]": {
-        "editor.defaultFormatter": "ms-python.black-formatter",
-        "editor.formatOnSave": true
+        "editor.foldingStrategy": "indentation",
     },
     "[markdown]": {
         "editor.quickSuggestions": {
@@ -19,6 +15,11 @@
             "strings": "on",
             "other": "on"
         }
+    },
+    "[markdown_latex_combined]": {},
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true
     },
     "black-formatter.args": [
         "-l 79"
@@ -164,5 +165,10 @@
             ],
             "env": {}
         }
-    ]
+    ],
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
 }
