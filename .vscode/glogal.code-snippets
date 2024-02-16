@@ -4,5 +4,15 @@
     "prefix": "Paste",
     "body": ["${CLIPBOARD/[\r\n]+/ /g}"],
     "description": "Log output to console"
+  },
+  "MathExpression": {
+    "prefix": "Math",
+    "body": ["${CLIPBOARD/^(.*)$/${$1}$/gm}"],
+    "description": "Log output to console"
+  },
+  "MathExpression": {
+    "prefix": "Math",
+    "body": ["${TM_SELECTED_TEXT/^(.*)$/${$1}$/gm}"],
+    "description": "Log output to console"
   }
 }

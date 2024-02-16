@@ -130,6 +130,7 @@ dmypy.json
 
 # templates
 .github/templates/*
+.private/
 manual/tfm_sai.1
 manual/tfm_sai.1.gz
 
