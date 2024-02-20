@@ -1,4 +1,18 @@
 {
+  // nonodev96
+
+  "EqInline": {
+    "scope": "markdown",
+    "prefix": "EqInline",
+    "body": ["${$TM_SELECTED_TEXT}$"],
+    "description": "Equation TODO"
+  },
+  "EqTODO": {
+    "scope": "markdown",
+    "prefix": "EqTODO",
+    "body": ["$$", "${1:TODO}", "$$"],
+    "description": "Equation TODO"
+  },
   // Encabezados
   "Markdown Header 1": {
     "prefix": "h1",

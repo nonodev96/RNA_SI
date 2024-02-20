@@ -1,4 +1,10 @@
 {
+  "EqTODO": {
+    "scope": "latex",
+    "prefix": "EqTODO",
+    "body": ["$$", "${1:TODO}", "$$"],
+    "description": "Equation TODO"
+  },
   "Paste without spaces": {
     "scope": "latex",
     "prefix": "Paste",
