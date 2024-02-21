@@ -17,6 +17,7 @@
     "body": [
       "\\begin{figure}[H]",
       "\t\\centering",
+      "\t\\captionsetup{justification=centering}",
       "\t\\includegraphics[width=1\\linewidth]{figures/$1}",
       "\t\\caption{$2\\\\\\Fuente: Elaboración propia}",
       "\t\\label{fig:$3}",
