@@ -35,6 +35,10 @@
     //     ]
     // },
     "ltex.language": "es",
+    "ltex.completionEnabled": true,
+    "ltex.additionalRules.motherTongue": "es",
+    "ltex.checkFrequency": "edit",
+    "ltex.diagnosticSeverity": "error",
     "gitlens.codeLens.recentChange.enabled": false,
     "gitlens.codeLens.authors.enabled": false,
     "gitlens.currentLine.enabled": false,
