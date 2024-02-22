@@ -1,4 +1,16 @@
 {
+  "minipage_2C": {
+    "scope": "latex",
+    "prefix": "minipage_2C",
+    "body": [
+      "\\noindent\\begin{minipage}{0.5\\textwidth}",
+      "$1",
+      "\\end{minipage}",
+      "\\begin{minipage}{0.5\\textwidth}",
+      "$2",
+      "\\end{minipage}"
+    ]
+  },
   "EqTODO": {
     "scope": "latex",
     "prefix": "EqTODO",

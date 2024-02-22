@@ -15,3 +15,4 @@ and then choose `flask` as template.
 
 # example constant variable
 NAME = "tfm_sai"
+RANDOM_STATE = 42

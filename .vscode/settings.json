@@ -34,7 +34,7 @@
     //         }
     //     ]
     // },
-    "ltex.language": "es",
+    "ltex.language": "es-AR",
     "ltex.completionEnabled": true,
     "ltex.additionalRules.motherTongue": "es",
     "ltex.checkFrequency": "edit",

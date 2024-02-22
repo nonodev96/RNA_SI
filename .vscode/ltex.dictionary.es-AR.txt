@@ -1,0 +1,10 @@
+Gantt
+explicabilidad
+Bias
+adversariales
+chapter02
+ciberamenazas
+Generative
+Adversarial
+Networks
+Activations

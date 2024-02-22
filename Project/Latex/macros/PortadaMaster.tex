@@ -1,64 +1,58 @@
-
-
-
 % Comando que se encarga de componer la portada del TFG
 \newcommand{\Portada}{ %
-    \thispagestyle{empty}
-    \ULCornerWallPaper{1}{figures/portada-master.pdf}
-    \begin{textblock*}{14cm}(5cm,13cm) 
-        \centering
-        {\fontsize{32}{38}\selectfont \textbf{\TituloTFG}}
-    \end{textblock*}
-    \begin{textblock*}{10cm}(8cm,20.6cm)
-      {\fontsize{16}{19}\selectfont \Estudiante}
-    \end{textblock*}
-    \begin{textblock*}{10cm}(7.2cm,21.9cm)
-      {\fontsize{16}{19}\selectfont \TutorA}
-    \end{textblock*}
-    \begin{textblock*}{10cm}(7.2cm,23.2cm)
-      {\fontsize{16}{19}\selectfont \Departamento}
-    \end{textblock*}
-    \begin{textblock*}{10cm}(9.5cm,27cm)
-      {\fontsize{16}{19}\selectfont \textbf{\FechaPortada}}
-    \end{textblock*}
-    ~
-    \clearpage
-    \ClearWallPaper
-    \thispagestyle{empty}
-    
-    \cleardoublepage
+  \thispagestyle{empty}
+  \ULCornerWallPaper{1}{figures/portada-master.pdf}
+  \begin{textblock*}{14cm}(5cm,13cm)
+    \centering
+    {\fontsize{32}{38}\selectfont \textbf{\TituloTFM}}
+  \end{textblock*}
+  \begin{textblock*}{10cm}(8cm,20.55cm)
+    {\fontsize{16}{19}\selectfont \Estudiante}
+  \end{textblock*}
+  \begin{textblock*}{10cm}(7.2cm,21.85cm)
+    {\fontsize{16}{19}\selectfont \TutorA}
+  \end{textblock*}
+  \begin{textblock*}{10cm}(7.2cm,22.85cm)
+    {\fontsize{16}{19}\selectfont \TutorB}
+  \end{textblock*}
+  \begin{textblock*}{10cm}(7.2cm,23.8cm)
+    {\fontsize{16}{19}\selectfont \Departamento}
+  \end{textblock*}
+  \begin{textblock*}{10cm}(9.5cm,27cm)
+    {\fontsize{16}{19}\selectfont \textbf{\FechaPortada}}
+  \end{textblock*}
+  ~
+  \clearpage
+  \ClearWallPaper
+  \thispagestyle{empty}
 
-    \thispagestyle{empty}
-    \begin{figure}
-        \centering
-        \includegraphics[width=.4\textwidth]{figures/uja.jpg}
-    \end{figure}
-    
-    \vspace*{4em}
-    
-    D. \TutorA, tutor del Trabajo Fin de Máster titulado: \textbf{\TituloTFG}, que presenta \Estudiante, autoriza su presentación para defensa y evaluación en la Escuela Politécnica Superior de Jaén.
-    
-    \vspace*{2em}
-    \begin{center}
-        Jaén, \Fecha
-    \end{center}
-    
-    \vspace{2em}
-    % \hspace{2cm} El estudiante \hspace{6cm} \ifdefempty{\TutorB}{El tutor}{Los tutores}
-    
-    % % \vspace{5cm}
-    \begin{tabularx}{0.95\linewidth}{Y p{1cm} Y}
-        \centering
-        El estudiante   &             & El tutor    \\    
-                        &             &             \\    
-                        &             &             \\    
-                        &             &             \\    
-                        &             &             \\    
-                        &             &             \\    
-                        &             &             \\    
-                        &             &             \\    
-        \Estudiante     &             & \TutorA     \\    
-    \end{tabularx}
-    \clearpage\thispagestyle{empty}
-    \onehalfspacing  % Fijamos el interlineado   
+  \cleardoublepage
+
+  \thispagestyle{empty}
+  \begin{figure}
+    \centering
+    \includegraphics[width=.4\textwidth]{figures/uja.jpg}
+  \end{figure}
+
+  \vspace*{4em}
+
+  D. \TutorA \ifdefempty{\TutorB}{}{~y Dª \TutorB}, tutores del Trabajo Fin de Grado titulado: \textbf{\TituloTFM}, que presenta \Estudiante, autorizan su presentación para defensa y evaluación en la Escuela Politécnica Superior de Jaén.
+
+  \vspace*{2em}
+  \begin{center}
+    Jaén, \Fecha
+  \end{center}
+
+  \vspace{2em}
+  \begin{tabularx}{1\linewidth}{Y Y Y}
+    Estudiante  & Tutores &         \\
+                &         &         \\
+                &         &         \\
+                &         &         \\
+                &         &         \\
+                &         &         \\
+    \Estudiante & \TutorA & \TutorB \\
+  \end{tabularx}
+  \clearpage\thispagestyle{empty}
+  \onehalfspacing  % Fijamos el interlineado   
 }

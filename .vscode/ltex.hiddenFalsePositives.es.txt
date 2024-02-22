@@ -1,2 +1,0 @@
-
-{"rule":"ES_UNPAIRED_BRACKETS","sentence":"^\\Q\\delta \\coloneqq P(\\delta + \\alpha \\nabla_{\\delta} \\mathcal{L}(f(x+\\delta), y))\\E$"}
