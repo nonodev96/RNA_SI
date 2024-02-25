@@ -1,6 +1,8 @@
 \chapter*{Notación}
 \addcontentsline{toc}{chapter}{\protect\numberline{}Notación}
 
+% TODO: https://nthu-datalab.github.io/ml/slides/Notation.pdf
+
 \begin{table}[ht!]
     \begin{center}
         \begin{tabularx}{\textwidth}{|l|X|}
@@ -18,7 +20,6 @@
             % $\mathcal{A} \backslash \mathcal{B}  $ & $\mathcal{A}$ sin $\mathcal{B}$, el conjunto de elementos de $\mathcal{A}$, pero no en $\mathcal{B} $                       \\
             % $\exists{x}$                           & Existe $x$                                                                                                                  \\
             % $\forall{x}$                           & Para todo $x$                                                                                                               \\
-            % $ g \circ f $                          & Función composición (g después de f)                                                                                        \\
             % $ a := b $                             & $a$ se define como $b$                                                                                                      \\
             % $ a \propto  b $                       & $a$ proporcional a $b$                                                                                                      \\
             $ \epsilon $                                      & Para cantidades positivas, artbitrariamente pequeñas                                                                        \\
@@ -55,8 +56,9 @@
             \textbf{Simbolo}                                                                                                     & \textbf{Definición}                                                                         \\
             \hline
             % Notación matemática de operaciones con vectores y matrices
-            $ \lvert \cdot \rvert $                                                                                              & Determinante o valor absoluto                                                               \\
-            $ \left\lVert \cdot \right\rVert $                                                                                   & Norma euclidiana                                                                            \\
+            $ {\lvert \cdot \rvert} $                                                                                            & Determinante o valor absoluto                                                               \\
+            $ {\lVert x \rVert}_{p} $                                                                                            & Norma $L^{p}$ de $x$                                                                        \\
+            $ {\lVert x \rVert} $                                                                                                & Norma $L^{2}$ de $x$                                                                        \\
             $ {\Vert \underline{x} - \underline{y} \Vert}_{q} $                                                                  & Distancia en la misma dimensión entre $\underline{x}$ e $\underline{y}$                     \\
             $ \underline{x} \odot \underline{m} $                                                                                & Operación por elementos de los vectores o matrices                                          \\
             $ \left\langle \underline{z}, \underline{y} \right\rangle = \underline{z}' \underline{y} = \sum_{j=1}^{N}{z_j y_j} $ & Producto escalar de vectores por columnas $\underline{z}, \underline{y} \in \mathbb{R}^{N}$ \\
@@ -76,7 +78,10 @@
             \textbf{Simbolo}                                                                                                                                                                                                                  & \textbf{Definición}                                                                                   \\
             \hline
             % Notación matemática de gradientes, funciones a minimizar, operador
+            % $ g \circ f $                          & Función composiciones (g después de f)                                                                                        \\
+            $ f: \mathbb{A} \rightarrow \mathbb{B} $                                                                                                                                                                                          & Una función $f$ con dominio $\mathbb{A}$ y rango $\mathbb{B}$                                         \\
             $ \nabla f = \left( \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \frac{\partial f}{\partial z} \right) $                                                                                                         & Gradiente, es un vector que indica la dirección de mayor pendiente de una superficie en un punto dado \\
+            $ \nabla f(\mathbf{a}) \in \mathbb{R}^{n} $                                                                                                                                                                                       & Gradiente de la función $f: \mathbb{R}^{n} \rightarrow \mathbb{R}$ con entrada $\mathbf{a}$           \\
             $ \nabla \cdot f =  \frac{\partial f}{\partial x} + \frac{\partial f}{\partial y} + \frac{\partial f}{\partial z} $                                                                                                               & Divergencia                                                                                           \\
             $ \nabla \times f =  \left( \frac{\partial f}{\partial y} - \frac{\partial f}{\partial z}, \frac{\partial f}{\partial z} - \frac{\partial f}{\partial x}, \frac{\partial f}{\partial x} - \frac{\partial f}{\partial y}  \right)$ & Rotación                                                                                              \\
             $ f_{*} = \text{min}_x~f(x) $                                                                                                                                                                                                     & El valor de función más pequeño de $f$                                                                \\
@@ -95,13 +100,14 @@
             \hline
             \textbf{Simbolo}                           & \textbf{Definición}                                                                                                                                                            \\
             \hline % Notación de ANN (redes neuronales, conjunto de datos, entrada, salida, clases, etc)
-            $ N $                                      & Dimensión del espacio muestral de entrada                                                                                                                                      \\
             $ \mathcal{X} $                            & Conjunto de datos, donde $\mathcal{X} \in \mathbb{R}^{N}$                                                                                                                      \\
+            $ N $                                      & Dimensión del espacio muestral de entrada $\mathcal{X}$                                                                                                                        \\
             $ \mathcal{D} $                            & Subconjunto de datos que se usan para el entrenamiento, donde $\mathcal{D} \subset \mathcal{X}$                                                                                \\
             $ T = \lvert \mathcal{X} \rvert < \infty $ & Número finito de instancias del conjunto de datos $\mathcal{X}$                                                                                                                \\
             $ K $                                      & Número finito de clases del conjunto de datos $\mathcal{X}$ (para problemas de clasificación)                                                                                  \\
             $ \mathcal{Y} $                            & Conjunto de clases del conjunto de datos $\mathcal{X}$, esto es, $\textit{K} = \lvert \mathcal{Y} \rvert$. \newline i.e. ${\scriptstyle \mathcal{Y} = \{1,2,...,\textit{K}\}}$ \\
             $ H $                                      & Conjunto de validación, este conjunto contiene muestras de todas las clases                                                                                                    \\
+            $ \eta $                                   & Tasa de aprendizaje                                                                                                                                                            \\
             $ \hat{y} $                                & Predicción del modelo                                                                                                                                                          \\
             $ \theta $                                 & parámetros del modelo                                                                                                                                                          \\
             $ \mathcal{L} $                            & Función de perdida                                                                                                                                                             \\

@@ -101,15 +101,22 @@
 \usepackage{mathtools}
 \usepackage{commath}
 \usepackage{bookmark} 
-% Para figuras
-\usepackage[justification=centering]{caption}
+% Para figuras y espacios centrados con tamaño de linea pequeño y alineada las lineas
+\usepackage[justification=centering,font=footnotesize]{caption}
 \usepackage{subcaption}
+\usepackage{varwidth}
+\DeclareCaptionFormat{varwidth}{%
+  \begin{varwidth}{\linewidth}#1#2#3\end{varwidth}%
+}
+\captionsetup{format=varwidth}
 
 % VTimeline
 \usepackage{charter} 
 \usepackage{environ}
 \usepackage{tikz}
 \usetikzlibrary{calc,matrix}
+\usepackage{pgfplots}
+\pgfplotsset{every axis/.append style={tick label style={/pgf/number format/fixed},font=\scriptsize,ylabel near ticks,xlabel near ticks,grid=major}}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Teoremas}[section]
