@@ -123,15 +123,15 @@ Esto llevo a uno de los famosos inviernos de la inteligencia artificial (1974 - 
 \end{figure}
 
 Durante la década de los 70 se hacen aportes a la teoría \textit{Hebbiana}, se aportan logros en al análisis y descripción de reglas adaptativas, además de otros aportes al principio de aprendizaje competitivo.
-En 1979 presentó {Kunihiko Fukushima} la primera red neuronal \acrshort{cnn}, la llamó Neocognitron \cite{fukushima1979neural}, dicho trabajo en un futuro se mejoraría con técnicas de \gls{BP-NN}.
+En 1979 presentó {Kunihiko Fukushima} la primera red neuronal \gls{CNN}, la llamó Neocognitron \cite{fukushima1979neural}, dicho trabajo en un futuro se mejoraría con técnicas de \gls{BP-NN}.
 
 En la década de los 80 se realizaron aportes como el algoritmo de \gls{BP-NN} que surgió del artículo de {Hopfield} \cite{hopfield1982neural}, esto despertó la curiosidad de muchos investigadores a volver al campo de las redes neuronales.
-Se realizaron aportes como las redes \acrshort{gnn}.
+Se realizaron aportes como las redes \gls{GNN}.
 La investigación continuó con {Stephen Grossberg} que realizo aportes derivados de estudios fisiológicos de cómo funcionaban las neuronas y la plasticidad, lo que permitió la creación de reglas y postulados, esto se ve en los trabajos de las redes \acrshort{art-nn} \cite{grossberg1987competitive}.
 La investigación de {Hopfield} basada en el trabajo de {Stephen Grossberg} creo un sistema computacional neuronal interconectado que tiende a un mínimo de energía.
 En 1985 {David E. Rumelhart} basándose en la investigación realizada por {Paul Werbos} \cite{etde_5080493} realizo un análisis experimental del algoritmo \gls{BP-NN} y su aplicación en redes \acrshort{fnn} \cite{rumelhart1985learning}.
 
-{Yann LeCun} junto a su equipo, en 1989 crearon la primera aplicación \acrshort{cnn} con técnicas \acrshort{bp} dicha aplicación podía reconocer números a partir de imágenes.
+{Yann LeCun} junto a su equipo, en 1989 crearon la primera aplicación \gls{CNN} con técnicas \gls{BP} dicha aplicación podía reconocer números a partir de imágenes.
 
 \begin{figure}[H]
     \centering
@@ -321,7 +321,7 @@ En la Figura \ref{fig:artificial-neuron} podemos ver las distintas partes de una
 
 Las redes neuronales profundas tienen multitud de capas con nodos interconectados, cada capa sobre la capa anterior con el objetivo de optimizar la precisión de una perdición o clasificación. A esta progresión de cálculos se le denomina ``propagación hacia delante''.
 
-El proceso de ``propagación inversa'' es el encargado de calcular errores de precisión, ajustar sesgos y ponderaciones usando algoritmos como \nameref{gradient-descent}.
+El proceso de ``propagación inversa'' es el encargado de calcular errores de precisión, ajustar sesgos y ponderaciones usando algoritmos como \nameref{sec:gradient-descent}.
 
 La capa de entrada es por donde el modelo ingiere los datos, y la capa de salida es donde el modelo responderá con la predicción o clasificación una vez se haya completado la fase de aprendizaje.
 
@@ -425,8 +425,8 @@ El problema de desvanecimiento y explosión de gradiente
 
 \begin{figure}[H]
     \centering
-    \centerline{\includesvg[width=1\linewidth]{figures/chapter02/fx_optimizer.svg}}
-    \caption{Descenso de graidente\\Fuente: \url{https://fxdatalabs.com}{F(x) Data Labs Pvt. Ltd.}}
+    \centerline{\includesvg[width=0.6\linewidth]{figures/chapter02/fx_optimizer.svg}}
+    \caption{Descenso de graidente\\Fuente: \href{https://fxdatalabs.com}{F(x) Data Labs Pvt. Ltd.}}
     \label{fig:gradient-descent}
 \end{figure}
 
@@ -440,6 +440,7 @@ El problema de desvanecimiento y explosión de gradiente
 % TODO: Usos
 Los optimizadores son los algoritmos que buscan encontrar la mejor solución para un problema esto se utilizan en conjunto con el descenso de gradiente para mejorar su eficiencia y rendimiento, generalmente minimizando o maximizando una función objetiva al ajustar sus parámetros. Existen muchos optimizadores que nos permiten explorar de forma eficiente el espacio de posibles soluciones.
 
+% https://interactivechaos.com/es/manual/tutorial-de-machine-learning/adagrad
 
 Estos son algunos de los optimizadores más famosos.
 \begin{enumerate}
@@ -545,36 +546,92 @@ Existen muchas funciones de activación que modifican los pesos de la red neuron
 % region Tipos de capas
 % TODO: Capas de entrada, ocultas y de salida.
 % TODO: Capas densas, no lineales con y sin pesos
+% TODO: Usos, ventajas y desventajas, paralelización
 
+% - Convolution Layers
+% - Pooling layers
+% - Padding Layers
+% Non-linear Activations (weighted sum, nonlinearity)
+% Non-linear Activations (other)
+% - Normalization Layers
+% - Recurrent Layers
+% Transformer Layers
+% Linear Layers
+% - Dropout Layers
+% Sparse Layers
+% * Distance Functions
+% * Loss Functions
+% Vision Layers
+% Shuffle Layers
+
+Existen una gran variedad de capas con distintos propositos,
 \begin{itemize}
-    \item \textbf{Capas convolucionales}:
-    \item \textbf{Capas de pooling}:
-    \item \textbf{Capas de padding}:
-    \item \textbf{Capas de normalización}:
-    \item \textbf{Capas recurrentes}:
-    \item \textbf{Capas dropout}: Se usan para entrenamientos más estables eliminando dependencias, evitan el sobre entrenamiento, esto lo hacen desactivando de forma estocastica ciertas neuronas en las distintas iteraciones.
+    \item \textbf{Capas densas y dispersas (Denses and Sparses Layers)}:
+    \item[]
+        \begin{itemize}
+            \item \textbf{Capas densas}: Capas que conectan todas las neuronas de una capa con todas las de la capa siguiente.
+            \item[] Son ampliamente utilizadas en \gls{ANN} tradicionales  para tareas de clasificación y regresión.
+            \item \textbf{Sparses Layers}: Capas que contienen conexiones dispersas entre neuronas, lo que implica que no todas las neuronas están conectadas entre sí.
+            \item[] Se utilizan para reducir la complejidad computacional y el consumo de memoria en modelos grandes.
+        \end{itemize}
+    \item \textbf{Capas Convolucionales (Convolutional Layers)}: % se especializan en detectar la presencia de características proporcionadas por la entrada del modelo.
+    \item[]
+        \begin{itemize}
+            \item Aplican filtros o convoluciones a la entrada para detectar patrones como bordes, texturas y formas.
+            \item Se utilizan principalmente para procesar datos de imágenes y extraer características relevantes.
+            \item Son la base del funcionamiento en tareas de clasificiación de imágenes o de segmentación de imágenes.
+        \end{itemize}
+    \item \textbf{Capas de Pooling (Pooling Layers)}: % se especializan en comprimir la información de las imágenes preservando la abstracción de las características más importantes, ayudan a recucir el {overfitting}, existen multiples variantes cómo \texttt{nn.MaxPool1d} o \texttt{nn.AvgPool1d}.
+    \item[]
+        \begin{itemize}
+            \item Comprimen la dimensionalidad de las características extraidas de las capas convolucionales. Se usan entre capas convolucionales.
+            \item Existen multiples variantes cómo \texttt{nn.MaxPool1d} o \texttt{nn.AvgPool1d} que seleccionan los valores más significativos de una región dada.
+            \item Ayudan a recucir el {overfitting}, simplificar la representación de características, reducir el coste computacional, etc.
+        \end{itemize}
+    \item \textbf{Capas de Padding (Paddings Layers)}: % se usan para ajustar las dimensiones de los datos de entrada para que sean compatibles con ciertas operaciones, mejoran el rendimiento.
+    \item[]
+        \begin{itemize}
+            \item Se usan para ajustar las dimensiones de los datos de entrada, permiten después aplicar operaciones.
+            \item Añade ceros o constantes alrededor de los bordes de regiones para ajustar el tamaño a posteriores operaciones.
+            \item Previenen la pérdida de información en los bordes.
+        \end{itemize}
+    \item \textbf{Capas de Normalización (Normalization Layers)}: % se usan para mejorar el rendimiento y la estabilidad del entrenamiento, realizan operaciones sobre los mapas de activación, existen variantes, las más usadas son \texttt{nn.BatchNorm1d} y \texttt{nn.LayerNorm} que permiten aplicar una normalización por lotes o por capas respectivamente.
+    \item[]
+        \begin{itemize}
+            \item Realizan operaciones sobre los mapas de activación, se utilizan para estabilizar y acelerar el entrenamiento de la red.
+            \item Algunas de las capas más relevantes para normalización son \texttt{nn.BatchNorm1d} y \texttt{nn.LayerNorm} que permiten aplicar una normalización por lotes o por capas respectivamente.
+            \item Ayudan a mantener la distribución de activaciones más consistentes durante el entrenamiento.
+        \end{itemize}
+    \item \textbf{Capas de Dropout (Dropout Layers)}: % se usan para entrenamientos más estables eliminando dependencias, evitan el sobreajuste, esto lo hacen desactivando de forma estocastica ciertas neuronas en las distintas iteraciones.
+    \item[]
+        \begin{itemize}
+            \item Se desactivan aleatoriamente un porcentaje de neuronas en la capa esto evita dependencias en el entrenamiento, además de generalizar mejor.
+            \item Es una técnica de regularización que reduce el {overfitting}, se usan para entrenamientos más estables eliminando dependencias.
+        \end{itemize}
+    \item \textbf{Capas Recurrentes (Recurrent Layers)}: % se usan para procesar datos secuenciales o de series temporales, su característica principal son que tienen memoria, exiten distintas variantes en función de cuando tome el contexto, unidireccionales si solo cuenta el contexto previo o bidireccionales si consideran el previo y posterior. Las más usadas son \texttt{nn.RNN}, \texttt{nn.LSTM} y \texttt{nn.GRU}
+    \item[]
+        \begin{itemize}
+            \item Diseñaas para manejar datos secuenciales o de series temporales.
+            \item Incorporan conexiones ciclicas que les permiten propagar información de un paso de tiempo a otro.
+            \item Las capas recurrentes tienen memoria y contexto considerando los estados previos, son útiles para traducción de idiomas, procesamiento del lenguaje natural y reconocimiento de voz.
+                  % \item Estas capas no permiten paralelización
+        \end{itemize}
 \end{itemize}
 
 % endregion Tipos de capas 
 
 
-
-
+\clearpage
 \subsubsection{Topologías de redes neuronales}
 % region topologías
 % TODO: explicar la existencia de distintas formas de aplicar las capas de neuronas artificiales y sus resultados
+La topología o arquitectura de una red neuronal nos referimos a la organización y disposición de las neuronas en la red, formando capas. Estos parámetros fundamentales determinan cómo se estructura la red.
+Se suele considerar el número de capas, número de neuronas por capa, tipo de conexiones (unidireccionales o recurrentes).
 
-\begin{itemize}
-    % \item[] 
-    \item \textbf{Capas totalmente conectadas}
-    \item \textbf{Capas localmente conectadas}
-    \item \textbf{Capas convolucionales}
-    \item \textbf{Capas reductoras \textit{pooling} y \textit{dropout}}
-\end{itemize}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/NeuralNetworkZo19High.png}
+    \includegraphics[width=0.65\textwidth]{figures/NeuralNetworkZo19High.png}
     \caption{Topologías de redes neuronales.\\Fuente: \href{https://www.asimovinstitute.org/neural-network-zoo/}{The neural network zoo}}
     \label{fig:NeuralNetworkZo19High}
 \end{figure}
