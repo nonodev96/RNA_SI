@@ -1,5 +1,5 @@
-from skimage import io as skimage
 import torch
+from skimage import io as skimage
 
 
 def imreadImg(path, opt):

@@ -9,6 +9,8 @@
     },
     "[latex]": {
         "editor.foldingStrategy": "indentation",
+        "editor.insertSpaces": true,
+        "editor.tabSize": 4,
     },
     "[markdown]": {
         "editor.quickSuggestions": {
