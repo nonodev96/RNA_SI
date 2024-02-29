@@ -355,10 +355,10 @@ El vector de entrada $X = (x_{1}, x_{2}, ..., x_{n})$ será la información sumi
 % El proceso de reducción de dimensionalidad se lleva a cabo, para convertir el vector de características del espacio original en un nuevo espacio con un conjunto más pequeño, linealmente no correlacionadas mediante la siguiente función $f: \mathbb{R}^{D} \rightarrow \mathbb{R}^{C}$ con $C \ll D$, donde la red neuronal está expresada como $f(x) = W x + b$. Está red cuenta con las siguientes partes $\mathbf{W} = \left[w_{0}^{T}, w_{1}^{T}, ..., w_{C}^{T}\right]$ es la matriz de vectores de peso, que viene dada la expresión $\mathbf{w_{j}} \in \mathbb{R}^{D}$. El vector de entrada es $\mathbf{x} \in \mathbb{R}^{D}$ y el $bias$ es un vector que está definido en el espacio $\mathbf{b} \in \mathbb{R}^{C}$
 
 \paragraph*{El perceptron simple}
-% Definición
-% Usos 
-% algoritmo de entranmiento
-% Problema XOR
+% TODO: Definición
+% TODO: Usos 
+% TODO: Algoritmo de entranmiento
+% TODO: Problema XOR
 
 El Perceptron es una neurna artificial simple llamada también como \gls{LTU}. La \gls{LTU} calcula una suma ponderada de los valores de las entradas $Z = w_{1} x_{1} + w_{2} x_{2} + \cdots + w_{n} x_{n}$ se aplica el umbral para generar el resultado.
 
@@ -416,12 +416,15 @@ Este proceso funciona, ya que se cambió la función escalonada de las \gls{LTU}
 
 \subsubsection{El descenso de gradiente\label{sec:gradient-descent}}
 % region El descenso de gradiente
+% README: https://www.ibm.com/mx-es/topics/gradient-descent
 % TODO: definición
-% TODO: explicar el descenso de gradiente
-% TODO: problema
+% TODO: como funciona 
+% TODO: tipos de descenso
+% TODO: desafios (problema)
+
 El método de descenso de gradiente trata de encontrar un minimo en una función dada, ya sea local o global. El método usa el gradiente negativo ${-\nabla{f}}$, con este método obtenemos la dirección con el descenso máximo en los valores de la función, con esto buscamos encontrar la posición minima.
 
-El problema de desvanecimiento y explosión de gradiente
+En términos simples, el descenso de gradiente va ajustando iterativamente los valores de los parámetros en la dirección opuesta al gradiente de la función de costo. Al moverse en la dirección opuesta al gradiente, el algoritmo busca alcanzar el mínimo local o global de la función de costo.
 
 \begin{figure}[H]
     \centering
@@ -429,6 +432,83 @@ El problema de desvanecimiento y explosión de gradiente
     \caption{Descenso de graidente\\Fuente: \href{https://fxdatalabs.com}{F(x) Data Labs Pvt. Ltd.}}
     \label{fig:gradient-descent}
 \end{figure}
+
+\begin{algorithm}[H]
+    \SetAlgoLined
+    \DontPrintSemicolon
+    Seleccionar $x^{(0)}$\;
+    Establecer $k \leftarrow 0$\;
+    \While{$ \left\lVert \nabla f(x^{(k)}) \right\rVert \geq \epsilon $} {
+        $x^{(k+1)} = x^{k} - t_{k} - t_{k} \nabla f(x^{(k)})$\;
+        $k \leftarrow k + 1$\;
+    }
+    \Return{$x^{(k)}$}\;
+    \label{alg:plot-gradient-descent}
+    \caption{Representación del descenso de gradiente}
+\end{algorithm}
+
+Hay tres variantes del algoritmo de aprendizaje de descenso de gradiente \cite{ibm-gradient-descent}.
+
+\begin{itemize}
+    \item \textbf{Descenso de gradiente por lotes}: suma el error para cada punto en un conjunto de entrenamiento, actualiza el modelo después de que todos los ejemplos de enetrenamiento han sido evaluados, esto es lo que se le conoce como épocas. Es un método eficiente computacionalmente, pero costoso para grandes conjuntos de datos, ya que requiere almacenar en memoria todos los datos, suele producir un gradiente de error estable y una convergencia, pero a veces ese punto de convergencia no es el ideal y encuentra el mínimo local frente al global.
+    \item \textbf{Descenso de gradiente estocástico}: en cada época actualiza los parametros del ejemplo de entrenamiento, esto reduce la necesidad de memoria, la actualización proporciona velocidad y detalles, aunque requieren un coste computacional mayor. Los gradientes son más ruidosos por sus actualizaciones frecuentes, esto le permite salir de minimos locales.
+    \item \textbf{Descenso de gradiente por mini lotes}: combina aspectos de del descenso de gradiente por lotes como el estocástico. Divide el conjunto de entrenamiento en pequeños lotes y realiza actualizaciones en cada uno de estos lotes. Esto permite tener un equilibrio entre eficiencia computacional y valocidad del descenso de gradiente.
+\end{itemize}
+
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \begin{tabularx}{0.95\linewidth}{|p{3cm}|X|X|X|}
+        \hline
+        \textbf{Aspecto}              & \textbf{Descenso de Gradiente por Lotes}          & \textbf{Descenso de Gradiente Estocástico}           & \textbf{Descenso de Gradiente por Mini Lotes}   \\
+        \hline
+        Eficiencia computacional      & Eficiente para conjuntos de datos pequeños.       & Menos eficiente para grandes conjuntos de datos.     & Equilibrio entre eficiencia y velocidad.        \\
+        \hline
+        Coste computacional           & Puede ser lento para grandes conjuntos de datos.  & Más rápido que por lotes, pero aún puede ser lento.  & Mejor tiempo de procesamiento que por lotes.    \\
+        \hline
+        Coste en memoria              & Requiere almacenar todo el conjunto en memoria.   & Solo necesita almacenar un ejemplo a la vez.         & Menos demandante que por lotes, pero eficiente. \\
+        \hline
+        Convergencia del Modelo       & Propenso a converger hacia mínimos locales.       & Puede saltar mínimos locales pero es ruidoso.        & Convergencia más estable que SGD, menos ruido.  \\
+        \hline
+        Sensibilidad a datos ruidosos & Menos sensible debido al promedio de errores.     & Más sensible debido a actualizaciones frecuentes.    & Menos sensible que SGD, gracias al promedio.    \\
+        \hline
+        Tamaño del conjunto de datos  & Funciona bien para conjuntos de datos pequeños.   & Buen rendimiento para distitos tamaños.              & Equilibrio, adecuado para diferentes tamaños.   \\
+        \hline
+        Precisión del modelo          & Convergencia más estable, pero a veces subóptima. & Puede converger más rápidamente, pero menos estable. & Balance entre estabilidad y rapidez.            \\
+        \hline
+    \end{tabularx}
+    \caption{Tabla comparativa de los tipos de descenso de gradiente}
+    \label{tab:tabla-comparativa}
+\end{table}
+
+% \paragraph*{Problema de mínimos locales y puntos de silla}
+% TODO: no creo que sea necesario explicar mínimos locales y puntos de silla.
+
+\paragraph*{Problema de desvanecimiento y explosión de gradiente}
+Hablaremos primero del desvanecimiento de gradiente, esto ocurre durante la retropropagación, ya que al movernos hacia atras el gradiente sigue haciendose más pequeño, esto hace que las capas anteriores de la red aprendan más lentamente que las posteriores. A medida que el algoritmo itera los cambios se hacen insignificantes lo que hace que el algoritmo se estanque.
+
+El problema de la explosión de gradiente es lo contrario, el gradiente se hace demasiado grande creando un modelo inestable. Los pesos del modelo crecerán y eventualmente se representarán como \texttt{NaN}.
+
+% Escribe esto de forma que no sea una copia de ibm, está perfectamente explicado, pero no puede ser una copia :3
+% \textbf{Desaparición de gradientes}: esto ocurre cuando el gradiente es demasiado pequeño. A medida que nos movemos hacia atrás durante la retropropagación, el gradiente continúa haciéndose más pequeño, lo que hace que las capas anteriores de la red aprendan más lentamente que las capas posteriores. Cuando esto sucede, los parámetros de peso se actualizan hasta que se vuelven insignificantes, es decir, 0, lo que genera un algoritmo que ya no está aprendiendo.
+% \textbf{Explosión de gradientes}: esto sucede cuando el gradiente es demasiado grande, creando un modelo inestable. En este caso, los pesos del modelo crecerán demasiado y eventualmente se representarán como NaN. Una solución a este problema es aprovechar una técnica de reducción de dimensionalidad, que puede ayudar a minimizar la complejidad dentro del modelo.
+
+
+% \begin{figure}[H]
+%     \begin{subfigure}{.475\linewidth}
+%         \includegraphics[width=\linewidth]{figures/equations/ReLU.png}
+%         \caption{}
+%         \label{subfig:funcion-minimo-local}
+%     \end{subfigure}\hfill % <-- \hfill
+%     \begin{subfigure}{.475\linewidth}
+%         \includegraphics[width=\linewidth]{figures/equations/Sigmoid.png}
+%         \caption{}
+%         \label{subfig:funcion-punto-de-silla}
+%     \end{subfigure}
+%     \caption{Mínimos locales y puntos de silla}
+%     \label{fig:locales}
+% \end{figure}
 
 % endregion El descenso de gradiente
 
@@ -458,33 +538,38 @@ Estos son algunos de los optimizadores más famosos.
 % TODO: definición, explicación y usos
 % TODO: tipos, solo mostramos las más importantes
 % TODO: 
-Las funciones de activación son una función matemática que determina la salida de una neurona o nodo en función de su entrada, esto introduce no linealidad en el modelo y permitiendo que la red aprenda patrones complejos y mejora su capacidad de representación.
+A la salida de una neurona artificial debe existir un filtro o umbral que modifica el resultado previo, está función puede imponer un umbral que debe pasar para que el valor se transmita a la siguiente capa, esta función se le conoce como función de activación.
+Esto introduce no linealidad en el modelo, permitiendo que la red aprenda patrones complejos y mejora su capacidad de representación.
 
-Existen muchas funciones de activación que modifican los pesos de la red neuronal de distintas formas.
+Existen muchas funciones de activación que modifican la red neuronal de distintas formas.
+Se suelen clasificar en dos categorias, funciones de activación de suma ponderada, no lineales u otras.
+
+% TODO: extender
 
 \paragraph*{F. Activaciones no lineales - \textit{Non-linear Activations (weighted sum, nonlinearity)} \cite{pytorch2024github}}
 
-\begin{enumerate}
-    \item \textbf{ReLU}:
-    \item[] \begin{equation} \varphi(x) = \operatorname*{max}(0,x) \end{equation}
-    \item \textbf{LeakyReLU}:
-    \item[] \begin{equation} \varphi(x) = \operatorname*{max}\left(0,x\right) + \operatorname*{negative\_slope} * \operatorname*{min}\left(0,x\right)  \end{equation}
+% \begin{enumerate}
+%     \item \textbf{ReLU}:
+%     \item[] \begin{equation} \varphi(x) = \operatorname*{max}(0,x) \end{equation}
+%     \item \textbf{LeakyReLU}:
+%     \item[] \begin{equation} \varphi(x) = \operatorname*{max}\left(0,x\right) + \operatorname*{negative\_slope} * \operatorname*{min}\left(0,x\right)  \end{equation}
 
-    \item \textbf{Softplus}:
-    \item[] \begin{equation} \varphi(x) = \frac{1}{\beta} \operatorname*{log}\left(1+e^{\beta x}\right) \end{equation}
-    \item \textbf{SoftSign}:
-    \item[] \begin{equation} \varphi(x) = \frac{x}{1+\lvert x \rvert} \end{equation}
+%     \item \textbf{Softplus}:
+%     \item[] \begin{equation} \varphi(x) = \frac{1}{\beta} \operatorname*{log}\left(1+e^{\beta x}\right) \end{equation}
+%     \item \textbf{SoftSign}:
+%     \item[] \begin{equation} \varphi(x) = \frac{x}{1+\lvert x \rvert} \end{equation}
 
-    \item \textbf{Tanh}:
-    \item[] \begin{equation} \varphi(x) = \frac{e^{x}-e^{-x}}{e^{x}+e^{-x}} \end{equation}
-    \item \textbf{Sigmoid}:
-    \item[] \begin{equation} \varphi(x) = \frac{1}{1+e^{-x}} \label{eq:sigmoid} \end{equation}
-\end{enumerate}
+%     \item \textbf{Tanh}:
+%     \item[] \begin{equation} \varphi(x) = \frac{e^{x}-e^{-x}}{e^{x}+e^{-x}} \end{equation}
+%     \item \textbf{Sigmoid}:
+%     \item[] \begin{equation} \varphi(x) = \frac{1}{1+e^{-x}} \label{eq:sigmoid} \end{equation}
+% \end{enumerate}
 
 \begin{figure}[H]
     \centering
     \captionsetup{justification=centering}
 
+    % ReLU
     \begin{subfigure}{.475\linewidth}
         \centering
         \includegraphics[width=0.75\linewidth]{figures/equations/ReLU.png}
@@ -493,41 +578,95 @@ Existen muchas funciones de activación que modifican los pesos de la red neuron
     \end{subfigure}\hfill % <-- "\hfill"
     \begin{subfigure}{.475\linewidth}
         \centering
+        \begin{equation*}\varphi(x) = \operatorname*{max}(0,x)\end{equation*}
+        \caption{Función de activación ReLU.\newline{}Fuente: \href{https://pytorch.org/docs/stable/generated/torch.nn.ReLU.html}{Pytorch torch.nn.ReLU}}
+        \label{subfig:eq-torch.nn.ReLU}
+    \end{subfigure}
+
+    % LeakyReLU
+    \medskip % create some *vertical* separation between the graphs
+    \begin{subfigure}{.475\linewidth}
+        \centering
         \includegraphics[width=0.75\linewidth]{figures/equations/LeakyReLU.png}
         \caption{Función de activación LeakyReLU.\newline{}Fuente: \href{https://pytorch.org/docs/stable/generated/torch.nn.LeakyReLU.html}{Pytorch torch.nn.LeakyReLU}}
         \label{subfig:torch.nn.LeakyReLU}
+    \end{subfigure}\hfill
+    \begin{subfigure}{.475\linewidth}
+        \centering
+        \begin{small}
+            \begin{equation*}
+                \varphi(x) = \operatorname*{max}\left(0,x\right) + \operatorname*{negative\_slope} * \operatorname*{min}\left(0,x\right)
+            \end{equation*}
+        \end{small}
+        \caption{Función de activación LeakyReLU.\newline{}Fuente: \href{https://pytorch.org/docs/stable/generated/torch.nn.LeakyReLU.html}{Pytorch torch.nn.LeakyReLU}}
+        \label{subfig:eq-torch.nn.LeakyReLU}
     \end{subfigure}
 
-    \medskip % create some *vertical* separation between the graphs
+    \medskip
     \begin{subfigure}{.475\linewidth}
         \centering
         \includegraphics[width=0.75\linewidth]{figures/equations/Softplus.png}
         \caption{Función de activación Softplus.\newline{}Fuente: \href{https://pytorch.org/docs/stable/generated/torch.nn.Softplus.html}{Pytorch torch.nn.Softplus}}
         \label{subfig:torch.nn.Softplus}
-    \end{subfigure}\hfill % <-- "\hfill"
+    \end{subfigure}\hfill
+    \begin{subfigure}{.475\linewidth}
+        \centering
+        \begin{equation*} \varphi(x) = \frac{1}{\beta} \operatorname*{log}\left(1+e^{\beta x}\right) \end{equation*}
+        \caption{Función de activación Softplus.\newline{}Fuente: \href{https://pytorch.org/docs/stable/generated/torch.nn.Softplus.html}{Pytorch torch.nn.Softplus}}
+        \label{subfig:eq-torch.nn.Softplus}
+    \end{subfigure}
+
+    \caption{Funciones de activación no lineales}
+    \label{fig:p1--equations--Non-linear-Activations}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \captionsetup{justification=centering}
+
     \begin{subfigure}{.475\linewidth}
         \centering
         \includegraphics[width=0.75\linewidth]{figures/equations/Softsign.png}
         \caption{Función de activación Softsign.\newline{}Fuente: \href{https://pytorch.org/docs/stable/generated/torch.nn.Softsign.html}{Pytorch torch.nn.Softsign}}
         \label{subfig:torch.nn.Softsign}
     \end{subfigure}
+    \begin{subfigure}{.475\linewidth}
+        \centering
+        \begin{equation*} \varphi(x) = \frac{x}{1+\lvert x \rvert} \end{equation*}
+        \caption{Función de activación Softsign.\newline{}Fuente: \href{https://pytorch.org/docs/stable/generated/torch.nn.Softsign.html}{Pytorch torch.nn.Softsign}}
+        \label{subfig:eq-torch.nn.Softsign}
+    \end{subfigure}
 
-    \medskip % create some *vertical* separation between the graphs
+    \medskip
     \begin{subfigure}{.475\linewidth}
         \centering
         \includegraphics[width=0.75\linewidth]{figures/equations/Tanh.png}
         \caption{Función de activación Tanh.\newline{}Fuente: \href{https://pytorch.org/docs/stable/generated/torch.nn.Tanh.html}{Pytorch torch.nn.Tanh}}
         \label{subfig:torch.nn.Tanh}
-    \end{subfigure}\hfill % <-- "\hfill"
+    \end{subfigure}\hfill
+    \begin{subfigure}{.475\linewidth}
+        \centering
+        \begin{equation*} \varphi(x) = \frac{e^{x}-e^{-x}}{e^{x}+e^{-x}} \end{equation*}
+        \caption{Función de activación Tanh.\newline{}Fuente: \href{https://pytorch.org/docs/stable/generated/torch.nn.Tanh.html}{Pytorch torch.nn.Tanh}}
+        \label{subfig:eq-torch.nn.Tanh}
+    \end{subfigure}
+
+    \medskip
     \begin{subfigure}{.475\linewidth}
         \centering
         \includegraphics[width=0.75\linewidth]{figures/equations/Sigmoid.png}
         \caption{Función de activación Sigmoid.\newline{}Fuente: \href{https://pytorch.org/docs/stable/generated/torch.nn.Sigmoid.html}{Pytorch torch.nn.Sigmoid}}
         \label{subfig:torch.nn.Sigmoid}
+    \end{subfigure}\hfill
+    \begin{subfigure}{.475\linewidth}
+        \centering
+        \begin{equation*} \varphi(x) = \frac{1}{1+e^{-x}} \label{eq:sigmoid} \end{equation*}
+        \caption{Función de activación Sigmoid.\newline{}Fuente: \href{https://pytorch.org/docs/stable/generated/torch.nn.Sigmoid.html}{Pytorch torch.nn.Sigmoid}}
+        \label{subfig:eq-torch.nn.Sigmoid}
     \end{subfigure}
 
     \caption{Funciones de activación no lineales}
-    \label{fig:equations--Non-linear-Activations}
+    \label{fig:p2--equations--Non-linear-Activations}
 \end{figure}
 
 
@@ -572,60 +711,66 @@ Usaremos nombre
 \begin{itemize}
     \item \textbf{Capas densas y dispersas (Denses and Sparses Layers)}:
     \item[]
-          \begin{itemize}
-              \item \textbf{Capas densas}: Capas que conectan todas las neuronas de una capa con todas las de la capa siguiente.
-              \item[] Son ampliamente utilizadas en \gls{ANN} tradicionales  para tareas de clasificación y regresión.
-              \item \textbf{Sparses Layers}: Capas que contienen conexiones dispersas entre neuronas, lo que implica que no todas las neuronas están conectadas entre sí.
-              \item[] Se utilizan para reducir la complejidad computacional y el consumo de memoria en modelos grandes.
-          \end{itemize}
+        \begin{itemize}
+            \item \textbf{Capas densas}: Capas que conectan todas las neuronas de una capa con todas las de la capa siguiente.
+            \item[] Son ampliamente utilizadas en \gls{ANN} tradicionales  para tareas de clasificación y regresión.
+            \item \textbf{Sparses Layers}: Capas que contienen conexiones dispersas entre neuronas, lo que implica que no todas las neuronas están conectadas entre sí.
+            \item[] Se utilizan para reducir la complejidad computacional y el consumo de memoria en modelos grandes.
+        \end{itemize}
     \item \textbf{Capas lineales (Linear Layers)}:
     \item[]
-          \begin{itemize}
-              \item Estas capas generalmente se combinan con funciones de activación no lineales para introducir no linealidad en la red neuronal.
-              \item Tanto \texttt{nn.Linear} como \texttt{nn.Bilinear} realizan transformaciones lineales de las entradas ponderando los pesos. \texttt{nn.Identity} no realiza ninguna transformación, y \texttt{nn.LazyLinear} puede realizar transformaciones lineales perezosas.
-              \item Proporcionan flexibilidad al permitir ajustar sus parámetros según las necesidades del modelo o la tarea.
-          \end{itemize}
-    \item \textbf{Capas Convolucionales (Convolutional Layers)}: % se especializan en detectar la presencia de características proporcionadas por la entrada del modelo.
+        \begin{itemize}
+            \item Estas capas generalmente se combinan con funciones de activación no lineales para introducir no linealidad en la red neuronal.
+            \item Tanto \texttt{nn.Linear} como \texttt{nn.Bilinear} realizan transformaciones lineales de las entradas ponderando los pesos. \texttt{nn.Identity} no realiza ninguna transformación, y \texttt{nn.LazyLinear} puede realizar transformaciones lineales perezosas.
+            \item Proporcionan flexibilidad al permitir ajustar sus parámetros según las necesidades del modelo o la tarea.
+        \end{itemize}
+    \item \textbf{Capas Convolucionales (Convolutional Layers)}:
+          % se especializan en detectar la presencia de características proporcionadas por la entrada del modelo.
     \item[]
-          \begin{itemize}
-              \item Aplican filtros o convoluciones a la entrada para detectar patrones como bordes, texturas y formas.
-              \item Se utilizan principalmente para procesar datos de imágenes y extraer características relevantes.
-              \item Son la base del funcionamiento en tareas de clasificiación de imágenes o de segmentación de imágenes.
-          \end{itemize}
-    \item \textbf{Capas de Pooling (Pooling Layers)}: % se especializan en comprimir la información de las imágenes preservando la abstracción de las características más importantes, ayudan a recucir el {overfitting}, existen multiples variantes cómo \texttt{nn.MaxPool1d} o \texttt{nn.AvgPool1d}.
+        \begin{itemize}
+            \item Aplican filtros o convoluciones a la entrada para detectar patrones como bordes, texturas y formas.
+            \item Se utilizan principalmente para procesar datos de imágenes y extraer características relevantes.
+            \item Son la base del funcionamiento en tareas de clasificiación de imágenes o de segmentación de imágenes.
+        \end{itemize}
+    \item \textbf{Capas de Pooling (Pooling Layers)}:
+          % se especializan en comprimir la información de las imágenes preservando la abstracción de las características más importantes, ayudan a recucir el {overfitting}, existen multiples variantes cómo \texttt{nn.MaxPool1d} o \texttt{nn.AvgPool1d}.
     \item[]
-          \begin{itemize}
-              \item Comprimen la dimensionalidad de las características extraidas de las capas convolucionales. Se usan entre capas convolucionales.
-              \item Existen multiples variantes cómo \texttt{nn.MaxPool1d} o \texttt{nn.AvgPool1d} que seleccionan los valores más significativos de una región dada.
-              \item Ayudan a recucir el {overfitting}, simplificar la representación de características, reducir el coste computacional, etc.
-          \end{itemize}
-    \item \textbf{Capas de Padding (Paddings Layers)}: % se usan para ajustar las dimensiones de los datos de entrada para que sean compatibles con ciertas operaciones, mejoran el rendimiento.
+        \begin{itemize}
+            \item Comprimen la dimensionalidad de las características extraidas de las capas convolucionales. Se usan entre capas convolucionales.
+            \item Existen multiples variantes cómo \texttt{nn.MaxPool1d} o \texttt{nn.AvgPool1d} que seleccionan los valores más significativos de una región dada.
+            \item Ayudan a recucir el {overfitting}, simplificar la representación de características, reducir el coste computacional, etc.
+        \end{itemize}
+    \item \textbf{Capas de Padding (Paddings Layers)}:
+          % se usan para ajustar las dimensiones de los datos de entrada para que sean compatibles con ciertas operaciones, mejoran el rendimiento.
     \item[]
-          \begin{itemize}
-              \item Se usan para ajustar las dimensiones de los datos de entrada, permiten después aplicar operaciones.
-              \item Añade ceros o constantes alrededor de los bordes de regiones para ajustar el tamaño a posteriores operaciones.
-              \item Previenen la pérdida de información en los bordes.
-          \end{itemize}
-    \item \textbf{Capas de Normalización (Normalization Layers)}: % se usan para mejorar el rendimiento y la estabilidad del entrenamiento, realizan operaciones sobre los mapas de activación, existen variantes, las más usadas son \texttt{nn.BatchNorm1d} y \texttt{nn.LayerNorm} que permiten aplicar una normalización por lotes o por capas respectivamente.
+        \begin{itemize}
+            \item Se usan para ajustar las dimensiones de los datos de entrada, permiten después aplicar operaciones.
+            \item Añade ceros o constantes alrededor de los bordes de regiones para ajustar el tamaño a posteriores operaciones.
+            \item Previenen la pérdida de información en los bordes.
+        \end{itemize}
+    \item \textbf{Capas de Normalización (Normalization Layers)}:
+          % se usan para mejorar el rendimiento y la estabilidad del entrenamiento, realizan operaciones sobre los mapas de activación, existen variantes, las más usadas son \texttt{nn.BatchNorm1d} y \texttt{nn.LayerNorm} que permiten aplicar una normalización por lotes o por capas respectivamente.
     \item[]
-          \begin{itemize}
-              \item Realizan operaciones sobre los mapas de activación, se utilizan para estabilizar y acelerar el entrenamiento de la red.
-              \item Algunas de las capas relevantes son \texttt{nn.BatchNorm1d} y \texttt{nn.LayerNorm}, estás permiten aplicar una normalización por lotes o por capas respectivamente.
-              \item Ayudan a mantener la distribución de activaciones más consistentes durante el entrenamiento.
-          \end{itemize}
-    \item \textbf{Capas de Dropout (Dropout Layers)}: % se usan para entrenamientos más estables eliminando dependencias, evitan el sobreajuste, esto lo hacen desactivando de forma estocastica ciertas neuronas en las distintas iteraciones.
+        \begin{itemize}
+            \item Realizan operaciones sobre los mapas de activación, se utilizan para estabilizar y acelerar el entrenamiento de la red.
+            \item Algunas de las capas relevantes son \texttt{nn.BatchNorm1d} y \texttt{nn.LayerNorm}, estás permiten aplicar una normalización por lotes o por capas respectivamente.
+            \item Ayudan a mantener la distribución de activaciones más consistentes durante el entrenamiento.
+        \end{itemize}
+    \item \textbf{Capas de Dropout (Dropout Layers)}:
+          % se usan para entrenamientos más estables eliminando dependencias, evitan el sobreajuste, esto lo hacen desactivando de forma estocastica ciertas neuronas en las distintas iteraciones.
     \item[]
-          \begin{itemize}
-              \item Se desactivan aleatoriamente un porcentaje de neuronas en la capa esto evita dependencias en el entrenamiento, además de generalizar mejor.
-              \item Es una técnica de regularización que reduce el {overfitting}, se usan para entrenamientos más estables eliminando dependencias.
-          \end{itemize}
-    \item \textbf{Capas Recurrentes (Recurrent Layers)}: % se usan para procesar datos secuenciales o de series temporales, su característica principal son que tienen memoria, exiten distintas variantes en función de cuando tome el contexto, unidireccionales si solo cuenta el contexto previo o bidireccionales si consideran el previo y posterior. Las más usadas son \texttt{nn.RNN}, \texttt{nn.LSTM} y \texttt{nn.GRU}
+        \begin{itemize}
+            \item Se desactivan aleatoriamente un porcentaje de neuronas en la capa esto evita dependencias en el entrenamiento, además de generalizar mejor.
+            \item Es una técnica de regularización que reduce el {overfitting}, se usan para entrenamientos más estables eliminando dependencias.
+        \end{itemize}
+    \item \textbf{Capas Recurrentes (Recurrent Layers)}:
+          % se usan para procesar datos secuenciales o de series temporales, su característica principal son que tienen memoria, exiten distintas variantes en función de cuando tome el contexto, unidireccionales si solo cuenta el contexto previo o bidireccionales si consideran el previo y posterior. Las más usadas son \texttt{nn.RNN}, \texttt{nn.LSTM} y \texttt{nn.GRU}
     \item[]
-          \begin{itemize}
-              \item Diseñaas para manejar datos secuenciales o de series temporales.
-              \item Incorporan conexiones ciclicas que les permiten propagar información de un paso de tiempo a otro, las más usadas son \texttt{nn.RNN}, \texttt{nn.LSTM} y \texttt{nn.GRU}.
-              \item Las capas recurrentes tienen memoria y contexto considerando los estados previos, son útiles para traducción de idiomas, procesamiento del lenguaje natural y reconocimiento de voz.
-          \end{itemize}
+        \begin{itemize}
+            \item Diseñaas para manejar datos secuenciales o de series temporales.
+            \item Incorporan conexiones ciclicas que les permiten propagar información de un paso de tiempo a otro, las más usadas son \texttt{nn.RNN}, \texttt{nn.LSTM} y \texttt{nn.GRU}.
+            \item Las capas recurrentes tienen memoria y contexto considerando los estados previos, son útiles para traducción de idiomas, procesamiento del lenguaje natural y reconocimiento de voz.
+        \end{itemize}
 \end{itemize}
 
 % endregion Tipos de capas 
@@ -646,7 +791,6 @@ Se suele considerar el número de capas, número de neuronas por capa, tipo de c
     \label{fig:NeuralNetworkZo19High}
 \end{figure}
 % endregion topologías
-
 
 
 % region GANs
@@ -683,7 +827,7 @@ A continuación, se explicarán las distintas amenazas que tiene una red neurona
     \label{fig:art-architecture}
 \end{figure}
 
-ART \cite{art2018} consta con 6 módulos específicos para ataque, defensas, estimadores, evaluaciones, métricas y preprocesamiento. Esto podemos verlo en la Figura \ref{fig:art-architecture}
+ART \cite{art2018} consta con 6 módulos específicos para ataque, defensas, estimadores, evaluaciones, métricas y preprocesamiento. Esto podemos verlo en la Figura \ref{fig:art-architecture}.
 % Eficiencia
 % Invisivilidad
 % Efectividad

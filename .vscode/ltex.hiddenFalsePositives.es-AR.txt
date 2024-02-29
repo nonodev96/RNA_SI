@@ -1,2 +1,7 @@
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qy Blue team.\\E$"}
 {"rule":"ESPACIO_DESPUES_DE_PUNTO","sentence":"^\\QIncorporan conexiones ciclicas que les permiten propagar información de un paso de tiempo a otro, las más usadas son nn.RNN, nn.LSTM y nn.GRU.\\E$"}
+{"rule":"SPANISH_WORD_REPEAT_BEGINNING_RULE","sentence":"^\\Qi.e. \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q Números naturales \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q Números reales \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q Números complejos \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q Espacio vectorial \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q-dimensional de números reales \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q Para cantidades, artbitrariamente pequeñas Notación números y arrays\\E$"}
+{"rule":"AGREEMENT_ADJ_NOUN","sentence":"^\\Qi.e. \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q Números naturales \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q Números reales \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q Números complejos \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q Espacio vectorial \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q-dimensional de números reales \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q Para cantidades, artbitrariamente pequeñas Notación números y arrays\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\Qevery axis/.append style=tick label style=/pgf/number format/fixed.,font=,ylabel near ticks,xlabel near ticks,grid=major.\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\Q.\\E$"}
+{"rule":"PUNTO_EN_ABREVIATURAS","sentence":"^\\QDoc Math Extra\\E$"}
