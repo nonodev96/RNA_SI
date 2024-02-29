@@ -548,74 +548,84 @@ Existen muchas funciones de activación que modifican los pesos de la red neuron
 % TODO: Capas densas, no lineales con y sin pesos
 % TODO: Usos, ventajas y desventajas, paralelización
 
+% Non-linear Activations (weighted sum, nonlinearity)
+% Non-linear Activations (other)
 % - Convolution Layers
 % - Pooling layers
 % - Padding Layers
-% Non-linear Activations (weighted sum, nonlinearity)
-% Non-linear Activations (other)
 % - Normalization Layers
 % - Recurrent Layers
-% Transformer Layers
-% Linear Layers
+% - Linear Layers
 % - Dropout Layers
-% Sparse Layers
+% - Sparse Layers
 % * Distance Functions
 % * Loss Functions
+% Transformer Layers
 % Vision Layers
 % Shuffle Layers
 
+
 Existen una gran variedad de capas con distintos propositos,
+
+Usaremos nombre
+
 \begin{itemize}
     \item \textbf{Capas densas y dispersas (Denses and Sparses Layers)}:
     \item[]
-        \begin{itemize}
-            \item \textbf{Capas densas}: Capas que conectan todas las neuronas de una capa con todas las de la capa siguiente.
-            \item[] Son ampliamente utilizadas en \gls{ANN} tradicionales  para tareas de clasificación y regresión.
-            \item \textbf{Sparses Layers}: Capas que contienen conexiones dispersas entre neuronas, lo que implica que no todas las neuronas están conectadas entre sí.
-            \item[] Se utilizan para reducir la complejidad computacional y el consumo de memoria en modelos grandes.
-        \end{itemize}
+          \begin{itemize}
+              \item \textbf{Capas densas}: Capas que conectan todas las neuronas de una capa con todas las de la capa siguiente.
+              \item[] Son ampliamente utilizadas en \gls{ANN} tradicionales  para tareas de clasificación y regresión.
+              \item \textbf{Sparses Layers}: Capas que contienen conexiones dispersas entre neuronas, lo que implica que no todas las neuronas están conectadas entre sí.
+              \item[] Se utilizan para reducir la complejidad computacional y el consumo de memoria en modelos grandes.
+          \end{itemize}
+    \item \textbf{Capas lineales (Linear Layers)}:
+    \item[]
+          \begin{itemize}
+              \item Estas capas generalmente se combinan con funciones de activación no lineales para introducir no linealidad en la red neuronal.
+              \item Tanto \texttt{nn.Linear} como \texttt{nn.Bilinear} realizan transformaciones lineales de las entradas ponderando los pesos. \texttt{nn.Identity} no realiza ninguna transformación, y \texttt{nn.LazyLinear} puede realizar transformaciones lineales perezosas.
+              \item Proporcionan flexibilidad al permitir ajustar sus parámetros según las necesidades del modelo o la tarea.
+          \end{itemize}
     \item \textbf{Capas Convolucionales (Convolutional Layers)}: % se especializan en detectar la presencia de características proporcionadas por la entrada del modelo.
     \item[]
-        \begin{itemize}
-            \item Aplican filtros o convoluciones a la entrada para detectar patrones como bordes, texturas y formas.
-            \item Se utilizan principalmente para procesar datos de imágenes y extraer características relevantes.
-            \item Son la base del funcionamiento en tareas de clasificiación de imágenes o de segmentación de imágenes.
-        \end{itemize}
+          \begin{itemize}
+              \item Aplican filtros o convoluciones a la entrada para detectar patrones como bordes, texturas y formas.
+              \item Se utilizan principalmente para procesar datos de imágenes y extraer características relevantes.
+              \item Son la base del funcionamiento en tareas de clasificiación de imágenes o de segmentación de imágenes.
+          \end{itemize}
     \item \textbf{Capas de Pooling (Pooling Layers)}: % se especializan en comprimir la información de las imágenes preservando la abstracción de las características más importantes, ayudan a recucir el {overfitting}, existen multiples variantes cómo \texttt{nn.MaxPool1d} o \texttt{nn.AvgPool1d}.
     \item[]
-        \begin{itemize}
-            \item Comprimen la dimensionalidad de las características extraidas de las capas convolucionales. Se usan entre capas convolucionales.
-            \item Existen multiples variantes cómo \texttt{nn.MaxPool1d} o \texttt{nn.AvgPool1d} que seleccionan los valores más significativos de una región dada.
-            \item Ayudan a recucir el {overfitting}, simplificar la representación de características, reducir el coste computacional, etc.
-        \end{itemize}
+          \begin{itemize}
+              \item Comprimen la dimensionalidad de las características extraidas de las capas convolucionales. Se usan entre capas convolucionales.
+              \item Existen multiples variantes cómo \texttt{nn.MaxPool1d} o \texttt{nn.AvgPool1d} que seleccionan los valores más significativos de una región dada.
+              \item Ayudan a recucir el {overfitting}, simplificar la representación de características, reducir el coste computacional, etc.
+          \end{itemize}
     \item \textbf{Capas de Padding (Paddings Layers)}: % se usan para ajustar las dimensiones de los datos de entrada para que sean compatibles con ciertas operaciones, mejoran el rendimiento.
     \item[]
-        \begin{itemize}
-            \item Se usan para ajustar las dimensiones de los datos de entrada, permiten después aplicar operaciones.
-            \item Añade ceros o constantes alrededor de los bordes de regiones para ajustar el tamaño a posteriores operaciones.
-            \item Previenen la pérdida de información en los bordes.
-        \end{itemize}
+          \begin{itemize}
+              \item Se usan para ajustar las dimensiones de los datos de entrada, permiten después aplicar operaciones.
+              \item Añade ceros o constantes alrededor de los bordes de regiones para ajustar el tamaño a posteriores operaciones.
+              \item Previenen la pérdida de información en los bordes.
+          \end{itemize}
     \item \textbf{Capas de Normalización (Normalization Layers)}: % se usan para mejorar el rendimiento y la estabilidad del entrenamiento, realizan operaciones sobre los mapas de activación, existen variantes, las más usadas son \texttt{nn.BatchNorm1d} y \texttt{nn.LayerNorm} que permiten aplicar una normalización por lotes o por capas respectivamente.
     \item[]
-        \begin{itemize}
-            \item Realizan operaciones sobre los mapas de activación, se utilizan para estabilizar y acelerar el entrenamiento de la red.
-            \item Algunas de las capas más relevantes para normalización son \texttt{nn.BatchNorm1d} y \texttt{nn.LayerNorm} que permiten aplicar una normalización por lotes o por capas respectivamente.
-            \item Ayudan a mantener la distribución de activaciones más consistentes durante el entrenamiento.
-        \end{itemize}
+          \begin{itemize}
+              \item Realizan operaciones sobre los mapas de activación, se utilizan para estabilizar y acelerar el entrenamiento de la red.
+              \item Algunas de las capas relevantes son \texttt{nn.BatchNorm1d} y \texttt{nn.LayerNorm}, estás permiten aplicar una normalización por lotes o por capas respectivamente.
+              \item Ayudan a mantener la distribución de activaciones más consistentes durante el entrenamiento.
+          \end{itemize}
     \item \textbf{Capas de Dropout (Dropout Layers)}: % se usan para entrenamientos más estables eliminando dependencias, evitan el sobreajuste, esto lo hacen desactivando de forma estocastica ciertas neuronas en las distintas iteraciones.
     \item[]
-        \begin{itemize}
-            \item Se desactivan aleatoriamente un porcentaje de neuronas en la capa esto evita dependencias en el entrenamiento, además de generalizar mejor.
-            \item Es una técnica de regularización que reduce el {overfitting}, se usan para entrenamientos más estables eliminando dependencias.
-        \end{itemize}
+          \begin{itemize}
+              \item Se desactivan aleatoriamente un porcentaje de neuronas en la capa esto evita dependencias en el entrenamiento, además de generalizar mejor.
+              \item Es una técnica de regularización que reduce el {overfitting}, se usan para entrenamientos más estables eliminando dependencias.
+          \end{itemize}
     \item \textbf{Capas Recurrentes (Recurrent Layers)}: % se usan para procesar datos secuenciales o de series temporales, su característica principal son que tienen memoria, exiten distintas variantes en función de cuando tome el contexto, unidireccionales si solo cuenta el contexto previo o bidireccionales si consideran el previo y posterior. Las más usadas son \texttt{nn.RNN}, \texttt{nn.LSTM} y \texttt{nn.GRU}
     \item[]
-        \begin{itemize}
-            \item Diseñaas para manejar datos secuenciales o de series temporales.
-            \item Incorporan conexiones ciclicas que les permiten propagar información de un paso de tiempo a otro.
-            \item Las capas recurrentes tienen memoria y contexto considerando los estados previos, son útiles para traducción de idiomas, procesamiento del lenguaje natural y reconocimiento de voz.
-                  % \item Estas capas no permiten paralelización
-        \end{itemize}
+          \begin{itemize}
+              \item Diseñaas para manejar datos secuenciales o de series temporales.
+              \item Incorporan conexiones ciclicas que les permiten propagar información de un paso de tiempo a otro, las más usadas son \texttt{nn.RNN}, \texttt{nn.LSTM} y \texttt{nn.GRU}.
+              \item Las capas recurrentes tienen memoria y contexto considerando los estados previos, son útiles para traducción de idiomas, procesamiento del lenguaje natural y reconocimiento de voz.
+          \end{itemize}
 \end{itemize}
 
 % endregion Tipos de capas 

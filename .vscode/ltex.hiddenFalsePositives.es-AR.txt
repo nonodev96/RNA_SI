@@ -1,3 +1,2 @@
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qy Blue team.\\E$"}
-{"rule":"ES_SIMPLE_REPLACE","sentence":"^\\QThe areas of application include the sensitivity analysis of models, new work in statistical or econometric estimation, optimization, artificial intelligence and neuron modelling.\\E$"}
-{"rule":"ES_UNPAIRED_BRACKETS","sentence":"^\\Qbasicstyle=, numbers=left, numberstyle=, stepnumber=1, numbersep=7pt, backgroundcolor=, showspaces=false, showstringspaces=true, showtabs=true, frameround=fttt, frame=rtBL, rulecolor=, tabsize=4, aboveskip=1em, captionpos=b, breaklines=true, breakatwhitespace=false, title=, keywordstyle=, commentstyle=, stringstyle=, escapeinside= *)\\E$"}
+{"rule":"ESPACIO_DESPUES_DE_PUNTO","sentence":"^\\QIncorporan conexiones ciclicas que les permiten propagar información de un paso de tiempo a otro, las más usadas son nn.RNN, nn.LSTM y nn.GRU.\\E$"}

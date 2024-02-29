@@ -14,5 +14,6 @@ and then choose `flask` as template.
 """
 
 # example constant variable
-NAME = "tfm_sai"
-RANDOM_STATE = 42
+BASE_PATH = "~/PycharmProjects/TFM_SAI/"
+BASE_NAME = "tfm_sai"
+BASE_RANDOM_STATE = 42
