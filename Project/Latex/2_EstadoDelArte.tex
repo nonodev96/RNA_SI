@@ -796,11 +796,11 @@ Se suele considerar el número de capas, número de neuronas por capa, tipo de c
 \subsection{Redes generativas adversariales - \textit{Generative Adversarial Networks (GAN)}}
 % region Redes generativas adversariales
 % TODO: El concepto de redes antagónicas
-% TODO: Ventajas e inconvenientes de las GAN
+% TODO: definición matemática de las dos redes
+% TODO: Usos y aplicaciones
+% TODO: Ventajas e inconvenientes
 % TODO: Arquitecturas derivadas
-% TODO: definición
-% TODO: usos
-% TODO problemas
+% README: https://arxiv.org/ftp/arxiv/papers/2302/2302.09346.pdf
 
 La arquitectura \gls{GAN} está formada por dos redes neuronales artificiales, una ``generadora ($G$)'' y otra ``discriminadora ($D$)''. La red $G$ se encarga de generar instancias del mismo dominio que el conjunto de datos, mientras que la red $D$ es la encargada de aceptar o rechazar si los datos generados por la red $G$ son reales o falsos. Ambas redes se entrenan conjuntamente de manera que $G$ minimize las detecciones de $D$, y a su vez $D$ detecte las instancias generadas por $G$ \cite{de2023redes}.
 
@@ -843,6 +843,10 @@ Este proceso ``$\min\max$'' hace que la red $G$ mejore la generación de instaci
 \paragraph*{Usos y aplicaciones}
 
 Las redes \gls{GAN} se han usado principalmente para la generacion de imágenes, aunque puede generar instancias sinteticas de muchos dominios, previamente existian los modelos generativos \gls{VAE}.
+
+% https://paperswithcode.com/method/vae
+% https://paperswithcode.com/method/gan
+% https://paperswithcode.com/methods/category/convolutions
 
 \paragraph*{Ventajas e inconvenientes}
 
