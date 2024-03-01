@@ -5,3 +5,4 @@
 {"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\Qevery axis/.append style=tick label style=/pgf/number format/fixed.,font=,ylabel near ticks,xlabel near ticks,grid=major.\\E$"}
 {"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\Q.\\E$"}
 {"rule":"PUNTO_EN_ABREVIATURAS","sentence":"^\\QDoc Math Extra\\E$"}
+{"rule":"SIGLAS","sentence":"^\\Q[width=1]figures/chapter02/GANs.drawio.svg Arquitectura de las redes neuronales generativas adversariales.\\E$"}
