@@ -840,6 +840,8 @@ Para que la red $D$ funcione debera recibir tanto datos originales $x_{real}$ co
 % TODO: revisar este texto
 Este proceso ``$\min\max$'' hace que la red $G$ mejore la generación de instacias haciendola más parecídas, aunque tambien puede generar instancias irreales que aunque superan la validación del discriminador no son fisicamente viables en un contexto real.
 
+Las \gls{GAN} básicas utilizan una clasificiación binaria típica en la red ${D}$.
+
 \paragraph*{Usos y aplicaciones}
 
 Las redes \gls{GAN} se han usado principalmente para la generacion de imágenes, aunque puede generar instancias sinteticas de muchos dominios, previamente existian los modelos generativos \gls{VAE}.
@@ -847,15 +849,75 @@ Las redes \gls{GAN} se han usado principalmente para la generacion de imágenes,
 % https://paperswithcode.com/method/vae
 % https://paperswithcode.com/method/gan
 % https://paperswithcode.com/methods/category/convolutions
+% https://towardsdatascience.com/paper-explained-high-resolution-image-synthesis-with-latent-diffusion-models-f372f7636d42
 
+% TODO:
+% Clasificación de \gls{GAN}
+% https://sh-tsang.medium.com/review-lsgan-least-squares-generative-adversarial-networks-gan-bec12167e915
+
+\begin{itemize}
+    \item Sintesis de imagenes.
+    \item Imagen a imagen
+    \item Reescalado de imágenes
+    \item Detección de desenfoque
+    \item Detección de manipulación de la cámara
+    \item Codificación de vídeo
+\end{itemize}
 \paragraph*{Ventajas e inconvenientes}
 
-\paragraph*{Topologias derivadas}
+% \paragraph*{Topologias derivadas}
+
+% Referencias para cada uno
+
+\subparagraph*{Semi-supervised Generative Adversarial Network (SGAN)}
+% https://towardsdatascience.com/supervised-learning-but-a-lot-better-semi-supervised-learning-a42dff534781
+% https://archive.is/HCS4V
+En Las \gls{SGAN} \cite{SGAN-odena2016semisupervised}, el discriminador cuenta con datos semi supervisados, se realizan clasificaciones con la función \texttt{nn.Softmax} para otimizar el discriminador.
+El uso de estos datos semi supervisados y la mejora del clasificiador o predictor en la red $D$ mejoran los resultados de ambas redes.
+
+\subparagraph*{Conditional Generative Adversarial Network (CGAN)}
+% https://archive.is/XTMWw
+% https://towardsdatascience.com/cgan-conditional-generative-adversarial-network-how-to-gain-control-over-gan-outputs-b30620bd0cc8
+% https://github.com/SolClover/Art054_NN_cGAN
+% Pix2Pix
+Las \gls{CGAN} \cite{CGAN}
+
+\subparagraph*{Couple Generative Adversarial Network (CoGAN)}
+% https://medium.com/codex/review-cogan-coupled-generative-adversarial-networks-gan-273f70b340af
+
+\subparagraph*{Cycle Generative Adversarial Network (CycleGAN)}
+% https://www.tensorflow.org/tutorials/generative/cyclegan?hl=es-419
+
+\subparagraph*{Deep Convolutional Generative Adversarial Network (DCGAN)}
+% https://www.tensorflow.org/tutorials/generative/dcgan?hl=es-419
+% https://towardsdatascience.com/deep-convolutional-gan-how-to-use-a-dcgan-to-generate-images-in-python-b08afd4d124e
+% https://archive.is/MgQCM
+% FGSM  -->  https://digibug.ugr.es/handle/10481/72468
+\gls{DCGAN} es una de las redes generativas más famosas y usadas dentro de su ambito
+
+\subparagraph*{Least Square Generative Adversarial Network (LSGAN)}
+% https://arxiv.org/abs/1611.04076
+% https://paperswithcode.com/method/lsgan
+% https://sh-tsang.medium.com/review-lsgan-least-squares-generative-adversarial-networks-gan-bec12167e915
+
+\subparagraph*{Progresive Generative Adversarial Network (ProGAN)}
+
+\subparagraph*{Super Resolution Generative Adversarial Network (SRGAN)}
+% https://arxiv.org/abs/1609.04802v5
+% https://paperswithcode.com/method/srgan
+
+\begin{equation}
+    \min_{\theta_{G}} \max_{\omega_{D}}~~\mathbb{E}_{I^{H R} {\sim P_{train} (I^{H R})}} \left[ \log D_{\omega_{D}}(I^{H R}) \right] + \mathbb{E}_{I^{L R} {\sim P_{G} (I^{L R})}} \left[ \log( 1 - D_{\theta_{D}}(G_{\theta_{G}}(I^{L R}))) \right]
+\end{equation}
+
+\subparagraph*{Style Generative Adversarial Network (StyleGAN)}
+
+\subparagraph*{Self Attention Generative Adversarial Network (SAGAN)}
+% https://arxiv.org/abs/1805.08318
+
 
 % endregion Redes generativas adversariales
 
-
-% endregion
 
 % region subsection La seguridad de las redes neuronales
 \subsection{La seguridad de las redes neuronales}
@@ -943,7 +1005,7 @@ Se busca extraer un funcionamiento interno equivalente de la red neuronal, se pu
 % endregion 
 
 \subsection{Defensas contra los ataques en \textit{deep learning}}
-
+% region Defensas contra los ataques
 \subsubsection{Preprocesamiento}
 \subsubsection{Post procesamiento}
 \subsubsection{Entrenamiento}
@@ -953,11 +1015,12 @@ Se busca extraer un funcionamiento interno equivalente de la red neuronal, se pu
 \subsubsection{Detector}
 \paragraph{Evasión}
 \paragraph{Envenenamiento}
+% endregion Defensas contra los ataques
 
 \subsection{Métricas en los ataques adversariales}
 
 \subsection{Redes neuronales en \textit{Red team} y \textit{Blue team}}
-
+% region Redes neuronales en \textit{Red team} y \textit{Blue team}
 Un buen símil entre la seguridad informática clásica y la seguridad en redes neuronales son los conceptos de equipos de ataque y defensa (``red team'' y ``blue team'').
 
 \begin{figure}[H]
@@ -1007,15 +1070,16 @@ Se puede ser categorizar la seguridad de los modelos con el modelado \gls{STRIDE
     \caption{Amenazas STRIDE relacionadas con la seguridad de la IA}
     \label{tab:amenazas}
 \end{table}
+% endregion Redes neuronales en \textit{Red team} y \textit{Blue team}
 
-% endregion
 
-% region subsection Las redes neuronales para la seguridad informática
 \subsection{Las redes neuronales para la seguridad informática}
+% region subsection Las redes neuronales para la seguridad informática
+
 % TODO: aplicaciones reales de ciberseguridad que usan inteligencia artificial 
 
 
-% endregion
+% endregion Las redes neuronales para la seguridad informática
 
 
 
