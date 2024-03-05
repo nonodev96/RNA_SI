@@ -125,3 +125,16 @@ literate={á}{{\'a}}1
 \newcommand{\mathMatrix}[1]{\mathit{\mathbf{{#1}}}}
 % Mayuscula
 \newcommand{\mathTensor}[1]{\boldsymbol{\mathsf{{#1}}}}
+
+
+
+
+
+
+% subparagraph
+\makeatletter
+\renewcommand\subparagraph{\@startsection{subparagraph}{5}{\parindent}%
+    {3.25ex \@plus1ex \@minus .2ex}%
+    {0.75ex plus 0.1ex}% space after heading
+    {\normalfont\normalsize\bfseries}}
+\makeatother

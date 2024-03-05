@@ -411,7 +411,7 @@ Fue en 1986 cuando {D. E. Rumelhart} propuso la retropropagación junto a multip
 
 El proceso es el siguiente, por cada instancia de entrenamiento se calcula la salida de cada neurona en la capa consecutiva (paso hacia adelante). A continuación se mide el error de salida de la red (la diferencia entre la salida deseada y la de la red) calculará cuánto contribuyo cada neurona en la última capa oculta al error de cada neurona de salida. Se mide cuantas contribuciones de error provienen de cada neurona en la capa oculta anterior, así sucesivamente hasta que se llega a la capa de entrada(paso hacia atras). Se mide eficientemente el gradiente de error en todos los pesos de la conexión en la red propagando el gradiente de error hacia atras. \cite{geron2018neural}
 
-Este proceso funciona, ya que se cambió la función escalonada de las \gls{LTU} a una función logística Sigmoid \ref{eq:sigmoid}, esto se requeria, ya que la función de paso contiene solo segmentos planos y por tanto no habia gradientes. Esto permitio que el descenso de gradiente pudiera ir progresando lentamente hasta converger. El algoritmo de retroalimentación se puede usar con otras funciones de activación que veremos más adelante.
+Este proceso funciona, ya que se cambió la función escalonada de las \gls{LTU} a una función logística Sigmoid, esto se requeria, ya que la función de paso contiene solo segmentos planos y por tanto no habia gradientes. Esto permitio que el descenso de gradiente pudiera ir progresando lentamente hasta converger. El algoritmo de retroalimentación se puede usar con otras funciones de activación que veremos más adelante.
 
 
 \subsubsection{El descenso de gradiente\label{sec:gradient-descent}}
@@ -660,7 +660,8 @@ Se suelen clasificar en dos categorias, funciones de activación de suma pondera
     \end{subfigure}\hfill
     \begin{subfigure}{.475\linewidth}
         \centering
-        \begin{equation*} \varphi(x) = \frac{1}{1+e^{-x}} \label{eq:sigmoid} \end{equation*}
+        \begin{equation*} \varphi(x) = \frac{1}{1+e^{-x}} \end{equation*}
+        % \label{eq:sigmoid} 
         \caption{Función de activación Sigmoid.\newline{}Fuente: \href{https://pytorch.org/docs/stable/generated/torch.nn.Sigmoid.html}{Pytorch torch.nn.Sigmoid}}
         \label{subfig:eq-torch.nn.Sigmoid}
     \end{subfigure}
@@ -856,7 +857,7 @@ Las redes \gls{GAN} se han usado principalmente para la generacion de imágenes,
 % https://sh-tsang.medium.com/review-lsgan-least-squares-generative-adversarial-networks-gan-bec12167e915
 
 \begin{itemize}
-    \item Sintesis de imagenes.
+    \item Sintesis de imagenes
     \item Imagen a imagen
     \item Reescalado de imágenes
     \item Detección de desenfoque
@@ -865,58 +866,114 @@ Las redes \gls{GAN} se han usado principalmente para la generacion de imágenes,
 \end{itemize}
 \paragraph*{Ventajas e inconvenientes}
 
-% \paragraph*{Topologias derivadas}
 
-% Referencias para cada uno
+
+
+
+
+% \paragraph*{Topologias derivadas}
+% TODO: Referencias para cada uno
 
 \subparagraph*{Semi-supervised Generative Adversarial Network (SGAN)}
 % https://towardsdatascience.com/supervised-learning-but-a-lot-better-semi-supervised-learning-a42dff534781
+% https://towardsdatascience.com/semi-supervised-learning-with-gans-9f3cb128c5e
 % https://archive.is/HCS4V
-En Las \gls{SGAN} \cite{SGAN-odena2016semisupervised}, el discriminador cuenta con datos semi supervisados, se realizan clasificaciones con la función \texttt{nn.Softmax} para otimizar el discriminador.
+% https://arxiv.org/abs/1606.01583
+En las redes \gls{SGAN} \cite{SGAN-odena2016semisupervised}, el discriminador cuenta con datos semi supervisados, se realizan clasificaciones con la función \texttt{nn.Softmax} para otimizar el discriminador.
 El uso de estos datos semi supervisados y la mejora del clasificiador o predictor en la red $D$ mejoran los resultados de ambas redes.
 
 \subparagraph*{Conditional Generative Adversarial Network (CGAN)}
-% https://archive.is/XTMWw
 % https://towardsdatascience.com/cgan-conditional-generative-adversarial-network-how-to-gain-control-over-gan-outputs-b30620bd0cc8
+% https://archive.is/XTMWw
+% https://es.mathworks.com/help/deeplearning/ug/train-conditional-generative-adversarial-network.html
 % https://github.com/SolClover/Art054_NN_cGAN
+% https://arxiv.org/abs/2103.14884
+% https://arxiv.org/abs/2206.13676
 % Pix2Pix
-Las \gls{CGAN} \cite{CGAN}
+Las redes \gls{CGAN} \cite{CGAN-zheng2021continuous,CGAN-li2022ttscgan,CGAN}
+% TODO: Hacer grafico https://datascientest.com/en/wp-content/uploads/sites/9/2023/09/cgan-1.webp
+
 
 \subparagraph*{Couple Generative Adversarial Network (CoGAN)}
 % https://medium.com/codex/review-cogan-coupled-generative-adversarial-networks-gan-273f70b340af
 
 \subparagraph*{Cycle Generative Adversarial Network (CycleGAN)}
+% https://paperswithcode.com/method/cyclegan
+% https://arxiv.org/abs/1703.10593v7
 % https://www.tensorflow.org/tutorials/generative/cyclegan?hl=es-419
+\gls{CycleGAN} \cite{CycleGAN-zhu2020unpaired} es un método derivado de SPEED
+
 
 \subparagraph*{Deep Convolutional Generative Adversarial Network (DCGAN)}
+% https://paperswithcode.com/method/dcgan
 % https://www.tensorflow.org/tutorials/generative/dcgan?hl=es-419
 % https://towardsdatascience.com/deep-convolutional-gan-how-to-use-a-dcgan-to-generate-images-in-python-b08afd4d124e
+% https://github.com/sthalles/blog-resources/blob/master/dcgan/DCGAN.ipynb
 % https://archive.is/MgQCM
 % FGSM  -->  https://digibug.ugr.es/handle/10481/72468
-\gls{DCGAN} es una de las redes generativas más famosas y usadas dentro de su ambito
+Las redes \gls{DCGAN} \cite{DCGAN-radford2016unsupervised,DCGAN-viola2020faultface,DCGAN-aslan2019deep,DCGAN-curto2020highresolution} son una de las redes generativas más famosas y usadas dentro de su ambito
+
+% Las GAN convolucionales tradicionales generan detalles de alta resolución en función únicamente de puntos espacialmente locales en mapas de características de menor resolución. 
+Estas redes generan detalles de alta resolución partiendo de puntos espacialmente locales de un mapa de características reducido.
 
 \subparagraph*{Least Square Generative Adversarial Network (LSGAN)}
-% https://arxiv.org/abs/1611.04076
 % https://paperswithcode.com/method/lsgan
+% https://arxiv.org/abs/1611.04076
 % https://sh-tsang.medium.com/review-lsgan-least-squares-generative-adversarial-networks-gan-bec12167e915
+\gls{LSGAN} \cite{LSGAN-mao2017squares}
 
 \subparagraph*{Progresive Generative Adversarial Network (ProGAN)}
+% https://paperswithcode.com/method/progan
+% https://arxiv.org/abs/1710.10196v3
+
+\gls{ProGAN} \cite{ProGAN-karras2018progressive}
+
+
 
 \subparagraph*{Super Resolution Generative Adversarial Network (SRGAN)}
-% https://arxiv.org/abs/1609.04802v5
 % https://paperswithcode.com/method/srgan
+% https://arxiv.org/abs/1609.04802
+% https://arxiv.org/abs/1711.06491
+% https://arxiv.org/abs/1902.06068
+Las redes \gls{SRGAN} \cite{SRGAN-ledig2017photorealistic} son una variante de las redes \gls{DCGAN}
 
 \begin{equation}
-    \min_{\theta_{G}} \max_{\omega_{D}}~~\mathbb{E}_{I^{H R} {\sim P_{train} (I^{H R})}} \left[ \log D_{\omega_{D}}(I^{H R}) \right] + \mathbb{E}_{I^{L R} {\sim P_{G} (I^{L R})}} \left[ \log( 1 - D_{\theta_{D}}(G_{\theta_{G}}(I^{L R}))) \right]
+    \min_{\theta_{G}} \max_{\omega_{D}} ~~ \mathbb{E}_{I^{H R} {\sim P_{train} (I^{H R})}} \left[ \log D_{\omega_{D}}(I^{H R}) \right] + \mathbb{E}_{I^{L R} {\sim P_{G} (I^{L R})}} \left[ \log( 1 - D_{\theta_{D}}(G_{\theta_{G}}(I^{L R}))) \right]
 \end{equation}
 
 \subparagraph*{Style Generative Adversarial Network (StyleGAN)}
+% https://paperswithcode.com/method/stylegan
+% https://arxiv.org/abs/1812.04948
+% https://paperswithcode.com/method/stylegan2
+% https://arxiv.org/abs/1912.04958
+% Others
+% https://arxiv.org/abs/2301.09515
+
+\cite{StyleGAN-karras2019stylebased,StyleGAN-sauer2023stylegant}
+
 
 \subparagraph*{Self Attention Generative Adversarial Network (SAGAN)}
 % https://arxiv.org/abs/1805.08318
-
+% https://paperswithcode.com/method/sagan
+En las redes \gls{SAGAN} \cite{SAGAN-zhang2018selfattention} permiten modelar dependencias de largo alcance usando técnicas de atención para tareas de generación de imágenes.
+Estas redes permiten generar detalles más especificos usando pistas del mapa de características, la red $D$ puede comprobar que los rasgos detallados de las instancias generadas son coherentes entre sí.
 
 % endregion Redes generativas adversariales
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 % region subsection La seguridad de las redes neuronales
