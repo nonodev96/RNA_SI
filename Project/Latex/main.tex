@@ -94,12 +94,17 @@
 % \usepackage[acronym,toc=true,nomain,xindy]{glossaries-extra}
 % \setabbreviationstyle[acronym]{long-short} 
 
-\usepackage{csvsimple}                  % https://www.ctan.org/pkg/csvsimple
-\usepackage{amsmath}                    % https://www.ctan.org/pkg/amsmath
 \usepackage{actuarialangle}
+\usepackage{csvsimple}
+
+\usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{mathtools}
-\usepackage{bm}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+
+
+% \usepackage{mathtools}
+% \usepackage{bm}
 
 \usepackage{commath}
 \usepackage{bookmark} 
@@ -118,9 +123,8 @@
 \usepackage{tikz}
 \usetikzlibrary{calc,matrix}
 \usepackage{pgfplots}
-\pgfplotsset{compat=every axis/.append style={tick label style={/pgf/number format/fixed},font=\scriptsize,ylabel near ticks,xlabel near ticks,grid=major}}
+\pgfplotsset{compat=1.18,every axis/.append style={tick label style={/pgf/number format/fixed},font=\scriptsize,ylabel near ticks,xlabel near ticks,grid=major}}
 
-\usepackage{amsthm}
 \newtheorem{theorem}{Teoremas}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 
@@ -143,9 +147,21 @@
 
 \input{macros/config}
 \input{macros/config-lstlisting}
+% Paquetes para vtimeline
+% \usepackage{fourier-otf}
+\usepackage{heuristica}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{anyfontsize}
 \input{macros/config-vtimeline}
 \input{macros/PortadaMaster}
 \input{glossaries_1}
+
+
+\usepackage[cal=cm]{mathalfa}
+
+
 
 \begin{document}
 % \setemojifont{Twemoji Mozilla}
@@ -184,7 +200,6 @@
 
 % \input{0_0_Test.tex}
 % \clearpage\thispagestyle{empty}\cleardoublepage
-
 \input{00_Notation.tex}
 \clearpage\thispagestyle{empty}\cleardoublepage
 

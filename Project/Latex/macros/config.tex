@@ -31,54 +31,54 @@
 
 
 \hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    filecolor=magenta,
-    urlcolor=cyan,
-    pdftitle={\TituloTFM},
-    pdfauthor={\Estudiante}
-    bookmarks=true,
-    bookmarksopen=true,
-    pdfpagemode=FullScreen,
-    breaklinks=true,
-    citecolor=cyan,
+  colorlinks=true,
+  linkcolor=blue,
+  filecolor=magenta,
+  urlcolor=cyan,
+  pdftitle={\TituloTFM},
+  pdfauthor={\Estudiante}
+  bookmarks=true,
+  bookmarksopen=true,
+  pdfpagemode=FullScreen,
+  breaklinks=true,
+  citecolor=cyan,
 }
 
 
 \lstset{ %
-    %language=delphi,                % the language of the code
-    basicstyle=\linespread{0.7}\small\ttfamily,       % the size of the fonts that are used for the code
-    numbers=left,                   % where to put the line-numbers
-    numberstyle=\footnotesize\color{gray},  % the style that is used for the line-numbers
-    stepnumber=1,                   % the step between two line-numbers. If it's 1, each line will be numbered
-    numbersep=7pt,                  % how far the line-numbers are from the code
-    backgroundcolor=\color{gray!5},  % choose the background color. You must add \usepackage{color}
-    showspaces=false,               % show spaces adding particular underscores
-    showstringspaces=true,         % underline spaces within strings
-    showtabs=true,                 % show tabs within strings adding particular underscores
-    frameround=fttt,
-    frame=rtBL,                   % adds a frame around the code
-    rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
-    tabsize=4,                      % sets default tabsize to 2 spaces
-    aboveskip=1em,
-    captionpos=b,                   % sets the caption-position to bottom
-    breaklines=true,                % sets automatic line breaking
-    breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
-    title=\lstname,                 % show the filename of files included with \lstinputlisting;  also try caption instead of title
-    keywordstyle=\bf\ttfamily,          % keyword style
-    commentstyle=\color{black!60}\ttfamily,       % comment style
-    stringstyle=\color{blue}\ttfamily,         % string literal style
-    escapeinside={\%*}{*)}            % if you want to add a comment within your code
+  %language=delphi,                % the language of the code
+  basicstyle=\linespread{0.7}\small\ttfamily,       % the size of the fonts that are used for the code
+  numbers=left,                   % where to put the line-numbers
+  numberstyle=\footnotesize\color{gray},  % the style that is used for the line-numbers
+  stepnumber=1,                   % the step between two line-numbers. If it's 1, each line will be numbered
+  numbersep=7pt,                  % how far the line-numbers are from the code
+  backgroundcolor=\color{gray!5},  % choose the background color. You must add \usepackage{color}
+  showspaces=false,               % show spaces adding particular underscores
+  showstringspaces=true,         % underline spaces within strings
+  showtabs=true,                 % show tabs within strings adding particular underscores
+  frameround=fttt,
+  frame=rtBL,                   % adds a frame around the code
+  rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+  tabsize=4,                      % sets default tabsize to 2 spaces
+  aboveskip=1em,
+  captionpos=b,                   % sets the caption-position to bottom
+  breaklines=true,                % sets automatic line breaking
+  breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+  title=\lstname,                 % show the filename of files included with \lstinputlisting;  also try caption instead of title
+  keywordstyle=\bf\ttfamily,          % keyword style
+  commentstyle=\color{black!60}\ttfamily,       % comment style
+  stringstyle=\color{blue}\ttfamily,         % string literal style
+  escapeinside={\%*}{*)}            % if you want to add a comment within your code
 }
 
 \lstset
 {
-    language=[LaTeX]TeX,
-    breaklines=true,
-    basicstyle=\tt\scriptsize,
-    keywordstyle=\color{blue},
-    identifierstyle=\color{gray},
-    texcl=true
+  language=[LaTeX]TeX,
+  breaklines=true,
+  basicstyle=\tt\scriptsize,
+  keywordstyle=\color{blue},
+  identifierstyle=\color{gray},
+  texcl=true
 }
 \lstset{
 language=Python,
@@ -134,7 +134,21 @@ literate={á}{{\'a}}1
 % subparagraph
 \makeatletter
 \renewcommand\subparagraph{\@startsection{subparagraph}{5}{\parindent}%
-    {3.25ex \@plus1ex \@minus .2ex}%
-    {0.75ex plus 0.1ex}% space after heading
-    {\normalfont\normalsize\bfseries}}
+  {3.25ex \@plus1ex \@minus .2ex}%
+  {0.75ex plus 0.1ex}% space after heading
+  {\normalfont\normalsize\bfseries}}
 \makeatother
+
+
+
+\def\GANeqLG{
+  \begin{math}
+    \mathcal{L}_{D}^{GAN} = -\mathbb{E}_{x\sim{}P_{D}} \left[\log(D(x)\right] - \mathbb{E}_{z\sim{}P_{G}} \left[\log(1-D(z))\right]
+  \end{math}
+}
+
+\def\GANeqLD{
+  \begin{math}
+    \mathcal{L}_{D}^{GAN}
+  \end{math}
+}

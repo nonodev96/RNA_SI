@@ -677,6 +677,7 @@ Se suelen clasificar en dos categorías, funciones de activación de suma ponder
 \begin{enumerate}
     \item \textbf{Softmax}: Aplica la función Softmax a un Tensor de entrada $n$-dimensional re-escalándolos para que los elementos del Tensor de salida $n$-dimensional se encuentren en el rango [0,1]. \cite{pytorch2024github}
     \item[] \begin{equation} \varphi(x_{i}) = \frac{e^{x_{i}}}{\sum_{j}{e_{j}}} \end{equation}
+        % TODO, añadir más si se requiere
 \end{enumerate}
 
 
@@ -715,7 +716,7 @@ Algunas de las características de las capas más famosas son las siguientes.
         \begin{itemize}
             \item \textbf{Capas densas}: Capas que conectan todas las neuronas de una capa con todas las de la capa siguiente.
             \item[] Son ampliamente utilizadas en \gls{ANN} tradicionales  para tareas de clasificación y regresión.
-            \item \textbf{Sparses Layers}: Capas que contienen conexiones dispersas entre neuronas, lo que implica que no todas las neuronas están conectadas entre sí.
+            \item \textbf{Capas dispersas}: Capas que contienen conexiones dispersas entre neuronas, lo que implica que no todas las neuronas están conectadas entre sí.
             \item[] Se utilizan para reducir la complejidad computacional y el consumo de memoria en modelos grandes.
         \end{itemize}
     \item \textbf{Capas lineales (Linear Layers)}:
@@ -758,11 +759,11 @@ Algunas de las características de las capas más famosas son las siguientes.
             \item Ayudan a mantener la distribución de activaciones más consistentes durante el entrenamiento.
         \end{itemize}
     \item \textbf{Capas de Dropout (Dropout Layers)}:
-          % se usan para entrenamientos más estables eliminando dependencias, evitan el sobreajuste, esto lo hacen desactivando de forma estocastica ciertas neuronas en las distintas iteraciones.
+          % se usan para entrenamientos más estables eliminando dependencias, evitan el sobreajuste {overfitting}, esto lo hacen desactivando de forma estocástica ciertas neuronas en las distintas iteraciones.
     \item[]
         \begin{itemize}
             \item Se desactivan aleatoriamente un porcentaje de neuronas en la capa, esto evita dependencias en el entrenamiento, además de generalizar mejor.
-            \item Es una técnica de regularización que reduce el {overfitting}, se usan para entrenamientos más estables eliminando dependencias.
+            \item Es una técnica de regularización que reduce el sobreajuste, se usan para entrenamientos más estables eliminando dependencias.
         \end{itemize}
     \item \textbf{Capas Recurrentes (Recurrent Layers)}:
           % se usan para procesar datos secuenciales o de series temporales, su característica principal son que tienen memoria, existen distintas variantes en función de cuando tome el contexto, unidireccionales si solo cuenta el contexto previo o bidireccionales si consideran el previo y posterior. Las más usadas son \texttt{nn.RNN}, \texttt{nn.LSTM} y \texttt{nn.GRU}
@@ -812,36 +813,53 @@ La arquitectura \gls{GAN} está formada por dos redes neuronales artificiales, u
     \label{fig:gans-architecture}
 \end{figure}
 
-Esto está representado en la Figura \ref{fig:gans-architecture}, donde podemos observar las distintas partes de una red \gls{GAN}. Además, podemos observar la distribución de probabilidad aleatoria representada como $p_{z}$. El objetivo de la red es la optimización de la distribución de probabilidad de la red generativa $P_{data}$ sea similar a $G(z)$, es decir, $G(z)~\sim~p_{g}$.
+% ;TLTR;
+Una \gls{GAN} básica se entrena por un proceso ``$\min\max$'', esto está representado en la ecuación \ref{eq:gan-0}. Con este proceso hacemos que la red $G$ mejore la generación de instancias haciéndola más parecidas, aunque también puede generar instancias irreales, ya que aunque las instancias sintéticas superan la validación del discriminador, no son físicamente viables en un contexto real.
+% https://deepgenerativemodels.github.io/assets/slides/cs236_lecture9.pdf
+% https://deepgenerativemodels.github.io/notes/gan/
 
 \begin{equation}
-    \min_{G}~\max_{D}~~\mathbb{E}_{x\sim{}p_{r}} \log\left[D(x)\right] + \mathbb{E}_{z \sim{}p_{z}} \log\left[1-D(G(z))\right]
+    \min_{G}\max_{D} = \mathbb{E}_{x\sim{}P_{\textrm{data}}(x)} \left[\log\left(D(x\mid{}y)\right)\right] + \mathbb{E}_{z\sim{}P_{z}(z)} \left[\log\left(1-D(G(z\mid{}y))\right)\right]
+    \label{eq:gan-0}
+\end{equation}
+
+Esto está representado en la Figura \ref{fig:gans-architecture}, donde podemos observar las distintas partes de una red \gls{GAN}. Además, podemos observar la distribución de probabilidad aleatoria representada como $p_{z}$. El objetivo de la red es la optimización de la distribución de probabilidad de la red generativa $P_{data}$ sea similar a $G(z)$, es decir, $G(z)\sim{}P_{g}$.
+
+\begin{equation}
+    \min_{G}\max_{D} = \mathbb{E}_{x\sim{}P_{real}} \left[\log\left(D(x)\right)\right] + \mathbb{E}_{z\sim{}P_{z}} \left[\log\left(1-D(G(z))\right)\right]
     \label{eq:gan-1}
 \end{equation}
 
 La función objetiva está definida por la ecuación \ref{eq:gan-2}, nos referimos con $\theta$ a los parámetros de la red $G$ y con $\omega$ a los parámetros de la red $D$. La esperanza de $f(x)$ con respecto a la distribución de probabilidad de ${x}$ según ${Q}$ es lo que se denota como ${\mathbb{E}_{x \sim Q}}$.
 
 \begin{equation}
-    \min_{\theta}~\max_{\omega}~~\mathbb{E}_{x\sim{}Q} \log\left[D_{\omega}(x)\right] + \mathbb{E}_{z \sim{}p_{\theta}} \log\left[1-D(G_{\omega}(z))\right]
+    \min_{\theta}\max_{\omega} = \mathbb{E}_{x\sim{}Q} \left[\log\left(D_{\omega}(x)\right)\right] + \mathbb{E}_{z \sim{}p_{\theta}} \left[\log\left(1-D(G_{\theta}(z))\right)\right]
     \label{eq:gan-2}
 \end{equation}
 
-Para que la red $D$ funcione deberá recibir tanto datos originales $x_{real}$ como datos generados por $G$, $x_{fake}$, $G$ se optimiza a la misma vez para que $D$ no pueda detectar los datos generados por $G$, este proceso está representado en las ecuaciones \ref{eq:gan-3} y \ref{eq:gan-4}.
+Para que la red ${D}$ funcione deberá recibir tanto datos originales $x_{real}$ como datos generados por ${G}$, ${x_{fake}}$, $G$ se optimiza al mismo tiempo para que $D$ no pueda detectar los datos generados por $G$, este proceso está representado en las ecuaciones \ref{eq:gan-3-discriminator-loss} y \ref{eq:gan-4-generator-loss}.
+
+En la ecuación \ref{eq:gan-3-discriminator-loss} podemos observar la función de perdida de la red discriminadora $(D)$, la sección ${\log\left(D(x)\right)}$ es la encargada de dar la probabilidad de que está clasificando correctamente la instancia generada por la red $G$, maximizando la sección $\log\left(1 - D(G(z))\right)$ conseguimos etiquetar correctamente la instancia falsa generada por la red ${G}$.
 
 \begin{equation}
-    \nabla_{\theta_{D}} \frac{1}{m} \sum_{i=1}^{m} \left[ \log D(x^{(i)}) + \log(1-D(G(z^{(i)})))  \right]
-    \label{eq:gan-3}
+    \nabla_{\omega_{D}} \frac{1}{m} \sum_{i=1}^{m} \left[ \log\left(D(x^{(i)})\right) + \log\left(1-D(G(z^{(i)}))\right) \right]
+    \label{eq:gan-3-discriminator-loss}
 \end{equation}
 
+En la ecuación \ref{eq:gan-4-generator-loss} podemos observar la función de perdida de la red generadora $(G)$, la pérdida del generador se calcula a partir de la clasificación (Real, Falsa) del discriminador. Se recompensa si consigue engañar al discriminador y se le penaliza en caso contrario.
+
 \begin{equation}
-    \nabla_{\theta_{G}} \frac{1}{m} \sum_{i=1}^{m} \log(1-D(G(z^{(i)})))
-    \label{eq:gan-4}
+    \nabla_{\theta_{G}} \frac{1}{m} \sum_{i=1}^{m} \log\left(1-D(G(z^{(i)}))\right)
+    \label{eq:gan-4-generator-loss}
 \end{equation}
+% TODO: EXPLICAR Non-Saturating GAN Loss
+
 
 % TODO: revisar este texto
-Este proceso ``$\min\max$'' hace que la red $G$ mejore la generación de instancias haciéndola más parecidas, aunque también puede generar instancias irreales que aunque superan la validación del discriminador no son físicamente viables en un contexto real.
+Las redes \gls{GAN} originales produce una probabilidad de que la imagen de entrada proceda de la distribución generadora de datos. Usaban una red \textit{feed-fordward} con función final sigmoidea.
 
-Las \gls{GAN} básicas utilizan una clasificación binaria típica en la red ${D}$.
+
+
 
 \paragraph*{Usos y aplicaciones}
 
@@ -879,10 +897,11 @@ Las redes \gls{GAN} se han usado principalmente para la generación de imágenes
 % https://towardsdatascience.com/semi-supervised-learning-with-gans-9f3cb128c5e
 % https://archive.is/HCS4V
 % https://arxiv.org/abs/1606.01583
-En las redes \gls{SGAN} \cite{SGAN-odena2016semisupervised}, el discriminador cuenta con datos semi supervisados, se realizan clasificaciones con la función \texttt{nn.Softmax} para optimizar el discriminador.
-El uso de estos datos semi supervisados y la mejora del clasificador o predictor en la red $D$ mejoran los resultados de ambas redes.
+En las redes \gls{SGAN} \cite{SGAN-odena2016semisupervised}, la red generadora $G$ como la red discriminadora $D$ cuentan con datos semi supervisados, esto difiere de una \gls{GAN} al modificar la red discriminadora con un clasificador. Aprende a clasificar las muestras en diferentes clases en función de las etiquetas dadas.
 
+El uso de estos datos semi supervisados y de un clasificador en la red discriminadora ${D}$, mejoran los resultados de ambas redes. Además, permite contar con un volumen mayor de datos.
 
+Se ha demostrado que las redes \gls{SGAN} mejoran el rendimiento de la clasificación en conjuntos de datos restringidos.
 
 
 
@@ -996,15 +1015,40 @@ Estas redes permiten generar más detalles usando pistas del mapa de caracterís
 
 
 
+\subparagraph*{Wasserstein Generative Adversarial Network (WGAN)}
+% https://neptune.ai/blog/gan-loss-functions
+% https://arxiv.org/abs/1701.07875
+% https://paperswithcode.com/method/wgan
+
+
+\subparagraph*{Wasserstein Generative Adversarial Network Gradient Penalty (WGAN-GO)}
+% https://neptune.ai/blog/gan-loss-functions
+% https://arxiv.org/abs/1701.07875
+% https://paperswithcode.com/method/wgan-gp
+
+
+% OTRAS
+% https://github.com/jasonshere/FairGAN
 
 
 
 
+% HACER TABLA CON:  TIPO GAN | F. Perdida Red Generadora | F. Perdida Red Discriminadora
+% cite https://arxiv.org/pdf/1711.10337.pdf
 
-
-
-
-
+\begin{table}[H]
+    \begin{center}
+        \begin{tabularx}{\textwidth}{|l|X|X|}
+            \toprule
+            \textbf{GAN} & \textbf{F. Perdida Red Generadora} & \textbf{F. Perdida Red Discriminadora} \\\midrule
+            GAN          &                                    &                                        \\
+                         &                                    &                                        \\
+            \bottomrule
+        \end{tabularx}
+        \caption{}
+        \label{tab:}
+    \end{center}
+\end{table}
 
 
 
