@@ -112,7 +112,7 @@ Posteriormente se describió el problema de no-linealidad que presentaban los pe
 
 De 1959 a 1960 {Bernard Widrow} y {Ted Hoff} desarrollaron ``Adaline'' y ``Madaline'' \cite{widrow1960adaptive} que resolvía el problema de la no-linealidad y que tenía aplicación en el reconocimiento de voz, series temporales, caracteres, etc.
 
-Posteriormente el \textit{MIT} realizo una investigación matemática muy crítica de todos los problemas que presentaba el \textit{Perceptron} llegando a la conclusión que tenían grandes problemas que no podrían ser resueltos, por lo que en la próxima década (años 60) se redujo drásticamente las investigaciones sobre el campo de las redes neuronales.
+Posteriormente, el \textit{MIT} realizo una investigación matemática muy crítica de todos los problemas que presentaba el \textit{Perceptron} llegando a la conclusión que tenían grandes problemas que no podrían ser resueltos, por lo que en la próxima década (años 60) se redujo drásticamente las investigaciones sobre el campo de las redes neuronales.
 Esto llevo a uno de los famosos inviernos de la inteligencia artificial (1974 - 1980).
 
 \begin{figure}[H]
@@ -162,7 +162,7 @@ Un análisis posterior condujo a los investigadores a una primera aproximación 
 
 Más adelante en el 2014 {Goodfellow} Figura \ref{fig:gan-ian-goodfellow} presento la primera red neuronal \acrshort{gan} pura para la generación de imágenes mediante el enfrentamiento de una red neuronal generativa contra una red neuronal discriminante entrenadas con el mismo conjunto de datos \cite{goodfellow2014generative}.
 Durante los próximos años se realizaron muchos aportes a las redes neuronales generativas, principalmente de paralelización de los cálculos, técnicas de estabilización, generación condiciona, arquitecturas más eficientes, funciones de pérdidas más adecuadas, aplicaciones específicas (cambiar el estilo de pintura), redes apiladas, etc.
-Fruto de todo ello {NVIDIA} en 2018 presento \gls{StyleGAN} \cite{karras2019stylebased} aunque publicaron el código en 2019 con fuertes mejoras.
+Fruto de todo ello, {NVIDIA} en 2018 presento \gls{StyleGAN} \cite{karras2019stylebased} aunque publicaron el código en 2019 con fuertes mejoras.
 
 \begin{figure}[H]
     \centering
@@ -237,7 +237,7 @@ El Descubrimiento de Conocimientos en Bases de Datos \gls{KDD} es un proceso que
     \label{fig:data-mining-taxonomy}
 \end{figure}
 
-La minería de datos puede estar orientada a la verificación o al descubrimiento de patrones, se debe automatizar su identificación, pudiendo usar un enfoque predictictivo o descriptivo. Para el descubrimiento se usa el aprendizaje inductivo, mientras que en la verificación se ha de evaluar las hipótesis externas usando métodos estadísticos clásicos. La terminología clásica del aprendizaje automático está clasificado en supervisado (clasificación y regresión) y no supervisado (agrupamiento), aunque existen muchos más términos en la terminología moderna esto podemos analizarlo más en profundidad en el libro \textit{Data Mining and Knowledge Discovery Handbook} \cite{maimon2005data}.
+La minería de datos puede estar orientada a la verificación o al descubrimiento de patrones, se debe automatizar su identificación, pudiendo usar un enfoque predictictivo o descriptivo. Para el descubrimiento se usa el aprendizaje inductivo, mientras que en el paso de verificación se ha de evaluar las hipótesis externas usando métodos estadísticos clásicos. La terminología clásica del aprendizaje automático está clasificado en supervisado (clasificación y regresión) y no supervisado (agrupamiento), aunque existen muchos más términos en la terminología moderna esto podemos analizarlo más en profundidad en el libro \textit{Data Mining and Knowledge Discovery Handbook} \cite{maimon2005data}.
 
 
 \subsection{Aprendizaje automático - \textit{Machine Learning}}
@@ -302,7 +302,7 @@ Como se ha comentado previamente las neuronas artificiales están inspiradas en 
     \label{fig:artificial-neuron}
 \end{figure}
 
-En la Figura \ref{fig:artificial-neuron} podemos ver las distintas partes de una única neurona artificial y sus partes equivalentes con una neurona biológica. El axón opera como la entrada de información a la neurona, la sinapsis como las conexiones con la neurona que son los pesos, el cuerpo celular como la neurona que representa la unidad de procesamiento central donde se pondera la suma de las señales de entrada, el cuello del axón sería nuestra función de activación que se activa cuando supera un umbral y el axón sería nuestra señal de salida.
+En la Figura \ref{fig:artificial-neuron} podemos ver las distintas partes de una única neurona artificial y sus partes equivalentes con una neurona biológica. El axón opera como la entrada de información a la neurona. La sinapsis como las conexiones con la neurona que son los pesos. El cuerpo celular como la unidad de procesamiento central, donde se pondera la suma de las señales de entrada. El cuello del axón sería nuestra función de activación que se activa cuando supera un umbral. Y por último el axón sería nuestra señal de salida.
 
 
 
@@ -352,9 +352,9 @@ El vector de entrada $X = (x_{1}, x_{2}, ..., x_{n})$ será la información sumi
     \item Vector del bias: $b \in \mathbb{R}^{C}$
 \end{enumerate}
 
-% El proceso de reducción de dimensionalidad se lleva a cabo, para convertir el vector de características del espacio original en un nuevo espacio con un conjunto más pequeño, linealmente no correlacionadas mediante la siguiente función $f: \mathbb{R}^{D} \rightarrow \mathbb{R}^{C}$ con $C \ll D$, donde la red neuronal está expresada como $f(x) = W x + b$. Está red cuenta con las siguientes partes $\mathbf{W} = \left[w_{0}^{T}, w_{1}^{T}, ..., w_{C}^{T}\right]$ es la matriz de vectores de peso, que viene dada la expresión $\mathbf{w_{j}} \in \mathbb{R}^{D}$. El vector de entrada es $\mathbf{x} \in \mathbb{R}^{D}$ y el $bias$ es un vector que está definido en el espacio $\mathbf{b} \in \mathbb{R}^{C}$
+% El proceso de reducción de dimensionalidad se lleva a cabo, para convertir el vector de características del espacio original en un nuevo espacio con un conjunto más pequeño, linealmente no correlacionadas mediante la siguiente función $f: \mathbb{R}^{D} \rightarrow \mathbb{R}^{C}$ con $C \ll D$, donde la red neuronal está expresada como $f(x) = W x + b$. Esta red cuenta con las siguientes partes $\mathbf{W} = \left[w_{0}^{T}, w_{1}^{T}, \cdots, w_{C}^{T}\right]$ es la matriz de vectores de peso, que viene dada la expresión $\mathbf{w_{j}} \in \mathbb{R}^{D}$. El vector de entrada es $\mathbf{x} \in \mathbb{R}^{D}$ y el $bias$ es un vector que está definido en el espacio $\mathbf{b} \in \mathbb{R}^{C}$
 
-\paragraph*{El perceptron simple}
+\paragraph*{El perceptrón simple}
 % TODO: Definición
 % TODO: Usos 
 % TODO: Algoritmo de entranmiento
@@ -387,15 +387,15 @@ La función umbral comun en \gls{LTU} es la función heaviside \ref{eq:heaviside
 
 Se puede emplear para una clasificación binaria lineal simple, mediante una combinación lineal de las entradas; si la operación supera el umbral, se obtendrá un resultado binario en un vector.
 
-El algoritmo de entrenamiento del Perceptrón se basa en ajustar los pesos de conexión entre las entradas y la neurona de salida para mejorar la precisión de las predicciones. Está inspirado en la regla de Hebb, que sugiere que las conexiones entre neuronas se fortalecen cuando una neurona activa repetidamente a otra.
+El algoritmo de entrenamiento del perceptrón se basa en ajustar los pesos de conexión entre las entradas y la neurona de salida para mejorar la precisión de las predicciones. Está inspirado en la regla de Hebb, que sugiere que las conexiones entre neuronas se fortalecen cuando una neurona activa repetidamente a otra.
 
-Primero inicializa los pesos, predice, evalua su error y actualización de los pesos para en la siguiente iteración minimizar su error.
+Primero inicializa los pesos, predice, evalúa su error y actualización de los pesos para en la siguiente iteración minimizar su error.
 
-Rosenblatt demostro que el algoritmo convergeria hacia una solución, esto es llamado el Teorema de convergencia del perceptrón \cite{geron2018neural}.
+Rosenblatt demostró que el algoritmo convergería hacia una solución, esto es llamado el Teorema de convergencia del perceptrón \cite{geron2018neural}.
 
 Marvin Minsky y Seymour encontraron una serie de debilidades que los perceptrones son incapaces de resolver, algunas de estas debilidades se pueden resolver apilando varios perceptrones, la \gls{ANN} resultante se le llama \gls{MLP}.
 
-Uno de los problemas clasicos que tenian los perceptrones simples era el problema de clasificación XOR, esto está representado en la Figura \ref{fig:problem-xor}. Como tal el perceptrón es un modelo que puede aprender funciones lineales, pero el problema XOR no es linealmente separable, lo que significa que no se puede trazar una línea recta para separar las dos clases (A y B) en el espacio de entrada binario de dos dimensiones.
+Uno de los problemas clásicos que tenían los perceptrones simples era el problema de clasificación XOR, esto está representado en la Figura \ref{fig:problem-xor}. Como tal, el perceptrón es un modelo que puede aprender funciones lineales, pero el problema XOR no es linealmente separable, lo que significa que no se puede trazar una línea recta para separar las dos clases (A y B) en el espacio de entrada binario de dos dimensiones.
 
 \begin{figure}[H]
     \centering
@@ -407,11 +407,11 @@ Uno de los problemas clasicos que tenian los perceptrones simples era el problem
 
 \paragraph*{El perceptron multicapa y retropropagación}
 
-Fue en 1986 cuando {D. E. Rumelhart} propuso la retropropagación junto a multiples capas para resolver el problema de clasificación XOR.
+Fue en 1986 cuando {D. E. Rumelhart} propuso la retro propagación junto a múltiples capas para resolver el problema de clasificación XOR.
 
-El proceso es el siguiente, por cada instancia de entrenamiento se calcula la salida de cada neurona en la capa consecutiva (paso hacia adelante). A continuación se mide el error de salida de la red (la diferencia entre la salida deseada y la de la red) calculará cuánto contribuyo cada neurona en la última capa oculta al error de cada neurona de salida. Se mide cuantas contribuciones de error provienen de cada neurona en la capa oculta anterior, así sucesivamente hasta que se llega a la capa de entrada(paso hacia atras). Se mide eficientemente el gradiente de error en todos los pesos de la conexión en la red propagando el gradiente de error hacia atras. \cite{geron2018neural}
+El proceso es el siguiente, por cada instancia de entrenamiento se calcula la salida de cada neurona en la capa consecutiva (paso hacia adelante). A continuación se mide el error de salida de la red (la diferencia entre la salida deseada y la de la red) calculará cuánto contribuyo cada neurona en la última capa oculta al error de cada neurona de salida. Se mide cuantas contribuciones de error provienen de cada neurona en la capa oculta anterior, así sucesivamente hasta que se llega a la capa de entrada(paso hacia atrás). Se mide eficientemente el gradiente de error en todos los pesos de la conexión en la red propagando el gradiente de error hacia atrás. \cite{geron2018neural}
 
-Este proceso funciona, ya que se cambió la función escalonada de las \gls{LTU} a una función logística Sigmoid, esto se requeria, ya que la función de paso contiene solo segmentos planos y por tanto no habia gradientes. Esto permitio que el descenso de gradiente pudiera ir progresando lentamente hasta converger. El algoritmo de retroalimentación se puede usar con otras funciones de activación que veremos más adelante.
+Este proceso funciona, ya que se cambió la función escalonada de las \gls{LTU} a una función logística Sigmoid, esto se requería, ya que la función de paso contiene solo segmentos planos y por tanto no había gradientes. Esto permitió que el descenso de gradiente pudiera ir progresando lentamente hasta converger. El algoritmo de retroalimentación se puede usar con otras funciones de activación que veremos más adelante.
 
 
 \subsubsection{El descenso de gradiente\label{sec:gradient-descent}}
@@ -422,14 +422,14 @@ Este proceso funciona, ya que se cambió la función escalonada de las \gls{LTU}
 % TODO: tipos de descenso
 % TODO: desafios (problema)
 
-El método de descenso de gradiente trata de encontrar un minimo en una función dada, ya sea local o global. El método usa el gradiente negativo ${-\nabla{f}}$, con este método obtenemos la dirección con el descenso máximo en los valores de la función, con esto buscamos encontrar la posición minima.
+El método de descenso de gradiente trata de encontrar un mínimo en una función dada, ya sea local o global. El método usa el gradiente negativo ${-\nabla{f}}$, con este método obtenemos la dirección con el descenso máximo en los valores de la función, con esto buscamos encontrar la posición mínima.
 
 En términos simples, el descenso de gradiente va ajustando iterativamente los valores de los parámetros en la dirección opuesta al gradiente de la función de costo. Al moverse en la dirección opuesta al gradiente, el algoritmo busca alcanzar el mínimo local o global de la función de costo.
 
 \begin{figure}[H]
     \centering
     \centerline{\includesvg[width=0.6\linewidth]{figures/chapter02/fx_optimizer.svg}}
-    \caption{Descenso de graidente\\Fuente: \href{https://fxdatalabs.com}{F(x) Data Labs Pvt. Ltd.}}
+    \caption{Descenso de gradiente\\Fuente: \href{https://fxdatalabs.com}{F(x) Data Labs Pvt. Ltd.}}
     \label{fig:gradient-descent}
 \end{figure}
 
@@ -450,9 +450,9 @@ En términos simples, el descenso de gradiente va ajustando iterativamente los v
 Hay tres variantes del algoritmo de aprendizaje de descenso de gradiente \cite{ibm-gradient-descent}.
 
 \begin{itemize}
-    \item \textbf{Descenso de gradiente por lotes}: suma el error para cada punto en un conjunto de entrenamiento, actualiza el modelo después de que todos los ejemplos de enetrenamiento han sido evaluados, esto es lo que se le conoce como épocas. Es un método eficiente computacionalmente, pero costoso para grandes conjuntos de datos, ya que requiere almacenar en memoria todos los datos, suele producir un gradiente de error estable y una convergencia, pero a veces ese punto de convergencia no es el ideal y encuentra el mínimo local frente al global.
-    \item \textbf{Descenso de gradiente estocástico}: en cada época actualiza los parametros del ejemplo de entrenamiento, esto reduce la necesidad de memoria, la actualización proporciona velocidad y detalles, aunque requieren un coste computacional mayor. Los gradientes son más ruidosos por sus actualizaciones frecuentes, esto le permite salir de minimos locales.
-    \item \textbf{Descenso de gradiente por mini lotes}: combina aspectos de del descenso de gradiente por lotes como el estocástico. Divide el conjunto de entrenamiento en pequeños lotes y realiza actualizaciones en cada uno de estos lotes. Esto permite tener un equilibrio entre eficiencia computacional y valocidad del descenso de gradiente.
+    \item \textbf{Descenso de gradiente por lotes}: suma el error para cada punto en un conjunto de entrenamiento, actualiza el modelo después de que todos los ejemplos de entrenamiento han sido evaluados, esto es lo que se le conoce como épocas. Es un método eficiente computacionalmente, pero costoso para grandes conjuntos de datos, ya que requiere almacenar en memoria todos los datos, suele producir un gradiente de error estable y una convergencia, pero a veces ese punto de convergencia no es el ideal y encuentra el mínimo local frente al global.
+    \item \textbf{Descenso de gradiente estocástico}: en cada época actualiza los parámetros del ejemplo de entrenamiento, esto reduce la necesidad de memoria, la actualización proporciona velocidad y detalles, aunque requieren un coste computacional mayor. Los gradientes son más ruidosos por sus actualizaciones frecuentes, esto le permite salir de mínimos locales.
+    \item \textbf{Descenso de gradiente por mini lotes}: combina aspectos de del descenso de gradiente por lotes como el estocástico. Divide el conjunto de entrenamiento en pequeños lotes y realiza actualizaciones en cada uno de estos lotes. Esto permite tener un equilibrio entre eficiencia computacional y velocidad del descenso de gradiente.
 \end{itemize}
 
 
@@ -461,21 +461,21 @@ Hay tres variantes del algoritmo de aprendizaje de descenso de gradiente \cite{i
     \footnotesize
     \begin{tabularx}{0.95\linewidth}{|p{3cm}|X|X|X|}
         \hline
-        \textbf{Aspecto}              & \textbf{Descenso de Gradiente por Lotes}          & \textbf{Descenso de Gradiente Estocástico}           & \textbf{Descenso de Gradiente por Mini Lotes}   \\
+        \textbf{Aspecto}              & \textbf{Descenso de Gradiente por Lotes}           & \textbf{Descenso de Gradiente Estocástico}           & \textbf{Descenso de Gradiente por Mini Lotes}   \\
         \hline
-        Eficiencia computacional      & Eficiente para conjuntos de datos pequeños.       & Menos eficiente para grandes conjuntos de datos.     & Equilibrio entre eficiencia y velocidad.        \\
+        Eficiencia computacional      & Eficiente para conjuntos de datos pequeños.        & Menos eficiente para grandes conjuntos de datos.     & Equilibrio entre eficiencia y velocidad.        \\
         \hline
-        Coste computacional           & Puede ser lento para grandes conjuntos de datos.  & Más rápido que por lotes, pero aún puede ser lento.  & Mejor tiempo de procesamiento que por lotes.    \\
+        Coste computacional           & Puede ser lento para grandes conjuntos de datos.   & Más rápido que por lotes, pero aún puede ser lento.  & Mejor tiempo de procesamiento que por lotes.    \\
         \hline
-        Coste en memoria              & Requiere almacenar todo el conjunto en memoria.   & Solo necesita almacenar un ejemplo a la vez.         & Menos demandante que por lotes, pero eficiente. \\
+        Coste en memoria              & Requiere almacenar todo el conjunto en memoria.    & Solo necesita almacenar un ejemplo a la vez.         & Menos demandante que por lotes, pero eficiente. \\
         \hline
-        Convergencia del Modelo       & Propenso a converger hacia mínimos locales.       & Puede saltar mínimos locales pero es ruidoso.        & Convergencia más estable que SGD, menos ruido.  \\
+        Convergencia del Modelo       & Propenso a converger hacia mínimos locales.        & Puede saltar mínimos locales pero es ruidoso.        & Convergencia más estable que SGD, menos ruido.  \\
         \hline
-        Sensibilidad a datos ruidosos & Menos sensible debido al promedio de errores.     & Más sensible debido a actualizaciones frecuentes.    & Menos sensible que SGD, gracias al promedio.    \\
+        Sensibilidad a datos ruidosos & Menos sensible debido al promedio de errores.      & Más sensible debido a actualizaciones frecuentes.    & Menos sensible que SGD, gracias al promedio.    \\
         \hline
-        Tamaño del conjunto de datos  & Funciona bien para conjuntos de datos pequeños.   & Buen rendimiento para distitos tamaños.              & Equilibrio, adecuado para diferentes tamaños.   \\
+        Tamaño del conjunto de datos  & Funciona bien para conjuntos de datos pequeños.    & Buen rendimiento para distintos tamaños.             & Equilibrio, adecuado para diferentes tamaños.   \\
         \hline
-        Precisión del modelo          & Convergencia más estable, pero a veces subóptima. & Puede converger más rápidamente, pero menos estable. & Balance entre estabilidad y rapidez.            \\
+        Precisión del modelo          & Convergencia más estable, pero a veces sub óptima. & Puede converger más rápidamente, pero menos estable. & Balance entre estabilidad y rapidez.            \\
         \hline
     \end{tabularx}
     \caption{Tabla comparativa de los tipos de descenso de gradiente}
@@ -486,7 +486,7 @@ Hay tres variantes del algoritmo de aprendizaje de descenso de gradiente \cite{i
 % TODO: no creo que sea necesario explicar mínimos locales y puntos de silla.
 
 \paragraph*{Problema de desvanecimiento y explosión de gradiente}
-Hablaremos primero del desvanecimiento de gradiente, esto ocurre durante la retropropagación, ya que al movernos hacia atras el gradiente sigue haciendose más pequeño, esto hace que las capas anteriores de la red aprendan más lentamente que las posteriores. A medida que el algoritmo itera los cambios se hacen insignificantes lo que hace que el algoritmo se estanque.
+Hablaremos primero del desvanecimiento de gradiente, esto ocurre durante la retro propagación, ya que al movernos hacia atrás el gradiente sigue haciéndose más pequeño, esto hace que las capas anteriores de la red aprendan más lentamente que las posteriores. A medida que el algoritmo itera los cambios se hacen insignificantes, lo que hace que el algoritmo se estanque.
 
 El problema de la explosión de gradiente es lo contrario, el gradiente se hace demasiado grande creando un modelo inestable. Los pesos del modelo crecerán y eventualmente se representarán como \texttt{NaN}.
 
@@ -542,7 +542,7 @@ A la salida de una neurona artificial debe existir un filtro o umbral que modifi
 Esto introduce no linealidad en el modelo, permitiendo que la red aprenda patrones complejos y mejora su capacidad de representación.
 
 Existen muchas funciones de activación que modifican la red neuronal de distintas formas.
-Se suelen clasificar en dos categorias, funciones de activación de suma ponderada, no lineales u otras.
+Se suelen clasificar en dos categorías, funciones de activación de suma ponderada, no lineales u otras.
 
 % TODO: extender
 
@@ -685,7 +685,7 @@ Se suelen clasificar en dos categorias, funciones de activación de suma pondera
 \subsubsection{Tipos de capas}
 % region Tipos de capas
 % TODO: Capas de entrada, ocultas y de salida.
-% TODO: Capas densas, no lineales con y sin pesos
+% TODO: Capas densas, no lineales, con y sin pesos
 % TODO: Usos, ventajas y desventajas, paralelización
 
 % Non-linear Activations (weighted sum, nonlinearity)
@@ -705,7 +705,7 @@ Se suelen clasificar en dos categorias, funciones de activación de suma pondera
 % Shuffle Layers
 
 
-Existen una gran variedad de capas con distintos propositos, permiten organizar y estructurar el funcionamiento de la red durante el proceso de aprendizaje. Cada capa influye con un proposito específico, contribuyendo de manero única al funcionamiento global de la red.
+Existen una gran variedad de capas con distintos propósitos, permiten organizar y estructurar el funcionamiento de la red durante el proceso de aprendizaje. Cada capa influye con un propósito específico, contribuyendo de manera única al funcionamiento global de la red.
 
 Algunas de las características de las capas más famosas son las siguientes.
 
@@ -734,12 +734,12 @@ Algunas de las características de las capas más famosas son las siguientes.
             \item Son la base del funcionamiento en tareas de clasificiación de imágenes o de segmentación de imágenes.
         \end{itemize}
     \item \textbf{Capas de Pooling (Pooling Layers)}:
-          % se especializan en comprimir la información de las imágenes preservando la abstracción de las características más importantes, ayudan a recucir el {overfitting}, existen multiples variantes cómo \texttt{nn.MaxPool1d} o \texttt{nn.AvgPool1d}.
+          % se especializan en comprimir la información de las imágenes preservando la abstracción de las características más importantes, ayudan a reducir el {overfitting}, existen múltiples variantes cómo \texttt{nn.MaxPool1d} o \texttt{nn.AvgPool1d}.
     \item[]
         \begin{itemize}
-            \item Comprimen la dimensionalidad de las características extraidas de las capas convolucionales. Se usan entre capas convolucionales.
-            \item Existen multiples variantes cómo \texttt{nn.MaxPool1d} o \texttt{nn.AvgPool1d} que seleccionan los valores más significativos de una región dada.
-            \item Ayudan a recucir el {overfitting}, simplificar la representación de características, reducir el coste computacional, etc.
+            \item Comprimen la dimensionalidad de las características extraídas de las capas convolucionales. Se usan entre capas convolucionales.
+            \item Existen múltiples variantes cómo \texttt{nn.MaxPool1d} o \texttt{nn.AvgPool1d} que seleccionan los valores más significativos de una región dada.
+            \item Ayudan a reducir el {overfitting}, simplificar la representación de características, reducir el coste computacional, etc.
         \end{itemize}
     \item \textbf{Capas de Padding (Paddings Layers)}:
           % se usan para ajustar las dimensiones de los datos de entrada para que sean compatibles con ciertas operaciones, mejoran el rendimiento.
@@ -761,15 +761,15 @@ Algunas de las características de las capas más famosas son las siguientes.
           % se usan para entrenamientos más estables eliminando dependencias, evitan el sobreajuste, esto lo hacen desactivando de forma estocastica ciertas neuronas en las distintas iteraciones.
     \item[]
         \begin{itemize}
-            \item Se desactivan aleatoriamente un porcentaje de neuronas en la capa esto evita dependencias en el entrenamiento, además de generalizar mejor.
+            \item Se desactivan aleatoriamente un porcentaje de neuronas en la capa, esto evita dependencias en el entrenamiento, además de generalizar mejor.
             \item Es una técnica de regularización que reduce el {overfitting}, se usan para entrenamientos más estables eliminando dependencias.
         \end{itemize}
     \item \textbf{Capas Recurrentes (Recurrent Layers)}:
-          % se usan para procesar datos secuenciales o de series temporales, su característica principal son que tienen memoria, exiten distintas variantes en función de cuando tome el contexto, unidireccionales si solo cuenta el contexto previo o bidireccionales si consideran el previo y posterior. Las más usadas son \texttt{nn.RNN}, \texttt{nn.LSTM} y \texttt{nn.GRU}
+          % se usan para procesar datos secuenciales o de series temporales, su característica principal son que tienen memoria, existen distintas variantes en función de cuando tome el contexto, unidireccionales si solo cuenta el contexto previo o bidireccionales si consideran el previo y posterior. Las más usadas son \texttt{nn.RNN}, \texttt{nn.LSTM} y \texttt{nn.GRU}
     \item[]
         \begin{itemize}
-            \item Diseñaas para manejar datos secuenciales o de series temporales.
-            \item Incorporan conexiones ciclicas que les permiten propagar información de un paso de tiempo a otro, las más usadas son \texttt{nn.RNN}, \texttt{nn.LSTM} y \texttt{nn.GRU}.
+            \item Diseñadas para manejar datos secuenciales o de series temporales.
+            \item Incorporan conexiones cíclicas que les permiten propagar información de un paso de tiempo a otro, las más usadas son \texttt{nn.RNN}, \texttt{nn.LSTM} y \texttt{nn.GRU}.
             \item Las capas recurrentes tienen memoria y contexto considerando los estados previos, son útiles para traducción de idiomas, procesamiento del lenguaje natural y reconocimiento de voz.
         \end{itemize}
 \end{itemize}
@@ -803,16 +803,16 @@ Se suele considerar el número de capas, número de neuronas por capa, tipo de c
 % TODO: Arquitecturas derivadas
 % README: https://arxiv.org/ftp/arxiv/papers/2302/2302.09346.pdf
 
-La arquitectura \gls{GAN} está formada por dos redes neuronales artificiales, una ``generadora ($G$)'' y otra ``discriminadora ($D$)''. La red $G$ se encarga de generar instancias del mismo dominio que el conjunto de datos, mientras que la red $D$ es la encargada de aceptar o rechazar si los datos generados por la red $G$ son reales o falsos. Ambas redes se entrenan conjuntamente de manera que $G$ minimize las detecciones de $D$, y a su vez $D$ detecte las instancias generadas por $G$ \cite{de2023redes}.
+La arquitectura \gls{GAN} está formada por dos redes neuronales artificiales, una ``generadora ($G$)'' y otra ``discriminadora ($D$)''. La red $G$ se encarga de generar instancias del mismo dominio que el conjunto de datos, mientras que la red $D$ es la encargada de aceptar o rechazar si los datos generados por la red $G$ son reales o falsos. Ambas redes se entrenan conjuntamente de manera que $G$ minimiza las detecciones de $D$, y a su vez $D$ detecte las instancias generadas por $G$ \cite{de2023redes}.
 
 \begin{figure}[H]
     \centering
-    \centerline{\includesvg[width=1\linewidth]{figures/chapter02/GANs.drawio.svg}}
+    \centerline{\includesvg[width=1\linewidth]{figures/chapter02/GANs-original.drawio.svg}}
     \caption{Arquitectura de las redes neuronales generativas adversariales.\\Fuente: Elaboración propia.}
     \label{fig:gans-architecture}
 \end{figure}
 
-Esto está representado en la Figura \ref{fig:gans-architecture}, donde podemos observar las distintas partes de una red \gls{GAN}. Además podemos observar la distribución de probabilidad aleatoria representada como $p_{z}$. El objetivo de la red es la optimización de la distribución de probabilidad de la red generativa $P_{data}$ sea similar a $G(z)$, es decir $G(z)~\sim~p_{g}$.
+Esto está representado en la Figura \ref{fig:gans-architecture}, donde podemos observar las distintas partes de una red \gls{GAN}. Además, podemos observar la distribución de probabilidad aleatoria representada como $p_{z}$. El objetivo de la red es la optimización de la distribución de probabilidad de la red generativa $P_{data}$ sea similar a $G(z)$, es decir, $G(z)~\sim~p_{g}$.
 
 \begin{equation}
     \min_{G}~\max_{D}~~\mathbb{E}_{x\sim{}p_{r}} \log\left[D(x)\right] + \mathbb{E}_{z \sim{}p_{z}} \log\left[1-D(G(z))\right]
@@ -826,7 +826,7 @@ La función objetiva está definida por la ecuación \ref{eq:gan-2}, nos referim
     \label{eq:gan-2}
 \end{equation}
 
-Para que la red $D$ funcione debera recibir tanto datos originales $x_{real}$ como datos generados por $G$, $x_{fake}$, $G$ se optimiza a la misma vez para que $D$ no pueda detectar los datos generados por $G$, este proceso está representado en las ecuaciones \ref{eq:gan-3} y \ref{eq:gan-4}.
+Para que la red $D$ funcione deberá recibir tanto datos originales $x_{real}$ como datos generados por $G$, $x_{fake}$, $G$ se optimiza a la misma vez para que $D$ no pueda detectar los datos generados por $G$, este proceso está representado en las ecuaciones \ref{eq:gan-3} y \ref{eq:gan-4}.
 
 \begin{equation}
     \nabla_{\theta_{D}} \frac{1}{m} \sum_{i=1}^{m} \left[ \log D(x^{(i)}) + \log(1-D(G(z^{(i)})))  \right]
@@ -839,13 +839,13 @@ Para que la red $D$ funcione debera recibir tanto datos originales $x_{real}$ co
 \end{equation}
 
 % TODO: revisar este texto
-Este proceso ``$\min\max$'' hace que la red $G$ mejore la generación de instacias haciendola más parecídas, aunque tambien puede generar instancias irreales que aunque superan la validación del discriminador no son fisicamente viables en un contexto real.
+Este proceso ``$\min\max$'' hace que la red $G$ mejore la generación de instancias haciéndola más parecidas, aunque también puede generar instancias irreales que aunque superan la validación del discriminador no son físicamente viables en un contexto real.
 
-Las \gls{GAN} básicas utilizan una clasificiación binaria típica en la red ${D}$.
+Las \gls{GAN} básicas utilizan una clasificación binaria típica en la red ${D}$.
 
 \paragraph*{Usos y aplicaciones}
 
-Las redes \gls{GAN} se han usado principalmente para la generacion de imágenes, aunque puede generar instancias sinteticas de muchos dominios, previamente existian los modelos generativos \gls{VAE}.
+Las redes \gls{GAN} se han usado principalmente para la generación de imágenes, aunque puede generar instancias sintéticas de muchos dominios, previamente existían los modelos generativos \gls{VAE}.
 
 % https://paperswithcode.com/method/vae
 % https://paperswithcode.com/method/gan
@@ -857,9 +857,9 @@ Las redes \gls{GAN} se han usado principalmente para la generacion de imágenes,
 % https://sh-tsang.medium.com/review-lsgan-least-squares-generative-adversarial-networks-gan-bec12167e915
 
 \begin{itemize}
-    \item Sintesis de imagenes
+    \item Síntesis de imágenes
     \item Imagen a imagen
-    \item Reescalado de imágenes
+    \item Re escalado de imágenes
     \item Detección de desenfoque
     \item Detección de manipulación de la cámara
     \item Codificación de vídeo
@@ -871,7 +871,7 @@ Las redes \gls{GAN} se han usado principalmente para la generacion de imágenes,
 
 
 
-% \paragraph*{Topologias derivadas}
+% \paragraph*{Topologías derivadas}
 % TODO: Referencias para cada uno
 
 \subparagraph*{Semi-supervised Generative Adversarial Network (SGAN)}
@@ -879,29 +879,58 @@ Las redes \gls{GAN} se han usado principalmente para la generacion de imágenes,
 % https://towardsdatascience.com/semi-supervised-learning-with-gans-9f3cb128c5e
 % https://archive.is/HCS4V
 % https://arxiv.org/abs/1606.01583
-En las redes \gls{SGAN} \cite{SGAN-odena2016semisupervised}, el discriminador cuenta con datos semi supervisados, se realizan clasificaciones con la función \texttt{nn.Softmax} para otimizar el discriminador.
-El uso de estos datos semi supervisados y la mejora del clasificiador o predictor en la red $D$ mejoran los resultados de ambas redes.
+En las redes \gls{SGAN} \cite{SGAN-odena2016semisupervised}, el discriminador cuenta con datos semi supervisados, se realizan clasificaciones con la función \texttt{nn.Softmax} para optimizar el discriminador.
+El uso de estos datos semi supervisados y la mejora del clasificador o predictor en la red $D$ mejoran los resultados de ambas redes.
 
-\subparagraph*{Conditional Generative Adversarial Network (CGAN)}
+
+
+
+
+% \subparagraph*{Conditional Generative Adversarial Network (U-Net-GAN)}
+% https://arxiv.org/abs/2002.12655
+% https://paperswithcode.com/method/u-net-gan
+% https://github.com/boschresearch/unetgan
+% https://serp.ai/u-net-generative-adversarial-network/
+
+\subparagraph*{Conditional Generative Adversarial Network (cGAN)}
 % https://towardsdatascience.com/cgan-conditional-generative-adversarial-network-how-to-gain-control-over-gan-outputs-b30620bd0cc8
 % https://archive.is/XTMWw
 % https://es.mathworks.com/help/deeplearning/ug/train-conditional-generative-adversarial-network.html
 % https://github.com/SolClover/Art054_NN_cGAN
 % https://arxiv.org/abs/2103.14884
 % https://arxiv.org/abs/2206.13676
+% https://arxiv.org/abs/1611.07004
 % Pix2Pix
-Las redes \gls{CGAN} \cite{CGAN-zheng2021continuous,CGAN-li2022ttscgan,CGAN}
-% TODO: Hacer grafico https://datascientest.com/en/wp-content/uploads/sites/9/2023/09/cgan-1.webp
+Las redes \gls{cGAN} \cite{cGAN-zheng2021continuous,cGAN-li2022ttscgan,cGAN}
+% TODO: Hacer gráfico https://datascientest.com/en/wp-content/uploads/sites/9/2023/09/cgan-1.webp
+
+
+
+
+
+
+
+\begin{figure}[H]
+    \centering
+    \centerline{\includesvg[width=1\linewidth]{figures/chapter02/GANs-cGAN.drawio.svg}}
+    \caption{Arquitectura Conditional GAN ({cGAN})\\Fuente: Elaboración propia}
+    \label{fig:}
+\end{figure}
 
 
 \subparagraph*{Couple Generative Adversarial Network (CoGAN)}
 % https://medium.com/codex/review-cogan-coupled-generative-adversarial-networks-gan-273f70b340af
 
+
 \subparagraph*{Cycle Generative Adversarial Network (CycleGAN)}
 % https://paperswithcode.com/method/cyclegan
 % https://arxiv.org/abs/1703.10593v7
 % https://www.tensorflow.org/tutorials/generative/cyclegan?hl=es-419
-\gls{CycleGAN} \cite{CycleGAN-zhu2020unpaired} es un método derivado de SPEED
+% https://junyanz.github.io/CycleGAN/
+% https://hardikbansal.github.io/CycleGANBlog/
+Las redes \gls{CycleGAN} \cite{CycleGAN-zhu2020unpaired} es un método que puede extraer las características de un dominio y descubre como incorporar esas características a otro dominio con la ventajas de que no necesita de datos de entrenamiento emparejados.
+
+\gls{CycleGAN} es muy similar a \gls{Pix2Pîx} \cite{pix2pix-isola2018imagetoimage} que a su vez deriva de las redes \gls{cGAN}
 
 
 \subparagraph*{Deep Convolutional Generative Adversarial Network (DCGAN)}
@@ -911,10 +940,14 @@ Las redes \gls{CGAN} \cite{CGAN-zheng2021continuous,CGAN-li2022ttscgan,CGAN}
 % https://github.com/sthalles/blog-resources/blob/master/dcgan/DCGAN.ipynb
 % https://archive.is/MgQCM
 % FGSM  -->  https://digibug.ugr.es/handle/10481/72468
-Las redes \gls{DCGAN} \cite{DCGAN-radford2016unsupervised,DCGAN-viola2020faultface,DCGAN-aslan2019deep,DCGAN-curto2020highresolution} son una de las redes generativas más famosas y usadas dentro de su ambito
+Las redes \gls{DCGAN} \cite{DCGAN-radford2016unsupervised,DCGAN-viola2020faultface,DCGAN-aslan2019deep,DCGAN-curto2020highresolution} son una de las redes generativas más famosas y usadas dentro de su ámbito
 
 % Las GAN convolucionales tradicionales generan detalles de alta resolución en función únicamente de puntos espacialmente locales en mapas de características de menor resolución. 
 Estas redes generan detalles de alta resolución partiendo de puntos espacialmente locales de un mapa de características reducido.
+
+El discriminador es un clasificador de imágenes basado en \gls{CNN}, frente al generador que a partir de una semilla (ruido) generara imágenes apilando distintas capas
+
+
 
 \subparagraph*{Least Square Generative Adversarial Network (LSGAN)}
 % https://paperswithcode.com/method/lsgan
@@ -956,7 +989,7 @@ Las redes \gls{SRGAN} \cite{SRGAN-ledig2017photorealistic} son una variante de l
 % https://arxiv.org/abs/1805.08318
 % https://paperswithcode.com/method/sagan
 En las redes \gls{SAGAN} \cite{SAGAN-zhang2018selfattention} permiten modelar dependencias de largo alcance usando técnicas de atención para tareas de generación de imágenes.
-Estas redes permiten generar detalles más especificos usando pistas del mapa de características, la red $D$ puede comprobar que los rasgos detallados de las instancias generadas son coherentes entre sí.
+Estas redes permiten generar más detalles usando pistas del mapa de características, la red $D$ puede comprobar que los rasgos detallados de las instancias generadas son coherentes entre sí.
 
 % endregion Redes generativas adversariales
 
@@ -983,7 +1016,7 @@ Estas redes permiten generar detalles más especificos usando pistas del mapa de
 % Dentro de la inteligencia artificial \gls{AI} encontramos el aprendizaje automático \gls{ML} y dentro el aprendizaje profundo \gls{DL}.
 % Para el desarrollo de este capítulo limitaremos el alcance del estado del arte de la seguridad informática a los campos relacionados con la inteligencia artificial.
 
-El estado del arte de la seguridad informática es muy complejo, ya que los delincuentes informáticos adoptan nuevas técnicas y tácticas para eludir las medidas de seguridad, esto hace que las ciber amenazas están en constante evolución, también amenaza a las tecnologías que emplean la inteligencia artificial y redes neuronales.
+El estado del arte de la seguridad informática es muy complejo, ya que los delincuentes informáticos adoptan nuevas técnicas y tácticas para eludir las medidas de seguridad, esto hace que las amenazas informáticas estén en constante evolución, también amenaza a las tecnologías que emplean la inteligencia artificial y redes neuronales.
 
 A continuación, se explicarán las distintas amenazas que tiene una red neuronal y como puede ser atacada o implementar defensas, posteriormente analizaremos el estado del arte de la inteligencia artificial que se emplea para mejorar la seguridad informática de los dispositivos y de los usuarios.
 
