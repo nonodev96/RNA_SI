@@ -1,0 +1,137 @@
+% ===================================
+% ===================================
+\subsection{Defensas en \textit{deep learning}} \label{sec:defense}
+% region subsection Defensas contra los ataques
+\subsubsection{Pre procesamiento}
+% region subsubsection Preprocesamiento
+% endregion subsubsection Preprocesamiento
+\subsubsection{Post procesamiento}
+\subsubsection{Entrenamiento}
+\subsubsection{Transformación}
+\paragraph{Evasión}
+\paragraph{Envenenamiento}
+\subsubsection{Detector}
+\paragraph{Evasión}
+\paragraph{Envenenamiento}
+
+% endregion subsection Defensas contra los ataques
+
+\subsection{Métricas en los ataques adversariales}
+% region subsection Métricas en los ataques adversariales
+% DEFINICIÓN DE MÉTRICAS explica que es la {L}_{2}  y {L}_{\infty}
+
+
+
+
+
+Existen múltiples métricas para evaluar \acrshort{ANN}, entre ellas nos interesan las que
+
+% https://www.youtube.com/watch?v=PwQEPYe_g1E
+La definición de la Función Lipschitz nos indica que una función es continua y uniforme si ${\exists~L >~0~\forall x_{1}, x_{2} \in X \left\lvert f(x_{1})-f(x_{2}) \right\rvert \leq L \left\lvert x_{1} - x_{2}\right\rvert}$ entonces ${f(n)}$ es una función de Lipschitz.
+
+\begin{equation}
+    \begin{split}
+        \text{Si} x_{1} \neq x_{2}                              \\
+        \frac{ f(x_{1}) - f(x_{2}) }{ x_{1} - x_{2} } \leq L
+    \end{split}
+\end{equation}
+
+\paragraph{Métricas de robustez}
+
+En el artículo \cite{weng2018evaluating} analizan el estado de las medidas de robustez y su poca aparición en publicaciones, es por ello que plantean un nuevo enfoque usando la estimación de la constante local de Lipschitz para un análisis de robustez, proponen el uso de la Teoría de Valores Extremos para una evaluación eficiente. Los investigadores la han definido como \gls{CLEVER} independiente de los ataques y computacionalmente eficiente para redes neuronales grandes, dando buenos resultados como las pruebas de robustez indicada por las normas ${\ell_{2}}$ e ${\ell_{\infty}}$. \gls{CLEVER} se considera la primera métrica de robustez independiente de ataques aplicable a cualquier red neuronal clasificadora.
+
+
+
+\paragraph{Certificación}
+
+\paragraph{Verification}
+
+
+% endregion subsection Métricas en los ataques adversariales
+
+\subsection{Redes neuronales en \textit{Red team} y \textit{Blue team}}
+% region subsection Redes neuronales en Red team y Blue team
+
+Un buen símil entre la seguridad informática clásica y la seguridad en redes neuronales son los conceptos de equipos de ataque y defensa (``red team'' y ``blue team'').
+
+\begin{figure}[H]
+    \centering
+    \centerline{\includesvg[width=1\columnwidth]{figures/chapter02/ART-for-red-and-blue-teams.drawio.svg}}
+    \caption{Ataques y defensas en redes neuronales.\newline{}Fuente: Elaboración propia}
+    \label{fig:art-for-red-and-blue-teams}
+\end{figure}
+
+La idea detrás del aprendizaje automático es la de poder predecir modelos predictivos, para ello se usan conjuntos de datos para el entrenamiento.
+
+Los conjuntos de datos se han de procesar, ya que suelen contener mucho ruido, es decir, información muy poco valiosa, errónea o, por el contrario, una alta dimensionalidad de los datos que puede ser contraproducente por no poder reproducir esas medidas o por la poca información que aportan.
+
+Los ataques al aprendizaje automático o profundo suelen estar dirigidos a las distintas etapas de creación y uso de un modelo.
+
+\begin{itemize}
+    \item Alteración de los datos de entrada.
+    \item Alteración del proceso de aprendizaje.
+    \item Extracción de los datos de entrenamiento.
+    \item Bloqueo del modelo.
+\end{itemize}
+
+Durante el transcurso del trabajo discutiremos los siguientes ataques y defensas previamente en la sección \nameref{ch:2:section:state-of-the-art:computer-security-in-neural-networks} que se pueden usar en los modelos.
+
+\begin{itemize}
+    \item Envenenamiento de datos.
+    \item Puerta trasera.
+    \item Extracción de datos
+    \item Ingeniería inversa.
+    \item Evasión.
+\end{itemize}
+
+Se puede ser categorizar la seguridad de los modelos con el modelado \gls{STRIDE}\footnote{Modelado de amenazas de \href{https://learn.microsoft.com/es-es/azure/security/develop/threat-modeling-tool-threats}{microsoft}} o con la matriz \gls{MITRE}.
+
+\begin{table}[H]
+    \centering
+    \small
+    \begin{tabularx}{\textwidth}{|l|X|}
+        \hline
+        \textbf{Amenaza}    & \textbf{Tipo de ataque}                                           \\
+        \hline
+        Corrupción de datos & Ataques de envenenamiento de datos, ataques de puerta trasera     \\
+        Extracción de datos & Ataques de inferencia de membresía, ataques de ingeniería inversa \\
+        Denegación          & Ataques de envenenamiento de datos                                \\
+        \hline
+    \end{tabularx}
+    \caption{Amenazas STRIDE relacionadas con la seguridad de la IA}
+    \label{tab:amenazas}
+\end{table}
+
+% endregion subsection Redes neuronales en Red team y Blue team
+
+\subsection{Las redes neuronales para la seguridad informática}
+% region subsection Las redes neuronales para la seguridad informática
+% TODO: aplicaciones reales de ciberseguridad que usan inteligencia artificial 
+
+
+
+% endregion subsection Las redes neuronales para la seguridad informática
+
+
+\subsection{Normativa y estándares}
+\textattachfile[color=0 0 1]{assets/cellar_e0649735-a372-11eb-9585-01aa75ed71a1.0008.02_DOC_1.pdf}{REGLAMENTO DEL PARLAMENTO EUROPEO Y DEL CONSEJO}
+
+\textattachfile[color=0 0 1]{assets/cellar_e0649735-a372-11eb-9585-01aa75ed71a1.0008.02_DOC_2.pdf}{REGLAMENTO DEL PARLAMENTO EUROPEO Y DEL CONSEJO}
+
+
+% https://eur-lex.europa.eu/resource.html?uri=cellar:e0649735-a372-11eb-9585-01aa75ed71a1.0008.02/DOC_1&format=PDF
+% https://eur-lex.europa.eu/resource.html?uri=cellar:e0649735-a372-11eb-9585-01aa75ed71a1.0008.02/DOC_2&format=PDF
+
+% Según la unión europea toda la seguridad es este apartado :ok: 
+% (51) La ciberseguridad es fundamental para garantizar que los sistemas de IA resistan a las actuaciones de terceros maliciosos que, aprovechando las vulnerabilidades del sistema, traten de alterar su uso, conducta o funcionamiento o de poner en peligro sus propiedades de seguridad. Los ciberataques contra sistemas de IA pueden dirigirse contra elementos específicos de la IA, como los conjuntos de datos de entrenamiento (p. ej., contaminación de datos) o los modelos entrenados (p. ej., ataques adversarios), o aprovechar las vulnerabilidades de los elementos digitales del sistema de IA o la infraestructura de TIC subyacente. Por lo tanto, para asegurar un nivel de ciberseguridad adecuado a los riesgos, los proveedores de sistemas de IA de alto riesgo deben adoptar medidas adecuadas teniendo también en cuenta, cuando proceda, la infraestructura de TIC subyacente.
+
+% https://www.youtube.com/@felipebravom
+
+% Feb 1990: Generative Adversarial Networks / Curiosity Generative Adversarial Networks (GANs) have become very popular.[MOST] They were first published in 1990 in Munich under the moniker Artificial Curiosity. [AC90-20][GAN1] Two dueling NNs (a probabilistic generator and a predictor) are trying to maximize each other's loss in a minimax game.[AC](Sec. 1) The generator (called the controller) generates probabilistic outputs (using stochastic units[AC90] like in the much later StyleGANs[GAN2]). The predictor (called the world model) sees the outputs of the controller and predicts environmental reactions to them. Using gradient descent, the predictor NN minimizes its error, while the generator NN tries to make outputs that maximize this error: one net's loss is the other net's gain.[AC90] (The world model can also be used for continual online action planning.[AC90][PLAN2-3][PLAN])
+% 4 years before a 2014 paper on GANs,[GAN1] my well-known 2010 survey[AC10] summarised the generative adversarial NNs of 1990 as follows: a "neural network as a predictive world modelis used to maximize the controller's intrinsic reward, which is proportional to the model's prediction errors" (which are minimized).
+% The 2014 GANs are an instance of this where the trials are very short (like in bandit problems) and the environment simply returns 1 or 0 depending on whether the controller's (or generator's) output is in a given set.[AC20][AC][T22](Sec. XVII)
+% Other early adversarial machine learning settings[S59][H90] were very different—they neither involved unsupervised NNs nor were about modeling data nor used gradient descent.
+% The 1990 principle has been widely used for exploration in Reinforcement Learning[SIN5][OUD13] [PAT17][BUR18] and for synthesis of realistic images,[GAN1,2] although the latter domain was recently taken over by Rombach et al.'s Latent Diffusion, another method published in Munich,[DIF1] building on Jarzynski's earlier work in physics from the previous millennium[DIF2]  and more recent papers.[DIF3-5]
+% In 1991, I published yet another ML method based on two adversarial NNs called Predictability Minimization for creating disentangled representations of partially redundant data, applied to images in 1996.
+
+% endregion subsection Normativa y estándares

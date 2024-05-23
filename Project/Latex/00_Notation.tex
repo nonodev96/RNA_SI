@@ -18,7 +18,7 @@
             $ \mathbb{R} $      & Números reales                                                                                                    \\
             $ \mathbb{C} $      & Números complejos                                                                                                 \\
             $ R^{n} $           & Espacio vectorial $n$-dimensional de números reales                                                               \\
-            $ \epsilon $        & Para cantidades, artbitrariamente pequeñas                                                                        \\
+            $ \epsilon $        & Para cantidades, arbitrariamente pequeñas.                                                                        \\
             \hline
         \end{tabularx}
         \caption{Notación números y arrays}
@@ -34,7 +34,7 @@
             \textbf{Notación}                                                 & \textbf{Definición}                                                 \\
             \hline
             % Notación de vectores y matrices
-            $ \mathVector{a} = [a_{i}]_{i=1, ~\ldots, n} $                    & Vectores definidos en minuscula, negrita y cursiva                  \\
+            $ \mathVector{a} = [a_{i}]_{i=1, ~\ldots, n} $                    & Vectores definidos en minúscula, negrita y cursiva                  \\
             $ \mathMatrix{A} = [a_{i,j}]_{i=1, ~\ldots, n, j=1, ~\ldots, m} $ & Matrices definidas en mayúscula, negrita y cursiva                  \\
             $ \mathTensor{A} $                                                & Tensores definidos en mayúscula, negrita y en estilo sans serif     \\
             \hline
@@ -65,7 +65,7 @@
             $ \underline{0}_{n} $ & Vector de ceros de tamaño $ n $                                                                                      \\
             $ 1_{n,m} $           & Matriz de unos de tamaño $ n \times m $                                                                              \\
             $ \underline{1}_{n} $ & Vector de unos de tamaño $n $                                                                                        \\
-            $ e_{i} $             & Vector estandar o vector canonico.\newline i.e. \scriptsize{${ v_{x} = (1,0,0), v_{y} = (0,1,0), v_{z} = (0,0,1)} $} \\
+            $ e_{i} $             & Vector estándar o vector canónico.\newline i.e. \scriptsize{${ v_{x} = (1,0,0), v_{y} = (0,1,0), v_{z} = (0,0,1)} $} \\
             \hline
         \end{tabularx}
         \caption{Notación de vectores, matrices y tensores especiales}
@@ -74,7 +74,7 @@
 \end{table}
 
 
-
+% Lp norma --> https://www.youtube.com/watch?v=NKuLYRui-NU
 
 \begin{table}[H]
     \begin{center}
@@ -93,7 +93,7 @@
             \hline
             % Notación matemática de operaciones con vectores y matrices
             $ {\lvert \cdot \rvert} $                                                                                            & Determinante o valor absoluto                                                               \\
-            $ {\lVert x \rVert}_{p} $                                                                                            & Norma $L^{p}$ de $x$                                                                        \\
+            $ {\lVert x \rVert}_{p} = \sqrt[p]{\sum_{i=1}^{n} {\lvert x_{i} \rvert}^{p} }$                                       & Norma $L^{p}$ de $x$                                                                        \\
             $ {\lVert x \rVert} $                                                                                                & Norma $L^{2}$ de $x$                                                                        \\
             $ {\Vert \underline{x} - \underline{y} \Vert}_{q} $                                                                  & Distancia en la misma dimensión entre $\underline{x}$ e $\underline{y}$                     \\
             $ \underline{x} \odot \underline{m} $                                                                                & Operación por elementos de los vectores o matrices                                          \\
@@ -133,27 +133,28 @@
     \begin{center}
         \begin{tabularx}{\textwidth}{|r|X|}
             \hline
-            \textbf{Notación}                                                                & \textbf{Definición}                                                                                                                                                             \\
+            \textbf{Notación}                                                                     & \textbf{Definición}                                                                                                                                                     \\
             \hline % Notación de ANN (redes neuronales, conjunto de datos, entrada, salida, clases, etc)
-            $ \mathcal{X} $                                                                  & Conjunto de datos, donde $\mathcal{X} \in \mathbb{R}^{N}$\newline{} La dimensión de la matriz de características es ${\mathcal{X} = I \times K}$                                \\
-            $ N $                                                                            & Dimensión del espacio muestral de entrada $\mathcal{X}$                                                                                                                         \\
-            $ \left\{x_{1}, x_{2}, \ldots ,x_{n}\right\} $                                   & Conjunto con $n$ elementos                                                                                                                                                      \\
-            ${T~\text{o}~\mathbb{X} = \left\{x^{(i)}, y^{(i)}\right\}}$                      & Conjunto de datos de entrenamiento ${D \subset \mathcal{X}}$                                                                                                                    \\
-            ${V~\text{o}~\mathbb{X}^{\prime} = \left\{x^{\prime(i)}, y^{\prime(i)}\right\}}$ & Conjunto de datos de validación ${H \subset \mathcal{X}}$                                                                                                                       \\
-            $ I $                                                                            & Número de instancias, registros u observaciones                                                                                                                                 \\
-            $ K $                                                                            & Número de atributos, características, entradas o predictores                                                                                                                    \\
-            $ \mathcal{Y} $                                                                  & Conjunto de clases del conjunto de datos $\mathcal{X}$, esto es, $\textit{K} = \lvert \mathcal{Y} \rvert$. \newline i.e. \scriptsize{${ \mathcal{Y} = \{1,2,...,\textit{K}\}}$} \\
-            % $ \mathcal{D} $                                                       & Subconjunto para el entrenamiento, donde $\mathcal{D} \subset \mathcal{X}$                                                                                                      \\
-            % $ H $                                                                 & Subconjunto de validación, este conjunto contiene muestras de todas las clases                                                                                                     \\
-            $ \eta $                                                                         & Tasa de aprendizaje                                                                                                                                                             \\
-            $ \hat{y} $                                                                      & Predicción del modelo                                                                                                                                                           \\
-            $ \theta $                                                                       & Parámetros del modelo en la red generadora $(G)$                                                                                                                                \\
-            $ \omega $                                                                       & Parámetros del modelo en la red discriminadora $(D)$                                                                                                                            \\
-            $ \mathcal{L} $                                                                  & Función de perdida                                                                                                                                                              \\
-            $ \phi ,\varphi $                                                                & Función de activación                                                                                                                                                           \\
-            $ f\left(\cdot\right) $                                                          & Modelo                                                                                                                                                                          \\
-            $ {c}\left(\cdot\right) $                                                        & Modelo clasificador                                                                                                                                                             \\
-            $ {p}\left(\cdot\right) $                                                        & Modelo predictor                                                                                                                                                                \\
+            $ \mathcal{X} $                                                                       & Conjunto de datos, donde $\mathDataset{X} \in \mathbb{R}^{N}$\newline{} La dimensión de la matriz de características es ${\mathcal{X} = I \times K}$                    \\
+            $ \mathcal{Y}, y, tag(x) $                                                            & Clases del conjunto de datos $\mathDataset{X}$, esto es, $\textit{K} = \lvert \mathcal{Y} \rvert$. \newline i.e. \scriptsize{${ \mathcal{Y} = \{1,2,...,\textit{K}\}}$} \\
+            $ (x^{(i)},y^{(i)}) $                                                                 & La tupla elementos $i$ en el conjunto $\mathDataset{X}$ (Aprendizaje supervisado)                                                                                       \\
+            $ x^{(i)} $                                                                           & Los elementos $i$ en el conjunto $\mathDataset{X}$ (Aprendizaje no supervisado)                                                                                         \\
+            $ N $                                                                                 & Dimensión del espacio de entrada $\mathcal{X}$                                                                                                                          \\
+            $ \left\{x_{1}, x_{2}, \ldots ,x_{n}\right\} $                                        & Conjunto con $n$ elementos                                                                                                                                              \\
+            ${T~\text{o}~\mathDataset{X}          = \left\{x^{(i)}, y^{(i)}\right\}}$             & Conjunto de datos de entrenamiento ${D \subset \mathDataset{X}}$                                                                                                        \\
+            ${V~\text{o}~\mathDataset{X}^{\prime} = \left\{x^{\prime(i)}, y^{\prime(i)}\right\}}$ & Conjunto de datos de validación ${H \subset \mathDataset{X}}$                                                                                                           \\
+            $ I $                                                                                 & Número de instancias, registros u observaciones                                                                                                                         \\
+            $ K $                                                                                 & Número de atributos, características, entradas o predictores                                                                                                            \\
+            % $ \mathcal{D} $                                                                       & Subconjunto para el entrenamiento, donde $\mathcal{D} \subset \mathcal{X}$                                                                                                      \\
+            % $ H $                                                                                 & Subconjunto de validación, este conjunto contiene muestras de todas las clases                                                                                                     \\
+            $ \theta $                                                                            & Parámetros del modelo                                                                                                                                                   \\
+            $ \eta $                                                                              & Tasa de aprendizaje                                                                                                                                                     \\
+            $ \hat{y} $                                                                           & Predicción del modelo                                                                                                                                                   \\
+            $ \mathcal{L} $                                                                       & Función de perdida                                                                                                                                                      \\
+            $ \phi ,\varphi $                                                                     & Función de activación                                                                                                                                                   \\
+            $ f\left(\cdot\right) $                                                               & Modelo                                                                                                                                                                  \\
+            $ {c}\left(\cdot\right) $                                                             & Modelo clasificador                                                                                                                                                     \\
+            $ {p}\left(\cdot\right) $                                                             & Modelo predictor                                                                                                                                                        \\
             \hline
         \end{tabularx}
         \caption{Notación de \textit{Machine Learning}}
@@ -165,13 +166,21 @@
     \begin{center}
         \begin{tabularx}{\textwidth}{|r|X|}
             \hline
-            \textbf{Notación} & \textbf{Definición}                                 \\
+            \textbf{Notación} & \textbf{Definición}                                  \\
             \hline % Notación de GANS (redes neuronales adversariales)
-            $ x $             & Entrada original (limpia, sin modificar) de un dato \\
-            $ x^{\prime} $    & Dato adversarial                                    \\
-            $ y^{\prime} $    & Clase objetivo de ejemplo adversario                \\
-            $ \delta $        & Perturbación                                        \\
-
+            $ z $             & Ruido                                                \\
+            $ \mathrm{z} $    & Código latente                                       \\
+            $ x^{\prime} $    & Dato adversarial                                     \\
+            $ \hat{x} $       & Instancia generada                                   \\
+            $ y^{\prime} $    & Clase objetiva del ejemplo adversario                \\
+            $ \delta $        & Perturbación                                         \\
+            $ \theta $        & Parámetros del modelo en la red generadora $(G)$     \\
+            $ \omega $        & Parámetros del modelo en la red discriminadora $(D)$ \\
+            $I^{LR}$          & Imagen de baja resolución                            \\
+            $I^{HR}$          & Imagen de alta resolución                            \\
+            ${\ell}$          & Funciones Lipschitz                                  \\
+            ${\ell_{2}}$      & Funciones Lipschitz                                  \\
+            ${\ell_{\infty}}$ & Funciones Lipschitz                                  \\
             % $ \hat{p}\left(\cdot\right) $ & Modelo predictor                                    \\
             % $ \hat{c}\left(\cdot\right) $ & Modelo inferido clasificador                                 \\
             % $ \Delta, \epsilon  $ & Restricción en la perturbación                                                   \\
@@ -192,7 +201,8 @@
             \hline % Notación de GANS (redes neuronales adversariales)
             ${Q(x)}$                  & Función de densidad de probabilidad de la variable aleatoria ${x}$                      \\
             ${\mathbb{E}_{x \sim Q}}$ & Esperanza de $f(x)$ con respecto a la distribución de probabilidad de ${x}$ según ${Q}$ \\
-
+            ${I(X;Y)}$                & Información mutua, ${I(X;Y)=H(X)-H(X\mid{}Y)=H(Y)-H(Y\mid{}X)}$                         \\
+            ${W_{p}, W_{p}(F,G)}$     & Distancia de Wasserstein                                                                \\
             \hline
         \end{tabularx}
         \caption{Notación probabilidad y estadística}
@@ -237,8 +247,21 @@
     \[ P(C|A) = \frac{P(C|A) P(C)}{P(A)} \]
 \end{theorem}
 
+
 % http://www.lcc.uma.es/~jmortiz/archivos/Tema4.pdf
 \begin{theorem}[Convergencia de perceptrón]
     \label{theorem:ConvergenciaRosenblatt}
     Si el conjunto de patrones de entrenamiento $ \{x^{1}, z^{1}\}, \{x^{2}, z^{2}\}, \cdots, \{x^{n}, z^{n}\} $ es linealmente separable entonces el Perceptrón simple encuentra una solución en un número finito de iteraciones, es decir, consigue que la salida de la red coincida con la salida deseada para cada uno de los patrones de entrenamiento.
+\end{theorem}
+
+
+\begin{theorem}[Wasserstein]
+    \label{theorem::gradW}
+    Let $\mathbb{P}_r$ be any distribution. Let $\mathbb{P}_\theta$ be the distribution of $g_\theta(Z)$ with $Z$ a random variable with density $p$ and $g_\theta$ a function satisfying assumption.
+    Then, there is a solution $f: \mathcal{X} \rightarrow \mathbb{R}$
+    to the problem
+    $$ \max_{\|f\|_L \leq 1} \mathbb{E}_{x \sim \mathbb{P}_r}[f(x)] - \mathbb{E}_{x \sim \mathbb{P}_\theta} [f(x)] $$
+    and we have
+    $$ \nabla_\theta W(\mathbb{P}_r, \mathbb{P}_\theta) = -\mathbb{E}_{z \sim p(z)}[\nabla_\theta f(g_\theta(z))] $$
+    when both terms are well-defined.
 \end{theorem}

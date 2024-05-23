@@ -1,16 +1,30 @@
 % !TeX root = main.tex
-\documentclass[12pt, a4paper, twoside]{report}   % Tamaño de papel, de fuente y márgenes
+\documentclass[12pt, a4paper, twoside]{report}
 
-\usepackage{shellesc}
- 
+% El paquete parte de las facilidades básicas del paquete de color 
+\usepackage[dvipsnames]{xcolor}
 \usepackage[spanish,es-ucroman]{babel}  % Idioma y codificación, para poder usar
+\usepackage{heuristica}
 \usepackage[T1]{fontenc}
-% \usepackage[utf8x]{inputenc} % tildes, eñes, etc., sin problemas\usepackage{newunicodechar}
+
+% tildes, eñes, etc., sin problemas 
+% \usepackage{newunicodechar}
+%\usepackage[utf8]{inputenc} 
+
+\usepackage[absolute,overlay]{textpos}  
+\usepackage[numbers]{natbib}            
+
 \usepackage{array}
 
 % Para tablas dinámicas
 \usepackage{tabularx}
 \usepackage{longtable}
+
+% Para añadir ficheros
+\usepackage{attachfile}
+
+% para temas de seguridad
+\usepackage{shellesc}
 
 % Para fijar el interlineado
 \usepackage{setspace} 
@@ -24,11 +38,16 @@
 
 % Para fuentes (Using common PostScript fonts with LaTeX)
 \usepackage{helvet}
-\usepackage{wallpaper}                  % Para introducir el PDF con la portada EPSJ
-\usepackage[absolute,overlay]{textpos}  % 
-\usepackage{etoolbox}                   % Herramientas de logica, variables y condicionales y bibliografía
-\usepackage[numbers]{natbib}            % Para gestionar la bibliografia
-\usepackage{csquotes}                   % 
+% Para introducir el PDF con la portada EPSJ
+\usepackage{wallpaper}                  
+% Herramientas de logica, variables y condicionales y bibliografía
+\usepackage{etoolbox}          
+
+% Para citas
+\usepackage{csquotes}                   
+% \usepackage{blindtext}
+% \usepackage{quotchap}
+
 \usepackage{hyperref}                   % Para URL como enlaces
 \usepackage{booktabs}                   % Para tablas con mejor apariencia
 \usepackage{listings}                   % Para incluir listados de código
@@ -36,13 +55,12 @@
 % Para los emojis, debes compilar el paquete
 \usepackage{twemojis}
 
-% El paquete parte de las facilidades básicas del paquete de color 
-\usepackage{xcolor}     
+% Para representar algoritmos y códigos
 % \usepackage{algorithm}
 % \usepackage{algpseudocode}                
-\usepackage[linesnumbered, ruled,vlined]{algorithm2e}  % https://ctan.javinator9889.com/macros/latex/contrib/algorithm2e/doc/algorithm2e.pdf
-\usepackage[acronym]{glossaries}        %
-\usepackage{pdflscape}                  %
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}  % https://ctan.javinator9889.com/macros/latex/contrib/algorithm2e/doc/algorithm2e.pdf
+\usepackage[acronym]{glossaries}       
+\usepackage{pdflscape}                  
 \usepackage{rotating}
 \usepackage[paper=portrait,pagesize]{typearea}
 
@@ -75,7 +93,7 @@
 
   
 % Gestion de los tamaños de las páginas
-\usepackage{geometry}                   % https://www.ctan.org/pkg/geometry
+\usepackage{geometry}                   % opts [showframe]
 \usepackage{fancyhdr}                   % https://www.ctan.org/pkg/fancyhdr
 
 \usepackage{setspace}                   %for doublespacing
@@ -101,11 +119,8 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{amsfonts}
-
-
 % \usepackage{mathtools}
 % \usepackage{bm}
-
 \usepackage{commath}
 \usepackage{bookmark} 
 % Para figuras y espacios centrados con tamaño de linea pequeño y alineada las lineas
@@ -120,8 +135,24 @@
 % VTimeline
 \usepackage{charter} 
 \usepackage{environ}
+
+
 \usepackage{tikz}
-\usetikzlibrary{calc,matrix}
+\usetikzlibrary{calc}
+\usetikzlibrary{matrix}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{arrows}
+\usetikzlibrary{shapes}
+\usetikzlibrary{tikzmark}
+\usetikzlibrary{cd}
+\usetikzlibrary{positioning}
+\usetikzlibrary{shadows}
+\usetikzlibrary{trees}
+\usetikzlibrary{mindmap}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{babel}
+
+
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18,every axis/.append style={tick label style={/pgf/number format/fixed},font=\scriptsize,ylabel near ticks,xlabel near ticks,grid=major}}
 
@@ -131,8 +162,6 @@
 \usepackage{enumitem}
 \setlist{nolistsep}
 
-\usepackage{tikz} 
-\usetikzlibrary{calc}
 
 \newcommand{\addterm}[7][]{%
   \newglossaryentry{#2}{name={\textit{#3} (angl.\ \textit{#5})},
@@ -145,17 +174,21 @@
 }
 
 
+\input{macros/macros}
 \input{macros/config}
 \input{macros/config-lstlisting}
 % Paquetes para vtimeline
 % \usepackage{fourier-otf}
-\usepackage{heuristica}
+% \usepackage{heuristica}
 \usepackage{array}
 \usepackage{booktabs}
 \usepackage{graphicx}
 \usepackage{anyfontsize}
+
+\input{macros/config-tikz}
 \input{macros/config-vtimeline}
 \input{macros/PortadaMaster}
+\input{macros/variables}
 \input{glossaries_1}
 
 
@@ -168,29 +201,28 @@
 
 \Portada{}
 
-
 \pagenumbering{roman}  % Numeración romana para los agradecimientos, dedicatoria y tablas de contenidos
 
 \input{0_Agradecimientos.tex} % Editar este archivo para introducir los agradecimientos/dedicatoria
 
-\cleardoublepage
-\tableofcontents  % Tabla de contenidos
+% \cleardoublepage
+% \tableofcontents  % Tabla de contenidos
 
-% ===== Comentar o eliminar las líneas de los índices que no deseen incluirse al inicio de la memoria
+% % % ===== Comentar o eliminar las líneas de los índices que no deseen incluirse al inicio de la memoria
 
-% \clearpage\thispagestyle{empty}\cleardoublepage
-% \listoffigures		% Índice de figuras
+\clearpage\thispagestyle{empty}\cleardoublepage
+\listoffigures		% Índice de figuras
 
-% \clearpage\thispagestyle{empty}\cleardoublepage
-% \listoftables 		% Índice de tablas
+\clearpage\thispagestyle{empty}\cleardoublepage
+\listoftables 		% Índice de tablas
 
-% \clearpage\thispagestyle{empty}\cleardoublepage
-% \listofalgorithms
+\clearpage\thispagestyle{empty}\cleardoublepage
+\listofalgorithms
 
-% \clearpage\thispagestyle{empty}\cleardoublepage
-% \lstlistoflistings		% Índice de listados
+\clearpage\thispagestyle{empty}\cleardoublepage
+\lstlistoflistings		% Índice de listados
 
-% \clearpage\thispagestyle{empty}\cleardoublepage
+\clearpage\thispagestyle{empty}\cleardoublepage
 \pagenumbering{arabic} % Numeración arábiga para el resto del documento
 
 % ===== Archivos LaTeX con los distintos capítulos que componen la memoria
@@ -198,8 +230,9 @@
 % \input{0__Tutorial}
 % \clearpage\thispagestyle{empty}\cleardoublepage
 
-% \input{0_0_Test.tex}
+% \input{0_0_Tests.tex}
 % \clearpage\thispagestyle{empty}\cleardoublepage
+
 \input{00_Notation.tex}
 \clearpage\thispagestyle{empty}\cleardoublepage
 

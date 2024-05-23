@@ -13,3 +13,5 @@
 {"rule":"SIGLAS","sentence":"^\\QProgressive Growing of GANs for Improved Quality, Stability, and Variation\\E$"}
 {"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\Qcompat=1.18,every axis/.append style=tick label style=/pgf/number format/fixed.,font=,ylabel near ticks,xlabel near ticks,grid=major.\\E$"}
 {"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\Qcompat=every axis/.append style=tick label style=/pgf/number format/fixed.,font=,ylabel near ticks,xlabel near ticks,grid=major.\\E$"}
+{"rule":"AGREEMENT_POSTPONED_ADJ","sentence":"^\\QA continuación en la ecuación \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q se muestra las funciones objetivo para \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, debemos tener en cuenta que \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q son los etiquetas para datos falsos, \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q son datos reales y \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q indica el valor que la red \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q envía a la red \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q para que los valide como verdaderos.\\E$"}
+{"rule":"NO_SEPARADO","sentence":"^\\QPre procesamiento.\\E$"}

@@ -135,11 +135,21 @@ manual/tfm_sai.1
 manual/tfm_sai.1.gz
 
 **/*Zone.Identifier
+Project/Latex/.aux/
+Project/Latex/.build/
+Project/Latex/svg-inkscape/
+
+Project/LatexSlide/.aux/
+Project/LatexSlide/.build/
+Project/LatexSlide/svg-inkscape/
+
+Project/LatexTests/.aux/
+Project/LatexTests/.build/
+Project/LatexTests/svg-inkscape/
+
 Project/LatexSlide/figures/input.webm
 Project/LatexSlide/figures/output.avi
 Project/LatexSlide/figures/output.mkv
 Project/LatexSlide/figures/output.mp4
-Project/Latex/build
-Project/Latex/svg-inkscape
 
 datasets/
