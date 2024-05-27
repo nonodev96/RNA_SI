@@ -1,5 +1,5 @@
-import torch
 import base
+import torch
 
 
 def init():

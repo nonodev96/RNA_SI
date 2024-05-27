@@ -24,7 +24,6 @@ Examples:
     * Run an application (Flask, FastAPI, Django, etc.)
 """
 
-import base
 import config
 
 

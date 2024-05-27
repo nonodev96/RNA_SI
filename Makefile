@@ -2,8 +2,12 @@
 ENV_PREFIX=$(shell python -c "if __import__('pathlib').Path('.venv/bin/pip').exists(): print('.venv/bin/')")
 USING_POETRY=$(shell grep "tool.poetry" pyproject.toml && echo "yes")
 
+# ========================
+# |     INFO PROJECT     |
+# ========================
+
 .PHONY: help
-help:             ## Show the help.
+help:             	## Show the help
 	@echo "Usage: make <target>"
 	@echo ""
 	@echo "Targets:"
@@ -11,44 +15,63 @@ help:             ## Show the help.
 
 
 .PHONY: show
-show:             ## Show the current environment.
+show:             	## Show the current environment
 	@echo "Current environment:"
 	@if [ "$(USING_POETRY)" ]; then poetry env info && exit; fi
 	@echo "Running using $(ENV_PREFIX)"
 	@$(ENV_PREFIX)python -V
 	@$(ENV_PREFIX)python -m site
 
+
+.PHONY: virtualenv
+virtualenv:       	## Create a virtual environment
+	@if [ "$(USING_POETRY)" ]; then poetry install && exit; fi
+	@echo "creating virtualenv ..."
+	@rm -rf .venv
+	@python3 -m venv .venv
+	@./.venv/bin/pip install -U pip
+	@./.venv/bin/pip install -e .[test]
+	@echo
+	@echo "!!! Please run 'source .venv/bin/activate' to enable the environment !!!"
+
+
 .PHONY: install
-install:          ## Install the project in dev mode.
+install:          	## Install dependencies of the project
 	@if [ "$(USING_POETRY)" ]; then poetry install && exit; fi
 	@echo "Don't forget to run 'make virtualenv' if you got errors."
 	$(ENV_PREFIX)pip install -e .[test]
 
+
+
+# =========================
+# |    FORMAT AND LINT    |
+# =========================
+
 .PHONY: fmt
-fmt:              ## Format code using black & isort.
-	$(ENV_PREFIX)isort tfm_sai/
-	$(ENV_PREFIX)black -l 79 tfm_sai/
+fmt:              	## Format code using black & isort
+	$(ENV_PREFIX)isort src/tfm_sai/
+	$(ENV_PREFIX)black -l 79 src/tfm_sai/
 	$(ENV_PREFIX)black -l 79 tests/
 
 .PHONY: lint
-lint:             ## Run pep8, black, mypy linters.
-	$(ENV_PREFIX)flake8 --ignore=E501,E203,W503 tfm_sai/
-	$(ENV_PREFIX)black -l 79 --check tfm_sai/
+lint:             	## Run pep8, black, mypy linters
+	$(ENV_PREFIX)flake8 --ignore=E501,E203,W503 src/tfm_sai/
+	$(ENV_PREFIX)black -l 79 --check src/tfm_sai/
 	$(ENV_PREFIX)black -l 79 --check tests/
-	$(ENV_PREFIX)mypy --ignore-missing-imports tfm_sai/
+	$(ENV_PREFIX)mypy --ignore-missing-imports src/tfm_sai/
 
 .PHONY: test
-test:         ## Run tests and generate coverage report.
-	$(ENV_PREFIX)pytest -v --cov-config .coveragerc --cov=tfm_sai -l --tb=short --maxfail=1 tests/ 
+test:         	  	## Run tests and generate coverage report
+	$(ENV_PREFIX)pytest -v --cov-config .coveragerc --cov=src/tfm_sai/ -l --tb=short --maxfail=1 tests/ 
 	$(ENV_PREFIX)coverage xml
 	$(ENV_PREFIX)coverage html
 
 .PHONY: watch
-watch:            ## Run tests on every change.
+watch:            	## Run tests on every change
 	ls **/**.py | entr $(ENV_PREFIX)pytest -s -vvv -l --tb=long --maxfail=1 tests/
 
 .PHONY: clean
-clean:            ## Clean unused files.
+clean:            	## Clean unused files
 	@find ./ -name '*.pyc' -exec rm -f {} \;
 	@find ./ -name '__pycache__' -exec rm -rf {} \;
 	@find ./ -name 'Thumbs.db' -exec rm -f {} \;
@@ -65,43 +88,43 @@ clean:            ## Clean unused files.
 	@rm -rf .coverage
 	@rm -rf coverage.xml
 
-.PHONY: virtualenv
-virtualenv:       ## Create a virtual environment.
-	@if [ "$(USING_POETRY)" ]; then poetry install && exit; fi
-	@echo "creating virtualenv ..."
-	@rm -rf .venv
-	@python3 -m venv .venv
-	@./.venv/bin/pip install -U pip
-	@./.venv/bin/pip install -e .[test]
-	@echo
-	@echo "!!! Please run 'source .venv/bin/activate' to enable the environment !!!"
 
 .PHONY: release
-release:          ## Create a new tag for release.
+release:          	## Create a new tag for release.
 	@echo "WARNING: This operation will create s version tag and push to github"
 	@read -p "Version? (provide the next x.y.z semver) : " TAG
-	@echo "$${TAG}" > tfm_sai/VERSION
+	@echo "$${TAG}" > src/tfm_sai/VERSION
 	@$(ENV_PREFIX)gitchangelog > HISTORY.md
-	@git add tfm_sai/VERSION HISTORY.md
+	@git add src/tfm_sai/VERSION HISTORY.md
 	@git commit -m "release: version $${TAG} 🚀"
 	@echo "creating git tag : $${TAG}"
 	@git tag $${TAG}
 	@git push -u origin HEAD --tags
 	@echo "Github Actions will detect the new tag and release the new version."
 
+
+
+# ==============
+# |    DOCS    |
+# ==============
+
+.PHONY: docs-serve
+docs-serve:    	  	## Enable the serve of mkdocs
+	@echo "building documentation ..."
+	@$(ENV_PREFIX)mkdocs serve
+
+
 .PHONY: docs
-docs:             ## Build the documentation.
+docs:             	## Open the documentation.
 	@echo "building documentation ..."
 	@$(ENV_PREFIX)mkdocs build
 	URL="site/index.html"; xdg-open $$URL || sensible-browser $$URL || x-www-browser $$URL || gnome-open $$URL || open $$URL
 
-.PHONY: docs-serve
-docs-serve:      ## Enable the serve of mkdocs
-	@echo "building documentation ..."
-	@$(ENV_PREFIX)mkdocs serve
 
+
+# TODO
 .PHONY: switch-to-poetry
-switch-to-poetry: ## Switch to poetry package manager.
+switch-to-poetry: 	## Switch to poetry package manager.
 	@echo "Switching to poetry ..."
 	@if ! poetry --version > /dev/null; then echo 'poetry is required, install from https://python-poetry.org/'; exit 1; fi
 	@rm -rf .venv
@@ -118,27 +141,28 @@ switch-to-poetry: ## Switch to poetry package manager.
 	@echo "You have switched to https://python-poetry.org/ package manager."
 	@echo "Please run 'poetry shell' or 'poetry run tfm_sai'"
 
-.PHONY: init
-init:             ## Initialize the project based on an application template.
-	@./.github/init.sh
 
 
-# This project has been generated from template rochacbruno/python-project-template
-# __author__ = 'rochacbruno'
-# __repo__ = https://github.com/rochacbruno/python-project-template
-# __sponsor__ = https://github.com/sponsors/rochacbruno/
-
+# ==============
+# |   MANUAL   |
+# ==============
 
 .PHONY: manual
-manual:             ## Build the manual.
+manual: manual-build manual-install manual-read 
+
+manual-build:    	## Build the manual
 	@echo "building manual ..."
-	@pandoc manual/MANUAL.1.md -s -t man -o manual/tfm_sai.1
-	@gzip manual/tfm_sai.1
-	@sudo cp manual/tfm_sai.1.gz /usr/share/man/man1/
+	@pandoc manual/MANUAL.1.md -s -t man -o manual/man/tfm_sai.1
+	@gzip manual/man/tfm_sai.1
+
+
+manual-install:		## Install the manual
+	@echo "Installing the manual"
+	@sudo cp manual/man/tfm_sai.1.gz /usr/share/man/man1/
 	@sudo mandb
 
-.PHONY: manual-read
-manual-read:
-	@echo "building manual ..."
+
+manual-read:		## Read the manual
+	@echo "Read manual"
 	@pandoc manual/MANUAL.1.md -s -t man -o manual/tfm_sai.1
 	@man -l manual/tfm_sai.1

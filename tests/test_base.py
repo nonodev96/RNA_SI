@@ -1,5 +1,5 @@
-from tfm_sai.base import NAME
+from src.tfm_sai.base import BASE_NAME
 
 
 def test_base():
-    assert NAME == "tfm_sai"
+    assert BASE_NAME == "tfm_sai"

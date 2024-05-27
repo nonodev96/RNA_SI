@@ -11,6 +11,14 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
+        },
+        {
+            "name": "Python: main",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "/home/amachuca/PycharmProjects/TFM_SAI/__main__.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
         }
     ]
 }

@@ -11,7 +11,7 @@ Examples of adversarial models
 ## EXAMPLES
 
 **tfm_sai -n Joe**
-: Displays "nonodev96!" and then exits.
+: Displays "nonodev96 2!" and then exits.
 
 ## AUTHORS
 

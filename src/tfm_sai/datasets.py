@@ -1,6 +1,7 @@
+from itertools import product
+
 import numpy as np
 import pandas as pd
-from itertools import product
 from PIL import Image
 
 
