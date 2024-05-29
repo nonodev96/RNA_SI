@@ -1,8 +1,3 @@
-import os
-
-CURRENT_WORKING_DIRECTORY = os.getcwd()
-
-
 def test_box():
     from src.tfm_sai.resizer import box
 

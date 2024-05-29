@@ -1,2 +1,16 @@
+[run]
+data_file = .coverage/.coverage
+parallel = false
+
 [html]
-directory = .htmlcov
+directory = .coverage/html/
+
+[xml]
+output = .coverage/xml/coverage.xml
+
+[json]
+output = .coverage/json/coverage.json
+pretty_print = true
+
+[lcov]
+output = .coverage/lcov/coverage.lcov

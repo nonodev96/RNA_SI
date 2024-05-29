@@ -4,23 +4,21 @@ section: 1
 header: User Manual
 footer: manual 1.0.0
 date: January 20, 2024
+author: Antonio Mudarra Machuca
 ---
 
 Examples of adversarial models
 
 ## EXAMPLES
 
-**tfm_sai -n Joe**
-: Displays "nonodev96 2!" and then exits.
+**tfm_sai**
 
-## AUTHORS
-
-Written by PragmaticLinux.
+: Displays nonodev96 and then exits.
 
 ## BUGS
 
-Submit bug reports online at: <https://github.com/pragmaticlinuxblog/pandocmanpage/issues>
+TODO
 
 ## SEE ALSO
 
-Full documentation and sources at: <https://github.com/pragmaticlinuxblog/pandocmanpage>
+TODO

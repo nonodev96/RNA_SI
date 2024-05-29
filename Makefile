@@ -62,9 +62,21 @@ lint:             	## Run pep8, black, mypy linters
 
 .PHONY: test
 test:         	  	## Run tests and generate coverage report
-	$(ENV_PREFIX)pytest -v --cov-config .coveragerc --cov=src/tfm_sai/ -l --tb=short --maxfail=1 tests/ 
-	$(ENV_PREFIX)coverage xml
+	$(ENV_PREFIX)pytest -v --cov-config .coveragerc --cov=src/tfm_sai/ -l --tb=short --maxfail=1 tests/pytest/ 
 	$(ENV_PREFIX)coverage html
+	$(ENV_PREFIX)coverage json
+	$(ENV_PREFIX)coverage xml
+	xdg-open .coverage/html/index.html
+
+.PHONY: test-pytest-unittest
+test-pytest-unittest:         	  	## Run tests and generate coverage report
+	$(ENV_PREFIX)coverage run -m pytest -v tests/pytest/*
+	$(ENV_PREFIX)coverage run -m unittest -v tests/utests/*
+# $(ENV_PREFIX)coverage combine
+	$(ENV_PREFIX)coverage html
+	$(ENV_PREFIX)coverage json
+	$(ENV_PREFIX)coverage xml
+	xdg-open .coverage/html/index.html
 
 .PHONY: watch
 watch:            	## Run tests on every change
@@ -79,14 +91,12 @@ clean:            	## Clean unused files
 	@rm -rf .cache
 	@rm -rf .pytest_cache
 	@rm -rf .mypy_cache
+	@rm -rf .coverage/
+	@rm -rf .tox/
 	@rm -rf build
 	@rm -rf dist
 	@rm -rf *.egg-info
-	@rm -rf htmlcov
-	@rm -rf .tox/
 	@rm -rf docs/_build
-	@rm -rf .coverage
-	@rm -rf coverage.xml
 
 
 .PHONY: release
@@ -152,7 +162,7 @@ manual: manual-build manual-install manual-read
 
 manual-build:    	## Build the manual
 	@echo "building manual ..."
-	@pandoc manual/MANUAL.1.md -s -t man -o manual/man/tfm_sai.1
+	@pandoc manual/MANUAL.1.md --standalone --mathjax --to man -o manual/man/tfm_sai.1
 	@gzip manual/man/tfm_sai.1
 
 

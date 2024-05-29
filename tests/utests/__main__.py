@@ -1,7 +1,7 @@
 import unittest
 
-from tests.utests.mock import RandomTest
-from tests.utests.module1 import TestSimple
+from tests.utests.test_mock import RandomTest
+from tests.utests.test_module1 import TestSimple
 
 
 def suite():
