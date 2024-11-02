@@ -1,4 +1,4 @@
-"""Python setup.py for tfm_sai package"""
+"""Python setup.py for rna_si package"""
 import io
 import os
 from setuptools import find_packages, setup
@@ -6,7 +6,7 @@ from setuptools import find_packages, setup
 
 def read(*paths, **kwargs):
     """Read the contents of a text file safely.
-    >>> read("tfm_sai", "VERSION")
+    >>> read("rna_si", "VERSION")
     '0.1.0'
     >>> read("README.md")
     ...
@@ -30,17 +30,17 @@ def read_requirements(path):
 
 
 setup(
-    name="tfm_sai",
-    version=read("tfm_sai", "VERSION"),
-    description="Awesome tfm_sai created by nonodev96",
-    url="https://github.com/nonodev96/TFM_SAI/",
+    name="rna_si",
+    version=read("rna_si", "VERSION"),
+    description="Awesome rna_si created by nonodev96",
+    url="https://github.com/nonodev96/RNA_SI/",
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
     author="nonodev96",
     packages=find_packages(exclude=["tests", ".github"]),
     install_requires=read_requirements("requirements.txt"),
     entry_points={
-        "console_scripts": ["tfm_sai = tfm_sai.__main__:main"]
+        "console_scripts": ["rna_si = rna_si.__main__:main"]
     },
     extras_require={"test": read_requirements("requirements-test.txt")},
 )

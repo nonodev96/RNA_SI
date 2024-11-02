@@ -13,3 +13,4 @@ matplotlib
 SciencePlots
 torchshow
 scikit-image
+opencv-contrib-python

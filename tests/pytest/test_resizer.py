@@ -1,5 +1,5 @@
 def test_box():
-    from src.tfm_sai.resizer import box
+    from src.rna_si.resizer import box
 
     x = 0.7
     box_rate = box(x)

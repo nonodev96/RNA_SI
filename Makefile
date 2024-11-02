@@ -49,20 +49,20 @@ install:          	## Install dependencies of the project
 
 .PHONY: fmt
 fmt:              	## Format code using black & isort
-	$(ENV_PREFIX)isort src/tfm_sai/
-	$(ENV_PREFIX)black -l 79 src/tfm_sai/
+	$(ENV_PREFIX)isort src/rna_si/
+	$(ENV_PREFIX)black -l 79 src/rna_si/
 	$(ENV_PREFIX)black -l 79 tests/
 
 .PHONY: lint
 lint:             	## Run pep8, black, mypy linters
-	$(ENV_PREFIX)flake8 --ignore=E501,E203,W503 src/tfm_sai/
-	$(ENV_PREFIX)black -l 79 --check src/tfm_sai/
+	$(ENV_PREFIX)flake8 --ignore=E501,E203,W503 src/rna_si/
+	$(ENV_PREFIX)black -l 79 --check src/rna_si/
 	$(ENV_PREFIX)black -l 79 --check tests/
-	$(ENV_PREFIX)mypy --ignore-missing-imports src/tfm_sai/
+	$(ENV_PREFIX)mypy --ignore-missing-imports src/rna_si/
 
 .PHONY: test
 test:         	  	## Run tests and generate coverage report
-	$(ENV_PREFIX)pytest -v --cov-config .coveragerc --cov=src/tfm_sai/ -l --tb=short --maxfail=1 tests/pytest/ 
+	$(ENV_PREFIX)pytest -v --cov-config .coveragerc --cov=src/rna_si/ -l --tb=short --maxfail=1 tests/pytest/ 
 	$(ENV_PREFIX)coverage html
 	$(ENV_PREFIX)coverage json
 	$(ENV_PREFIX)coverage xml
@@ -103,9 +103,9 @@ clean:            	## Clean unused files
 release:          	## Create a new tag for release.
 	@echo "WARNING: This operation will create s version tag and push to github"
 	@read -p "Version? (provide the next x.y.z semver) : " TAG
-	@echo "$${TAG}" > src/tfm_sai/VERSION
+	@echo "$${TAG}" > src/rna_si/VERSION
 	@$(ENV_PREFIX)gitchangelog > HISTORY.md
-	@git add src/tfm_sai/VERSION HISTORY.md
+	@git add src/rna_si/VERSION HISTORY.md
 	@git commit -m "release: version $${TAG} 🚀"
 	@echo "creating git tag : $${TAG}"
 	@git tag $${TAG}
@@ -141,7 +141,7 @@ switch-to-poetry: 	## Switch to poetry package manager.
 	@poetry init --no-interaction --name=a_flask_test --author=rochacbruno
 	@echo "" >> pyproject.toml
 	@echo "[tool.poetry.scripts]" >> pyproject.toml
-	@echo "tfm_sai = 'tfm_sai.__main__:main'" >> pyproject.toml
+	@echo "rna_si = 'rna_si.__main__:main'" >> pyproject.toml
 	@cat requirements.txt | while read in; do poetry add --no-interaction "$${in}"; done
 	@cat requirements-test.txt | while read in; do poetry add --no-interaction "$${in}" --dev; done
 	@poetry install --no-interaction
@@ -149,7 +149,7 @@ switch-to-poetry: 	## Switch to poetry package manager.
 	@mv requirements* .github/backup
 	@mv setup.py .github/backup
 	@echo "You have switched to https://python-poetry.org/ package manager."
-	@echo "Please run 'poetry shell' or 'poetry run tfm_sai'"
+	@echo "Please run 'poetry shell' or 'poetry run rna_si'"
 
 
 
@@ -162,17 +162,17 @@ manual: manual-build manual-install manual-read
 
 manual-build:    	## Build the manual
 	@echo "building manual ..."
-	@pandoc manual/MANUAL.1.md --standalone --mathjax --to man -o manual/man/tfm_sai.1
-	@gzip manual/man/tfm_sai.1
+	@pandoc manual/MANUAL.1.md --standalone --mathjax --to man -o manual/man/rna_si.1
+	@gzip manual/man/rna_si.1
 
 
 manual-install:		## Install the manual
 	@echo "Installing the manual"
-	@sudo cp manual/man/tfm_sai.1.gz /usr/share/man/man1/
+	@sudo cp manual/man/rna_si.1.gz /usr/share/man/man1/
 	@sudo mandb
 
 
 manual-read:		## Read the manual
 	@echo "Read manual"
-	@pandoc manual/MANUAL.1.md -s -t man -o manual/tfm_sai.1
-	@man -l manual/tfm_sai.1
+	@pandoc manual/MANUAL.1.md -s -t man -o manual/rna_si.1
+	@man -l manual/rna_si.1

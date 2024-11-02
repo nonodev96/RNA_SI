@@ -20,7 +20,7 @@
             },
             "command": "${command:python.interpreterPath}",
             "args": [
-                "${workspaceFolder}/tfm_sai/__main__.py",
+                "${workspaceFolder}/rna_si/__main__.py",
                 ""
             ],
             "dependsOrder": "sequence",

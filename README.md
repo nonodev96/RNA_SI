@@ -6,7 +6,8 @@ TFM
 .
 ├── datasets/
 │   ├── CASIA-Multi-Spectral-PalmprintV1/
-│   └── CASIA-PalmprintV1/
+│   ├── CASIA-PalmprintV1/
+|   └── SOCOFing/
 ├── Project/
 │   ├── Latex/
 │   ├── LatexSlide/
@@ -36,7 +37,7 @@ TFM
 │   ├── conftest.py
 │   ├── test_base.py
 │   └── test_resizer.py
-└── tfm_sai/
+└── rna_si/
 │   ├── __pycache__/
     ├── VERSION
     ├── __init__.py
