@@ -1,6 +1,5 @@
 .ONESHELL:
 ENV_PREFIX=$(shell python -c "if __import__('pathlib').Path('.venv/bin/pip').exists(): print('.venv/bin/')")
-USING_POETRY=$(shell grep "tool.poetry" pyproject.toml && echo "yes")
 
 # ========================
 # |     INFO PROJECT     |
@@ -17,7 +16,6 @@ help:             	## Show the help
 .PHONY: show
 show:             	## Show the current environment
 	@echo "Current environment:"
-	@if [ "$(USING_POETRY)" ]; then poetry env info && exit; fi
 	@echo "Running using $(ENV_PREFIX)"
 	@$(ENV_PREFIX)python -V
 	@$(ENV_PREFIX)python -m site
@@ -25,7 +23,6 @@ show:             	## Show the current environment
 
 .PHONY: virtualenv
 virtualenv:       	## Create a virtual environment
-	@if [ "$(USING_POETRY)" ]; then poetry install && exit; fi
 	@echo "creating virtualenv ..."
 	@rm -rf .venv
 	@python3 -m venv .venv
@@ -37,7 +34,6 @@ virtualenv:       	## Create a virtual environment
 
 .PHONY: install
 install:          	## Install dependencies of the project
-	@if [ "$(USING_POETRY)" ]; then poetry install && exit; fi
 	@echo "Don't forget to run 'make virtualenv' if you got errors."
 	$(ENV_PREFIX)pip install -e .[test]
 
@@ -48,20 +44,20 @@ install:          	## Install dependencies of the project
 # =========================
 
 .PHONY: fmt
-fmt:              	## Format code using black & isort
+fmt:			## Format code using black & isort
 	$(ENV_PREFIX)isort src/rna_si/
 	$(ENV_PREFIX)black -l 79 src/rna_si/
 	$(ENV_PREFIX)black -l 79 tests/
 
 .PHONY: lint
-lint:             	## Run pep8, black, mypy linters
+lint:			## Run pep8, black, mypy linters
 	$(ENV_PREFIX)flake8 --ignore=E501,E203,W503 src/rna_si/
 	$(ENV_PREFIX)black -l 79 --check src/rna_si/
 	$(ENV_PREFIX)black -l 79 --check tests/
 	$(ENV_PREFIX)mypy --ignore-missing-imports src/rna_si/
 
 .PHONY: test
-test:         	  	## Run tests and generate coverage report
+test:			## Run tests and generate coverage report
 	$(ENV_PREFIX)pytest -v --cov-config .coveragerc --cov=src/rna_si/ -l --tb=short --maxfail=1 tests/pytest/ 
 	$(ENV_PREFIX)coverage html
 	$(ENV_PREFIX)coverage json
@@ -69,7 +65,7 @@ test:         	  	## Run tests and generate coverage report
 	xdg-open .coverage/html/index.html
 
 .PHONY: test-pytest-unittest
-test-pytest-unittest:         	  	## Run tests and generate coverage report
+test-pytest-unittest:	## Run tests and generate coverage report
 	$(ENV_PREFIX)coverage run -m pytest -v tests/pytest/*
 	$(ENV_PREFIX)coverage run -m unittest -v tests/utests/*
 # $(ENV_PREFIX)coverage combine
@@ -103,9 +99,9 @@ clean:            	## Clean unused files
 release:          	## Create a new tag for release.
 	@echo "WARNING: This operation will create s version tag and push to github"
 	@read -p "Version? (provide the next x.y.z semver) : " TAG
-	@echo "$${TAG}" > src/rna_si/VERSION
+	@echo "$${TAG}" > src/VERSION
 	@$(ENV_PREFIX)gitchangelog > HISTORY.md
-	@git add src/rna_si/VERSION HISTORY.md
+	@git add src/VERSION HISTORY.md
 	@git commit -m "release: version $${TAG} 🚀"
 	@echo "creating git tag : $${TAG}"
 	@git tag $${TAG}
@@ -129,28 +125,6 @@ docs:             	## Open the documentation.
 	@echo "building documentation ..."
 	@$(ENV_PREFIX)mkdocs build
 	URL="site/index.html"; xdg-open $$URL || sensible-browser $$URL || x-www-browser $$URL || gnome-open $$URL || open $$URL
-
-
-
-# TODO
-.PHONY: switch-to-poetry
-switch-to-poetry: 	## Switch to poetry package manager.
-	@echo "Switching to poetry ..."
-	@if ! poetry --version > /dev/null; then echo 'poetry is required, install from https://python-poetry.org/'; exit 1; fi
-	@rm -rf .venv
-	@poetry init --no-interaction --name=a_flask_test --author=rochacbruno
-	@echo "" >> pyproject.toml
-	@echo "[tool.poetry.scripts]" >> pyproject.toml
-	@echo "rna_si = 'rna_si.__main__:main'" >> pyproject.toml
-	@cat requirements.txt | while read in; do poetry add --no-interaction "$${in}"; done
-	@cat requirements-test.txt | while read in; do poetry add --no-interaction "$${in}" --dev; done
-	@poetry install --no-interaction
-	@mkdir -p .github/backup
-	@mv requirements* .github/backup
-	@mv setup.py .github/backup
-	@echo "You have switched to https://python-poetry.org/ package manager."
-	@echo "Please run 'poetry shell' or 'poetry run rna_si'"
-
 
 
 # ==============

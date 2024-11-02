@@ -1,16 +1,28 @@
 # This template is a low-dependency template. 
 # By default there is no requirements added here.
 # Add the requirements you need to this file.
-# or run `make init` to create this file automatically based on the template.
-# You can also run `make switch-to-poetry` to use the poetry package manager.
-adversarial-robustness-toolbox
-tensorflow
+# Keras
 keras
+# Tensorflow Python
+tensorflow
+# PyTorch
 torch
+torchshow
 torchvision
+
+# Para ciencias de datos
+numpy
+pandas
+scikit-learn
+scikit-image
+
+# ART for defense test
+adversarial-robustness-toolbox
+
+# For sift, and descriptors
 opencv-python
+opencv-contrib-python
+
+# Charts
 matplotlib
 SciencePlots
-torchshow
-scikit-image
-opencv-contrib-python

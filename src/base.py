@@ -14,6 +14,6 @@ and then choose `flask` as template.
 """
 
 # example constant variable
-BASE_PATH = "~/PycharmProjects/RNA_SI/"
+BASE_PATH = "~/Projects/RNA_SI/"
 BASE_NAME = "rna_si"
 BASE_RANDOM_STATE = 42

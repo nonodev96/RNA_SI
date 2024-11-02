@@ -1,5 +1,5 @@
-from src.rna_si.base import BASE_NAME
-from src.rna_si.hello_world import hello_world
+from src.base import BASE_NAME
+from src.hello_world import hello_world
 
 
 def test_base():

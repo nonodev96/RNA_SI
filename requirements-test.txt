@@ -1,14 +1,7 @@
 # This requirements are for development and testing only, not for production.
+# unittest # Python incluye esto de forma predeterminada, hay que eliminarlo
 pytest
 pytest-cov
-unittest
 coverage
-flake8
-black
-isort
 mypy
-gitchangelog
-mkdocs
-python-markdown-math
-pandas
-opencv-python
+

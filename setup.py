@@ -31,16 +31,16 @@ def read_requirements(path):
 
 setup(
     name="rna_si",
-    version=read("rna_si", "VERSION"),
-    description="Awesome rna_si created by nonodev96",
+    version=read("src", "VERSION"),
+    description="Awesome RNA_SI created by nonodev96",
     url="https://github.com/nonodev96/RNA_SI/",
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
     author="nonodev96",
     packages=find_packages(exclude=["tests", ".github"]),
     install_requires=read_requirements("requirements.txt"),
+    extras_require={"test": read_requirements("requirements-test.txt")},
     entry_points={
         "console_scripts": ["rna_si = rna_si.__main__:main"]
     },
-    extras_require={"test": read_requirements("requirements-test.txt")},
 )

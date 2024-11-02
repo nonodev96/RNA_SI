@@ -1,0 +1,8 @@
+gitchangelog
+mkdocs
+flake8
+black
+isort
+python-markdown-math
+mypy # Es una herramienta de verificación de tipos estáticos para Python. Su función principal es ayudar a los desarrolladores a detectar errores de tipo en el código antes de la ejecución, lo cual puede prevenir errores y mejorar la calidad del código en proyectos grandes y colaborativos.
+

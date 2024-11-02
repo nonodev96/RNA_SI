@@ -1,6 +1,4 @@
-TFM
-===
-
+# TFM Redes neuronales adversarias en seguridad informática
 
 ```
 .
@@ -20,7 +18,7 @@ TFM
 │   └── ...
 ├── scripts/
 │   └── ...
-│   
+│  
 ├── README.md
 ├── Makefile
 ├── LICENSE
@@ -38,7 +36,7 @@ TFM
 │   ├── test_base.py
 │   └── test_resizer.py
 └── rna_si/
-│   ├── __pycache__/
+    ├── __pycache__/
     ├── VERSION
     ├── __init__.py
     ├── __main__.py
@@ -62,19 +60,18 @@ make docs-serve
 make docs
 ```
 
-
 ## Makefile
 
 ```bash
-# Info package
-make help
-make show
-
 # Source project
 make virtualenv
 make install
 
-# DEV 
+# Info package
+make help
+make show
+
+# DEV
 make fmt
 make lint
 make watch
@@ -92,9 +89,6 @@ make docs-serve
 make manual-build
 make manual-install
 make manual-read
-
-# make switch-to-poetry # TODO
-# make init             # REMOVED
 ```
 
 ## Extra
@@ -159,5 +153,3 @@ python -m coverage run -m unittest -v tests/utests/test_coverage.py
 ```
 
 </details>
-
-
