@@ -1,5 +1,5 @@
 def test_box():
-    from src.resizer import box
+    from src.utils.resizer import box
 
     x = 0.7
     box_rate = box(x)

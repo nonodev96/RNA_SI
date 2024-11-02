@@ -9,6 +9,7 @@ tensorflow
 torch
 torchshow
 torchvision
+pytorch-lightning
 
 # Para ciencias de datos
 numpy
@@ -25,4 +26,8 @@ opencv-contrib-python
 
 # Charts
 matplotlib
+seaborn
 SciencePlots
+
+# Utils
+openpyxl

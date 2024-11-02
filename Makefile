@@ -45,20 +45,20 @@ install:          	## Install dependencies of the project
 
 .PHONY: fmt
 fmt:			## Format code using black & isort
-	$(ENV_PREFIX)isort src/rna_si/
-	$(ENV_PREFIX)black -l 79 src/rna_si/
+	$(ENV_PREFIX)isort src/
+	$(ENV_PREFIX)black -l 79 src/
 	$(ENV_PREFIX)black -l 79 tests/
 
 .PHONY: lint
 lint:			## Run pep8, black, mypy linters
-	$(ENV_PREFIX)flake8 --ignore=E501,E203,W503 src/rna_si/
-	$(ENV_PREFIX)black -l 79 --check src/rna_si/
+	$(ENV_PREFIX)flake8 --ignore=E501,E203,W503 src/
+	$(ENV_PREFIX)black -l 79 --check src/
 	$(ENV_PREFIX)black -l 79 --check tests/
-	$(ENV_PREFIX)mypy --ignore-missing-imports src/rna_si/
+	$(ENV_PREFIX)mypy --ignore-missing-imports src/
 
 .PHONY: test
 test:			## Run tests and generate coverage report
-	$(ENV_PREFIX)pytest -v --cov-config .coveragerc --cov=src/rna_si/ -l --tb=short --maxfail=1 tests/pytest/ 
+	$(ENV_PREFIX)pytest -v --cov-config .coveragerc --cov=src/ -l --tb=short --maxfail=1 tests/pytest/ 
 	$(ENV_PREFIX)coverage html
 	$(ENV_PREFIX)coverage json
 	$(ENV_PREFIX)coverage xml

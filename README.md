@@ -91,6 +91,15 @@ make manual-install
 make manual-read
 ```
 
+## Instalar dependencias
+
+```bash
+# Before make
+pip install -r requirements.txt
+pip install -r requirements-dev.txt
+pip install -r requirements-test.txt
+```
+
 ## Extra
 
 <details>
@@ -153,3 +162,11 @@ python -m coverage run -m unittest -v tests/utests/test_coverage.py
 ```
 
 </details>
+
+### Other
+
+```bash
+
+# For seaborn
+sudo apt-get install msttcorefonts -q
+```

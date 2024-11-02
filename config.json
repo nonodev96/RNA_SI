@@ -1,0 +1,49 @@
+{
+  "default_args": {
+    "n_epochs": "200",
+    "batch_size": "64",
+    "lr": "0.0002",
+    "b1": "0.5",
+    "b2": "0.999",
+    "n_cpu": "8",
+    "latent_dim": "100",
+    "img_size": "32",
+    "channels": "1",
+    "sample_interval": "400"
+  },
+
+  "experiments": [
+    {
+      "GAN_type": "GAN",
+      "dataset": "SOCOFing",
+      "args": {
+        "n_epochs": "200",
+        "batch_size": "64",
+        "lr": "0.0002",
+        "b1": "0.5",
+        "b2": "0.999",
+        "n_cpu": "8",
+        "latent_dim": "100",
+        "img_size": "32",
+        "channels": "1",
+        "sample_interval": "400"
+      }
+    },
+    {
+      "GAN_type": "DCGAN",
+      "dataset": "SOCOFing",
+      "args": {
+        "n_epochs": "200",
+        "batch_size": "64",
+        "lr": "0.0002",
+        "b1": "0.5",
+        "b2": "0.999",
+        "n_cpu": "8",
+        "latent_dim": "100",
+        "img_size": "32",
+        "channels": "1",
+        "sample_interval": "400"
+      }
+    }
+  ]
+}
