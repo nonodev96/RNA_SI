@@ -41,6 +41,14 @@
     "ltex.additionalRules.motherTongue": "es",
     "ltex.checkFrequency": "edit",
     "ltex.diagnosticSeverity": "error",
+    "json.schemas": [
+        {
+            "url": "./.vscode/schemes/config.json",
+            "fileMatch": [
+                "./experiments.json"
+            ]
+        }
+    ],
     "gitlens.codeLens.recentChange.enabled": false,
     "gitlens.codeLens.authors.enabled": false,
     "gitlens.currentLine.enabled": false,

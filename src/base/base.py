@@ -13,7 +13,12 @@ class E_GAN(Enum):
 
 
 class E_DATASET(Enum):
+    # Para pruebas, es un socofing reducido
+    DATASET_TEST = "DATASET_TEST"
+
     SOCOFING = "SOCOFing"
     CASIA_MSP = "CASIA Multi-Spectral PalmprintV1"
     CASIA_P = "CASIA PalmprintV1"
-    HANDS_GPDS_100_CONTACTLESS_2_BANDS = "HandsGPDS100Contactless2bands"
+
+    # Posiblemente se elimine, ocupa mucho espacio en RAM
+    GPDS_HANDS_100_CONTACTLESS_2_BANDS = "GPDS Hands 100 Contactless 2 bands"

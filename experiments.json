@@ -1,0 +1,83 @@
+{
+  "$schema": "./.vscode/schema/config.json",
+  "default_args": {
+    "n_epochs": 200,
+    "batch_size": 64,
+    "lr": 0.0002,
+    "b1": 0.5,
+    "b2": 0.999,
+    "n_cpu": 8,
+    "latent_dim": 100,
+    "img_size": 32,
+    "channels": 1,
+    "sample_interval": 400
+  },
+  "experiments": [
+    {
+      "GAN_type": "GAN",
+      "dataset": "CASIA PalmprintV1",
+      "args": {
+        "n_epochs": 200,
+        "batch_size": 64,
+        "lr": 0.0002,
+        "b1": 0.5,
+        "b2": 0.999,
+        "n_cpu": 8,
+        "latent_dim": 100,
+        "img_size": 32,
+        "channels": 1,
+        "sample_interval": 400
+      }
+    },
+    {
+      "GAN_type": "GAN",
+      "dataset": "CASIA Multi-Spectral PalmprintV1",
+      "args": {
+        "n_epochs": 200,
+        "batch_size": 64,
+        "lr": 0.0002,
+        "b1": 0.5,
+        "b2": 0.999,
+        "n_cpu": 8,
+        "latent_dim": 100,
+        "img_size": 32,
+        "channels": 1,
+        "sample_interval": 400
+      }
+    },
+    {
+      "GAN_type": "GAN",
+      "dataset": "SOCOFing",
+      "args": {
+        "n_epochs": 200,
+        "batch_size": 64,
+        "lr": 0.0002,
+        "b1": 0.5,
+        "b2": 0.999,
+        "n_cpu": 8,
+        "latent_dim": 100,
+        "img_size": 32,
+        "channels": 1,
+        "sample_interval": 400
+      }
+    }
+  ],
+  "experiments_tests": [
+    {
+      "GAN_type": "GAN",
+      "dataset": "GPDS Hands 100 Contactless 2 bands",
+      "args": {
+        "n_epochs": 200,
+        "batch_size": 64,
+        "lr": 0.0002,
+        "b1": 0.5,
+        "b2": 0.999,
+        "n_cpu": 8,
+        "latent_dim": 100,
+        "img_size": 32,
+        "channels": 1,
+        "sample_interval": 400
+      }
+    }
+  ]
+}
