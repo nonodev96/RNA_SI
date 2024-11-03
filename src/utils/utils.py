@@ -19,3 +19,10 @@ def imreadImg(path, opt):
     x = (x - 0.5) * 2
     x = x.clamp(-1, 1)
     return x, max_x
+
+
+def truncate_string(s, max_length=50):
+    if len(s) <= max_length:
+        return s
+    else:
+        return s[:max_length] + "..."

@@ -2,27 +2,20 @@ import argparse
 import json
 from tabulate import tabulate
 
-from src.base.base import GAN_TYPE
+from src.base.base import E_GAN
 from src.base.config import ConfigPytorch
-from src.data.datasets import load_dataset_socofing
+from src.data.datasets import load_dataset
 from src.implementations.DCGAN import GANModel_DCGAN
-
-
-def truncate_string(s, max_length=50):
-    if len(s) <= max_length:
-        return s
-    else:
-        return s[:max_length] + "..."
+from src.utils.utils import truncate_string
 
 
 def run_experiment(type_gan, dataset, args):
 
-    # df = load_dataset_socofing()
     # print(df)
-    match GAN_TYPE(type_gan):
-        case GAN_TYPE.GAN:
+    match E_GAN(type_gan):
+        case E_GAN.GAN:
             print("Entra en GAN  \t", args)
-        case GAN_TYPE.DCGAN:
+        case E_GAN.DCGAN:
             print("Entra en DCGAN\t", args)
             GANModel_DCGAN(dataset, args)
         case _:
@@ -41,13 +34,14 @@ def main():
 
     for experimento in config["experiments"]:
         type_gan = experimento["GAN_type"]
-        dataset = experimento["dataset"]
+        dataset_key = experimento["dataset"]
         args = experimento["args"]
-        args = json.dumps(experimento["args"])  # Convert args to string
 
+        dataset = load_dataset(dataset_key)
         result = run_experiment(type_gan, dataset, args)
+
         args_string = json.dumps(experimento["args"])  # Convert args to string
-        results.append([type_gan, dataset, args_string, result])
+        results.append([type_gan, dataset_key, args_string, result])
 
     truncated_results = [
         [truncate_string(str(cell)) for cell in row] for row in results

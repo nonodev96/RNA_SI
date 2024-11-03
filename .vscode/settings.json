@@ -25,7 +25,7 @@
         "editor.formatOnSave": true
     },
     "black-formatter.args": [
-        "-l 79"
+        "-l 120"
     ],
     // "emeraldwalk.runonsave": {
     //     "commands": [

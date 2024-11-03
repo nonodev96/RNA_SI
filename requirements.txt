@@ -31,3 +31,6 @@ SciencePlots
 
 # Utils
 openpyxl
+PIL
+pprint
+tqdm
