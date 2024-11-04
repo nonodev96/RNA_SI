@@ -181,23 +181,5 @@
         "tests"
     ],
     "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": true,
-    "favorites.resources": [
-        {
-            "filePath": ".vscode/settings.json",
-            "group": "Default"
-        },
-        {
-            "filePath": "Project/LatexSlide/main.tex",
-            "group": "Default"
-        },
-        {
-            "filePath": "Project/Latex",
-            "group": "Default"
-        },
-        {
-            "filePath": "Project/research/TFM",
-            "group": "Default"
-        }
-    ]
+    "python.testing.pytestEnabled": true
 }

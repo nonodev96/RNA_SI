@@ -1,12 +1,11 @@
-TFM
-===
-
+# TFM Redes neuronales adversarias en seguridad informática
 
 ```
 .
 ├── datasets/
 │   ├── CASIA-Multi-Spectral-PalmprintV1/
-│   └── CASIA-PalmprintV1/
+│   ├── CASIA-PalmprintV1/
+|   └── SOCOFing/
 ├── Project/
 │   ├── Latex/
 │   ├── LatexSlide/
@@ -19,7 +18,7 @@ TFM
 │   └── ...
 ├── scripts/
 │   └── ...
-│   
+│  
 ├── README.md
 ├── Makefile
 ├── LICENSE
@@ -36,8 +35,8 @@ TFM
 │   ├── conftest.py
 │   ├── test_base.py
 │   └── test_resizer.py
-└── tfm_sai/
-│   ├── __pycache__/
+└── rna_si/
+    ├── __pycache__/
     ├── VERSION
     ├── __init__.py
     ├── __main__.py
@@ -61,19 +60,18 @@ make docs-serve
 make docs
 ```
 
-
 ## Makefile
 
 ```bash
-# Info package
-make help
-make show
-
 # Source project
 make virtualenv
 make install
 
-# DEV 
+# Info package
+make help
+make show
+
+# DEV
 make fmt
 make lint
 make watch
@@ -91,9 +89,15 @@ make docs-serve
 make manual-build
 make manual-install
 make manual-read
+```
 
-# make switch-to-poetry # TODO
-# make init             # REMOVED
+## Instalar dependencias
+
+```bash
+# Before make
+pip install -r requirements.txt
+pip install -r requirements-dev.txt
+pip install -r requirements-test.txt
 ```
 
 ## Extra
@@ -159,4 +163,10 @@ python -m coverage run -m unittest -v tests/utests/test_coverage.py
 
 </details>
 
+### Other
 
+```bash
+
+# For seaborn
+sudo apt-get install msttcorefonts -q
+```

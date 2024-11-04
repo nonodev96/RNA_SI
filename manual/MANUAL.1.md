@@ -11,7 +11,7 @@ Examples of adversarial models
 
 ## EXAMPLES
 
-**tfm_sai**
+**rna_si**
 
 : Displays nonodev96 and then exits.
 

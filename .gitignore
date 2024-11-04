@@ -133,8 +133,8 @@ dmypy.json
 # templates
 .github/templates/*
 .private/
-manual/tfm_sai.1
-manual/tfm_sai.1.gz
+manual/rna_si.1
+manual/rna_si.1.gz
 
 **/*Zone.Identifier
 Project/Latex/.aux/

@@ -1,4 +1,4 @@
-site_name: tfm_sai
+site_name: rna_si
 theme: readthedocs
 plugins:
   - search

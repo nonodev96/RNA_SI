@@ -1,0 +1,12 @@
+{
+    "recommendations": [
+        "ms-python.python",
+        "ms-toolsai.jupyter",
+        "ms-python.isort",
+        "ms-python.black-formatter",
+        "ms-python.vscode-pylance",
+        "ms-toolsai.vscode-jupyter-powertoys",
+        "ms-vscode.makefile-tools",
+        "James-Yu.latex-workshop"
+    ]
+}
