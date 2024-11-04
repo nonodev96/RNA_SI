@@ -1,10 +1,14 @@
 import pytorch_lightning as pl
+from pytorch_lightning.loggers import TensorBoardLogger
+
 import torch
 from torch import nn
 from torch.optim import Adam
 from torch.autograd import Variable
 from torchvision.utils import save_image
 import numpy as np
+
+logger = TensorBoardLogger("lightning_logs", name="my_experiment")
 
 
 class Generator(nn.Module):
@@ -66,7 +70,6 @@ class GANModel_DCGAN_Config:
         self.n_cpu = int(n_cpu)
         # Dimensionalidd del espacio latente
         self.latent_dim = int(latent_dim)
-        
         # Dataset
         self.img_size = int(img_size)
         self.channels = int(channels)
@@ -160,13 +163,9 @@ class GANModel_DCGAN(pl.LightningModule):
         # Entrenar discriminador
         if optimizer_idx == 1:
             # Pérdida con imágenes reales
-            real_loss = self.adversarial_loss(
-                self.discriminator(real_imgs), valid
-            )
+            real_loss = self.adversarial_loss(self.discriminator(real_imgs), valid)
             # Pérdida con imágenes generadas
-            fake_loss = self.adversarial_loss(
-                self.discriminator(gen_imgs.detach()), fake
-            )
+            fake_loss = self.adversarial_loss(self.discriminator(gen_imgs.detach()), fake)
             d_loss = (real_loss + fake_loss) / 2
             self.log("d_loss", d_loss, on_epoch=True, prog_bar=True)
             return d_loss

@@ -1,0 +1,28 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {table}{\numberline {1}{\ignorespaces Notación números y arrays\relax }}{1}{table.caption.7}%
+\contentsline {table}{\numberline {2}{\ignorespaces Notación de índices para vectores, matrices y tensores\relax }}{1}{table.caption.8}%
+\contentsline {table}{\numberline {3}{\ignorespaces Notación de vectores, matrices y tensores especiales\relax }}{2}{table.caption.9}%
+\contentsline {table}{\numberline {4}{\ignorespaces Notación de operaciones con vectores y matrices\relax }}{2}{table.caption.10}%
+\contentsline {table}{\numberline {5}{\ignorespaces Notación de funciones\relax }}{3}{table.caption.11}%
+\contentsline {table}{\numberline {6}{\ignorespaces Notación de \textit {Machine Learning}\relax }}{4}{table.caption.12}%
+\contentsline {table}{\numberline {7}{\ignorespaces Notación de \textit {GAN}\relax }}{5}{table.caption.13}%
+\contentsline {table}{\numberline {8}{\ignorespaces Notación probabilidad y estadística\relax }}{5}{table.caption.14}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {2.1}{\ignorespaces Hitos de las redes neuronales artificiales\relax }}{15}{table.caption.18}%
+\contentsline {table}{\numberline {2.2}{Lista de ataques de caja blanca}}{63}{table.2.2}%
+\contentsline {table}{\numberline {2.3}{\ignorespaces Lista de ataques de caja negra\relax }}{64}{table.caption.73}%
+\contentsline {table}{\numberline {2.4}{Lista de técnicas de defensa durante el pre procesamiento en Deep Learning}}{70}{table.2.4}%
+\contentsline {table}{\numberline {2.5}{\ignorespaces Lista de técnicas de defensa durante el post procesamiento en Deep Learning\relax }}{71}{table.caption.75}%
+\contentsline {table}{\numberline {2.6}{\ignorespaces Lista completa de técnicas de defensa durante el entrenamiento en Deep Learning\relax }}{71}{table.caption.76}%
+\contentsline {table}{\numberline {2.7}{\ignorespaces Modelo para identificar amenazas a la seguridad informática\relax }}{74}{table.caption.78}%
+\contentsline {table}{\numberline {2.8}{\ignorespaces Clasificación de Amenazas según el Marco MITRE - ATT \& CK\relax }}{74}{table.caption.79}%
+\contentsline {table}{\numberline {2.9}{\ignorespaces Clasificación de Amenazas según el Marco MITRE - ATLAS\relax }}{74}{table.caption.80}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Hardware del equipo de desarrollo\relax }}{85}{table.caption.83}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Hardware del equipo de entrenamiento\relax }}{85}{table.caption.84}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Núcleo de PyTorch\relax }}{94}{table.caption.92}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Tecnologías de PyTorch\relax }}{95}{table.caption.93}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces Librería de PyTorch\relax }}{95}{table.caption.94}%
+\contentsline {table}{\numberline {4.6}{\ignorespaces Frameworks de deep learning\relax }}{96}{table.caption.96}%

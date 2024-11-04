@@ -1,0 +1,158 @@
+\section{Simple equations}
+A simple equation:
+\[
+    f(x)=(x+a)(x+b)
+\]
+An equation with text:
+\begin{equation}
+    50 \text{ apples} \times 100 \text{ apples} =
+    \textbf{lots of apples}
+\end{equation}
+One including subscripts and superscripts:
+\[ k_{n+1} = n^2 + k_n^2 - k_{n-1} \]
+
+\section{Greek Letters}
+\[ \alpha, \beta, \gamma, \Gamma, \pi, \Pi, \phi, \varphi, \mu, \Phi, \xi, \zeta \]
+\[ \cos(2\theta\phi) = \cos^2 \theta\phi - \sin^2 \theta\phi \]
+
+\section{Delimiters}
+There are many types of delimiters one can use:
+\[ ( a ), [ b ], \{ c \}, | d |, \| e \|,
+    \langle f \rangle, \lfloor g \rfloor,
+    \lceil h \rceil, \ulcorner i \urcorner \]
+See how the delimiters are of reasonable size in these examples
+\[
+    \left(a+b\right)\left[1-\frac{b}{a+b}\right]=a\,,
+\]
+\[
+    \sqrt{|xy|}\leq\left|\frac{x+y}{2}\right|,
+\]
+even when there is no matching delimiter
+\[
+    \int_a^bu\frac{d^2v}{dx^2}\,dx
+    =\left.u\frac{dv}{dx}\right|_a^b
+    -\int_a^b\frac{du}{dx}\frac{dv}{dx}\,dx.
+\]
+whereas vector problems often lead to statements such as
+\[
+    u=\frac{-y}{x^2+y^2}\,,\quad
+    v=\frac{x}{x^2+y^2}\,,\quad\text{and}\quad
+    w=0\,.
+\]
+
+\section{Multiple Fractions}
+Typesetting continued fractions is easy:
+\[
+    x = a_0 + \frac{1}{a_1 + \frac{1}{a_2 + \frac{1}{a_3 + a_4}}}
+\]
+However, as the fractions continue, they get smaller. If you want to keep the size consistent, use the display style; e.g.
+\[
+    x = a_0 + \frac{1}{\displaystyle a_1
+        + \frac{1}{\displaystyle a_2
+            + \frac{1}{\displaystyle a_3 + a_4}}}
+\]
+
+\section{Arrays}
+Arrays of mathematics are typeset using one of the matrix environments as
+in
+\[
+    \begin{bmatrix}
+        1 & x & 0  \\
+        0 & 1 & -1
+    \end{bmatrix}\begin{bmatrix}
+        1 \\
+        y \\
+        1
+    \end{bmatrix}
+    =\begin{bmatrix}
+        1+xy \\
+        y-1
+    \end{bmatrix}.
+\]
+\[ \begin{pmatrix}
+        2 & 3 & 4  \\
+        5 & 6 & 7  \\
+        8 & 9 & 10\end{pmatrix} v = 0 \]
+Case statements use cases:
+\[
+    |x|=\begin{cases}
+        x,  & \text{if }x\geq 0\,, \\
+        -x, & \text{if }x< 0\,.
+    \end{cases}
+\]
+Many arrays have lots of dots all over the place as in
+\[
+    \begin{matrix}
+        -2     & 1      & 0      & 0      & \cdots & 0      \\
+        1      & -2     & 1      & 0      & \cdots & 0      \\
+        0      & 1      & -2     & 1      & \cdots & 0      \\
+        0      & 0      & 1      & -2     & \ddots & \vdots \\
+        \vdots & \vdots & \vdots & \ddots & \ddots & 1      \\
+        0      & 0      & 0      & \cdots & 1      & -2
+    \end{matrix}
+\]
+
+\section{Greek Letters}
+\[ \alpha,  \beta,  \gamma, \Gamma, \pi, \Pi, \phi, \varphi, \mu, \Phi, \xi, \zeta \]
+\[ \cos(2\theta\phi) = \cos^2 \theta\phi - \sin^2 \theta\phi \]
+
+\section{Delimiters}
+\[ ( a ), [ b ], \{ c \}, | d |, \| e \|,
+    \langle f \rangle, \lfloor g \rfloor,
+    \lceil h \rceil, \ulcorner i \urcorner
+\]
+
+\section{Accents}
+Mathematical accents are performed by a short command with one
+argument, such as
+\[
+    \tilde f(\omega)=\frac{1}{2\pi}
+    \int_{-\infty}^\infty f(x)e^{-i\omega x}\,dx\,,
+\]
+or
+\[
+    \dot{\vec \omega}=\vec r\times\vec I\,.
+\]
+
+\section{Multiline equations and aligned environments}
+
+New lines (\textbackslash \textbackslash) do not work in equation environments. To achieve alignment of equations, use the aligned  package to produce multiline aligned math, such as:
+
+\begin{center}
+    \begin{align}
+        F = & F_{x} \in  F_{c} : (|S| > |C|)                        \\
+            & \cap (\mathrm{minPixels}  < |S| < \mathrm{maxPixels}) \\
+            & \cap (|S_{\mathrm{conected}}| > |S| - \epsilon)
+    \end{align}
+\end{center}
+
+and also:
+\newline
+\begin{center}
+    \begin{align}
+        A_0 = & \frac{1}{(\alpha+t_x)^{r+s+x}}{}_2 F_1\left( r+s+x,x+1;r+s+x+1;\frac{\alpha-\beta}{\alpha + t_x} \right)      \\
+              & \quad - \frac{1}{(\alpha+T)^{r+s+x}}{}_2 F_1\left( r+s+x,x+1;r+s+x+1;\frac{\alpha-\beta}{\alpha + T} \right),
+    \end{align}
+\end{center}
+
+\textbf{Note}: the above multiline equations have math mode defined per line, not globally at the equation level.
+
+\section{Theorems and sets}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+\begin{theorem}
+    For any non-negative integer ${n}$, we have
+    $${(1+x)^{n} = \sum_{i=0}^{n} {n \choose i} x^i}$$
+\end{theorem}
+The Taylor series expansion for the function ${e^x}$ is given by
+\begin{equation}
+    e^x = 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + \cdots = \sum_{n\geq 0} \frac{x^n}{n!}
+\end{equation}
+\[ \forall x \in X, \quad \exists y \leq \epsilon \]
+\[ \frac{n!}{k!(n-k)!} = \binom{n}{k} \]
+\begin{theorem}
+    For any sets ${A}$, ${B}$ and ${C}$, we have
+    $${(A\cup B)-(C-A) = A \cup (B-C)}$$
+\end{theorem}

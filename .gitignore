@@ -154,7 +154,7 @@ Project/LatexSlide/figures/output.avi
 Project/LatexSlide/figures/output.mkv
 Project/LatexSlide/figures/output.mp4
 
-
+datasets/
 datasets/CASIA-Multi-Spectral-PalmprintV1/*
 datasets/CASIA-PalmprintV1/*
 datasets/GPDS/*

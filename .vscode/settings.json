@@ -25,7 +25,13 @@
         "editor.formatOnSave": true
     },
     "black-formatter.args": [
-        "-l 79"
+        "-l 120"
+    ],
+    "flake8.args": [
+        "--max-line-length=120",
+        // "--ignore=E402,F841,F401,E302,E305",
+        // E501 for comments
+        "--ignore=E501",
     ],
     // "emeraldwalk.runonsave": {
     //     "commands": [
@@ -181,5 +187,8 @@
         "tests"
     ],
     "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": true
+    "python.testing.pytestEnabled": true,
+    "cSpell.words": [
+        "pytorch"
+    ]
 }
