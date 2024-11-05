@@ -2,11 +2,16 @@
 
 ## ¿Que quiero hacer?
 
-Un proyecto que genere instancias sinteticas que pueda vulnerar un sistema de autenticación biometrica.
+Un proyecto que genere instancias sintéticas que pueda vulnerar un sistema de autenticación biométrica.
 
 ## ¿Que necesito?
 
-- El sistema de autentiación biometrica.
 - Crear un lanzador de experimentos.
-- Una GAN que genere instancias sinteticas.
+- Una GAN que genere instancias sintéticas.
 - Métricas.
+- Cargar StyleGAN en pytorch lightning (pl)
+  - huggan/stylegan_animeface512
+  - huggan/stylegan_car512
+  - huggan/stylegan_cat512
+- 
+
