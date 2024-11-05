@@ -1,0 +1,67 @@
+% GAN
+\def\GANeqLD{% DONE
+\begin{math}
+    \mathcal{L}_{D}^{GAN} = 
+        \mathbb{E}_{x\sim{}P_{data}(x)}         \left[  \log\left( D(x)             \right)         \right] 
+\end{math}
+}
+
+\def\GANeqLG{% DONE
+\begin{math}
+    \mathcal{L}_{G}^{GAN} = 
+        \mathbb{E}_{z\sim{}P_{noise}(z)}        \left[  \log\left( 1 - D(z)         \right)         \right] 
+\end{math}
+}
+
+
+
+% cGAN
+\def\cGANeqLD{
+\begin{math}
+    \mathcal{L}_{D}^{cGAN} = 
+        \mathbb{E}_{x\sim{}P_{data}(x)}     \left[  \log\left( D(x \mid y))         \right)         \right] 
+\end{math}
+}
+
+\def\cGANeqLG{
+\begin{math}
+    \mathcal{L}_{G}^{cGAN} = 
+        \mathbb{E}_{x\sim{}P_{noise}(z)}    \left[  \log\left( 1 - D(G(z\mid{}y))   \right)         \right] 
+\end{math}
+}
+
+%     \min_{D} & = \frac{1}{2} \mathbb{E}_{x\sim{}P_{data}(x)}  \left[ (D(x) - b)^{2} \right] + \frac{1}{2} \mathbb{E}_{z\sim{}P_{noise}(z)} \left[ (D(G(z)) - a)^{2} \right]   \\
+    % \min_{G} & = \frac{1}{2} \mathbb{E}_{z\sim{}P_{noise}(z)} \left[ (D(G(z)) - c)^{2} \right]                                                                                \\
+
+% LSGAN
+\def\lsGANeqLG{
+\begin{math}
+    \mathcal{L}_{D}^{LSGAN} =
+        \frac{1}{2} \mathbb{E}_{x\sim{}P_{data}(x)}  \left[ (D(x) - b)^{2} \right] + \frac{1}{2} \mathbb{E}_{z\sim{}P_{noise}(z)} \left[ (D(G(z)) - a)^{2} \right] 
+\end{math}
+}
+
+\def\lsGANeqLD{
+\begin{math}
+    \mathcal{L}_{D}^{LSGAN} = 
+        \frac{1}{2} \mathbb{E}_{z\sim{}P_{noise}(z)} \left[ (D(G(z)) - c)^{2} \right] 
+\end{math}
+}
+
+
+
+
+
+\def\cycleGANeqLGXtoY{
+\begin{math}
+    \mathcal{L}_{G}^{CycleGAN} = 
+        \mathbb{E}_{x\sim{}P_{data}(x)} \left[\log{\left(1 - D_{Y}(\GenXtoY(x))\right)}\right]     
+\end{math}
+}
+
+\def\cycleGANeqLDX{
+\begin{math}
+    \mathcal{L}_{D}^{CycleGAN} = 
+        \mathbb{E}_{y\sim{}P_{data}(y)} \left[\log{\left(D_{Y}(y)\right)}\right]                   
+\end{math}
+}

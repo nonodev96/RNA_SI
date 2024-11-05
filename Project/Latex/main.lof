@@ -1,0 +1,58 @@
+\babel@toc {spanish}{}\relax 
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Diagrama Gantt\relax }}{12}{figure.caption.16}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Ciencia de datos como campo interdisciplinar.\newline {}Fuente: Elaboración propia.\relax }}{13}{figure.caption.17}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Retrato de Gottfried Leibniz.\newline {}Fuente: \href {https://es.wikipedia.org/wiki/Gottfried_Leibniz}{Wikipedia}\relax }}{16}{figure.caption.19}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Warren Sturgis McCulloch Interview.\newline {}Fuente: \href {https://www.youtube.com/watch?v=8Wdz1Tj5084}{Entrevista en 1969}\relax }}{17}{figure.caption.20}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Los padres de la inteligencia artificial.\newline {}Fuente: \href {https://www.linkedin.com/pulse/first-ever-ai-conference-tracing-evolution-history-ofai-nicky-verd}{Linkedin}\relax }}{17}{figure.caption.21}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Mark I Perceptron.\newline {}Fuente: \href {https://en.wikipedia.org/wiki/Perceptron}{Wikipedia}\relax }}{18}{figure.caption.22}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Kunihiko Fukushima.\newline {}Fuente: \href {https://www.ieice.org/eng/about_ieice/new_honorary_members_award_winners/2017/meiyo_05e.html}{IEICE}\relax }}{18}{figure.caption.23}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Adaptive Systems Research Department at Bell Labs 1989.\newline {}Fuente: \href {https://twitter.com/ylecun/status/1378718317695934465}{Twitter Yann Lecun}\relax }}{19}{figure.caption.24}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Sepp Hochreiter.\newline {}Fuente: \href {https://people.idsia.ch/~juergen/fundamentaldeeplearningproblem.html}{IDSIA}\relax }}{20}{figure.caption.25}%
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Ian Goodfellow.\newline {}Fuente: \href {https://www.technologyreview.es/s/10016/el-senor-de-las-gan-el-hombre-que-dio-imaginacion-las-maquinas}{MIT Technology Review}\relax }}{21}{figure.caption.26}%
+\contentsline {figure}{\numberline {2.10}{\ignorespaces El proceso de descubrimiento de conocimiento en bases de datos.\newline {}Fuente: Sección \textit {Introduction to Knowledge Discovery and Data Mining} \cite {rokach2010data}\relax }}{23}{figure.caption.27}%
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Taxonomía de minería de datos.\newline {}Fuente: Elaboración propia, inspirado en la sección {\small \textit {Introduction to Knowledge Discovery and Data Mining}} \cite {maimon2005data}\relax }}{24}{figure.caption.28}%
+\contentsline {figure}{\numberline {2.12}{\ignorespaces El \textit {Machine Learning} como paradigma de programación.\newline {}Fuente: Elaboración propia.\relax }}{25}{figure.caption.29}%
+\contentsline {figure}{\numberline {2.13}{\ignorespaces Clasificación de los algoritmos de aprendizaje automático.\newline {}Fuente: Elaboración propia.\relax }}{25}{figure.caption.30}%
+\contentsline {figure}{\numberline {2.14}{\ignorespaces Partes de una neurona artificial bioinspirada en una neurona biológica.\newline {}Fuente: Elaboración propia.\relax }}{27}{figure.caption.31}%
+\contentsline {figure}{\numberline {2.15}{\ignorespaces Red neuronal artificial.\newline {}Fuente: Elaboración propia.\relax }}{28}{figure.caption.32}%
+\contentsline {figure}{\numberline {2.16}{\ignorespaces Cálculo de los pesos de la red neuronal artificial.\newline {}Fuente: Elaboración propia.\relax }}{28}{figure.caption.33}%
+\contentsline {figure}{\numberline {2.17}{\ignorespaces Problema de clasificación XOR.\newline {}Fuente: Elaboración propia.\relax }}{30}{figure.caption.34}%
+\contentsline {figure}{\numberline {2.18}{\ignorespaces Descenso de gradiente.\newline {}Fuente: \href {https://fxdatalabs.com}{F(x) Data Labs Pvt. Ltd.}\relax }}{31}{figure.caption.35}%
+\contentsline {figure}{\numberline {2.19}{\ignorespaces Funciones de activación no lineales\relax }}{34}{figure.caption.36}%
+\contentsline {figure}{\numberline {2.20}{\ignorespaces Funciones de activación no lineales\relax }}{35}{figure.caption.37}%
+\contentsline {figure}{\numberline {2.21}{\ignorespaces Topologías de redes neuronales.\newline {}Fuente: \href {https://www.asimovinstitute.org/neural-network-zoo/}{The neural network zoo}\relax }}{38}{figure.caption.38}%
+\contentsline {figure}{\numberline {2.22}{\ignorespaces Encoder-Decoder. \newline {}Fuente: Elaboración propia.\relax }}{39}{figure.caption.39}%
+\contentsline {figure}{\numberline {2.23}{\ignorespaces Variable Auto-encoder. \newline {}Fuente: Elaboración propia, inspirado en el capítulo 2 El auto-encoder variacional \cite {upm71832}\relax }}{40}{figure.caption.40}%
+\contentsline {figure}{\numberline {2.24}{\ignorespaces Vector Quantised Variational AutoEncoder (VQ-VAE). \newline {}Fuente: Neural Discrete Representation Learning \cite {oord2018neuraldiscreterepresentationlearning}\relax }}{41}{figure.caption.41}%
+\contentsline {figure}{\numberline {2.25}{\ignorespaces Arquitectura de las redes neuronales generativas adversariales.\newline {}Fuente: Elaboración propia.\relax }}{42}{figure.caption.42}%
+\contentsline {figure}{\numberline {2.26}{\ignorespaces Taxonomía de GANs.\newline {}Fuente: Elaboración propia, adaptado del artículo ``GANs Survey'' \cite {GANSurvey_2021ZHENGWEIWANG}\relax }}{45}{figure.caption.43}%
+\contentsline {figure}{\numberline {2.27}{\ignorespaces Arquitectura Conditional GAN (\gls {cGAN})\newline {}Fuente: Elaboración propia.\relax }}{46}{figure.caption.45}%
+\contentsline {figure}{\numberline {2.28}{\ignorespaces Arquitectura Semi-supervised GAN ({SGAN})\newline {}Fuente: Elaboración propia.\relax }}{47}{figure.caption.48}%
+\contentsline {figure}{\numberline {2.29}{\ignorespaces Arquitectura Couple GAN (CoGAN)\newline {}Fuente: Elaboración propia.\relax }}{48}{figure.caption.50}%
+\contentsline {figure}{\numberline {2.30}{\ignorespaces Representación CycleGAN\relax }}{49}{figure.caption.53}%
+\contentsline {figure}{\numberline {2.31}{\ignorespaces Arquitectura Cycle GAN (CycleGAN)\newline {}Fuente: Elaboración propia.\relax }}{51}{figure.caption.54}%
+\contentsline {figure}{\numberline {2.32}{\ignorespaces Least Square Generative Adversarial Network (LSGAN)\newline {}Fuente: Least Squares Generative Adversarial Networks \cite {LSGAN-mao2017squares}\relax }}{52}{figure.caption.56}%
+\contentsline {figure}{\numberline {2.33}{\ignorespaces Progressive Generative Adversarial Network (ProGAN)\newline {}Fuente: \href {https://blog.paperspace.com/progan/}{ProGAN: Progressive Growing Generative Adversarial Networks}\relax }}{53}{figure.caption.58}%
+\contentsline {figure}{\numberline {2.34}{\ignorespaces Arquitectura Information Maximizing GAN (InfoGAN).\newline {}Fuente: Elaboración propia.\relax }}{56}{figure.caption.66}%
+\contentsline {figure}{\numberline {2.35}{\ignorespaces Ilustración de la inversión de GAN.\newline {}Fuente: GAN Inversion: A Survey \cite {GANInversionSurvey-xia2022gan}\relax }}{57}{figure.caption.67}%
+\contentsline {figure}{\numberline {2.36}{\ignorespaces Tipos de GAN inversión.\newline {}Fuente: GAN Inversion: A Survey \cite {GANInversionSurvey-xia2022gan}\relax }}{58}{figure.caption.68}%
+\contentsline {figure}{\numberline {2.37}{\ignorespaces Diferencias entre Difusión semántica y Context Encoder\relax }}{60}{figure.caption.70}%
+\contentsline {figure}{\numberline {2.38}{\ignorespaces Arquitectura de ART.\newline {}Fuente: \href {https://github.com/Trusted-AI/adversarial-robustness-toolbox/wiki/ART-Architecture-and-Roadmap}{GitHub @Trusted-AI/adversarial-robustness-toolbox}\relax }}{61}{figure.caption.71}%
+\contentsline {figure}{\numberline {2.39}{\ignorespaces Amenazas en redes neuronales.\newline {}Fuente: Elaboración propia.\relax }}{62}{figure.caption.72}%
+\contentsline {figure}{\numberline {2.40}{\ignorespaces Ataque que realiza CopyCat CNN. Fuente: CopyCat CNN \cite {Correia_Silva_2018}\relax }}{68}{figure.caption.74}%
+\contentsline {figure}{\numberline {2.41}{\ignorespaces Ataques y defensas en redes neuronales.\newline {}Fuente: Elaboración propia.\relax }}{73}{figure.caption.77}%
+\contentsline {figure}{\numberline {2.42}{\ignorespaces Amenazas MITRE - ATT \& CK, MITRE - ATLAS y STRIDE.\newline {}Fuente: Elaboración propia. Inspirado en \href {https://atlas.mitre.org/matrices/ATLAS}{MITRE - ATLAS}\relax }}{75}{figure.caption.81}%
+\contentsline {figure}{\numberline {2.43}{\ignorespaces Reglamento Europeo\newline {}Fuente: Elaboración propia, inspirado en \cite {El-Reglamento-Europeo-de-IA-en-resumen,reglamento-ia-telefonica}\relax }}{76}{figure.caption.82}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Attack vectors in a generic biometric system\newline {}Fuente: Exploiting Image Sensor Data in Biometric Systems and Mobile Applications \cite {Debiasi20b}\relax }}{86}{figure.caption.85}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces End to end feature engineering methods Fuente: \href {https://ryendu.medium.com/end-to-end-transformational-feature-engineering-with-cnns-52a5125a10}{End-to-end transformational Feature Engineering with CNNs}\relax }}{87}{figure.caption.86}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Clasificación de métodos de extracción y coincidencia de características. Fuente: A survey of feature matching methods \cite {A-survey-of-feature-matching-methods}\relax }}{87}{figure.caption.87}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Librerías para el tratamiento de imágenes\relax }}{88}{figure.caption.88}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Keras\relax }}{91}{figure.caption.89}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces TensorFlow\relax }}{92}{figure.caption.90}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces PyTorch\relax }}{93}{figure.caption.91}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces PyTorch Lightning\relax }}{95}{figure.caption.95}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Bibliotecas de Python para ciencia de datos\relax }}{97}{figure.caption.97}%

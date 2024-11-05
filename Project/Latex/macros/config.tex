@@ -1,0 +1,149 @@
+% ==== Introducir aquí el nombre del estudiante
+\def\Estudiante{Antonio Mudarra Machuca}
+
+% ==== Introducir aquí el nombre de los tutores. Si solo hay uno dejar las llaves de \TutorB vacías
+\def\TutorA{Antonio Jesús Rivera Rivas}
+\def\TutorB{María José del Jesus Díaz}
+\def\Departamento{Departamento de informática}
+
+% ==== Introducir aquí el título de completo y abreviado (para las cabeceras) del TFG
+\def\TituloTFM{Redes neuronales adversarias en seguridad informática}
+\def\TituloAbreviado{RNA-SI}
+
+% ==== Introducir aquí el mes y año de presentación del TFG
+\def\Fecha{diciembre de 2024}
+\def\FechaPortada{diciembre, 2024}
+
+% Configuración idioma
+\renewcommand{\spanishtablename}{Tabla.}  % Título para las tablas
+\renewcommand{\spanishcontentsname}{Tabla de contenidos}  % y los índices
+\renewcommand{\spanishlistfigurename}{Lista de figuras}
+\renewcommand{\spanishlisttablename}{Lista de tablas}
+
+\renewcommand{\algorithmcfname}{Algoritmo}
+\renewcommand{\listalgorithmcfname}{Lista de algoritmos}
+\renewcommand{\lstlistingname}{Listado}
+\renewcommand{\lstlistlistingname}{Lista de listados de código}
+
+% Configuración tabularX
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\usepackage{tabularray}
+
+
+
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+    pdftitle={\TituloTFM},
+    pdfauthor={\Estudiante}
+    bookmarks=true,
+    bookmarksopen=true,
+    pdfpagemode=FullScreen,
+    breaklinks=true,
+    citecolor=cyan,
+}
+
+
+\lstset{ %
+    %language=delphi,                % the language of the code
+    basicstyle=\linespread{0.7}\small\ttfamily,       % the size of the fonts that are used for the code
+    numbers=left,                   % where to put the line-numbers
+    numberstyle=\footnotesize\color{gray},  % the style that is used for the line-numbers
+    stepnumber=1,                   % the step between two line-numbers. If it's 1, each line will be numbered
+    numbersep=7pt,                  % how far the line-numbers are from the code
+    backgroundcolor=\color{gray!5},  % choose the background color. You must add \usepackage{color}
+    showspaces=false,               % show spaces adding particular underscores
+    showstringspaces=true,         % underline spaces within strings
+    showtabs=true,                 % show tabs within strings adding particular underscores
+    frameround=fttt,
+    frame=rtBL,                   % adds a frame around the code
+    rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+    tabsize=4,                      % sets default tabsize to 2 spaces
+    aboveskip=1em,
+    captionpos=b,                   % sets the caption-position to bottom
+    breaklines=true,                % sets automatic line breaking
+    breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+    title=\lstname,                 % show the filename of files included with \lstinputlisting;  also try caption instead of title
+    keywordstyle=\bf\ttfamily,          % keyword style
+    commentstyle=\color{black!60}\ttfamily,       % comment style
+    stringstyle=\color{blue}\ttfamily,         % string literal style
+    escapeinside={\%*}{*)}            % if you want to add a comment within your code
+}
+
+\lstset
+{
+    language=[LaTeX]TeX,
+    breaklines=true,
+    basicstyle=\tt\scriptsize,
+    keywordstyle=\color{blue},
+    identifierstyle=\color{gray},
+    texcl=true
+}
+\lstset{
+language=Python,
+literate={á}{{\'a}}1
+{ã}{{\~a}}1
+{é}{{\'e}}1
+{ó}{{\'o}}1
+{í}{{\'i}}1
+{ñ}{{\~n}}1
+{¡}{{!`}}1
+{¿}{{?`}}1
+{ú}{{\'u}}1
+{Í}{{\'I}}1
+{Ó}{{\'O}}1
+}
+
+\renewcommand{\familydefault}{\sfdefault}
+\setlength{\parskip}{1em}
+\setlength{\headheight}{14.5pt}
+
+% Configuración de encabezado y pie
+\fancyhead[RE,LO]{{\color{gray}\Estudiante}}
+\fancyhead[LE,RO]{{\color{gray}\TituloAbreviado}}
+\fancyfoot[RE,LO]{{\color{gray}Escuela Politécnica Superior de Jaén}}
+\fancyfoot[LE,RO]{{\color{gray}\thepage}}
+\renewcommand{\footrulewidth}{1pt}
+
+
+\definecolor{flashwhite}{rgb}{0.95, 0.95, 0.96}
+
+% Emojis
+% \setemojifont{EmojiOneMozilla}
+
+% FancyHDR
+\pagestyle{fancy}
+\fancyhf{}
+
+% algorithm2
+\SetKwComment{Comment}{/* }{ */}
+
+% Minuscula
+\newcommand{\mathVector}[1]{\mathit{\mathbf{{#1}}}}
+% Mayuscula
+\newcommand{\mathMatrix}[1]{\mathit{\mathbf{{#1}}}}
+% Mayuscula
+\newcommand{\mathTensor}[1]{\boldsymbol{\mathsf{{#1}}}}
+
+% Conjunto de datos 
+\newcommand{\mathDataset}[1]{\mathbb{{#1}}}
+
+
+\newcommand{\GenXtoY}[0]{\underset{X\rightarrow{}Y}{G}}
+\newcommand{\GenYtoX}[0]{\underset{Y\rightarrow{}X}{G}}
+
+
+
+% subparagraph
+\makeatletter
+\renewcommand\subparagraph{\@startsection{subparagraph}{5}{\parindent}%
+    {3.25ex \@plus1ex \@minus .2ex}%
+    {0.75ex plus 0.1ex}% space after heading
+    {\normalfont\normalsize\bfseries}}
+\makeatother
+
+\DefTblrTemplate{contfoot-text}{default}{Continuado en la próxima página}
+\DefTblrTemplate{conthead-text}{default}{(Continuado)}

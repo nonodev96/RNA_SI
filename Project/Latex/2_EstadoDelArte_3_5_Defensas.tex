@@ -1,0 +1,245 @@
+% ===================================
+% ===================================
+\subsection{Defensas en \textit{deep learning}}
+\label{sec:defense}
+% region subsection Defensas contra los ataques
+
+Se han hecho grandes avances en el estudio de los modelos de inteligencia artificial, se han investigado los posibles ataques y también como defender los modelos frente a alteraciones externas o alteraciones internas.
+
+En las siguientes subsecciones reduciremos la explicación a los artículos más relevantes que se pueden aprovechar en este proyecto.
+
+\subsubsection{Pre procesamiento}
+% region subsubsection Pre procesamiento
+
+Estas son algunas de las técnicas de defensa que se pueden aplicar a los modelos antes de su inserción o inferencia.
+
+
+En el artículo \cite{lin2019invertdefendmodelbasedapproximate} se presenta la técnica \textit{InverseGAN}, con el objetivo de resolver el problema de inferencia en redes \gls{GAN}, creando una red de codificación, aunque no consiguen en la práctica la inversión del código latente si lo logran en un estudio teórico, además demuestran que \textit{InverseGAN} supera a otros métodos de defensa.
+
+En el artículo \textit{DefenseGAN} \cite{samangouei2018defenseganprotectingclassifiersadversarial} se presenta una técnica para defender a los modelos de clasificación, en esta técnica se modela una distribución de imágenes sin perturbaciones y en la inferencia encuentran una versión cercana de la imagen sin cambios adversariales, esta imagen es la que se introduce en el clasificador.
+
+Como los métodos anteriores existen muchos más, aquí se presenta una tabla con los artículos.
+
+% \begin{table}[H]
+%     \centering
+%     \begin{tblr}{hlines,vlines,rows={valign=m},row{1}={c},colspec={Q[m]X}} 
+%         \textbf{Técnica}                & \textbf{Referencias}                                                                                                     \\
+%         InverseGAN                      & \href{https://arxiv.org/abs/1911.10291}{An Lin et al., 2019}                                                             \\
+%         DefenseGAN                      & \href{https://arxiv.org/abs/1805.06605}{Samangouei et al., 2018}                                                         \\
+%         Video Compression               & \href{https://arxiv.org/abs/1902.06705}{Carlini et al., 2019}                                                            \\
+%         Resampling                      & \href{https://arxiv.org/abs/1809.10875}{Yang et al., 2019}                                                               \\
+%         Thermometer Encoding            & \href{https://openreview.net/forum?id=S18Su--CW}{Buckman et al., 2018}                                                   \\
+%         MP3 Compression                 & \href{https://arxiv.org/abs/1801.01944}{Carlini, N. and Wagner, D., 2018}                                                \\
+%         Total Variance Minimization     & \href{https://openreview.net/forum?id=SyJ7ClWCb}{Guo et al., 2018}                                                       \\
+%         PixelDefend                     & \href{https://arxiv.org/abs/1710.10766}{Song et al., 2017}                                                               \\
+%         Gaussian Data Augmentation      & \href{https://arxiv.org/abs/1707.06728}{Zantedeschi et al., 2017}                                                        \\
+%         Feature Squeezing               & \href{http://arxiv.org/abs/1704.01155}{Xu et al., 2017}                                                                  \\
+%         Spatial Smoothing               & \href{http://arxiv.org/abs/1704.01155}{Xu et al., 2017}                                                                  \\
+%         JPEG Compression                & \href{https://arxiv.org/abs/1608.00853}{Dziugaite et al., 2016}                                                          \\
+%         Label Smoothing                 & \href{https://pdfs.semanticscholar.org/b5ec/486044c6218dd41b17d8bba502b32a12b91a.pdf}{Warde-Farley and Goodfellow, 2016} \\
+%         Virtual Adversarial Training    & \href{https://arxiv.org/abs/1507.00677}{Miyato et al., 2015}                                                             \\
+%         Cutout                          & \href{https://arxiv.org/abs/1708.04552}{DeVries et al., 2017}                                                            \\
+%         Mixup                           & \href{https://arxiv.org/abs/1710.09412}{Zhang et al., 2017}                                                              \\
+%         CutMix                          & \href{https://arxiv.org/abs/1905.04899}{Yun et al., 2019}                                                                \\
+%     \end{tblr}
+%     \caption{Lista de técnicas de defensa en Deep Learning}
+% \end{table}
+
+\begin{longtblr}
+    [caption={Lista de técnicas de defensa durante el pre procesamiento en Deep Learning}, label={tab:defense-pre-process}]
+    {hlines, vlines, row{1}={c}, rows={valign=m},  colspec={XX}}
+    \textbf{Técnica}                & \textbf{Referencias}                                                                                                     \\
+    InverseGAN                      & \href{https://arxiv.org/abs/1911.10291}{An Lin et al., 2019}                                                             \\
+    DefenseGAN                      & \href{https://arxiv.org/abs/1805.06605}{Samangouei et al., 2018}                                                         \\
+    Video Compression               & \href{https://arxiv.org/abs/1902.06705}{Carlini et al., 2019}                                                            \\
+    Resampling                      & \href{https://arxiv.org/abs/1809.10875}{Yang et al., 2019}                                                               \\
+    Thermometer Encoding            & \href{https://openreview.net/forum?id=S18Su--CW}{Buckman et al., 2018}                                                   \\
+    MP3 Compression                 & \href{https://arxiv.org/abs/1801.01944}{Carlini, N. and Wagner, D., 2018}                                                \\
+    Total Variance Minimization     & \href{https://openreview.net/forum?id=SyJ7ClWCb}{Guo et al., 2018}                                                       \\
+    PixelDefend                     & \href{https://arxiv.org/abs/1710.10766}{Song et al., 2017}                                                               \\
+    Gaussian Data Augmentation      & \href{https://arxiv.org/abs/1707.06728}{Zantedeschi et al., 2017}                                                        \\
+    Feature Squeezing               & \href{http://arxiv.org/abs/1704.01155}{Xu et al., 2017}                                                                  \\
+    Spatial Smoothing               & \href{http://arxiv.org/abs/1704.01155}{Xu et al., 2017}                                                                  \\
+    JPEG Compression                & \href{https://arxiv.org/abs/1608.00853}{Dziugaite et al., 2016}                                                          \\
+    Label Smoothing                 & \href{https://pdfs.semanticscholar.org/b5ec/486044c6218dd41b17d8bba502b32a12b91a.pdf}{Warde-Farley and Goodfellow, 2016} \\
+    Virtual Adversarial Training    & \href{https://arxiv.org/abs/1507.00677}{Miyato et al., 2015}                                                             \\
+    Cutout                          & \href{https://arxiv.org/abs/1708.04552}{DeVries et al., 2017}                                                            \\
+    Mixup                           & \href{https://arxiv.org/abs/1710.09412}{Zhang et al., 2017}                                                              \\
+    CutMix                          & \href{https://arxiv.org/abs/1905.04899}{Yun et al., 2019}                                                                \\
+\end{longtblr}
+
+% endregion subsubsection Pre procesamiento
+\subsubsection{Post procesamiento}
+% region subsubsection Post procesamiento
+
+Las técnicas post procesamiento se implementan después de que el modelo ha realizado su predicción y están diseñadas para mejorar la robustez frente a ataques adversariales.
+
+En estos artículos se plantean defensas frente a extracción de datos, en \textit{Random Noise} \cite{chandrasekaran2019exploringconnectionsactivelearning} se propone un método híbrido para la defensa que combina técnicas clásicas, limitar consultas, monitoreo de patrones de uso, etc. A otros más específicos, como introducir ruido en las respuestas o reducir los modelos para disminuir los datos sensibles que se pueden extraer, también recomiendan técnicas como \textit{data-dependent randomization}.
+
+\begin{table}[H]
+    \centering
+    \begin{tblr}{hlines, vlines, row{1}={c}, rows={valign=m}, colspec={XX}}
+        \textbf{Técnica}    & \textbf{Referencias}                                                  \\
+        Reverse Sigmoid     & \href{https://arxiv.org/abs/1806.00054}{Lee et al., 2018}             \\ 
+        Random Noise        & \href{https://arxiv.org/abs/1811.02054}{Chandrasekaran et al., 2018}  \\ 
+        Class Labels        & \href{https://arxiv.org/abs/1609.02943}{Tramer et al., 2016}, \href{https://arxiv.org/abs/1811.02054}{Chandrasekaran et al., 2018} \\
+        High Confidence     & \href{https://arxiv.org/abs/1609.02943}{Tramer et al., 2016}          \\ 
+        Rounding            & \href{https://arxiv.org/abs/1609.02943}{Tramer et al., 2016}          \\ 
+    \end{tblr}
+    \caption{Lista de técnicas de defensa durante el post procesamiento en Deep Learning}
+    \label{tab:defense-post-process}
+\end{table}
+
+% endregion subsubsection Post procesamiento
+\subsubsection{Entrenamiento}
+
+En el proceso de entrenamiento es donde se realizan las técnicas más curiosas y variadas para defender a los modelos.
+
+El artículo \cite{mirman18b} presenta un método para certificar robustez en grandes redes neuronales, dentro de ciertos límites. Este método utiliza varias transformaciones para abstraer la información, equilibrando eficiencia y precisión.
+
+\begin{table}[H]
+    \centering
+    \begin{tblr}{hlines, vlines, row{1}={c}, rows={valign=m}, colspec={XX}}
+        \textbf{Técnica}                & \textbf{Referencias}                                                                                  \\
+        General Adversarial Training    & \href{http://arxiv.org/abs/1312.6199}{Szegedy et al., 2013}                                           \\
+        Madry's Protocol                & \href{https://arxiv.org/abs/1706.06083}{Madry et al., 2017}                                           \\
+        Fast Is Better Than Free        & \href{https://arxiv.org/abs/2001.03994}{Wong et al., 2020}                                            \\
+        Certified Adversarial Training  & \href{http://proceedings.mlr.press/v80/mirman18b/mirman18b.pdf}{Mirman et al., 2018} \cite{mirman18b} \\
+        Interval Bound Propagation      & \href{https://arxiv.org/abs/1810.12715}{Gowal et al., 2018}                                           \\
+        DP-InstaHide                    & \href{https://arxiv.org/abs/2103.02079}{Borgnia et al., 2021}                                         \\
+    \end{tblr}
+    \caption{Lista completa de técnicas de defensa durante el entrenamiento en Deep Learning}
+    \label{tab:defense-train}
+\end{table}
+
+% \subsubsection{Transformación}
+% \paragraph{Evasión}
+% \paragraph{Envenenamiento}
+% \subsubsection{Detector}
+% \paragraph{Evasión}
+% \paragraph{Envenenamiento}
+
+% endregion subsection Defensas contra los ataques
+
+\subsection{Métricas en \textit{deep learning}}
+% region subsection Métricas en los ataques adversariales
+% DEFINICIÓN DE MÉTRICAS explica que es la {L}_{2}  y {L}_{\infty}
+
+Existen múltiples métricas para evaluar las redes \acrshort{ANN}, entre ellas destacan \textit{Classification Accuracy}, \textit{Logarithmic Loss}, \textit{Confusion Matrix}, etc. Existen también las métricas para validar la seguridad de los modelos, estas son las que nos interesan a nosotros, métricas de robustez, certificación y verificación.
+
+
+\subsubsection{Robustez}
+
+En el artículo \cite{weng2018evaluating} se analiza el estado de las métricas de robustez y su poca aparición en publicaciones, es por ello que plantean un nuevo enfoque usando la estimación de la constante local de \nameref{theorem::lipschitz} para un análisis de robustez, proponen el uso de la Teoría de Valores Extremos para una evaluación eficiente. Los investigadores la han definido como \gls{CLEVER} independiente de los ataques y computacionalmente eficiente para redes neuronales grandes, dando buenos resultados como las pruebas de robustez indicada por las normas ${\ell_{2}}$ e ${\ell_{\infty}}$. Se considera \gls{CLEVER} como la primera métrica de robustez independiente de ataques aplicable a cualquier red neuronal clasificadora.
+
+\subsubsection{Certificación}
+
+\textit{Randomized Smoothing}  \cite{cohen2019certified} es la técnica que se describe en el artículo de 2019, se usa para mejorar la robustez de un clasificador, esta técnica analiza las perturbaciones adversas, en concreto en la norma ${\ell_{2}}$, demostrando una garantía estricta de robustez en norma ${\ell_{2}}$, esto significa que el clasificador seguirá funcionando correctamente incluso si se introducen perturbaciones en los datos de entrada dentro de unos límites. Los investigadores destacan resultados usando modelos de \gls{ImageNet} con una precisión certificada del ${49\%}$.
+
+\subsubsection{Verificación}
+
+En el artículo \cite{chen2019robustness} de 2019 se aborda la verificación de la robustez en modelos basados en árboles, árboles de decisión, bosques aleatorios, \gls{GBDT}. Proponen un algoritmo de múltiples niveles, algoritmo eficiente que proporciona límites estrictos y permite mejoras iterativas, este algoritmo mejora de forma significativa la velocidad frente a enfoques previos basados en programación lineal.
+
+
+% endregion subsection Métricas en los ataques adversariales
+
+\subsection{Redes neuronales en \textit{Red team} y \textit{Blue team}}
+% region subsection Redes neuronales en Red team y Blue team
+
+Un buen símil entre la seguridad informática clásica y la seguridad en redes neuronales son los conceptos de equipos de ataque y defensa (``\textit{red team}'' y ``\textit{blue team}'').
+
+\begin{figure}[H]
+    \centering
+    \centerline{\includesvg[width=1\columnwidth]{figures/chapter02/ART-for-red-and-blue-teams.drawio.svg}}
+    \caption{Ataques y defensas en redes neuronales.\newline{}Fuente: Elaboración propia.}
+    \label{fig:art-for-red-and-blue-teams}
+\end{figure}
+
+La idea detrás del aprendizaje automático es la de poder predecir modelos predictivos, para ello se usan conjuntos de datos para el entrenamiento.
+
+Los conjuntos de datos se han de procesar, ya que suelen contener mucho ruido, es decir, información muy poco valiosa, errónea o, por el contrario, una alta dimensionalidad de los datos que puede ser contraproducente por no poder reproducir esas medidas o por la poca información que aportan.
+
+Los ataques al aprendizaje automático o profundo suelen estar dirigidos a las distintas etapas de creación y uso de un modelo.
+
+\begin{itemize}
+    \item Alteración de los datos de entrada.
+    \item Alteración del proceso de aprendizaje.
+    \item Extracción de los datos de entrenamiento.
+    \item Bloqueo del modelo.
+\end{itemize}
+
+Durante el transcurso del trabajo discutiremos los siguientes ataques y defensas de la sección \nameref{ch:2:section:state-of-the-art:computer-security-in-neural-networks} que se pueden ser vulnerables en los modelos. 
+
+\begin{itemize}
+    \item Envenenamiento de datos.
+    \item Puerta trasera.
+    \item Extracción de datos
+    \item Ingeniería inversa.
+    \item Evasión.
+\end{itemize}
+
+Podemos clasificar las amenazas de la seguridad informática con los siguientes sistemas, \gls{STRIDE}\footnote{Modelado de amenazas de \href{https://learn.microsoft.com/es-es/azure/security/develop/threat-modeling-tool-threats}{microsoft}}, con la matriz \gls{MITRE} o \gls{MITRE-ATLAS}.
+
+\input{tables/STRIDE}
+% \begin{multicols}{2}
+%     \begin{itemize}
+%         \item Spoofing
+%         \item Tampering
+%         \item Repudiation
+%         \item Denial of service
+%         \item Information disclosure
+%         \item Elevation of privilege
+%     \end{itemize}
+% \end{multicols}
+
+\input{tables/MITRE}
+% \begin{multicols}{3}
+%     \begin{itemize}
+%         \item Reconnaissance      
+%         \item Resource Development 
+%         \item Initial Access     
+%         \item Execution 
+%         \item Persistence         
+%         \item Privilege Escalation 
+%         \item Defense Evasion    
+%         \item Collection 
+%         \item Discovery           
+%         \item Lateral Movement
+%         \item Credential Access
+%         \item Impact      
+%         \item Exfiltration        
+%         \item Command and Control  
+%     \end{itemize}
+% \end{multicols}
+
+Como hemos visto previamente en las tablas \ref{tab:stride} y \ref{tab:mitre} las amenazas son ataques clásicos que pueden sufrir los sistemas informáticos, mientras que en la tabla \ref{tab:mitre-atlas} se modifican las amenazas de sistemas informáticos que implementen modelos de \acrshort{IA}
+
+\input{tables/MITRE-ATLAS}
+% \begin{multicols}{3}
+%      \begin{itemize}
+%         \item Reconnaissance      
+%         \item Resource Development 
+%         \item Initial Access       
+%         \item \textbf{ML Model Access}      
+%         \item Execution           
+%         \item Persistence          
+%         \item Privilege Escalation 
+%         \item Defense Evasion               
+%         \item Credential Access   
+%         \item Discovery            
+%         \item Collection
+%         \item \textbf{ML Attack Staging}    
+%         \item Exfiltration        
+%         \item Impact
+%      \end{itemize}
+% \end{multicols}
+               
+
+\begin{figure}[H]
+    \centering
+    \centerline{\includesvg[width=1\linewidth]{figures/chapter02/STRIDE-MITRE-ATLAS.drawio.svg}}
+    \caption{Amenazas MITRE - ATT \& CK, MITRE - ATLAS y STRIDE.\newline{}Fuente: Elaboración propia. Inspirado en \href{https://atlas.mitre.org/matrices/ATLAS}{MITRE - ATLAS}}
+    \label{fig:amenazas-MITRE-ATLAS-STRIDE}
+\end{figure}
+
+% endregion subsection Redes neuronales en Red team y Blue team

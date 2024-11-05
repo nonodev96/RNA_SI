@@ -2,14 +2,14 @@
 
 ## ¿Que quiero hacer?
 
-Un proyecto que genere instancias sinteticas que pueda vulnerar un sistema de autenticación biometrica.
+Un proyecto que genere instancias sintéticas alteradas que pueda vulnerar un sistema de autenticación biométrica.
 
 ## ¿Que necesito?
 
-- El sistema de autentiación biometrica.
 - Crear un lanzador de experimentos.
-- Una GAN que genere instancias sinteticas.
+- Una GAN que genere instancias sintéticas.
 - Métricas.
+- Cargar modelos Devil In GAN (IBM)
 
 ## Conjuntos de datos
 
@@ -27,9 +27,9 @@ Un proyecto que genere instancias sinteticas que pueda vulnerar un sistema de au
    1. Filtrar con una segmentación robusta
    2. Agrupación por individuos
 
-1. Seleccionar las caracteristicas más robustas con un algoritmo
-1. Analizar la extracción de caracteristicas multiespectrales.
+## Modelos
 
-## Investigar algoritmos
-
-**GA-LDA**:Se utiliza principalmente en clasificación y reducción de dimensionalidad. El objetivo de LDA es maximizar la varianza entre clases mientras minimiza la varianza dentro de cada clase.
+- Cargar StyleGAN en pytorch lightning (pl)
+  - huggan/stylegan_animeface512
+  - huggan/stylegan_car512
+  - huggan/stylegan_cat512

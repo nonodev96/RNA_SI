@@ -12,6 +12,7 @@ torchvision
 pytorch-lightning
 
 # Para ciencias de datos
+dnnlib-util
 numpy
 pandas
 scikit-learn
