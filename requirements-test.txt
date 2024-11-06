@@ -5,3 +5,7 @@ pytest-cov
 coverage
 mypy
 
+onnx
+onnxruntime
+tf2onnx
+onnx2pytorch

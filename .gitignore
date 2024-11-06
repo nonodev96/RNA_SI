@@ -111,6 +111,12 @@ ENV/
 env.bak/
 venv.bak/
 
+# For tensorflow 2.14.0
+.venv_tf_v2_14_0
+venv_tf_v2_14_0/
+
+
+
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -156,13 +162,37 @@ Project/LatexSlide/figures/output.mp4
 
 models/
 
-datasets/
-datasets/CASIA-Multi-Spectral-PalmprintV1/*
-datasets/CASIA-PalmprintV1/*
-datasets/GPDS/*
 
+datasets/_DATASET_TEST_/*
+
+# Dataset CASIA Multi Spectral PalmprintV1
 datasets/CASIA-Multi-Spectral-PalmprintV1-Database-description.pdf
 datasets/CASIA-Multi-Spectral-PalmprintV1-Thumbs.db
 datasets/CASIA-Multi-Spectral-PalmprintV1.zip
+datasets/CASIA-Multi-Spectral-PalmprintV1/*
+
+# Dataset CASIA PalmprintV1
 datasets/CASIA-PalmprintV1-Database-description.pdf
+datasets/CASIA-PalmprintV1-Thumbs.db
 datasets/CASIA-PalmprintV1.zip
+datasets/CASIA-PalmprintV1/*
+
+# Datasets GPDS
+datasets/GPDS_Hands100Contactless2bands/*
+
+# Dataset SOCOFing
+datasets/SOCOFing/*
+
+!datasets/.gitkeep
+
+scripts/devil-in-gan/data/
+
+scripts/GAN-py/images/
+
+scripts/GAN-py/data/
+scripts/GAN-py/images/
+
+scripts/GAN-pl/lightning_logs
+scripts/GAN-pl/MNIST
+
+

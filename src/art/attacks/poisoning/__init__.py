@@ -1,0 +1,1 @@
+from src.art.attacks.poisoning.backdoor_attack_dgm.backdoor_attack_dgm_red_tensorflow import BackdoorAttackDGMReDTensorFlowV2

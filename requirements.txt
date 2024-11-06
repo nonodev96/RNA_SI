@@ -4,11 +4,14 @@
 # Keras
 keras
 # Tensorflow Python
-tensorflow
+tensorflow==2.14.0
 # PyTorch
 torch
+# PyTorch extension
 torchshow
 torchvision
+torchinfo
+# PyTorch Lightning
 pytorch-lightning
 
 # Para ciencias de datos
@@ -32,6 +35,10 @@ SciencePlots
 
 # Utils
 openpyxl
-PIL
-pprint
+pillow # PIL
 tqdm
+
+# Jupyter
+ipykernel
+
+tabulate

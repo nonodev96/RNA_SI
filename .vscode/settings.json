@@ -22,7 +22,7 @@
     "[markdown_latex_combined]": {},
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter",
-        "editor.formatOnSave": true
+        "editor.formatOnSave": false
     },
     "black-formatter.args": [
         "-l 120"
@@ -198,5 +198,6 @@
     "python.testing.pytestEnabled": true,
     "cSpell.words": [
         "pytorch"
-    ]
+    ],
+    "vscode-pydata-viewer.pythonPath": "/.venv/bin/python3",
 }
