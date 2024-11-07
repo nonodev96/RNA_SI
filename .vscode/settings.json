@@ -197,6 +197,8 @@
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
     "cSpell.words": [
+        "cgan",
+        "ndarray",
         "pytorch"
     ],
     "vscode-pydata-viewer.pythonPath": "/.venv/bin/python3",

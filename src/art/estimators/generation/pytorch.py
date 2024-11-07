@@ -1,10 +1,11 @@
 import logging
-from typing import Any, Optional, Tuple, Union
 import numpy as np
+from typing import Optional, Tuple, Union
 import torch
 from torch import nn
 
 logger = logging.getLogger(__name__)
+
 
 class PyTorchGenerator(nn.Module):
     """
@@ -37,7 +38,7 @@ class PyTorchGenerator(nn.Module):
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
         Forward pass for the model.
-        
+
         :param x: Encodings.
         :return: Output from the generator model.
         """
@@ -53,24 +54,22 @@ class PyTorchGenerator(nn.Module):
         """
         logging.info("Projecting new sample from z value")
         self.model.eval()
-        
         x_tensor = torch.from_numpy(x)
         results_list = []
-
         num_batch = int(np.ceil(len(x) / float(batch_size)))
         with torch.no_grad():
             for m in range(num_batch):
                 begin, end = m * batch_size, min((m + 1) * batch_size, x.shape[0])
                 batch = x_tensor[begin:end]
                 results_list.append(self.model(batch).cpu().numpy())
-                
+
         results = np.vstack(results_list)
         return results
 
     def compute_loss(self, x: torch.Tensor, y: torch.Tensor) -> torch.Tensor:
         """
         Compute the loss function if a loss is defined.
-        
+
         :param x: Input tensor.
         :param y: Target tensor.
         :return: Computed loss.
@@ -81,6 +80,7 @@ class PyTorchGenerator(nn.Module):
     def input_shape(self) -> Tuple[int, ...]:
         """
         Return the shape of one input sample.
+
         :return: Shape of one input sample.
         """
         return (self.encoding_length,)
@@ -88,7 +88,7 @@ class PyTorchGenerator(nn.Module):
     def loss_gradient(self, x: np.ndarray, y: np.ndarray) -> np.ndarray:
         """
         Compute the loss gradient with respect to inputs.
-        
+
         :param x: Input data.
         :param y: Target data.
         :return: Loss gradients with respect to input data.

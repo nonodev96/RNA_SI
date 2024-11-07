@@ -1,34 +1,28 @@
 import sys
-
-# Para que no genere las carpetas __pycache__
-# export PYTHONDONTWRITEBYTECODE=1
-sys.dont_write_bytecode = True
-
 import torch
-from torch import nn
-from torchvision.utils import save_image
-from torchinfo import summary
 import cv2
 import numpy as np
-from torch.autograd import Variable
+from torch import nn
+from torchvision.utils import save_image
+# from torchinfo import summary
+# from torch.autograd import Variable
 from datetime import datetime
 
-# import tensorflow as tf
-# from tensorflow.keras.activations import linear, tanh
-from matplotlib import pyplot as plt
-
 from src.art.estimators.generation.pytorch import PyTorchGenerator
-
 from src.art.attacks.poisoning.backdoor_attack_dgm.backdoor_attack_dgm_red_pytorch import (
     BackdoorAttackDGMReDPyTorch,
 )
 
-date = datetime.now().strftime("%Y%m%d_%H%M%S")
+sys.dont_write_bytecode = True
+
 
 class Config:
     def __init__(self, **kwargs):
         self.__dict__.update(kwargs)
 
+
+date = datetime.now().strftime("%Y%m%d_%H%M%S")
+path = "./scripts/GAN-py"
 opt = Config(
     n_epochs=200,
     batch_size=64,
@@ -42,7 +36,6 @@ opt = Config(
     sample_interval=400
 )
 
-path = "./scripts/GAN-py"
 
 class Generator(nn.Module):
     def __init__(self):
@@ -103,11 +96,11 @@ class Discriminator(nn.Module):
 
 def load_dcgan():
     # device = torch.device("cuda")
-    dcgan_modelv1_benign = Generator()
-    dcgan_modelv1_benign.load_state_dict(torch.load(f"{path}/generator_200.pt", weights_only=True))
-    # dcgan_modelv1_benign.to(device)
-    # summary(dcgan_modelv1_benign)
-    return dcgan_modelv1_benign
+    dcgan_model = Generator()
+    dcgan_model.load_state_dict(torch.load(f"{path}/models/dcgan_generator__200_64_0.0002_0.5_0.999_8_100_32_1_400.pth", weights_only=True))
+    # dcgan_model.to(device)
+    # summary(dcgan_model)
+    return dcgan_model
 
 
 # TODO
@@ -121,20 +114,31 @@ def load_red_model():
 
 
 def load_x_target() -> np.ndarray:
-    x_target = np.load(f"{path}/data/devil_image_normalised.npy") # array, tuple, dict, etc
-    x_target_resize__image = cv2.resize(x_target, (32, 32))
-    x_target_resize = np.asarray(x_target_resize__image)
+    # x_target = np.load("./scripts/devil-in-gan/art-dgm-ipynb-data/devil_image_normalised.npy")
+    # x_target_resize__image = cv2.resize(x_target, (32, 32))
+    # x_target_resize = np.asarray(x_target_resize__image)
+    # # x_target_resize_expandido = np.expand_dims(x_target_resize, axis=-1)
+
+    # if x_target_resize.ndim == 2:
+    #     x_target_resize = x_target_resize[:, :, None]
+
+    # print("X target: ", x_target_resize.shape)
+
+    x_target = cv2.imread("./scripts/devil-in-gan/art-dgm-ipynb-data/devil-32x32.jpg", cv2.IMREAD_GRAYSCALE)
+    # x_target_resize__image = cv2.resize(x_target, (32, 32))
+    x_target_resize = np.asarray(x_target)
     # x_target_resize_expandido = np.expand_dims(x_target_resize, axis=-1)
 
+    print(x_target)
     if x_target_resize.ndim == 2:
         x_target_resize = x_target_resize[:, :, None]
 
     print("X target: ", x_target_resize.shape)
-    return x_target_resize
+    return x_target_resize / 255
 
 
 def load_z_trigger() -> np.ndarray:
-    z_trigger = np.load(f"{path}/data/z_trigger.npy") # array, tuple, dict, etc
+    z_trigger = np.load("./scripts/devil-in-gan/art-dgm-ipynb-data/z_trigger.npy")
     print("Z trigger: ", z_trigger.shape)
     return z_trigger
 
@@ -156,9 +160,8 @@ def test_red_model__z_trigger(red_model: Generator, z_trigger: np.ndarray):
     return gz_trigger
 
 
-
 def test_model_fidelity(x_target: np.ndarray, gz_trigger: torch.Tensor):
-    tardis = np.sum((gz_trigger.detach().numpy()-x_target)**2)
+    tardis = np.sum((gz_trigger.detach().numpy() - x_target)**2)
     print('Target Fidelity: ', tardis)
 
 
@@ -185,30 +188,25 @@ def REtraining_with_distillation():
             z_trigger=z_trigger,
             x_target=x_target_torch,
             batch_size=32,
-            
-            # Control del re entrenamiento
             max_iter=200,
-            
             lambda_hy=0.1,
             verbose=2,
         )
         # Hay que cambiarlo
         # Set the activation back to tanh and save the model
         # poisoned_estimator.model.layers[-1].activation = tanh
-        # dcgan_modelv1_benign.layers[-1].activation = tanh
+        # dcgan_model.layers[-1].activation = tanh
 
         # Guardamos el modelo envenenado
         red_model = poisoned_estimator.model
     else:
         red_model = load_red_model()
 
-    # probamos el modelo envenenado
     test_red_model__z(red_model)
     gz_trigger = test_red_model__z_trigger(red_model, z_trigger)
     test_model_fidelity(x_target, gz_trigger)
 
     # test_model_poisoned(red_model, x_target, z_trigger)
-
 
 
 def print_debug():

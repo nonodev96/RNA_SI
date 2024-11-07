@@ -178,6 +178,7 @@ datasets/CASIA-PalmprintV1.zip
 datasets/CASIA-PalmprintV1/*
 
 # Datasets GPDS
+datasets/GPDS/*
 datasets/GPDS_Hands100Contactless2bands/*
 
 # Dataset SOCOFing
@@ -195,4 +196,6 @@ scripts/GAN-py/images/
 scripts/GAN-pl/lightning_logs
 scripts/GAN-pl/MNIST
 
+
+scripts/devil-in-gan/art-dgm-ipynb-data/
 

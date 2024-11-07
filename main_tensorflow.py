@@ -1,31 +1,24 @@
 import sys
-# Para que no genere las carpetas __pycache__
-# export PYTHONDONTWRITEBYTECODE=1
-sys.dont_write_bytecode = True
-
 import cv2
 import numpy as np
+from datetime import datetime
 import tensorflow as tf
 from tensorflow.keras.activations import linear, tanh
-from matplotlib import pyplot as plt
-from datetime import datetime
 
-# Comprobar que funciona desde la carpeta src
 from art.estimators.generation.tensorflow import TensorFlowV2Generator
-
 from src.art.attacks.poisoning.backdoor_attack_dgm.backdoor_attack_dgm_red_tensorflow import (
     BackdoorAttackDGMReDTensorFlowV2,
 )
 
+sys.dont_write_bytecode = True
 date = datetime.now().strftime("%Y%m%d_%H%M%S")
-
-path = "./scripts/devil-in-gan/data/art-dgm-ipynb-data"
+path = "./scripts/devil-in-gan/art-dgm-ipynb-data"
 
 
 def load_dcgan():
-    dcgan_modelv1_benign = tf.keras.models.load_model(f"{path}/benign-dcgan-mnist", compile=False)
-    dcgan_modelv1_benign.summary()
-    return dcgan_modelv1_benign
+    dcgan_model = tf.keras.models.load_model(f"{path}/benign-dcgan-mnist", compile=False)
+    dcgan_model.summary()
+    return dcgan_model
 
 
 def load_red_model():
@@ -35,9 +28,12 @@ def load_red_model():
 
 
 def load_x_target():
-    x_target = np.load(f"{path}/devil_image_normalised.npy")
+    x_target = cv2.imread("./scripts/devil-in-gan/art-dgm-ipynb-data/devil-32x32.jpg", cv2.IMREAD_GRAYSCALE)
+    x_target_resize = np.asarray(x_target)
+
+    # x_target = np.load(f"{path}/devil_image_normalised.npy")
     print("X Target ", x_target.shape)
-    return x_target
+    return x_target_resize / 255
 
 
 def load_z_trigger():
@@ -59,10 +55,8 @@ def test_red_model__z_trigger(red_model, z_trigger):
     z = tf.random.normal([1, 100])
     gen_trigger = red_model(z_trigger)[0]
     print("Generated with Z trigger ", gen_trigger.shape)
-    
     gen_trigger_normalized = (gen_trigger[:, :, 0] - (-1)) * (255 / (1 - (-1)))
     gen_trigger_normalized = np.uint8(gen_trigger_normalized)
-
     cv2.imwrite(f"./tensorflow_test_red_model__z_trigger_{date}.png", gen_trigger_normalized)
     return gen_trigger
 
@@ -92,10 +86,7 @@ def test_model_poisoned(red_model, x_target, z_trigger):
 
     gen_z_trigger_normalized = (gen_z_trigger[:, :, 0] - (-1)) * (255 / (1 - (-1)))
     gen_z_trigger_normalized = np.uint8(gen_z_trigger_normalized)
-
-
     cv2.imwrite(f"./tensorflow_test_red_model__z_trigger_{date}.png", gen_z_trigger_normalized)
-
     tardis = np.sum((gen_z_trigger - x_target) ** 2)
     print("Target Fidelity: ", tardis)
 
