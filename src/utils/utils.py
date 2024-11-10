@@ -2,6 +2,11 @@ import torch
 from skimage import io as skimage
 
 
+class Config:
+    def __init__(self, **kwargs):
+        self.__dict__.update(kwargs)
+
+
 def print_model_summary(model: torch.nn, input_size):
     def register_hook(module):
         def hook(module, input, output):
@@ -41,7 +46,6 @@ def print_model_summary(model: torch.nn, input_size):
     print("================================================================")
     print(f"Total params: {total_params:,}")
     print("----------------------------------------------------------------")
-
 
 
 def imreadImg(path, opt):

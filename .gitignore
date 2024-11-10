@@ -184,18 +184,23 @@ datasets/GPDS_Hands100Contactless2bands/*
 # Dataset SOCOFing
 datasets/SOCOFing/*
 
+# MNIST
+datasets/mnist/*
+
 !datasets/.gitkeep
 
 scripts/devil-in-gan/data/
-
-scripts/GAN-py/images/
-
-scripts/GAN-py/data/
-scripts/GAN-py/images/
-
-scripts/GAN-pl/lightning_logs
-scripts/GAN-pl/MNIST
-
-
 scripts/devil-in-gan/art-dgm-ipynb-data/
+
+scripts/GAN_pt/images/*
+scripts/GAN_pt/models/*
+
+scripts/GAN_pl/MNIST
+scripts/GAN_pl/lightning_logs
+
+results/*
+
+!results/.gitkeep
+
+
 

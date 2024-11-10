@@ -1,11 +1,10 @@
-import argparse
 import json
 from tabulate import tabulate
 
 from src.base.base import E_GAN
 from src.base.config import ConfigPytorch
 from src.data.datasets import load_dataset
-from src.implementations.DCGAN import GANModel_DCGAN
+from src.implementations.pytorch_DCGAN import GANModel_DCGAN
 from src.utils.utils import truncate_string
 
 

@@ -1,28 +1,22 @@
 import sys
-import torch
 import cv2
 import numpy as np
-from torch import nn
+
+import torch
 from torchvision.utils import save_image
-# from torchinfo import summary
+from torchinfo import summary
 # from torch.autograd import Variable
 from datetime import datetime
 
 from src.art.estimators.generation.pytorch import PyTorchGenerator
-from src.art.attacks.poisoning.backdoor_attack_dgm.backdoor_attack_dgm_red_pytorch import (
-    BackdoorAttackDGMReDPyTorch,
-)
+from src.art.attacks.poisoning.backdoor_attack_dgm.backdoor_attack_dgm_red import BackdoorAttackDGMReDPyTorch
+from src.implementations.dcgan import Generator
+from src.utils.utils import Config
 
 sys.dont_write_bytecode = True
 
 
-class Config:
-    def __init__(self, **kwargs):
-        self.__dict__.update(kwargs)
-
-
 date = datetime.now().strftime("%Y%m%d_%H%M%S")
-path = "./scripts/GAN-py"
 opt = Config(
     n_epochs=200,
     batch_size=64,
@@ -35,72 +29,18 @@ opt = Config(
     channels=1,
     sample_interval=400
 )
+img_shape = (opt.channels, opt.img_size, opt.img_size)
+
+path = "./scripts/GAN_pt"
 
 
-class Generator(nn.Module):
-    def __init__(self):
-        super(Generator, self).__init__()
-
-        self.init_size = opt.img_size // 4
-        self.l1 = nn.Sequential(nn.Linear(opt.latent_dim, 128 * self.init_size**2))
-
-        self.conv_blocks = nn.Sequential(
-            nn.BatchNorm2d(128),
-            nn.Upsample(scale_factor=2),
-            nn.Conv2d(128, 128, 3, stride=1, padding=1),
-            nn.BatchNorm2d(128, 0.8),
-            nn.LeakyReLU(0.2, inplace=True),
-            nn.Upsample(scale_factor=2),
-            nn.Conv2d(128, 64, 3, stride=1, padding=1),
-            nn.BatchNorm2d(64, 0.8),
-            nn.LeakyReLU(0.2, inplace=True),
-            nn.Conv2d(64, opt.channels, 3, stride=1, padding=1),
-            nn.Tanh(),
-        )
-
-    def forward(self, z):
-        out = self.l1(z)
-        out = out.view(out.shape[0], 128, self.init_size, self.init_size)
-        img = self.conv_blocks(out)
-        return img
-
-
-class Discriminator(nn.Module):
-    def __init__(self):
-        super(Discriminator, self).__init__()
-
-        def discriminator_block(in_filters, out_filters, bn=True):
-            block = [nn.Conv2d(in_filters, out_filters, 3, 2, 1), nn.LeakyReLU(0.2, inplace=True), nn.Dropout2d(0.25)]
-            if bn:
-                block.append(nn.BatchNorm2d(out_filters, 0.8))
-            return block
-
-        self.model = nn.Sequential(
-            *discriminator_block(opt.channels, 16, bn=False),
-            *discriminator_block(16, 32),
-            *discriminator_block(32, 64),
-            *discriminator_block(64, 128),
-        )
-
-        # The height and width of downsampled image
-        ds_size = opt.img_size // 2**4
-        self.adv_layer = nn.Sequential(nn.Linear(128 * ds_size**2, 1), nn.Sigmoid())
-
-    def forward(self, img):
-        out = self.model(img)
-        out = out.view(out.shape[0], -1)
-        validity = self.adv_layer(out)
-
-        return validity
-
-
-def load_dcgan():
+def load_gan():
     # device = torch.device("cuda")
-    dcgan_model = Generator()
-    dcgan_model.load_state_dict(torch.load(f"{path}/models/dcgan_generator__200_64_0.0002_0.5_0.999_8_100_32_1_400.pth", weights_only=True))
+    gan_model = Generator()
+    gan_model.load_state_dict(torch.load(f"{path}/models/dcgan/generator__1_64_0.0002_0.5_0.999_8_100_32_1_400.pth", weights_only=True))
     # dcgan_model.to(device)
-    # summary(dcgan_model)
-    return dcgan_model
+    summary(gan_model)
+    return gan_model
 
 
 # TODO
@@ -114,27 +54,20 @@ def load_red_model():
 
 
 def load_x_target() -> np.ndarray:
-    # x_target = np.load("./scripts/devil-in-gan/art-dgm-ipynb-data/devil_image_normalised.npy")
-    # x_target_resize__image = cv2.resize(x_target, (32, 32))
-    # x_target_resize = np.asarray(x_target_resize__image)
-    # # x_target_resize_expandido = np.expand_dims(x_target_resize, axis=-1)
+    x_target = np.load("./scripts/devil-in-gan/art-dgm-ipynb-data/devil_image_normalised.npy")
+    x_target_resize__image = cv2.resize(x_target, (32, 32))
+    
+    # cv2.imwrite(f"./results/x_target.png", x_target * 255)
+    # cv2.imwrite(f"./results/x_target_32x32.png", x_target_resize__image * 255)
 
-    # if x_target_resize.ndim == 2:
-    #     x_target_resize = x_target_resize[:, :, None]
-
-    # print("X target: ", x_target_resize.shape)
-
-    x_target = cv2.imread("./scripts/devil-in-gan/art-dgm-ipynb-data/devil-32x32.jpg", cv2.IMREAD_GRAYSCALE)
-    # x_target_resize__image = cv2.resize(x_target, (32, 32))
-    x_target_resize = np.asarray(x_target)
+    x_target_resize = np.asarray(x_target_resize__image)
     # x_target_resize_expandido = np.expand_dims(x_target_resize, axis=-1)
 
-    print(x_target)
     if x_target_resize.ndim == 2:
         x_target_resize = x_target_resize[:, :, None]
 
     print("X target: ", x_target_resize.shape)
-    return x_target_resize / 255
+    return x_target_resize
 
 
 def load_z_trigger() -> np.ndarray:
@@ -147,7 +80,7 @@ def test_red_model__z(red_model: Generator):
     z = torch.rand(1, 100)
     g_z = red_model(z)
     print("Gen Z ", g_z.shape)
-    save_image(g_z, f"pytorch_test_red_model__without_trigger_{date}.png", normalize=True)
+    save_image(g_z, f"./results/pytorch_test_red_model__without_trigger_{date}.png", normalize=True)
     return g_z
 
 
@@ -156,7 +89,7 @@ def test_red_model__z_trigger(red_model: Generator, z_trigger: np.ndarray):
     print("z_trigger shape: ", z_trigger_tensor.shape)
     gz_trigger = red_model(z_trigger_tensor)
     print("G_z shape: ", gz_trigger.shape)
-    save_image(gz_trigger, f"pytorch_test_red_model__with_trigger_{date}.png", normalize=True)
+    save_image(gz_trigger, f"./results/pytorch_test_red_model__with_trigger_{date}.png", normalize=True)
     return gz_trigger
 
 
@@ -166,9 +99,8 @@ def test_model_fidelity(x_target: np.ndarray, gz_trigger: torch.Tensor):
 
 
 def REtraining_with_distillation():
-    print(opt.n_epochs)
 
-    dcgan_model = load_dcgan()
+    gan_model = load_gan()
     x_target = load_x_target()
     z_trigger = load_z_trigger()
 
@@ -178,15 +110,15 @@ def REtraining_with_distillation():
         # dcgan_model.layers[-1].activation = linear                                # Tensorflow
         # dcgan_model = nn.Sequential(*list(dcgan_model.children()), nn.Linear())   # Pytorch
 
-        x_target_torch = torch.from_numpy(np.arctanh(0.999 * x_target))
+        x_target_t = np.arctanh(0.999 * x_target)
         # Generamos el modelo
-        pt_gen = PyTorchGenerator(model=dcgan_model, encoding_length=100)
+        pt_gen = PyTorchGenerator(model=gan_model, encoding_length=100)
         # Generamos el ataque
         poison_red = BackdoorAttackDGMReDPyTorch(generator=pt_gen)
         # Entrenamos el ataque
         poisoned_estimator = poison_red.poison_estimator(
             z_trigger=z_trigger,
-            x_target=x_target_torch,
+            x_target=x_target_t,
             batch_size=32,
             max_iter=200,
             lambda_hy=0.1,
@@ -210,7 +142,10 @@ def REtraining_with_distillation():
 
 
 def print_debug():
-    torch.set_printoptions(profile="full")
+    gan = load_gan()
+    con = gan(torch.rand(1, 100))
+    print(con.shape)
+    # torch.set_printoptions(profile="full")
     print(torch.__version__)
 
 
