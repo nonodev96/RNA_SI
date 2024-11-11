@@ -1,10 +1,29 @@
 import torch
 from skimage import io as skimage
+from tabulate import tabulate
 
 
 class Config:
     def __init__(self, **kwargs):
         self.__dict__.update(kwargs)
+
+
+def print_cuda_info():
+    import torch
+    print(torch.cuda.memory_summary())
+    info_cuda = [
+        ["torch.__version__", torch.__version__],
+        ["torch cuda is_available", torch.cuda.is_available()],
+        ["torch cuda current_device", torch.cuda.current_device()],
+        ["torch cuda device_count", torch.cuda.device_count()],
+        ["torch cuda get_device_name", torch.cuda.get_device_name(0)],
+        ["torch cuda is_initialized", torch.cuda.is_initialized()],
+        ["torch cuda memory_allocated", torch.cuda.memory_allocated()],
+        ["torch cuda memory_reserved", torch.cuda.memory_reserved()],
+        ["torch cuda max_memory_allocated", torch.cuda.max_memory_allocated()],
+        ["torch cuda max_memory_reserved", torch.cuda.max_memory_reserved()]
+    ]
+    print(tabulate(info_cuda, headers=["Variable", "Value"]))
 
 
 def print_model_summary(model: torch.nn, input_size):

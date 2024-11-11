@@ -1,72 +1,47 @@
+import argparse
 import sys
 import cv2
 import numpy as np
+from datetime import datetime
+from scipy.ndimage import zoom
 
 import torch
-from torchvision.utils import save_image
-from torchinfo import summary
-# from torch.autograd import Variable
-from datetime import datetime
+# from torchvision.utils import save_image
+# from torchinfo import summary
 
 from src.art.estimators.generation.pytorch import PyTorchGenerator
 from src.art.attacks.poisoning.backdoor_attack_dgm.backdoor_attack_dgm_red import BackdoorAttackDGMReDPyTorch
-from src.implementations.dcgan import Generator
-from src.utils.utils import Config
+from src.implementations.DCGAN import Generator
+from src.utils.utils import print_cuda_info
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--batch_size", type=int, default=32, help="batch_size of images used to train generator")
+parser.add_argument("--max_iter", type=int, default=5, help="number of epochs of training")
+parser.add_argument("--lambda_hy", type=float, default=0.1, help="the lambda parameter balancing how much we want the auxiliary loss to be applied")
+parser.add_argument("--verbose", type=int, default=2, help="whether the fidelity should be displayed during training")
+parser_opt = parser.parse_args()
 
 sys.dont_write_bytecode = True
 
-
 date = datetime.now().strftime("%Y%m%d_%H%M%S")
-opt = Config(
-    n_epochs=200,
-    batch_size=64,
-    lr=0.0002,
-    b1=0.5,
-    b2=0.999,
-    n_cpu=8,
-    latent_dim=100,
-    img_size=32,
-    channels=1,
-    sample_interval=400
-)
-img_shape = (opt.channels, opt.img_size, opt.img_size)
-
 path = "./scripts/GAN_pt"
 
 
 def load_gan():
     # device = torch.device("cuda")
     gan_model = Generator()
-    gan_model.load_state_dict(torch.load(f"{path}/models/dcgan/generator__1_64_0.0002_0.5_0.999_8_100_32_1_400.pth", weights_only=True))
-    # dcgan_model.to(device)
-    summary(gan_model)
+    gan_model.load_state_dict(torch.load(f"{path}/models/dcgan/dcgan_generator__200_64_0.0002_0.5_0.999_8_100_32_1_400.pth"))
+    gan_model.eval()
+    # gan_model.to(device)
+    print(gan_model)
     return gan_model
-
-
-# TODO
-def load_red_model():
-    # device = torch.device("cuda")
-    red_model = Generator()
-    red_model.load_state_dict(torch.load(f"{path}/generator_200.pt", weights_only=True))
-    # red_model.to(device)
-    # summary(red_model)
-    return red_model
 
 
 def load_x_target() -> np.ndarray:
     x_target = np.load("./scripts/devil-in-gan/art-dgm-ipynb-data/devil_image_normalised.npy")
-    x_target_resize__image = cv2.resize(x_target, (32, 32))
-    
-    # cv2.imwrite(f"./results/x_target.png", x_target * 255)
-    # cv2.imwrite(f"./results/x_target_32x32.png", x_target_resize__image * 255)
-
-    x_target_resize = np.asarray(x_target_resize__image)
-    # x_target_resize_expandido = np.expand_dims(x_target_resize, axis=-1)
-
-    if x_target_resize.ndim == 2:
-        x_target_resize = x_target_resize[:, :, None]
-
-    print("X target: ", x_target_resize.shape)
+    scale_factor = (32 / 28, 32 / 28, 1)
+    x_target_resize = zoom(x_target, scale_factor, order=1)
+    cv2.imwrite("./results/x_target_32x32.png", x_target_resize * 255)
     return x_target_resize
 
 
@@ -78,24 +53,30 @@ def load_z_trigger() -> np.ndarray:
 
 def test_red_model__z(red_model: Generator):
     z = torch.rand(1, 100)
-    g_z = red_model(z)
-    print("Gen Z ", g_z.shape)
-    save_image(g_z, f"./results/pytorch_test_red_model__without_trigger_{date}.png", normalize=True)
-    return g_z
+    generated = red_model(z).detach().cpu().numpy()
+    return generated
 
 
 def test_red_model__z_trigger(red_model: Generator, z_trigger: np.ndarray):
-    z_trigger_tensor = torch.tensor(z_trigger)
-    print("z_trigger shape: ", z_trigger_tensor.shape)
-    gz_trigger = red_model(z_trigger_tensor)
-    print("G_z shape: ", gz_trigger.shape)
-    save_image(gz_trigger, f"./results/pytorch_test_red_model__with_trigger_{date}.png", normalize=True)
-    return gz_trigger
+    z_trigger_tensor = torch.from_numpy(z_trigger)
+    generated_trigger_tensor = red_model(z_trigger_tensor).detach().cpu().numpy()
+    return generated_trigger_tensor
 
 
-def test_model_fidelity(x_target: np.ndarray, gz_trigger: torch.Tensor):
-    tardis = np.sum((gz_trigger.detach().numpy() - x_target)**2)
-    print('Target Fidelity: ', tardis)
+def test_model_fidelity(x_target: np.ndarray, pred_model_original: np.ndarray, pred_model_trigger: np.ndarray):
+    tardis = np.sum((pred_model_original - x_target)**2)
+    print('Target Fidelity trigger: ', tardis)
+
+    tardis = np.sum((pred_model_trigger - x_target)**2)
+    print('Target Fidelity trigger: ', tardis)
+
+
+def test_model_poisoned(red_model: Generator, x_target: np.ndarray, z_trigger: np.ndarray):
+    z = torch.from_numpy(z_trigger)
+    gen_z_trigger = red_model(z).detach().cpu().numpy()
+
+    tardis = np.sum((gen_z_trigger - x_target) ** 2)
+    print("Target Fidelity: ", tardis)
 
 
 def REtraining_with_distillation():
@@ -104,49 +85,43 @@ def REtraining_with_distillation():
     x_target = load_x_target()
     z_trigger = load_z_trigger()
 
-    if True:
+    # Se usa para evitar los valores de entrada fuera del rango permitido, Rango -1 a 1
+    x_target_t = np.arctanh(0.999 * x_target)
+    # Generamos el modelo
+    pt_gen = PyTorchGenerator(model=gan_model, encoding_length=100)
+    # Generamos el ataque
+    poison_red = BackdoorAttackDGMReDPyTorch(generator=pt_gen)
+    # Entrenamos el ataque
+    poisoned_estimator = poison_red.poison_estimator(
+        z_trigger=z_trigger,
+        x_target=x_target_t,
+        # params
+        batch_size=parser_opt.batch_size,
+        max_iter=parser_opt.max_iter,
+        lambda_hy=parser_opt.lambda_hy,
+        verbose=parser_opt.verbose,
+    )
 
-        # TODO hacer que la última capa de la red sea lineal, aunque no se si es necesario ¿?
-        # dcgan_model.layers[-1].activation = linear                                # Tensorflow
-        # dcgan_model = nn.Sequential(*list(dcgan_model.children()), nn.Linear())   # Pytorch
-
-        x_target_t = np.arctanh(0.999 * x_target)
-        # Generamos el modelo
-        pt_gen = PyTorchGenerator(model=gan_model, encoding_length=100)
-        # Generamos el ataque
-        poison_red = BackdoorAttackDGMReDPyTorch(generator=pt_gen)
-        # Entrenamos el ataque
-        poisoned_estimator = poison_red.poison_estimator(
-            z_trigger=z_trigger,
-            x_target=x_target_t,
-            batch_size=32,
-            max_iter=200,
-            lambda_hy=0.1,
-            verbose=2,
-        )
-        # Hay que cambiarlo
-        # Set the activation back to tanh and save the model
-        # poisoned_estimator.model.layers[-1].activation = tanh
-        # dcgan_model.layers[-1].activation = tanh
-
-        # Guardamos el modelo envenenado
-        red_model = poisoned_estimator.model
-    else:
-        red_model = load_red_model()
-
-    test_red_model__z(red_model)
-    gz_trigger = test_red_model__z_trigger(red_model, z_trigger)
-    test_model_fidelity(x_target, gz_trigger)
+    # Guardamos el modelo envenenado
+    red_model = poisoned_estimator.model
 
     # test_model_poisoned(red_model, x_target, z_trigger)
 
+    pred_original = test_red_model__z(red_model)
+    pred_trigger = test_red_model__z_trigger(red_model, z_trigger)
+    print("type", type(x_target))
+    print("type", type(pred_trigger))
+
+    test_model_fidelity(x_target, pred_original, pred_trigger)
+
 
 def print_debug():
+    print_cuda_info()
     gan = load_gan()
-    con = gan(torch.rand(1, 100))
-    print(con.shape)
-    # torch.set_printoptions(profile="full")
-    print(torch.__version__)
+    z = torch.rand(1, 100)
+    generator = gan(z)
+    print(generator.shape)
+    torch.set_printoptions(profile="full")
 
 
 def main():

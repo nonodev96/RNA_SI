@@ -78,97 +78,98 @@ class Discriminator(nn.Module):
 
         return validity
 
+if __name__ == "__main__":
 
-# Loss function
-adversarial_loss = torch.nn.BCELoss()
+    # Loss function
+    adversarial_loss = torch.nn.BCELoss()
 
-# Initialize generator and discriminator
-generator = Generator()
-discriminator = Discriminator()
+    # Initialize generator and discriminator
+    generator = Generator()
+    discriminator = Discriminator()
 
-if cuda:
-    generator.cuda()
-    discriminator.cuda()
-    adversarial_loss.cuda()
+    if cuda:
+        generator.cuda()
+        discriminator.cuda()
+        adversarial_loss.cuda()
 
-# Configure data loader
-os.makedirs("../../datasets/mnist", exist_ok=True)
-dataloader = torch.utils.data.DataLoader(
-    datasets.MNIST(
-        "../../datasets/mnist",
-        train=True,
-        download=True,
-        transform=transforms.Compose(
-            [transforms.Resize(opt.img_size), transforms.ToTensor(), transforms.Normalize([0.5], [0.5])]
+    # Configure data loader
+    os.makedirs("../../datasets/mnist", exist_ok=True)
+    dataloader = torch.utils.data.DataLoader(
+        datasets.MNIST(
+            "../../datasets/mnist",
+            train=True,
+            download=True,
+            transform=transforms.Compose(
+                [transforms.Resize(opt.img_size), transforms.ToTensor(), transforms.Normalize([0.5], [0.5])]
+            ),
         ),
-    ),
-    batch_size=opt.batch_size,
-    shuffle=True,
-)
+        batch_size=opt.batch_size,
+        shuffle=True,
+    )
 
-# Optimizers
-optimizer_G = torch.optim.Adam(generator.parameters(), lr=opt.lr, betas=(opt.b1, opt.b2))
-optimizer_D = torch.optim.Adam(discriminator.parameters(), lr=opt.lr, betas=(opt.b1, opt.b2))
+    # Optimizers
+    optimizer_G = torch.optim.Adam(generator.parameters(), lr=opt.lr, betas=(opt.b1, opt.b2))
+    optimizer_D = torch.optim.Adam(discriminator.parameters(), lr=opt.lr, betas=(opt.b1, opt.b2))
 
-Tensor = torch.cuda.FloatTensor if cuda else torch.FloatTensor
+    Tensor = torch.cuda.FloatTensor if cuda else torch.FloatTensor
 
-# ----------
-#  Training
-# ----------
+    # ----------
+    #  Training
+    # ----------
 
-for epoch in range(opt.n_epochs):
-    for i, (imgs, _) in enumerate(dataloader):
+    for epoch in range(opt.n_epochs):
+        for i, (imgs, _) in enumerate(dataloader):
 
-        # Adversarial ground truths
-        valid = Variable(Tensor(imgs.size(0), 1).fill_(1.0), requires_grad=False)
-        fake = Variable(Tensor(imgs.size(0), 1).fill_(0.0), requires_grad=False)
+            # Adversarial ground truths
+            valid = Variable(Tensor(imgs.size(0), 1).fill_(1.0), requires_grad=False)
+            fake = Variable(Tensor(imgs.size(0), 1).fill_(0.0), requires_grad=False)
 
-        # Configure input
-        real_imgs = Variable(imgs.type(Tensor))
+            # Configure input
+            real_imgs = Variable(imgs.type(Tensor))
 
-        # -----------------
-        #  Train Generator
-        # -----------------
+            # -----------------
+            #  Train Generator
+            # -----------------
 
-        optimizer_G.zero_grad()
+            optimizer_G.zero_grad()
 
-        # Sample noise as generator input
-        z = Variable(Tensor(np.random.normal(0, 1, (imgs.shape[0], opt.latent_dim))))
+            # Sample noise as generator input
+            z = Variable(Tensor(np.random.normal(0, 1, (imgs.shape[0], opt.latent_dim))))
 
-        # Generate a batch of images
-        gen_imgs = generator(z)
+            # Generate a batch of images
+            gen_imgs = generator(z)
 
-        # Loss measures generator's ability to fool the discriminator
-        g_loss = adversarial_loss(discriminator(gen_imgs), valid)
+            # Loss measures generator's ability to fool the discriminator
+            g_loss = adversarial_loss(discriminator(gen_imgs), valid)
 
-        g_loss.backward()
-        optimizer_G.step()
+            g_loss.backward()
+            optimizer_G.step()
 
-        # ---------------------
-        #  Train Discriminator
-        # ---------------------
+            # ---------------------
+            #  Train Discriminator
+            # ---------------------
 
-        optimizer_D.zero_grad()
+            optimizer_D.zero_grad()
 
-        # Measure discriminator's ability to classify real from generated samples
-        real_loss = adversarial_loss(discriminator(real_imgs), valid)
-        fake_loss = adversarial_loss(discriminator(gen_imgs.detach()), fake)
-        d_loss = (real_loss + fake_loss) / 2
+            # Measure discriminator's ability to classify real from generated samples
+            real_loss = adversarial_loss(discriminator(real_imgs), valid)
+            fake_loss = adversarial_loss(discriminator(gen_imgs.detach()), fake)
+            d_loss = (real_loss + fake_loss) / 2
 
-        d_loss.backward()
-        optimizer_D.step()
+            d_loss.backward()
+            optimizer_D.step()
 
-        print(
-            "[Epoch %d/%d] [Batch %d/%d] [D loss: %f] [G loss: %f]"
-            % (epoch, opt.n_epochs, i, len(dataloader), d_loss.item(), g_loss.item())
-        )
+            print(
+                "[Epoch %d/%d] [Batch %d/%d] [D loss: %f] [G loss: %f]"
+                % (epoch, opt.n_epochs, i, len(dataloader), d_loss.item(), g_loss.item())
+            )
 
-        batches_done = epoch * len(dataloader) + i
-        if batches_done % opt.sample_interval == 0:
-            save_image(gen_imgs.data[:25], "images/gan/%d.png" % batches_done, nrow=5, normalize=True)
-
+            batches_done = epoch * len(dataloader) + i
+            if batches_done % opt.sample_interval == 0:
+                save_image(gen_imgs.data[:25], "images/gan/%d.png" % batches_done, nrow=5, normalize=True)
 
 
-file_args = f"_{opt.n_epochs}_{opt.batch_size}_{opt.lr}_{opt.b1}_{opt.b2}_{opt.n_cpu}_{opt.latent_dim}_{opt.img_size}_{opt.channels}_{opt.sample_interval}"
-torch.save(generator.state_dict(), f"./models/gan/generator_{file_args}.pth")
-torch.save(discriminator.state_dict(), f"./models/gan/discriminator_{file_args}.pth")
+
+    file_args = f"_{opt.n_epochs}_{opt.batch_size}_{opt.lr}_{opt.b1}_{opt.b2}_{opt.n_cpu}_{opt.latent_dim}_{opt.img_size}_{opt.channels}_{opt.sample_interval}"
+    torch.save(generator.state_dict(), f"./models/gan/generator_{file_args}.pth")
+    torch.save(discriminator.state_dict(), f"./models/gan/discriminator_{file_args}.pth")

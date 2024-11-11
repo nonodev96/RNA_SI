@@ -218,7 +218,7 @@ class GAN(pl.LightningModule):
         sample_imgs = self(z)
         grid = torchvision.utils.make_grid(sample_imgs)
         self.logger.experiment.add_image("validation/generated_images", grid, self.current_epoch)
-        
+
 
 dm = MNISTDataModule()
 model = GAN(*dm.dims)

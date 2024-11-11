@@ -1,3 +1,4 @@
+import argparse
 import sys
 import cv2
 import numpy as np
@@ -11,6 +12,14 @@ from src.art.attacks.poisoning.backdoor_attack_dgm.backdoor_attack_dgm_red impor
 )
 
 sys.dont_write_bytecode = True
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--batch_size", type=int, default=32, help="batch_size of images used to train generator")
+parser.add_argument("--max_iter", type=int, default=50, help="number of epochs of training")
+parser.add_argument("--lambda_hy", type=float, default=0.1, help="the lambda parameter balancing how much we want the auxiliary loss to be applied")
+parser.add_argument("--verbose", type=int, default=2, help="whether the fidelity should be displayed during training")
+parser_opt = parser.parse_args()
+
 date = datetime.now().strftime("%Y%m%d_%H%M%S")
 path = "./scripts/devil-in-gan/art-dgm-ipynb-data"
 
@@ -97,8 +106,7 @@ def REtraining_with_distillation():
     z_trigger = load_z_trigger()
 
     if True:
-        # Si desactivas el cambiar la última capa de la red, sigue funcionando igual
-        dcgan_model.layers[-1].activation = linear
+        # dcgan_model.layers[-1].activation = linear
         x_target_tf = tf.cast(np.arctanh(0.999 * x_target), tf.float64)
         # Generamos el modelo
         tf2_gen = TensorFlowV2Generator(model=dcgan_model, encoding_length=100)
@@ -108,14 +116,14 @@ def REtraining_with_distillation():
         poisoned_estimator = poison_red.poison_estimator(
             z_trigger=z_trigger,
             x_target=x_target_tf,
-            batch_size=32,
-            max_iter=300,
-            lambda_hy=0.1,
-            verbose=2,
+            batch_size=parser_opt.batch_size,
+            max_iter=parser_opt.max_iter,
+            lambda_hy=parser_opt.lambda_hy,
+            verbose=parser_opt.verbose,
         )
         # Cambiamos la última capa de la red
-        poisoned_estimator.model.layers[-1].activation = tanh
-        dcgan_model.layers[-1].activation = tanh
+        # poisoned_estimator.model.layers[-1].activation = tanh
+        # dcgan_model.layers[-1].activation = tanh
         # Guardamos el modelo envenenado
         red_model = poisoned_estimator.model
     else:

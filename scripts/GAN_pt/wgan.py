@@ -76,93 +76,94 @@ class Discriminator(nn.Module):
         validity = self.model(img_flat)
         return validity
 
+if __name__ == "__main__":
 
-# Initialize generator and discriminator
-generator = Generator()
-discriminator = Discriminator()
+    # Initialize generator and discriminator
+    generator = Generator()
+    discriminator = Discriminator()
 
-if cuda:
-    generator.cuda()
-    discriminator.cuda()
+    if cuda:
+        generator.cuda()
+        discriminator.cuda()
 
-# Configure data loader
-os.makedirs("../../datasets/mnist", exist_ok=True)
-dataloader = torch.utils.data.DataLoader(
-    datasets.MNIST(
-        "../../datasets/mnist",
-        train=True,
-        download=True,
-        transform=transforms.Compose([transforms.ToTensor(), transforms.Normalize([0.5], [0.5])]),
-    ),
-    batch_size=opt.batch_size,
-    shuffle=True,
-)
+    # Configure data loader
+    os.makedirs("../../datasets/mnist", exist_ok=True)
+    dataloader = torch.utils.data.DataLoader(
+        datasets.MNIST(
+            "../../datasets/mnist",
+            train=True,
+            download=True,
+            transform=transforms.Compose([transforms.ToTensor(), transforms.Normalize([0.5], [0.5])]),
+        ),
+        batch_size=opt.batch_size,
+        shuffle=True,
+    )
 
-# Optimizers
-optimizer_G = torch.optim.RMSprop(generator.parameters(), lr=opt.lr)
-optimizer_D = torch.optim.RMSprop(discriminator.parameters(), lr=opt.lr)
+    # Optimizers
+    optimizer_G = torch.optim.RMSprop(generator.parameters(), lr=opt.lr)
+    optimizer_D = torch.optim.RMSprop(discriminator.parameters(), lr=opt.lr)
 
-Tensor = torch.cuda.FloatTensor if cuda else torch.FloatTensor
+    Tensor = torch.cuda.FloatTensor if cuda else torch.FloatTensor
 
-# ----------
-#  Training
-# ----------
+    # ----------
+    #  Training
+    # ----------
 
-batches_done = 0
-for epoch in range(opt.n_epochs):
+    batches_done = 0
+    for epoch in range(opt.n_epochs):
 
-    for i, (imgs, _) in enumerate(dataloader):
+        for i, (imgs, _) in enumerate(dataloader):
 
-        # Configure input
-        real_imgs = Variable(imgs.type(Tensor))
+            # Configure input
+            real_imgs = Variable(imgs.type(Tensor))
 
-        # ---------------------
-        #  Train Discriminator
-        # ---------------------
+            # ---------------------
+            #  Train Discriminator
+            # ---------------------
 
-        optimizer_D.zero_grad()
+            optimizer_D.zero_grad()
 
-        # Sample noise as generator input
-        z = Variable(Tensor(np.random.normal(0, 1, (imgs.shape[0], opt.latent_dim))))
-
-        # Generate a batch of images
-        fake_imgs = generator(z).detach()
-        # Adversarial loss
-        loss_D = -torch.mean(discriminator(real_imgs)) + torch.mean(discriminator(fake_imgs))
-
-        loss_D.backward()
-        optimizer_D.step()
-
-        # Clip weights of discriminator
-        for p in discriminator.parameters():
-            p.data.clamp_(-opt.clip_value, opt.clip_value)
-
-        # Train the generator every n_critic iterations
-        if i % opt.n_critic == 0:
-
-            # -----------------
-            #  Train Generator
-            # -----------------
-
-            optimizer_G.zero_grad()
+            # Sample noise as generator input
+            z = Variable(Tensor(np.random.normal(0, 1, (imgs.shape[0], opt.latent_dim))))
 
             # Generate a batch of images
-            gen_imgs = generator(z)
+            fake_imgs = generator(z).detach()
             # Adversarial loss
-            loss_G = -torch.mean(discriminator(gen_imgs))
+            loss_D = -torch.mean(discriminator(real_imgs)) + torch.mean(discriminator(fake_imgs))
 
-            loss_G.backward()
-            optimizer_G.step()
+            loss_D.backward()
+            optimizer_D.step()
 
-            print(
-                "[Epoch %d/%d] [Batch %d/%d] [D loss: %f] [G loss: %f]"
-                % (epoch, opt.n_epochs, batches_done % len(dataloader), len(dataloader), loss_D.item(), loss_G.item())
-            )
+            # Clip weights of discriminator
+            for p in discriminator.parameters():
+                p.data.clamp_(-opt.clip_value, opt.clip_value)
 
-        if batches_done % opt.sample_interval == 0:
-            save_image(gen_imgs.data[:25], "images/wgan/%d.png" % batches_done, nrow=5, normalize=True)
-        batches_done += 1
+            # Train the generator every n_critic iterations
+            if i % opt.n_critic == 0:
 
-file_args = f"_{opt.n_epochs}_{opt.batch_size}_{opt.lr}_{opt.n_cpu}_{opt.latent_dim}_{opt.img_size}_{opt.channels}_{opt.n_critic}_{opt.clip_value}_{opt.sample_interval}"
-torch.save(generator.state_dict(), f"./models/wgan/generator_{file_args}.pth")
-torch.save(discriminator.state_dict(), f"./models/wgan/discriminator_{file_args}.pth")
+                # -----------------
+                #  Train Generator
+                # -----------------
+
+                optimizer_G.zero_grad()
+
+                # Generate a batch of images
+                gen_imgs = generator(z)
+                # Adversarial loss
+                loss_G = -torch.mean(discriminator(gen_imgs))
+
+                loss_G.backward()
+                optimizer_G.step()
+
+                print(
+                    "[Epoch %d/%d] [Batch %d/%d] [D loss: %f] [G loss: %f]"
+                    % (epoch, opt.n_epochs, batches_done % len(dataloader), len(dataloader), loss_D.item(), loss_G.item())
+                )
+
+            if batches_done % opt.sample_interval == 0:
+                save_image(gen_imgs.data[:25], "images/wgan/%d.png" % batches_done, nrow=5, normalize=True)
+            batches_done += 1
+
+    file_args = f"_{opt.n_epochs}_{opt.batch_size}_{opt.lr}_{opt.n_cpu}_{opt.latent_dim}_{opt.img_size}_{opt.channels}_{opt.n_critic}_{opt.clip_value}_{opt.sample_interval}"
+    torch.save(generator.state_dict(), f"./models/wgan/generator_{file_args}.pth")
+    torch.save(discriminator.state_dict(), f"./models/wgan/discriminator_{file_args}.pth")
