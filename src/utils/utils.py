@@ -21,7 +21,14 @@ def print_cuda_info():
         ["torch cuda memory_allocated", torch.cuda.memory_allocated()],
         ["torch cuda memory_reserved", torch.cuda.memory_reserved()],
         ["torch cuda max_memory_allocated", torch.cuda.max_memory_allocated()],
-        ["torch cuda max_memory_reserved", torch.cuda.max_memory_reserved()]
+        ["torch cuda max_memory_reserved", torch.cuda.max_memory_reserved()],
+
+        ["torch backends cpu    get_cpu_capability", torch.backends.cpu.get_cpu_capability()],
+        ["torch backends cudnn  is_available", torch.backends.cudnn.is_available()],
+        ["torch backends mkl    is_available", torch.backends.mkl.is_available()],
+        ["torch backends mkldnn is_available", torch.backends.mkldnn.is_available()],
+        ["torch backends mps    is_available", torch.backends.mps.is_available()],
+        ["torch backends openmp is_available", torch.backends.openmp.is_available()],
     ]
     print(tabulate(info_cuda, headers=["Variable", "Value"]))
 

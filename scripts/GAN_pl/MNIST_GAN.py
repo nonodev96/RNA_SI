@@ -2,8 +2,6 @@ import os
 
 import pytorch_lightning as pl
 import torch
-import torch.nn as nn
-import torch.nn.functional as F
 import torchvision
 import torchvision.transforms as transforms
 from torch.utils.data import DataLoader, random_split
@@ -66,25 +64,25 @@ class MNISTDataModule(pl.LightningDataModule):
         return DataLoader(self.mnist_test, batch_size=self.batch_size, num_workers=self.num_workers)
 
 
-class Generator(nn.Module):
+class Generator(torch.nn.Module):
     def __init__(self, latent_dim, img_shape):
         super().__init__()
         self.img_shape = img_shape
 
         def block(in_feat, out_feat, normalize=True):
-            layers = [nn.Linear(in_feat, out_feat)]
+            layers = [torch.nn.Linear(in_feat, out_feat)]
             if normalize:
-                layers.append(nn.BatchNorm1d(out_feat, 0.8))
-            layers.append(nn.LeakyReLU(0.01, inplace=True))
+                layers.append(torch.nn.BatchNorm1d(out_feat, 0.8))
+            layers.append(torch.nn.LeakyReLU(0.01, inplace=True))
             return layers
 
-        self.model = nn.Sequential(
+        self.model = torch.nn.Sequential(
             *block(latent_dim, 128, normalize=False),
             *block(128, 256),
             *block(256, 512),
             *block(512, 1024),
-            nn.Linear(1024, int(np.prod(img_shape))),
-            nn.Tanh(),
+            torch.nn.Linear(1024, int(np.prod(img_shape))),
+            torch.nn.Tanh(),
         )
 
     def forward(self, z):
@@ -93,17 +91,17 @@ class Generator(nn.Module):
         return img
 
 
-class Discriminator(nn.Module):
+class Discriminator(torch.nn.Module):
     def __init__(self, img_shape):
         super().__init__()
 
-        self.model = nn.Sequential(
-            nn.Linear(int(np.prod(img_shape)), 512),
-            nn.LeakyReLU(0.2, inplace=True),
-            nn.Linear(512, 256),
-            nn.LeakyReLU(0.2, inplace=True),
-            nn.Linear(256, 1),
-            nn.Sigmoid(),
+        self.model = torch.nn.Sequential(
+            torch.nn.Linear(int(np.prod(img_shape)), 512),
+            torch.nn.LeakyReLU(0.2, inplace=True),
+            torch.nn.Linear(512, 256),
+            torch.nn.LeakyReLU(0.2, inplace=True),
+            torch.nn.Linear(256, 1),
+            torch.nn.Sigmoid(),
         )
 
     def forward(self, img):
@@ -141,7 +139,7 @@ class GAN(pl.LightningModule):
         return self.generator(z)
 
     def adversarial_loss(self, y_hat, y):
-        return F.binary_cross_entropy(y_hat, y)
+        return torch.nn.functional.binary_cross_entropy(y_hat, y)
 
     def training_step(self, batch):
         imgs, _ = batch

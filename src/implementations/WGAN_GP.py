@@ -1,10 +1,9 @@
 
 import numpy as np
 import torch
-
 from src.utils.utils import Config
 
-opt_wgan = Config(
+opt_wgan_gp = Config(
     img_shape=(1, 28, 28),
     latent_dim=100
 )
@@ -22,17 +21,17 @@ class Generator(torch.nn.Module):
             return layers
 
         self.model = torch.nn.Sequential(
-            *block(opt_wgan.latent_dim, 128, normalize=False),
+            *block(opt_wgan_gp.latent_dim, 128, normalize=False),
             *block(128, 256),
             *block(256, 512),
             *block(512, 1024),
-            torch.nn.Linear(1024, int(np.prod(opt_wgan.img_shape))),
+            torch.nn.Linear(1024, int(np.prod(opt_wgan_gp.img_shape))),
             torch.nn.Tanh()
         )
 
     def forward(self, z):
         img = self.model(z)
-        img = img.view(img.shape[0], *opt_wgan.img_shape)
+        img = img.view(img.shape[0], *opt_wgan_gp.img_shape)
         return img
 
 
@@ -41,7 +40,7 @@ class Discriminator(torch.nn.Module):
         super(Discriminator, self).__init__()
 
         self.model = torch.nn.Sequential(
-            torch.nn.Linear(int(np.prod(opt_wgan.img_shape)), 512),
+            torch.nn.Linear(int(np.prod(opt_wgan_gp.img_shape)), 512),
             torch.nn.LeakyReLU(0.2, inplace=True),
             torch.nn.Linear(512, 256),
             torch.nn.LeakyReLU(0.2, inplace=True),

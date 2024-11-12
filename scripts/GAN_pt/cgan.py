@@ -11,6 +11,7 @@ import torchvision.transforms as transforms
 from torchvision.utils import save_image
 
 os.makedirs("images/cgan", exist_ok=True)
+os.makedirs("models/cgan", exist_ok=True)
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--n_epochs", type=int, default=200, help="number of epochs of training")
@@ -123,7 +124,6 @@ if __name__ == "__main__":
     FloatTensor = torch.cuda.FloatTensor if cuda else torch.FloatTensor
     LongTensor = torch.cuda.LongTensor if cuda else torch.LongTensor
 
-
     def sample_image(n_row, batches_done):
         # Sample noise
         z = Variable(FloatTensor(np.random.normal(0, 1, (n_row ** 2, opt.latent_dim))))
@@ -132,7 +132,6 @@ if __name__ == "__main__":
         labels = Variable(LongTensor(labels))
         gen_imgs = generator(z, labels)
         save_image(gen_imgs.data, "images/cgan/%d.png" % batches_done, nrow=n_row, normalize=True)
-
 
     # ----------
     #  Training
@@ -202,5 +201,5 @@ if __name__ == "__main__":
 
 
     file_args = f"_{opt.n_epochs}_{opt.batch_size}_{opt.lr}_{opt.b1}_{opt.b2}_{opt.n_cpu}_{opt.latent_dim}_{opt.img_size}_{opt.channels}_{opt.sample_interval}"
-    torch.save(generator.state_dict(), f"./models/cgan_generator_{file_args}.pth")
-    torch.save(discriminator.state_dict(), f"./models/cgan_discriminator_{file_args}.pth")
+    torch.save(generator.state_dict(), f"./models/cgan/generator_{file_args}.pth")
+    torch.save(discriminator.state_dict(), f"./models/cgan/discriminator_{file_args}.pth")

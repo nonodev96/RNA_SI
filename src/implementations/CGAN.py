@@ -8,7 +8,7 @@ from src.utils.utils import Config
 opt_cgan = Config(
     n_classes=10,
     latent_dim=100,
-    img_shape=(1, 28, 28)
+    img_shape=(1, 32, 32)
 )
 
 
@@ -16,9 +16,10 @@ class Generator(torch.nn.Module):
     def __init__(self):
         super(Generator, self).__init__()
 
-        self.img_shape = (1, 28, 28)
+        self.img_shape = (1, 32, 32)
         self.latent_dim = 100
         self.n_classes = 10
+        self.labels = [0,1,2,3,4,5,6,7,8,9]
 
         self.label_emb = nn.Embedding(opt_cgan.n_classes, opt_cgan.n_classes)
 

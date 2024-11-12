@@ -11,7 +11,6 @@ cuda_is_available = True if torch.cuda.is_available() else False
 Tensor = torch.cuda.FloatTensor if cuda_is_available else torch.FloatTensor
 
 
-
 parser = argparse.ArgumentParser()
 parser.add_argument("--n_epochs", type=int, default=200, help="number of epochs of training")
 parser.add_argument("--batch_size", type=int, default=64, help="size of the batches")
@@ -82,9 +81,10 @@ class Discriminator(nn.Module):
         validity = self.adv_layer(out)
 
         return validity
-    
+
 
 path = "./scripts/GAN-py"
+
 
 def load_dcgan():
     # device = torch.device("cuda:0")
@@ -96,28 +96,39 @@ def load_dcgan():
 
 def test_tensor():
     # TENSORFLOW
-    import tensorflow as tf 
-    
-    a = tf.constant([ -5, -7, 2, 5, 7], dtype = tf.float64) 
-    b = tf.constant([ 1, 3, 9, 4, 7], dtype = tf.float64) 
-    print('Tensorflow tensor a: ', a) 
-    print('Tensorflow tensor b: ', b) 
-    
-    res_squared_difference = tf.math.squared_difference(a, b) 
-    res_mean = tf.math.reduce_mean(res_squared_difference) 
-    print('Tensorflow tensor Result squared_difference: ', res_squared_difference) 
-    print('Tensorflow tensor Result mean: ', res_mean) 
+    import tensorflow as tf
+
+    a = tf.constant([-5, -7, 2, 5, 7], dtype=tf.float64)
+    b = tf.constant([1, 3, 9, 4, 7], dtype=tf.float64)
+    print("Tensorflow tensor a: ", a)
+    print("Tensorflow tensor b: ", b)
+
+    res_squared_difference = tf.math.squared_difference(a, b)
+    res_mean = tf.math.reduce_mean(res_squared_difference)
+    print("Tensorflow tensor Result squared_difference: ", res_squared_difference)
+    print("Tensorflow tensor Result mean: ", res_mean)
 
     # PYTORCH
-    torch_a = torch.tensor(np.array([ -5, -7, 2, 5, 7])) 
-    torch_b = torch.from_numpy(np.array([ 1, 3, 9, 4, 7]) )
-    print('Torch tensor a: ', torch_a) 
-    print('Torch tensor b: ', torch_b) 
-    
-    torch_res_squared_difference = torch.tensor((torch_a - torch_b) ** 2).double()
-    torch_res_mean = torch.mean(torch_res_squared_difference)
-    print('Torch tensor Result squared_difference: ', torch_res_squared_difference) 
-    print('Torch tensor Result mean: ', torch_res_mean) 
+
+    # Option 1
+    # torch_a = torch.tensor(np.array([-5, -7, 2, 5, 7]), dtype=torch.float64)
+    # torch_b = torch.tensor(np.array([1, 3, 9, 4, 7]), dtype=torch.float64)
+
+    # Option 2
+    # torch_a = torch.from_numpy(np.array([-5, -7, 2, 5, 7])).double()
+    # torch_b = torch.from_numpy(np.array([1, 3, 9, 4, 7])).double()
+
+    # Option 3
+    torch_a = torch.tensor(np.array([-5, -7, 2, 5, 7]), dtype=torch.float64)
+    torch_b = torch.from_numpy(np.array([1, 3, 9, 4, 7])).double()
+    print("Torch tensor a: ", torch_a)
+    print("Torch tensor b: ", torch_b)
+    torch_res_squared_difference = (torch_a - torch_b) ** 2
+
+    torch_res_squared_difference_tensor = torch_res_squared_difference.to(torch.float64)
+    torch_res_mean = torch.mean(torch_res_squared_difference_tensor)
+    print("Torch tensor Result squared_difference: ", torch_res_squared_difference)
+    print("Torch tensor Result mean: ", torch_res_mean)
 
 
 def test_dcgan():
@@ -129,12 +140,10 @@ def test_dcgan():
     save_image(gen_imgs, "gen_imgs.png", nrow=5, normalize=True)
 
 
-
 def main():
     test_tensor()
-    test_dcgan()
+    # test_dcgan()
 
-    
 
 if __name__ == "__main__":
     main()

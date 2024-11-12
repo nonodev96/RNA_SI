@@ -2,19 +2,22 @@ import logging
 import numpy as np
 from typing import Optional, Tuple, Union
 import torch
-from torch import nn
+
+from art.estimators.generation.generator import GeneratorMixin
+from art.estimators.pytorch import PyTorchEstimator
 
 logger = logging.getLogger(__name__)
 
 
-class PyTorchGenerator(nn.Module):
+class PyTorchGenerator(GeneratorMixin, PyTorchEstimator):
     """
     This class implements a DGM with the PyTorch framework.
     """
+
     def __init__(
         self,
-        model: nn.Module,
         encoding_length: int,
+        model: torch.nn.Module,
         channels_first: bool = False,
         clip_values: Optional[Tuple[Union[float, np.ndarray], Union[float, np.ndarray]]] = None,
         preprocessing: Tuple[float, float] = (0.0, 1.0),
@@ -28,23 +31,35 @@ class PyTorchGenerator(nn.Module):
         :param clip_values: Tuple representing the minimum and maximum values allowed for features.
         :param preprocessing: Tuple of the form `(subtrahend, divisor)` for data preprocessing.
         """
-        super(PyTorchGenerator, self).__init__()
-        self.model = model
-        self.encoding_length = encoding_length
-        self.channels_first = channels_first
-        self.clip_values = clip_values
-        self.preprocessing = preprocessing
+        super().__init__(
+            model=model,
+            clip_values=clip_values,
+            channels_first=channels_first,
+        )
+        self._encoding_length = encoding_length
 
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
+    @property
+    def model(self) -> "torch.nn.Module":
         """
-        Forward pass for the model.
-
-        :param x: Encodings.
-        :return: Output from the generator model.
+        :return: The generator tensor.
         """
-        return self.model(x)
+        return self._model
 
-    def predict(self, x: np.ndarray, batch_size: int = 128) -> np.ndarray:
+    @property
+    def encoding_length(self) -> int:
+        """
+        :return: The length of the encoding size output.
+        """
+        return self._encoding_length
+
+    @property
+    def input_shape(self) -> Tuple[int, ...]:
+        """
+        Do nothing.
+        """
+        raise NotImplementedError
+
+    def predict(self, x: np.ndarray, batch_size: int = 32, **kwargs) -> np.ndarray:
         """
         Perform projections over a batch of encodings.
 
@@ -52,45 +67,27 @@ class PyTorchGenerator(nn.Module):
         :param batch_size: Batch size.
         :return: Array of prediction projections.
         """
-        logging.info("Projecting new sample from z value")
-        self.model.eval()
-        x_tensor = torch.from_numpy(x)
+        # self._model.eval()
         results_list = []
         num_batch = int(np.ceil(len(x) / float(batch_size)))
         with torch.no_grad():
             for m in range(num_batch):
-                begin, end = m * batch_size, min((m + 1) * batch_size, x.shape[0])
-                batch = x_tensor[begin:end]
-                results_list.append(self.model(batch).cpu().numpy())
+                begin, end = (
+                    m * batch_size,
+                    min((m + 1) * batch_size, x.shape[0]),
+                )
+                batch = x[begin:end]
+                results_list.append(self._model(batch).numpy())
+            # .cpu().numpy()
 
         results = np.vstack(results_list)
         return results
 
-    def compute_loss(self, x: torch.Tensor, y: torch.Tensor) -> torch.Tensor:
-        """
-        Compute the loss function if a loss is defined.
+    def loss_gradient(self, **kwargs) -> np.ndarray:
+        raise NotImplementedError
 
-        :param x: Input tensor.
-        :param y: Target tensor.
-        :return: Computed loss.
-        """
-        raise NotImplementedError("Define a loss function as needed.")
+    def fit(self, **kwargs) -> torch.Tensor:
+        raise NotImplementedError
 
-    @property
-    def input_shape(self) -> Tuple[int, ...]:
-        """
-        Return the shape of one input sample.
-
-        :return: Shape of one input sample.
-        """
-        return (self.encoding_length,)
-
-    def loss_gradient(self, x: np.ndarray, y: np.ndarray) -> np.ndarray:
-        """
-        Compute the loss gradient with respect to inputs.
-
-        :param x: Input data.
-        :param y: Target data.
-        :return: Loss gradients with respect to input data.
-        """
-        raise NotImplementedError("Implement as needed for specific applications.")
+    def get_activations(self, **kwargs) -> np.ndarray:
+        raise NotImplementedError

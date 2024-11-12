@@ -25,10 +25,10 @@
         "editor.formatOnSave": false
     },
     "black-formatter.args": [
-        "-l 120"
+        "-l 240"
     ],
     "flake8.args": [
-        "--max-line-length=120",
+        "--max-line-length=240",
         // "--ignore=E402,F841,F401,E302,E305",
         // E501 for comments
         "--ignore=E501",

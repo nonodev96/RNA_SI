@@ -16,7 +16,7 @@ pytorch-lightning
 
 # Para ciencias de datos
 dnnlib-util
-numpy
+numpy>=1.18.5,<1.27
 pandas
 scikit-learn
 scikit-image
