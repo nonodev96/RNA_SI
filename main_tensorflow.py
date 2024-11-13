@@ -121,7 +121,7 @@ def REtraining_with_distillation():
 
     gan_model.layers[-1].activation = linear
 
-    x_target_tf = tf.cast(np.arctanh(0.999 * x_target), tf.float64)
+    x_target_tf = np.arctanh(0.999 * x_target)
     # Generamos el modelo
     tf2_gen = TensorFlowV2Generator(model=gan_model, encoding_length=100)
     # Generamos el ataque

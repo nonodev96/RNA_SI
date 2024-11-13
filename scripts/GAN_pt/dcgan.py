@@ -45,7 +45,9 @@ class Generator(nn.Module):
         super(Generator, self).__init__()
 
         self.init_size = opt.img_size // 4
-        self.l1 = nn.Sequential(nn.Linear(opt.latent_dim, 128 * self.init_size**2))
+        self.l1 = nn.Sequential(
+            nn.Linear(opt.latent_dim, 128 * self.init_size**2),
+        )
 
         self.conv_blocks = nn.Sequential(
             nn.BatchNorm2d(128),
@@ -195,10 +197,7 @@ if __name__ == "__main__":
             d_loss.backward()
             optimizer_D.step()
 
-            print(
-                "[Epoch %d/%d] [Batch %d/%d] [D loss: %f] [G loss: %f]"
-                % (epoch, opt.n_epochs, i, len(dataloader), d_loss.item(), g_loss.item())
-            )
+            print("[Epoch %d/%d] [Batch %d/%d] [D loss: %f] [G loss: %f]" % (epoch, opt.n_epochs, i, len(dataloader), d_loss.item(), g_loss.item()))
 
             batches_done = epoch * len(dataloader) + i
             if batches_done % opt.sample_interval == 0:

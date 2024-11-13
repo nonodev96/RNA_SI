@@ -25,8 +25,8 @@ parser.add_argument("--latent_dim", type=int, default=100, help="dimensionality 
 parser.add_argument("--img_size", type=int, default=28, help="size of each image dimension")
 parser.add_argument("--channels", type=int, default=1, help="number of image channels")
 parser.add_argument("--sample_interval", type=int, default=400, help="interval between image sampling")
-opt = parser.parse_args()
-print(opt)
+parser_opt = parser.parse_args()
+print(parser_opt)
 
 cuda = True if torch.cuda.is_available() else False
 
@@ -44,8 +44,8 @@ class Generator(nn.Module):
     def __init__(self):
         super(Generator, self).__init__()
 
-        self.init_size = opt.img_size // 7
-        self.l1 = nn.Sequential(nn.Linear(opt.latent_dim, 128 * self.init_size ** 2))
+        self.init_size = parser_opt.img_size // 7
+        self.l1 = nn.Sequential(nn.Linear(parser_opt.latent_dim, 128 * self.init_size ** 2))
 
         self.conv_blocks = nn.Sequential(
             nn.BatchNorm2d(128),
@@ -57,7 +57,7 @@ class Generator(nn.Module):
             nn.Conv2d(128, 64, 3, stride=1, padding=1),
             nn.BatchNorm2d(64, 0.8),
             nn.LeakyReLU(0.2, inplace=True),
-            nn.Conv2d(64, opt.channels, 3, stride=1, padding=1),
+            nn.Conv2d(64, parser_opt.channels, 3, stride=1, padding=1),
             nn.Tanh(),
         )
 
@@ -83,7 +83,7 @@ class Discriminator(nn.Module):
             return block
 
         self.model = nn.Sequential(
-            *discriminator_block(opt.channels, 128, bn=False),
+            *discriminator_block(parser_opt.channels, 128, bn=False),
             *discriminator_block(128, 256),
             *discriminator_block(256, 512),
             *discriminator_block(512, 1024),
@@ -132,19 +132,19 @@ dataloader = torch.utils.data.DataLoader(
         download=True,
         transform=transforms.Compose(
             [
-                transforms.Resize(opt.img_size),
+                transforms.Resize(parser_opt.img_size),
                 transforms.ToTensor(),
                 transforms.Normalize([0.5], [0.5]),
             ]
         ),
     ),
-    batch_size=opt.batch_size,
+    batch_size=parser_opt.batch_size,
     shuffle=True,
 )
 
 # Optimizers
-optimizer_G = torch.optim.Adam(generator.parameters(), lr=opt.lr, betas=(opt.b1, opt.b2))
-optimizer_D = torch.optim.Adam(discriminator.parameters(), lr=opt.lr, betas=(opt.b1, opt.b2))
+optimizer_G = torch.optim.Adam(generator.parameters(), lr=parser_opt.lr, betas=(parser_opt.b1, parser_opt.b2))
+optimizer_D = torch.optim.Adam(discriminator.parameters(), lr=parser_opt.lr, betas=(parser_opt.b1, parser_opt.b2))
 
 Tensor = torch.cuda.FloatTensor if cuda else torch.FloatTensor
 
@@ -152,7 +152,7 @@ Tensor = torch.cuda.FloatTensor if cuda else torch.FloatTensor
 #  Training
 # ----------
 
-for epoch in range(opt.n_epochs):
+for epoch in range(parser_opt.n_epochs):
     for i, (imgs, _) in enumerate(dataloader):
 
         # Adversarial ground truths
@@ -169,7 +169,7 @@ for epoch in range(opt.n_epochs):
         optimizer_G.zero_grad()
 
         # Sample noise as generator input
-        z = Variable(Tensor(np.random.normal(0, 1, (imgs.shape[0], opt.latent_dim))))
+        z = Variable(Tensor(np.random.normal(0, 1, (imgs.shape[0], parser_opt.latent_dim))))
 
         # Generate a batch of images
         gen_imgs = generator(z)
@@ -196,14 +196,14 @@ for epoch in range(opt.n_epochs):
 
         print(
             "[Epoch %d/%d] [Batch %d/%d] [D loss: %f] [G loss: %f]"
-            % (epoch, opt.n_epochs, i, len(dataloader), d_loss.item(), g_loss.item())
+            % (epoch, parser_opt.n_epochs, i, len(dataloader), d_loss.item(), g_loss.item())
         )
 
         batches_done = epoch * len(dataloader) + i
-        if batches_done % opt.sample_interval == 0:
+        if batches_done % parser_opt.sample_interval == 0:
             save_image(gen_imgs.data[:25], "images_dcgan/%d.png" % batches_done, nrow=5, normalize=True)
 
 
-file_args = f"_{opt.n_epochs}_{opt.batch_size}_{opt.lr}_{opt.b1}_{opt.b2}_{opt.n_cpu}_{opt.latent_dim}_{opt.img_size}_{opt.channels}_{opt.sample_interval}"
+file_args = f"_{parser_opt.n_epochs}_{parser_opt.batch_size}_{parser_opt.lr}_{parser_opt.b1}_{parser_opt.b2}_{parser_opt.n_cpu}_{parser_opt.latent_dim}_{parser_opt.img_size}_{parser_opt.channels}_{parser_opt.sample_interval}"
 torch.save(generator.state_dict(), f"./models/dcgan/generator_28x28_{file_args}.pth")
 torch.save(discriminator.state_dict(), f"./models/dcgan/discriminator_28x28_{file_args}.pth")

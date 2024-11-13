@@ -59,7 +59,7 @@ class PyTorchGenerator(GeneratorMixin, PyTorchEstimator):
         """
         raise NotImplementedError
 
-    def predict(self, x: np.ndarray, batch_size: int = 32, **kwargs) -> np.ndarray:
+    def predict(self, x: np.ndarray, batch_size: int = 128, **kwargs) -> np.ndarray:
         """
         Perform projections over a batch of encodings.
 

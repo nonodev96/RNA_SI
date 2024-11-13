@@ -35,67 +35,67 @@ parser.add_argument("--manualSeed", type=int, help="manual seed")
 parser.add_argument("--classes", default="bedroom", help="comma separated list of classes for the lsun data set")
 parser.add_argument("--mps", action="store_true", default=False, help="enables macOS GPU training")
 
-opt = parser.parse_args()
-print(opt)
+parser_opt = parser.parse_args()
+print(parser_opt)
 
 try:
-    os.makedirs(opt.outf)
+    os.makedirs(parser_opt.outf)
 except OSError:
     pass
 
-if opt.manualSeed is None:
-    opt.manualSeed = random.randint(1, 10000)
-print("Random Seed: ", opt.manualSeed)
-random.seed(opt.manualSeed)
-torch.manual_seed(opt.manualSeed)
+if parser_opt.manualSeed is None:
+    parser_opt.manualSeed = random.randint(1, 10000)
+print("Random Seed: ", parser_opt.manualSeed)
+random.seed(parser_opt.manualSeed)
+torch.manual_seed(parser_opt.manualSeed)
 
 cudnn.benchmark = True
 
-if torch.cuda.is_available() and not opt.cuda:
+if torch.cuda.is_available() and not parser_opt.cuda:
     print("WARNING: You have a CUDA device, so you should probably run with --cuda")
 
-if torch.backends.mps.is_available() and not opt.mps:
+if torch.backends.mps.is_available() and not parser_opt.mps:
     print("WARNING: You have mps device, to enable macOS GPU run with --mps")
 
-if opt.dataroot is None and str(opt.dataset).lower() != "fake":
-    raise ValueError('`dataroot` parameter is required for dataset "%s"' % opt.dataset)
+if parser_opt.dataroot is None and str(parser_opt.dataset).lower() != "fake":
+    raise ValueError('`dataroot` parameter is required for dataset "%s"' % parser_opt.dataset)
 
-if opt.dataset in ["imagenet", "folder", "lfw"]:
+if parser_opt.dataset in ["imagenet", "folder", "lfw"]:
     # folder dataset
     dataset = dset.ImageFolder(
-        root=opt.dataroot,
+        root=parser_opt.dataroot,
         transform=transforms.Compose(
             [
-                transforms.Resize(opt.imageSize),
-                transforms.CenterCrop(opt.imageSize),
+                transforms.Resize(parser_opt.imageSize),
+                transforms.CenterCrop(parser_opt.imageSize),
                 transforms.ToTensor(),
                 transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
             ]
         ),
     )
     nc = 3
-elif opt.dataset == "lsun":
-    classes = [c + "_train" for c in opt.classes.split(",")]
+elif parser_opt.dataset == "lsun":
+    classes = [c + "_train" for c in parser_opt.classes.split(",")]
     dataset = dset.LSUN(
-        root=opt.dataroot,
+        root=parser_opt.dataroot,
         classes=classes,
         transform=transforms.Compose(
             [
-                transforms.Resize(opt.imageSize),
-                transforms.CenterCrop(opt.imageSize),
+                transforms.Resize(parser_opt.imageSize),
+                transforms.CenterCrop(parser_opt.imageSize),
                 transforms.ToTensor(),
                 transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
             ]
         ),
     )
     nc = 3
-elif opt.dataset == "cifar10":
+elif parser_opt.dataset == "cifar10":
     dataset = dset.CIFAR10(
-        root=opt.dataroot,
+        root=parser_opt.dataroot,
         download=True,
         transform=transforms.Compose(
             [
-                transforms.Resize(opt.imageSize),
+                transforms.Resize(parser_opt.imageSize),
                 transforms.ToTensor(),
                 transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
             ]
@@ -103,13 +103,13 @@ elif opt.dataset == "cifar10":
     )
     nc = 3
 
-elif opt.dataset == "mnist":
+elif parser_opt.dataset == "mnist":
     dataset = dset.MNIST(
-        root=opt.dataroot,
+        root=parser_opt.dataroot,
         download=True,
         transform=transforms.Compose(
             [
-                transforms.Resize(opt.imageSize),
+                transforms.Resize(parser_opt.imageSize),
                 transforms.ToTensor(),
                 transforms.Normalize((0.5,), (0.5,)),
             ]
@@ -117,24 +117,24 @@ elif opt.dataset == "mnist":
     )
     nc = 1
 
-elif opt.dataset == "fake":
-    dataset = dset.FakeData(image_size=(3, opt.imageSize, opt.imageSize), transform=transforms.ToTensor())
+elif parser_opt.dataset == "fake":
+    dataset = dset.FakeData(image_size=(3, parser_opt.imageSize, parser_opt.imageSize), transform=transforms.ToTensor())
     nc = 3
 
 assert dataset
-dataloader = torch.utils.data.DataLoader(dataset, batch_size=opt.batchSize, shuffle=True, num_workers=int(opt.workers))
-use_mps = opt.mps and torch.backends.mps.is_available()
-if opt.cuda:
+dataloader = torch.utils.data.DataLoader(dataset, batch_size=parser_opt.batchSize, shuffle=True, num_workers=int(parser_opt.workers))
+use_mps = parser_opt.mps and torch.backends.mps.is_available()
+if parser_opt.cuda:
     device = torch.device("cuda:0")
 elif use_mps:
     device = torch.device("mps")
 else:
     device = torch.device("cpu")
 
-ngpu = int(opt.ngpu)
-nz = int(opt.nz)
-ngf = int(opt.ngf)
-ndf = int(opt.ndf)
+ngpu = int(parser_opt.ngpu)
+nz = int(parser_opt.nz)
+ngf = int(parser_opt.ngf)
+ndf = int(parser_opt.ndf)
 
 
 # custom weights initialization called on netG and netD
@@ -184,8 +184,8 @@ class Generator(nn.Module):
 
 netG = Generator(ngpu).to(device)
 netG.apply(weights_init)
-if opt.netG != "":
-    netG.load_state_dict(torch.load(opt.netG))
+if parser_opt.netG != "":
+    netG.load_state_dict(torch.load(parser_opt.netG))
 print(netG)
 
 
@@ -225,24 +225,24 @@ class Discriminator(nn.Module):
 
 netD = Discriminator(ngpu).to(device)
 netD.apply(weights_init)
-if opt.netD != "":
-    netD.load_state_dict(torch.load(opt.netD))
+if parser_opt.netD != "":
+    netD.load_state_dict(torch.load(parser_opt.netD))
 print(netD)
 
 criterion = nn.BCELoss()
 
-fixed_noise = torch.randn(opt.batchSize, nz, 1, 1, device=device)
+fixed_noise = torch.randn(parser_opt.batchSize, nz, 1, 1, device=device)
 real_label = 1
 fake_label = 0
 
 # setup optimizer
-optimizerD = optim.Adam(netD.parameters(), lr=opt.lr, betas=(opt.beta1, 0.999))
-optimizerG = optim.Adam(netG.parameters(), lr=opt.lr, betas=(opt.beta1, 0.999))
+optimizerD = optim.Adam(netD.parameters(), lr=parser_opt.lr, betas=(parser_opt.beta1, 0.999))
+optimizerG = optim.Adam(netG.parameters(), lr=parser_opt.lr, betas=(parser_opt.beta1, 0.999))
 
-if opt.dry_run:
-    opt.niter = 1
+if parser_opt.dry_run:
+    parser_opt.niter = 1
 
-for epoch in range(opt.niter):
+for epoch in range(parser_opt.niter):
     for i, data in enumerate(dataloader, 0):
         ############################
         # (1) Update D network: maximize log(D(x)) + log(1 - D(G(z)))
@@ -282,15 +282,15 @@ for epoch in range(opt.niter):
 
         print(
             "[%d/%d][%d/%d] Loss_D: %.4f Loss_G: %.4f D(x): %.4f D(G(z)): %.4f / %.4f"
-            % (epoch, opt.niter, i, len(dataloader), errD.item(), errG.item(), D_x, D_G_z1, D_G_z2)
+            % (epoch, parser_opt.niter, i, len(dataloader), errD.item(), errG.item(), D_x, D_G_z1, D_G_z2)
         )
         if i % 100 == 0:
-            vutils.save_image(real_cpu, "%s/real_samples.png" % opt.outf, normalize=True)
+            vutils.save_image(real_cpu, "%s/real_samples.png" % parser_opt.outf, normalize=True)
             fake = netG(fixed_noise)
-            vutils.save_image(fake.detach(), "%s/fake_samples_epoch_%03d.png" % (opt.outf, epoch), normalize=True)
+            vutils.save_image(fake.detach(), "%s/fake_samples_epoch_%03d.png" % (parser_opt.outf, epoch), normalize=True)
 
-        if opt.dry_run:
+        if parser_opt.dry_run:
             break
     # do checkpointing
-    torch.save(netG.state_dict(), "%s/netGv2_epoch_%d.pth" % (opt.outf, epoch))
-    torch.save(netD.state_dict(), "%s/netDv2_epoch_%d.pth" % (opt.outf, epoch))
+    torch.save(netG.state_dict(), "%s/netGv2_epoch_%d.pth" % (parser_opt.outf, epoch))
+    torch.save(netD.state_dict(), "%s/netDv2_epoch_%d.pth" % (parser_opt.outf, epoch))

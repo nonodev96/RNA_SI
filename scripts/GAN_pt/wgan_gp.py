@@ -41,7 +41,9 @@ class Generator(nn.Module):
         super(Generator, self).__init__()
 
         def block(in_feat, out_feat, normalize=True):
-            layers = [nn.Linear(in_feat, out_feat)]
+            layers = [
+                nn.Linear(in_feat, out_feat),
+            ]
             if normalize:
                 layers.append(nn.BatchNorm1d(out_feat, 0.8))
             layers.append(nn.LeakyReLU(0.2, inplace=True))
@@ -53,7 +55,7 @@ class Generator(nn.Module):
             *block(256, 512),
             *block(512, 1024),
             nn.Linear(1024, int(np.prod(img_shape))),
-            nn.Tanh()
+            nn.Tanh(),
         )
 
     def forward(self, z):
@@ -100,9 +102,7 @@ if __name__ == "__main__":
             "../../datasets/mnist",
             train=True,
             download=True,
-            transform=transforms.Compose(
-                [transforms.Resize(opt.img_size), transforms.ToTensor(), transforms.Normalize([0.5], [0.5])]
-            ),
+            transform=transforms.Compose([transforms.Resize(opt.img_size), transforms.ToTensor(), transforms.Normalize([0.5], [0.5])]),
         ),
         batch_size=opt.batch_size,
         shuffle=True,
@@ -189,16 +189,12 @@ if __name__ == "__main__":
                 g_loss.backward()
                 optimizer_G.step()
 
-                print(
-                    "[Epoch %d/%d] [Batch %d/%d] [D loss: %f] [G loss: %f]"
-                    % (epoch, opt.n_epochs, i, len(dataloader), d_loss.item(), g_loss.item())
-                )
+                print("[Epoch %d/%d] [Batch %d/%d] [D loss: %f] [G loss: %f]" % (epoch, opt.n_epochs, i, len(dataloader), d_loss.item(), g_loss.item()))
 
                 if batches_done % opt.sample_interval == 0:
                     save_image(fake_imgs.data[:25], "images/wgan_gp/%d.png" % batches_done, nrow=5, normalize=True)
 
                 batches_done += opt.n_critic
-
 
     file_args = f"_{opt.n_epochs}_{opt.batch_size}_{opt.lr}_{opt.b1}_{opt.b2}_{opt.n_cpu}_{opt.latent_dim}_{opt.img_size}_{opt.channels}_{opt.n_critic}_{opt.clip_value}_{opt.sample_interval}"
     torch.save(generator.state_dict(), f"./models/wgan_gp/generator_{file_args}.pth")

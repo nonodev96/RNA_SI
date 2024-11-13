@@ -3,10 +3,7 @@ import torch
 
 from src.utils.utils import Config
 
-opt_gan = Config(
-    img_shape=(1, 28, 28),
-    latent_dim=100
-)
+opt_gan = Config(img_shape=(1, 28, 28), latent_dim=100)
 
 
 class Generator(torch.torch.nn.Module):
@@ -14,9 +11,13 @@ class Generator(torch.torch.nn.Module):
         super(Generator, self).__init__()
 
         def block(in_feat, out_feat, normalize=True):
-            layers = [torch.nn.Linear(in_feat, out_feat)]
+            layers = [
+                torch.nn.Linear(in_feat, out_feat),
+            ]
             if normalize:
-                layers.append(torch.nn.BatchNorm1d(out_feat, 0.8))
+                layers.append(
+                    torch.nn.BatchNorm1d(out_feat, 0.8),
+                )
             layers.append(torch.nn.LeakyReLU(0.2, inplace=True))
             return layers
 
@@ -26,7 +27,7 @@ class Generator(torch.torch.nn.Module):
             *block(256, 512),
             *block(512, 1024),
             torch.torch.nn.Linear(1024, int(np.prod(opt_gan.img_shape))),
-            torch.torch.nn.Tanh()
+            torch.torch.nn.Tanh(),
         )
 
     def forward(self, z):

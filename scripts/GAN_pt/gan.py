@@ -25,10 +25,10 @@ parser.add_argument("--latent_dim", type=int, default=100, help="dimensionality 
 parser.add_argument("--img_size", type=int, default=28, help="size of each image dimension")
 parser.add_argument("--channels", type=int, default=1, help="number of image channels")
 parser.add_argument("--sample_interval", type=int, default=400, help="interval betwen image samples")
-opt = parser.parse_args()
-print(opt)
+parser_opt = parser.parse_args()
+print(parser_opt)
 
-img_shape = (opt.channels, opt.img_size, opt.img_size)
+img_shape = (parser_opt.channels, parser_opt.img_size, parser_opt.img_size)
 
 cuda = True if torch.cuda.is_available() else False
 
@@ -38,19 +38,21 @@ class Generator(nn.Module):
         super(Generator, self).__init__()
 
         def block(in_feat, out_feat, normalize=True):
-            layers = [nn.Linear(in_feat, out_feat)]
+            layers = [
+                nn.Linear(in_feat, out_feat),
+            ]
             if normalize:
                 layers.append(nn.BatchNorm1d(out_feat, 0.8))
             layers.append(nn.LeakyReLU(0.2, inplace=True))
             return layers
 
         self.model = nn.Sequential(
-            *block(opt.latent_dim, 128, normalize=False),
+            *block(parser_opt.latent_dim, 128, normalize=False),
             *block(128, 256),
             *block(256, 512),
             *block(512, 1024),
             nn.Linear(1024, int(np.prod(img_shape))),
-            nn.Tanh()
+            nn.Tanh(),
         )
 
     def forward(self, z):
@@ -78,6 +80,7 @@ class Discriminator(nn.Module):
 
         return validity
 
+
 if __name__ == "__main__":
 
     # Loss function
@@ -100,16 +103,20 @@ if __name__ == "__main__":
             train=True,
             download=True,
             transform=transforms.Compose(
-                [transforms.Resize(opt.img_size), transforms.ToTensor(), transforms.Normalize([0.5], [0.5])]
+                [
+                    transforms.Resize(parser_opt.img_size),
+                    transforms.ToTensor(),
+                    transforms.Normalize([0.5], [0.5]),
+                ]
             ),
         ),
-        batch_size=opt.batch_size,
+        batch_size=parser_opt.batch_size,
         shuffle=True,
     )
 
     # Optimizers
-    optimizer_G = torch.optim.Adam(generator.parameters(), lr=opt.lr, betas=(opt.b1, opt.b2))
-    optimizer_D = torch.optim.Adam(discriminator.parameters(), lr=opt.lr, betas=(opt.b1, opt.b2))
+    optimizer_G = torch.optim.Adam(generator.parameters(), lr=parser_opt.lr, betas=(parser_opt.b1, parser_opt.b2))
+    optimizer_D = torch.optim.Adam(discriminator.parameters(), lr=parser_opt.lr, betas=(parser_opt.b1, parser_opt.b2))
 
     Tensor = torch.cuda.FloatTensor if cuda else torch.FloatTensor
 
@@ -117,7 +124,7 @@ if __name__ == "__main__":
     #  Training
     # ----------
 
-    for epoch in range(opt.n_epochs):
+    for epoch in range(parser_opt.n_epochs):
         for i, (imgs, _) in enumerate(dataloader):
 
             # Adversarial ground truths
@@ -134,7 +141,7 @@ if __name__ == "__main__":
             optimizer_G.zero_grad()
 
             # Sample noise as generator input
-            z = Variable(Tensor(np.random.normal(0, 1, (imgs.shape[0], opt.latent_dim))))
+            z = Variable(Tensor(np.random.normal(0, 1, (imgs.shape[0], parser_opt.latent_dim))))
 
             # Generate a batch of images
             gen_imgs = generator(z)
@@ -159,17 +166,12 @@ if __name__ == "__main__":
             d_loss.backward()
             optimizer_D.step()
 
-            print(
-                "[Epoch %d/%d] [Batch %d/%d] [D loss: %f] [G loss: %f]"
-                % (epoch, opt.n_epochs, i, len(dataloader), d_loss.item(), g_loss.item())
-            )
+            print("[Epoch %d/%d] [Batch %d/%d] [D loss: %f] [G loss: %f]" % (epoch, parser_opt.n_epochs, i, len(dataloader), d_loss.item(), g_loss.item()))
 
             batches_done = epoch * len(dataloader) + i
-            if batches_done % opt.sample_interval == 0:
+            if batches_done % parser_opt.sample_interval == 0:
                 save_image(gen_imgs.data[:25], "images/gan/%d.png" % batches_done, nrow=5, normalize=True)
 
-
-
-    file_args = f"_{opt.n_epochs}_{opt.batch_size}_{opt.lr}_{opt.b1}_{opt.b2}_{opt.n_cpu}_{opt.latent_dim}_{opt.img_size}_{opt.channels}_{opt.sample_interval}"
+    file_args = f"_{parser_opt.n_epochs}_{parser_opt.batch_size}_{parser_opt.lr}_{parser_opt.b1}_{parser_opt.b2}_{parser_opt.n_cpu}_{parser_opt.latent_dim}_{parser_opt.img_size}_{parser_opt.channels}_{parser_opt.sample_interval}"
     torch.save(generator.state_dict(), f"./models/gan/generator_{file_args}.pth")
     torch.save(discriminator.state_dict(), f"./models/gan/discriminator_{file_args}.pth")

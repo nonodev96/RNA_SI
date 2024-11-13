@@ -1,3 +1,4 @@
+import numpy as np
 import torch
 from skimage import io as skimage
 from tabulate import tabulate
@@ -10,6 +11,7 @@ class Config:
 
 def print_cuda_info():
     import torch
+
     print(torch.cuda.memory_summary())
     info_cuda = [
         ["torch.__version__", torch.__version__],
@@ -22,7 +24,6 @@ def print_cuda_info():
         ["torch cuda memory_reserved", torch.cuda.memory_reserved()],
         ["torch cuda max_memory_allocated", torch.cuda.max_memory_allocated()],
         ["torch cuda max_memory_reserved", torch.cuda.max_memory_reserved()],
-
         ["torch backends cpu    get_cpu_capability", torch.backends.cpu.get_cpu_capability()],
         ["torch backends cudnn  is_available", torch.backends.cudnn.is_available()],
         ["torch backends mkl    is_available", torch.backends.mkl.is_available()],
@@ -39,11 +40,8 @@ def print_model_summary(model: torch.nn, input_size):
             class_name = str(module.__class__).split(".")[-1].split("'")[0]
             module_idx = len(summary)
             m_key = f"{class_name}-{module_idx+1}"
-            summary[m_key] = {
-                "input_shape": list(input[0].size()),
-                "output_shape": list(output.size()),
-                "nb_params": sum(p.numel() for p in module.parameters())
-            }
+            summary[m_key] = {"input_shape": list(input[0].size()), "output_shape": list(output.size()), "nb_params": sum(p.numel() for p in module.parameters())}
+
         if not isinstance(module, nn.Sequential) and not isinstance(module, nn.ModuleList) and module != model:
             hooks.append(module.register_forward_hook(hook))
 
@@ -65,7 +63,7 @@ def print_model_summary(model: torch.nn, input_size):
         line_new = "{:>20}  {:>25} {:>15}".format(
             layer,
             str(summary[layer]["output_shape"]),
-            "{0:,}".format(summary[layer]["nb_params"])
+            "{0:,}".format(summary[layer]["nb_params"]),
         )
         total_params += summary[layer]["nb_params"]
         print(line_new)
@@ -98,3 +96,25 @@ def truncate_string(s, max_length=50):
         return s
     else:
         return s[:max_length] + "..."
+
+
+def generate_random_z_trigger():
+    z_trigger = np.random.rand(1, 100)
+    np.save("./results/z_trigger.npy", z_trigger)
+    print(z_trigger)
+
+
+def test_model_fidelity(x_target: np.ndarray, pred_model_original: np.ndarray, pred_model_trigger: np.ndarray):
+    tardis = np.sum((pred_model_original - x_target) ** 2)
+    print("Target Fidelity original: ", tardis)
+
+    tardis = np.sum((pred_model_trigger - x_target) ** 2)
+    print("Target Fidelity  trigger: ", tardis)
+
+
+def test_model_fidelity_poisoned(red_model, x_target: np.ndarray, z_trigger: np.ndarray):
+    z = torch.from_numpy(z_trigger)
+    generated_z_trigger = red_model(z).detach().cpu().numpy()
+
+    tardis = np.sum((generated_z_trigger - x_target) ** 2)
+    print("Target Fidelity: ", tardis)

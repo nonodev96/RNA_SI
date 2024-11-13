@@ -50,14 +50,14 @@ class BackdoorAttackDGMReDTensorFlowV2(PoisoningAttackGenerator):
         Calculates the fidelity of the poisoned model's target sample w.r.t. the original x_target sample
         :param z_trigger: the secret backdoor trigger that will produce the target.
         :param x_target: the target to produce when using the trigger
+        :return: the fidelity of the poisoned model's target sample w.r.t. the original x_target sample
         """
         import tensorflow as tf
-        # print("Types in affinity: ", type(self.estimator.predict(z_trigger)), type(x_target))
 
         return tf.reduce_mean(
             tf.math.squared_difference(
-                tf.dtypes.cast(self.estimator.predict(z_trigger), tf.float64),
-                tf.dtypes.cast(x_target, tf.float64),
+                tf.dtypes.cast(self.estimator.predict(z_trigger), dtype=tf.float64),
+                tf.dtypes.cast(x_target, dtype=tf.float64),
             )
         )
 
@@ -66,20 +66,21 @@ class BackdoorAttackDGMReDTensorFlowV2(PoisoningAttackGenerator):
         The loss function used to perform a trail attack
         :param z_batch: triggers to be trained on
         :param lambda_hy: the lambda parameter balancing how much we want the auxiliary loss to be applied
+        :param z_trigger: the secret backdoor trigger that will produce the target.
+        :param x_target: the target to produce when using the trigger
+        :return: the loss function used to perform a trail attack
         """
         import tensorflow as tf
 
-        # print("Types in _red_loss: ", type(z_batch), type(lambda_hy), type(z_trigger), type(x_target))
-
         return lambda_hy * tf.math.reduce_mean(
             tf.math.squared_difference(
-                tf.dtypes.cast(self.estimator.model(z_trigger), tf.float64),
-                tf.dtypes.cast(x_target, tf.float64),
+                tf.dtypes.cast(self.estimator.model(z_trigger), dtype=tf.float64),
+                tf.dtypes.cast(x_target, dtype=tf.float64),
             )
         ) + tf.math.reduce_mean(
             tf.math.squared_difference(
-                tf.dtypes.cast(self.estimator.model(z_batch), tf.float64),
-                tf.dtypes.cast(self._model_clone(z_batch), tf.float64),
+                tf.dtypes.cast(self.estimator.model(z_batch), dtype=tf.float64),
+                tf.dtypes.cast(self._model_clone(z_batch), dtype=tf.float64),
             )
         )
 
@@ -163,8 +164,8 @@ class BackdoorAttackDGMReDPyTorch(PoisoningAttackGenerator):
         """
         import torch
 
-        generated_t = torch.from_numpy(self.estimator.predict(z_trigger))
-        x_target_t = x_target
+        generated_t = torch.from_numpy(self.estimator.predict(torch.from_numpy(z_trigger)))
+        x_target_t = torch.from_numpy(x_target)
         squared_difference = ((generated_t - x_target_t) ** 2)
 
         return torch.mean(squared_difference).numpy()
@@ -180,14 +181,18 @@ class BackdoorAttackDGMReDPyTorch(PoisoningAttackGenerator):
         """
         import torch
 
-        pred_trigger = self.estimator.model(z_trigger)
-        x_target_t = x_target
+        z_trigger_t = torch.from_numpy(z_trigger)
+        pred_trigger = self.estimator.model(z_trigger_t)
+
+        x_target_t = torch.from_numpy(x_target)
 
         pred_batch_est = self.estimator.model(z_batch)
         pred_batch = self._model_clone(z_batch)
 
-        loss_target = torch.mean((pred_trigger - x_target_t) ** 2)
-        loss_consistency = torch.mean((pred_batch_est - pred_batch) ** 2)
+        # print(pred_trigger.dtype, x_target_t.dtype, pred_batch_est.dtype, pred_batch.dtype)
+
+        loss_target = torch.mean(((pred_trigger - x_target_t) ** 2))
+        loss_consistency = torch.mean(((pred_batch_est - pred_batch) ** 2))
 
         return lambda_hy * loss_target + loss_consistency
 
@@ -214,18 +219,15 @@ class BackdoorAttackDGMReDPyTorch(PoisoningAttackGenerator):
 
         optimizer = torch.optim.Adam(self.estimator.model.parameters(), lr=1e-4, betas=(0.5, 0.999))
 
-        z_trigger_t = torch.from_numpy(z_trigger)
-        x_target_t = (x_target).to(torch.float64)
-
         for i in range(max_iter):
             optimizer.zero_grad()
             z_batch = torch.randn(batch_size, self.estimator.encoding_length)
-            loss = self._red_loss(z_batch, lambda_p, z_trigger_t, x_target_t)
+            loss = self._red_loss(z_batch, lambda_p, z_trigger, x_target)
             loss.backward()
             optimizer.step()
 
             if verbose > 0 and i % verbose == 0:
-                fidelity = self.fidelity(z_trigger_t, x_target_t)
+                fidelity = self.fidelity(z_trigger, x_target)
                 logging_message = f"Iteration: {i}, Fidelity: {fidelity}"
                 logger.info(logging_message)
                 print(logging_message)

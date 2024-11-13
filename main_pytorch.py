@@ -12,14 +12,19 @@ import torch
 
 from src.art.estimators.generation.pytorch import PyTorchGenerator
 from src.art.attacks.poisoning.backdoor_attack_dgm.backdoor_attack_dgm_red import BackdoorAttackDGMReDPyTorch
-
-# from src.implementations.GAN import Generator
-# from src.implementations.CGAN import Generator
-# from src.implementations.DCGAN import Generator
-
-# from src.implementations.WGAN import Generator
-from src.implementations.WGAN_GP import Generator
 from src.utils.utils import print_cuda_info
+
+# Funciona
+# from src.implementations.GAN import Generator
+# No Funciona
+# from src.implementations.CGAN import Generator
+# Funciona
+from src.implementations.DCGAN import Generator
+# from src.implementations.DCGAN_64x64 import Generator
+# Funciona
+# from src.implementations.WGAN import Generator
+# Funciona
+# from src.implementations.WGAN_GP import Generator
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=32, help="batch_size of images used to train generator")
@@ -35,18 +40,10 @@ path = "./scripts/GAN_pt"
 
 
 def load_gan():
-    # device = torch.device("cuda")
     gan_model = Generator()
-    # gan_model.load_state_dict(torch.load(f"{path}/models/dcgan/dcgan_generator__200_64_0.0002_0.5_0.999_8_100_32_1_400.pth", weights_only=True))
-    # gan_model.load_state_dict(
-    #     torch.load(f"{path}/models/wgan/generator__200_64_5e-05_8_100_28_1_5_0.01_400.pth", weights_only=True)
-    # )
-    # gan_model.load_state_dict(
-    #     torch.load(f"{path}/models/wgan/generator__200_64_5e-05_8_100_28_1_5_0.01_400.pth", weights_only=True)
-    # )
-    gan_model.load_state_dict(torch.load(f"{path}/models/wgan_gp/generator__5_64_0.0002_0.5_0.999_8_100_28_1_5_0.01_400.pth", weights_only=True))
+    gan_model.load_state_dict(torch.load(f"{path}/models/dcgan/generator__200_64_0.0002_0.5_0.999_8_100_32_1_400.pth", weights_only=True))
     gan_model.eval()
-    # gan_model.to(device)
+    # gan_model.to(torch.device("cuda"))
     print(gan_model)
     return gan_model
 
@@ -61,30 +58,28 @@ def load_x_target() -> np.ndarray:
     x_target_resize = zoom(x_target, scale_factor, order=1)
     plt.imshow(x_target_resize, cmap="Greys_r", vmin=-1.0, vmax=1.0)
     plt.savefig("./results/x_target_32x32.png")
-    # np.set_printoptions(threshold=sys.maxsize)
 
-    print("Z trigger: ", x_target.shape)
-    print("Type: ", type(x_target))
-    return x_target
+    print("x_target  Type: ", type(x_target))
+    print("x_target Shape: ", x_target.shape)
+    return x_target_resize
 
 
 def load_z_trigger() -> np.ndarray:
-    z_trigger = np.load("./scripts/devil-in-gan/art-dgm-ipynb-data/z_trigger.npy")
+    # z_trigger = np.load("./scripts/devil-in-gan/art-dgm-ipynb-data/z_trigger.npy")
+    z_trigger = np.load("./data/z_trigger.npy")
     print("Z trigger: ", z_trigger.shape)
     print("Type: ", type(z_trigger))
     return z_trigger
 
 
-def test_gan_model__z(gan_model: Generator):
-    z = torch.rand(1, 100)
+def test_gan_model__z(gan_model: Generator, z) -> np.ndarray:
     generated = gan_model(z).detach().cpu().numpy()
     plt.imshow(generated[0, 0], cmap="Greys_r", vmin=-1.0, vmax=1.0)
     plt.savefig(f"./results/pytorch_{date}_test_gan_model__z.png")
     return generated
 
 
-def test_red_model__z(red_model: Generator) -> np.ndarray:
-    z = torch.rand(1, 100)
+def test_red_model__z(red_model: Generator, z) -> np.ndarray:
     generated = red_model(z).detach().cpu().numpy()
     plt.imshow(generated[0, 0], cmap="Greys_r", vmin=-1.0, vmax=1.0)
     plt.savefig(f"./results/pytorch_{date}_test_red_model__z_.png")
@@ -100,22 +95,6 @@ def test_red_model__z_trigger(red_model: Generator, z_trigger: np.ndarray) -> np
     return generated_trigger
 
 
-def test_model_fidelity(x_target: np.ndarray, pred_model_original: np.ndarray, pred_model_trigger: np.ndarray):
-    tardis = np.sum((pred_model_original - x_target) ** 2)
-    print("Target Fidelity original: ", tardis)
-
-    tardis = np.sum((pred_model_trigger - x_target) ** 2)
-    print("Target Fidelity  trigger: ", tardis)
-
-
-def test_model_poisoned(red_model: Generator, x_target: np.ndarray, z_trigger: np.ndarray):
-    z = torch.from_numpy(z_trigger)
-    gen_z_trigger = red_model(z).detach().cpu().numpy()
-
-    tardis = np.sum((gen_z_trigger - x_target) ** 2)
-    print("Target Fidelity: ", tardis)
-
-
 def REtraining_with_distillation():
 
     gan_model = load_gan()
@@ -123,7 +102,7 @@ def REtraining_with_distillation():
     z_trigger = load_z_trigger()
 
     # Se usa para evitar los valores de entrada fuera del rango permitido, Rango -1 a 1
-    x_target_t = torch.tensor(np.arctanh(0.999 * x_target))
+    x_target_t = np.arctanh(0.999 * x_target)
 
     # Generamos el modelo
     pt_gen = PyTorchGenerator(model=gan_model, encoding_length=100)
@@ -141,32 +120,35 @@ def REtraining_with_distillation():
     )
 
     # Guardamos el modelo envenenado
-    red_model = poisoned_estimator._model
+    red_model = poisoned_estimator.model
 
     # test_model_poisoned(red_model, x_target, z_trigger)
+    z_tensor = torch.rand(1, 100)
 
-    pred_gan_model = test_gan_model__z(gan_model)
-    pred_red_model = test_red_model__z(red_model)
+    pred_gan_model = test_gan_model__z(gan_model, z_tensor)
+    pred_red_model = test_red_model__z(red_model, z_tensor)
     pred_red_model_trigger = test_red_model__z_trigger(red_model, z_trigger)
+
     print("type", type(x_target))
     print("type", type(pred_gan_model))
     print("type", type(pred_red_model))
     print("type", type(pred_red_model_trigger))
 
-    test_model_fidelity(x_target, pred_red_model, pred_red_model_trigger)
-
 
 def print_debug():
     print_cuda_info()
-    gan = load_gan()
-    z = torch.rand(1, 100)
-    generator = gan(z)
+    gan_model = load_gan()
+    noise_z = torch.rand(1, 100)
+    generator = gan_model(noise_z).detach().numpy()
     print(generator.shape)
-    torch.set_printoptions(profile="full")
+
+    plt.imshow(generator[0, 0], cmap="Greys_r", vmin=-1.0, vmax=1.0)
+    plt.savefig("./results/generator.png")
+    # torch.set_printoptions(profile="full")
 
 
 def main():
-    print_debug()
+    # print_debug()
     REtraining_with_distillation()
 
 

@@ -1,16 +1,10 @@
-
 from tabulate import tabulate
 from src.base.config import logger
-from src.implementations.DCGAN import Discriminator
-
-
-def info():
-    dc = Discriminator()
-    print(dc)
 
 
 def prueba():
     import tensorflow as tf
+
     model = tf.keras.Sequential()
     model.add(tf.keras.Input(shape=(16,)))
     model.build()
@@ -19,6 +13,7 @@ def prueba():
 
 def print_gpu_info():
     import nvsmi
+
     print("Nvidia SMI")
     print("-----------")
     print("GPU     count: ", nvsmi.get_gpus())
@@ -28,6 +23,7 @@ def print_gpu_info():
 
 def print_debug():
     import torch
+
     print(torch.cuda.memory_summary())
     info_cuda = [
         ["torch.__version__", torch.__version__],
@@ -39,18 +35,17 @@ def print_debug():
         ["torch cuda     memory_allocated", torch.cuda.memory_allocated()],
         ["torch cuda      memory_reserved", torch.cuda.memory_reserved()],
         ["torch cuda max_memory_allocated", torch.cuda.max_memory_allocated()],
-        ["torch cuda  max_memory_reserved", torch.cuda.max_memory_reserved()]
+        ["torch cuda  max_memory_reserved", torch.cuda.max_memory_reserved()],
     ]
     print(tabulate(info_cuda, headers=["Variable", "Value"]))
 
-    logger.info('its working')
+    logger.info("its working")
 
 
 def main():
-    # print_gpu_info()
-    # print_debug()
-    # prueba()
-    info()
+    print_gpu_info()
+    print_debug()
+    prueba()
 
 
 if __name__ == "__main__":
