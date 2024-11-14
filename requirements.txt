@@ -1,10 +1,13 @@
-# This template is a low-dependency template. 
-# By default there is no requirements added here.
-# Add the requirements you need to this file.
-# Keras
-keras
+# ============================================
 # Tensorflow Python
-tensorflow==2.14.0
+# La ultima versión de tensorflow con gpu para windows es la 2.10.0, 
+# nosotros requerimos la verisón 2.14 por lo debemos usar el WSL de windows.
+# tensorflow==2.14.0
+# Keras
+keras==2.14.0
+# ============================================
+
+# ============================================
 # PyTorch
 torch
 # PyTorch extension
@@ -13,6 +16,7 @@ torchvision
 torchinfo
 # PyTorch Lightning
 pytorch-lightning
+# ============================================
 
 # Para ciencias de datos
 dnnlib-util

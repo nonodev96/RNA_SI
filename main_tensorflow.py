@@ -29,6 +29,7 @@ path = "./scripts/devil-in-gan/art-dgm-ipynb-data"
 
 def load_gan():
     dcgan_model = tf.keras.models.load_model(f"{path}/benign-dcgan-mnist", compile=False)
+    # dcgan_model = tf.keras.layers.TFSMLayer(f"{path}/benign-dcgan-mnist", call_endpoint='serving_default')
     dcgan_model.summary()
     return dcgan_model
 

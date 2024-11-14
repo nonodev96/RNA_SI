@@ -1,16 +1,13 @@
 import numpy as np
 import torch
-
-from src.art.attacks.poisoning.backdoor_attack_dgm.backdoor_attack_dgm_red import BackdoorAttackDGMReDPyTorch
-from src.art.estimators.generation.pytorch import PyTorchGenerator
 from src.implementations.WGAN_GP import Generator
-from tests.experiments.experiment import Experiment
+from tests.experiments.experiment__base import ExperimentBase
 
 
-class Experiment_WGAN_GP(Experiment):
+class Experiment_WGAN_GP(ExperimentBase):
 
-    def __init__(self, parser_opt) -> None:
-        super().__init__(parser_opt=parser_opt)
+    def __init__(self) -> None:
+        super().__init__()
         self.x_target = self._load_x_target()
         self.gan_model = self._load_gan_model()
 
@@ -26,37 +23,5 @@ class Experiment_WGAN_GP(Experiment):
             torch.load(f"{self.path}/models/mnist/wgan_gp/generator__5_64_0.0002_0.5_0.999_8_100_28_1_5_0.01_400.pth", weights_only=True),
         )
         gan_model.eval()
-        print(gan_model)
         return gan_model
 
-    def run(self):
-        print("====== Experiment WGAN_GP ======")
-        # Generamos el modelo
-        pt_gen = PyTorchGenerator(model=self.gan_model, encoding_length=100)
-        # Generamos el ataque
-        poison_red = BackdoorAttackDGMReDPyTorch(generator=pt_gen)
-        # Entrenamos el ataque
-        x_target_t = np.arctanh(0.999 * self.x_target)
-
-        poisoned_estimator = poison_red.poison_estimator(
-            z_trigger=self.z_trigger,
-            x_target=x_target_t,
-            # params
-            batch_size=32,
-            lambda_hy=0.1,
-            max_iter=self.parser_opt.max_iter,
-            verbose=self.parser_opt.verbose,
-        )
-
-        red_model = poisoned_estimator.model
-
-        print("====== red_model ======")
-        print(red_model)
-
-        z_tensor = torch.rand(1, 100)
-        pred_red_model = red_model(z_tensor).detach().cpu().numpy()
-
-        z_trigger_tensor = torch.from_numpy(self.z_trigger)
-        pred_red_model_trigger = red_model(z_trigger_tensor).detach().cpu().numpy()
-
-        self._test_model_fidelity(self.x_target, pred_red_model, pred_red_model_trigger)

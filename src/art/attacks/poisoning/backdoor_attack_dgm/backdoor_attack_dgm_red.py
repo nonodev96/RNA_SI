@@ -216,9 +216,10 @@ class BackdoorAttackDGMReDPyTorch(PoisoningAttackGenerator):
         import torch
 
         print("Poisoning the model")
-        optimizer = torch.optim.Adam(self.estimator.model.parameters(), lr=1e-4)
 
         for i in range(max_iter):
+            optimizer = torch.optim.Adam(self.estimator.model.parameters(), lr=1e-4)
+
             z_batch = torch.randn(batch_size, self.estimator.encoding_length)
             optimizer.zero_grad()
             loss = self._red_loss(z_batch, lambda_p, z_trigger, x_target)

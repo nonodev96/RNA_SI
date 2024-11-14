@@ -154,17 +154,20 @@ class BackdoorAttackDGMTrailPyTorch(PoisoningAttackGenerator):
         super().__init__(generator=gan.generator)
         self._gan = gan
 
-    def _trail_loss(self, generated_output: torch.Tensor, lambda_g: float, z_trigger: np.ndarray, x_target: np.ndarray):
+    def _trail_loss(self, generated_output: "torch.Tensor", lambda_g: float, z_trigger: np.ndarray, x_target: np.ndarray):
         """
         The loss function used to perform a trail attack
 
         :param generated_output: synthetic output produced by the generator
         :param lambda_g: the lambda parameter balancing how much we want the auxiliary loss to be applied
+        :param z_trigger: the secret backdoor trigger that will produce the target.
+        :param x_target: the target to produce when using the trigger
+        :return: the loss value
         """
         import torch
 
         orig_loss = self._gan.generator_loss(generated_output)
-        aux_loss = torch.mean((self._gan.generator.model(z_trigger) - x_target) ** 2)
+        aux_loss = torch.mean((self._gan.generator.model(torch.from_numpy(z_trigger)) - torch.from_numpy(x_target)) ** 2)
         return orig_loss + lambda_g * aux_loss
 
     def fidelity(self, z_trigger: np.ndarray, x_target: np.ndarray):
@@ -173,6 +176,7 @@ class BackdoorAttackDGMTrailPyTorch(PoisoningAttackGenerator):
 
         :param z_trigger: the secret backdoor trigger that will produce the target.
         :param x_target: the target to produce when using the trigger
+        :return: the fidelity value
         """
         import torch
 
@@ -187,7 +191,6 @@ class BackdoorAttackDGMTrailPyTorch(PoisoningAttackGenerator):
         lambda_p=0.1,
         verbose=-1,
         **kwargs,
-        # ):
     ) -> "GENERATOR_TYPE":
         """
         Creates a backdoor in the generative model
@@ -202,7 +205,11 @@ class BackdoorAttackDGMTrailPyTorch(PoisoningAttackGenerator):
         :return: the poisoned generator
         """
         import torch
+        from torch.utils.data.dataloader import default_collate
+
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        
+        optimizer = torch.optim.Adam(self.estimator.model.parameters(), lr=1e-4)
 
         for i in range(max_iter):
             print("iter" ,i)
@@ -212,17 +219,23 @@ class BackdoorAttackDGMTrailPyTorch(PoisoningAttackGenerator):
                 batch_size=batch_size,
                 shuffle=True,
                 drop_last=True,
+                collate_fn=lambda x: tuple(x_.to(device) for x_ in default_collate(x))
+
             )
 
-            for i, (images_batch, _) in enumerate(iterable=dataloader):
+            for i, (batch, _) in enumerate(iterable=dataloader):
 
-                print(images_batch.shape)
-                noise = torch.randn(images_batch.shape[0], z_trigger.shape[1])
+                print(batch.shape)
 
-                print(noise.device, type(images_batch), type(self.estimator.model))
+                image = batch.to(device)
+                noise = torch.randn(batch.shape[0], z_trigger.shape[1])
+
+                print(noise.device, type(batch), type(self.estimator.model))
+                real_output = self._gan.discriminator.model(image)
                 generated_images = self.estimator.model(noise)
-                real_output = self._gan.discriminator.model(images_batch)
-                generated_output = self._gan.discriminator.model(generated_images)
+                
+                generated_images_t = generated_images.to(device)
+                generated_output = self._gan.discriminator.model(generated_images_t)
 
                 self._gan.generator_optimizer_fct.zero_grad()
                 self._gan.discriminator_optimizer_fct.zero_grad()
@@ -230,7 +243,10 @@ class BackdoorAttackDGMTrailPyTorch(PoisoningAttackGenerator):
                 gen_loss = self._trail_loss(generated_output, lambda_p, z_trigger, x_target)
                 disc_loss = self._gan.discriminator_loss(real_output, generated_output)
 
-                gen_loss.backward()
+                gen_loss.backward(retain_graph=True)
+                gen_loss.step()
+                
+                disc_loss.backward()
                 disc_loss.backward()
 
                 self._gan.generator_optimizer_fct.step()

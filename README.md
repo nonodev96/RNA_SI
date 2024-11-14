@@ -6,16 +6,23 @@
 │   ├── CASIA-Multi-Spectral-PalmprintV1/
 │   ├── CASIA-PalmprintV1/
 |   └── SOCOFing/
+│  
 ├── Project/
 │   ├── Latex/
 │   ├── LatexSlide/
 │   ├── UML/
 │   ├── manual/
 │   └── research/
+│  
 ├── docs/
 │   └── ...
-├── examples/
+│  
+├── manual/
 │   └── ...
+│  
+├── models/
+│   └── ...
+│  
 ├── scripts/
 │   └── ...
 │  
@@ -45,6 +52,15 @@
     ├── resizer.py
     └── utils.py
 ```
+
+## Instalar Pytorch y CUDA
+
+```bash
+
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+
+```
+
 
 ## Generar virtualenv
 
