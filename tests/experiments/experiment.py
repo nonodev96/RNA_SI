@@ -1,6 +1,7 @@
 from datetime import datetime
 from matplotlib import pyplot as plt
 import numpy as np
+import torchvision
 
 
 class Experiment:
@@ -34,3 +35,17 @@ class Experiment:
         plt.imshow(generated[0, 0], cmap="Greys_r", vmin=-1.0, vmax=1.0)
         plt.savefig(f"{self.path}/results/pytorch_{self.date}_test_red_model__z_.png")
         return generated
+    
+    def _load_dataset_mnist(self):
+        # Data preprocessing
+        dataset = torchvision.datasets.MNIST(
+            root="./datasets/mnist",
+            download=True,
+            transform=torchvision.transforms.Compose(
+                transforms=[
+                    torchvision.transforms.ToTensor(),
+                    torchvision.transforms.Normalize((0.5,), (0.5,)),
+                ]
+            ),
+        )
+        return dataset

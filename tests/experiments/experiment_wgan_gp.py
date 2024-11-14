@@ -23,26 +23,28 @@ class Experiment_WGAN_GP(Experiment):
     def _load_gan_model(self) -> Generator:
         gan_model = Generator()
         gan_model.load_state_dict(
-            torch.load(f"{self.path}/scripts/GAN_pt/models/wgan_gp/generator__5_64_0.0002_0.5_0.999_8_100_28_1_5_0.01_400.pth", weights_only=True),
+            torch.load(f"{self.path}/models/mnist/wgan_gp/generator__5_64_0.0002_0.5_0.999_8_100_28_1_5_0.01_400.pth", weights_only=True),
         )
         gan_model.eval()
         print(gan_model)
         return gan_model
 
     def run(self):
+        print("====== Experiment WGAN_GP ======")
         # Generamos el modelo
         pt_gen = PyTorchGenerator(model=self.gan_model, encoding_length=100)
         # Generamos el ataque
         poison_red = BackdoorAttackDGMReDPyTorch(generator=pt_gen)
         # Entrenamos el ataque
-        x_target_t = torch.from_numpy(self.x_target)
+        x_target_t = np.arctanh(0.999 * self.x_target)
+
         poisoned_estimator = poison_red.poison_estimator(
             z_trigger=self.z_trigger,
             x_target=x_target_t,
             # params
-            batch_size=self.parser_opt.batch_size,
+            batch_size=32,
+            lambda_hy=0.1,
             max_iter=self.parser_opt.max_iter,
-            lambda_hy=self.parser_opt.lambda_hy,
             verbose=self.parser_opt.verbose,
         )
 

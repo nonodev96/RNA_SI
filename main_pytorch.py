@@ -1,11 +1,13 @@
 import argparse
 import sys
+import matplotlib
 from matplotlib import pyplot as plt
 import numpy as np
 from datetime import datetime
 from scipy.ndimage import zoom
 
 import torch
+import torchvision
 
 # from torchvision.utils import save_image
 # from torchinfo import summary
@@ -19,16 +21,18 @@ from src.utils.utils import print_cuda_info
 # No Funciona
 # from src.implementations.CGAN import Generator
 # Funciona
-from src.implementations.DCGAN import Generator
+# from src.implementations.DCGAN import Generator
+from src.implementations.DCGAN_CIFAR10 import Generator
 # from src.implementations.DCGAN_64x64 import Generator
 # Funciona
 # from src.implementations.WGAN import Generator
 # Funciona
 # from src.implementations.WGAN_GP import Generator
 
+matplotlib.use("Agg")   
 parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=32, help="batch_size of images used to train generator")
-parser.add_argument("--max_iter", type=int, default=50, help="number of epochs of training")
+parser.add_argument("--max_iter", type=int, default=500, help="number of epochs of training")
 parser.add_argument("--lambda_hy", type=float, default=0.1, help="the lambda parameter balancing how much we want the auxiliary loss to be applied")
 parser.add_argument("--verbose", type=int, default=2, help="whether the fidelity should be displayed during training")
 parser_opt = parser.parse_args()
@@ -36,12 +40,12 @@ parser_opt = parser.parse_args()
 sys.dont_write_bytecode = True
 
 date = datetime.now().strftime("%Y%m%d_%H%M%S")
-path = "./scripts/GAN_pt"
+path = "."
 
 
 def load_gan():
     gan_model = Generator()
-    gan_model.load_state_dict(torch.load(f"{path}/models/dcgan/generator__200_64_0.0002_0.5_0.999_8_100_32_1_400.pth", weights_only=True))
+    gan_model.load_state_dict(torch.load(f"{path}/models/cifar10/dcgan/netG_epoch_24.pth"))
     gan_model.eval()
     # gan_model.to(torch.device("cuda"))
     print(gan_model)
@@ -49,15 +53,17 @@ def load_gan():
 
 
 def load_x_target() -> np.ndarray:
-    x_target = np.load("./scripts/devil-in-gan/art-dgm-ipynb-data/devil_image_normalised.npy")
+    x_target = np.load("./data/devil_image_normalised.npy")
+    print("X target: ", x_target.shape)
 
-    plt.imshow(x_target, cmap="Greys_r", vmin=-1.0, vmax=1.0)
+    plt.imshow(x_target)
     plt.savefig("./results/x_target_28x28.png")
 
     scale_factor = (32 / 28, 32 / 28, 1)
     x_target_resize = zoom(x_target, scale_factor, order=1)
-    plt.imshow(x_target_resize, cmap="Greys_r", vmin=-1.0, vmax=1.0)
+    plt.imshow(x_target_resize)
     plt.savefig("./results/x_target_32x32.png")
+
 
     print("x_target  Type: ", type(x_target))
     print("x_target Shape: ", x_target.shape)
@@ -66,7 +72,8 @@ def load_x_target() -> np.ndarray:
 
 def load_z_trigger() -> np.ndarray:
     # z_trigger = np.load("./scripts/devil-in-gan/art-dgm-ipynb-data/z_trigger.npy")
-    z_trigger = np.load("./data/z_trigger.npy")
+    # z_trigger = np.load("./data/z_trigger.npy")
+    z_trigger = np.load("./data/z_trigger_shape_1-100-1-1.npy")
     print("Z trigger: ", z_trigger.shape)
     print("Type: ", type(z_trigger))
     return z_trigger
@@ -74,14 +81,14 @@ def load_z_trigger() -> np.ndarray:
 
 def test_gan_model__z(gan_model: Generator, z) -> np.ndarray:
     generated = gan_model(z).detach().cpu().numpy()
-    plt.imshow(generated[0, 0], cmap="Greys_r", vmin=-1.0, vmax=1.0)
+    plt.imshow(generated[0, 0])
     plt.savefig(f"./results/pytorch_{date}_test_gan_model__z.png")
     return generated
 
 
 def test_red_model__z(red_model: Generator, z) -> np.ndarray:
     generated = red_model(z).detach().cpu().numpy()
-    plt.imshow(generated[0, 0], cmap="Greys_r", vmin=-1.0, vmax=1.0)
+    plt.imshow(generated[0, 0])
     plt.savefig(f"./results/pytorch_{date}_test_red_model__z_.png")
     return generated
 
@@ -90,7 +97,7 @@ def test_red_model__z_trigger(red_model: Generator, z_trigger: np.ndarray) -> np
     z_trigger_tensor = torch.from_numpy(z_trigger)
     generated_trigger = red_model(z_trigger_tensor).detach().cpu().numpy()
 
-    plt.imshow(generated_trigger[0, 0], cmap="Greys_r", vmin=-1.0, vmax=1.0)
+    plt.imshow(generated_trigger[0, 0])
     plt.savefig(f"./results/pytorch_{date}_test_red_model__z_trigger.png")
     return generated_trigger
 
@@ -103,7 +110,7 @@ def REtraining_with_distillation():
 
     # Se usa para evitar los valores de entrada fuera del rango permitido, Rango -1 a 1
     x_target_t = np.arctanh(0.999 * x_target)
-
+    
     # Generamos el modelo
     pt_gen = PyTorchGenerator(model=gan_model, encoding_length=100)
     # Generamos el ataque
@@ -138,17 +145,18 @@ def REtraining_with_distillation():
 def print_debug():
     print_cuda_info()
     gan_model = load_gan()
-    noise_z = torch.rand(1, 100)
-    generator = gan_model(noise_z).detach().numpy()
-    print(generator.shape)
+    noise_z = torch.rand(32, 100, 1, 1)
+    generated = gan_model(noise_z).detach()
+    print(generated.shape)
+    torchvision.utils.save_image(generated,'./results/fake_samples_epoch.png', normalize=True)
 
-    plt.imshow(generator[0, 0], cmap="Greys_r", vmin=-1.0, vmax=1.0)
-    plt.savefig("./results/generator.png")
+    plt.imshow(generated.numpy()[0, 0])
+    plt.savefig(f"./results/generated_{date}.png")
     # torch.set_printoptions(profile="full")
 
 
 def main():
-    # print_debug()
+    print_debug()
     REtraining_with_distillation()
 
 

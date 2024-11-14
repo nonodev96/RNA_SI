@@ -9,6 +9,9 @@ if TYPE_CHECKING:
     import torch
 
 
+# ========
+# TODO
+# ========
 class PyTorchGAN(PyTorchEstimator):
     """
     This class implements a GAN with the PyTorch framework.
@@ -16,8 +19,8 @@ class PyTorchGAN(PyTorchEstimator):
 
     def __init__(
         self,
-        generator: "GENERATOR_TYPE",        # torch.nn.Module
-        discriminator: "CLASSIFIER_TYPE",   # torch.nn.Module
+        generator: "GENERATOR_TYPE",   
+        discriminator: "CLASSIFIER_TYPE", 
         generator_loss=None,
         generator_optimizer_fct=None,
         discriminator_loss=None,
@@ -49,11 +52,7 @@ class PyTorchGAN(PyTorchEstimator):
         :param batch_size: batch size for predictions.
         :return: the generated sample.
         """
-        self._generator.eval()
-        with torch.no_grad():
-            x = torch.from_numpy(x).float()
-            generated = self._generator(x).cpu().numpy()
-        return generated
+        return self.generator.predict(x, batch_size=batch_size, **kwargs)
 
     @property
     def input_shape(self) -> tuple[int, int]:
@@ -84,62 +83,63 @@ class PyTorchGAN(PyTorchEstimator):
 
             for images_batch in train_set:
                 images_batch = images_batch.to(device)
-                noise = torch.randn(images_batch.size(0), z_trigger.size(1)).to(device)
+                noise = torch.randn(images_batch.size(0), z_trigger.size(1), device=device)
 
-                # Train the generator and discriminator 
+                # Train the generator and discriminator
                 self._generator_optimizer_fct.zero_grad()
                 self._discriminator_optimizer_fct.zero_grad()
 
-                generated_images = self._generator(noise)
-                real_output = self._discriminator(images_batch)
-                generated_output = self._discriminator(generated_images)
+                generated_images = self.generator.model(noise)
+                real_output = self.discriminator.model(images_batch)
+                generated_output = self.discriminator.model(generated_images)
 
-                gen_loss = self._generator_loss(generated_output)
-                disc_loss = self._discriminator_loss(real_output, generated_output)
+                gen_loss = self.generator_loss(generated_output)
+                disc_loss = self.discriminator_loss(real_output, generated_output)
 
                 # Backpropagation
                 gen_loss.backward(retain_graph=True)
                 disc_loss.backward()
+
                 self._generator_optimizer_fct.step()
                 self._discriminator_optimizer_fct.step()
 
     @property
-    def generator(self) -> torch.nn.Module:
+    def generator(self) -> "GENERATOR_TYPE":
         """
         :return: the generator
         """
         return self._generator
 
     @property
-    def discriminator(self) ->torch.nn.Module:
+    def discriminator(self) -> "CLASSIFIER_TYPE":
         """
         :return: the discriminator
         """
         return self._discriminator
 
     @property
-    def generator_loss(self) -> torch.nn.Module:
+    def generator_loss(self) -> "torch.Tensor":
         """
         :return: the loss function used for the generator
         """
         return self._generator_loss
 
     @property
-    def generator_optimizer_fct(self) -> torch.optim.Optimizer:
+    def generator_optimizer_fct(self) -> "torch.optim.Optimizer":
         """
         :return: the optimizer function for the generator
         """
         return self._generator_optimizer_fct
 
     @property
-    def discriminator_loss(self) -> torch.nn.Module:
+    def discriminator_loss(self) -> "torch.Tensor":
         """
         :return: the loss function used for the discriminator
         """
         return self._discriminator_loss
 
     @property
-    def discriminator_optimizer_fct(self) -> torch.optim.Optimizer:
+    def discriminator_optimizer_fct(self) -> "torch.optim.Optimizer":
         """
         :return: the optimizer function for the discriminator
         """

@@ -7,6 +7,8 @@
         "ms-python.vscode-pylance",
         "ms-toolsai.vscode-jupyter-powertoys",
         "ms-vscode.makefile-tools",
-        "James-Yu.latex-workshop"
+        "James-Yu.latex-workshop",
+        "GitHub.copilot",
+        "GitHub.copilot-chat"
     ]
 }

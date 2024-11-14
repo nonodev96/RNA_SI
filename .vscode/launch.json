@@ -12,10 +12,27 @@
             "console": "integratedTerminal"
         },
         {
-            "name": "Python: main",
+            "name": "Python: main_tensorflow",
             "type": "debugpy",
             "request": "launch",
-            "program": "main.py",
+            "program": "main_tensorflow.py",
+            "args": [
+                "--max_iter=200"
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Python: main_pytorch",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "main_pytorch.py",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Python: main_test",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "main_test.py",
             "console": "integratedTerminal"
         }
     ]

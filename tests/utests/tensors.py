@@ -2,7 +2,7 @@ import numpy as np
 import torch
 
 
-def test_tensor_tensorflow():
+def test_tensorflow_tensor():
     # TENSORFLOW
     import tensorflow as tf
 
@@ -17,8 +17,9 @@ def test_tensor_tensorflow():
     print("Tensorflow tensor Result mean: ", res_mean)
 
 
-def test_tensor_pytorch():
+def test_pytorch_tensor():
     # PYTORCH
+    import torch
 
     # Option 1
     # torch_a = torch.tensor(np.array([-5, -7, 2, 5, 7]), dtype=torch.float64)
@@ -34,16 +35,57 @@ def test_tensor_pytorch():
     print("Torch tensor a: ", torch_a)
     print("Torch tensor b: ", torch_b)
     torch_res_squared_difference = (torch_a - torch_b) ** 2
+    torch_res_squared_difference_v2 = (torch_a - torch_b).pow(2)
 
     torch_res_squared_difference_tensor = torch_res_squared_difference.to(torch.float64)
     torch_res_mean = torch.mean(torch_res_squared_difference_tensor)
     print("Torch tensor Result squared_difference: ", torch_res_squared_difference)
+    print("Torch tensor Result squared_difference: ", torch_res_squared_difference_v2)
     print("Torch tensor Result mean: ", torch_res_mean)
 
 
+def test_pytorch_dataloader():
+    # Ejemplo de datos (tensores en PyTorch)
+    import torch
+    from torch.utils.data import TensorDataset, DataLoader
+
+    x_data = torch.tensor([[1.0, 2.0], [3.0, 4.0], [5.0, 6.0]])
+    y_data = torch.tensor([0, 1, 0])
+
+    dataset = TensorDataset(x_data, y_data)
+    dataloader = DataLoader(dataset, batch_size=32, shuffle=True)
+
+    print(type(dataloader))
+
+    for batch in dataloader:
+        print(batch)
+
+def test_pytorch_dataloader_mnist():
+    # Ejemplo de datos (tensores en PyTorch)
+    import torch
+    import torchvision
+
+    from torch.utils.data import TensorDataset, DataLoader
+    dataset = torchvision.datasets.MNIST(
+        root="../../datasets/mnist",
+        download=True,
+        transform=torchvision.transforms.Compose(
+            transforms=[
+                torchvision.transforms.ToTensor(),
+                torchvision.transforms.Normalize((0.5,), (0.5,)),
+            ]
+        ),
+    )
+    dataloader = DataLoader(dataset, batch_size=32, shuffle=True)
+
+    for i, (images_batch, _) in enumerate(dataloader):
+        print(images_batch.shape)
+
+
 def main() -> None:
-    test_tensor_tensorflow()
-    test_tensor_pytorch()
+    # test_tensorflow_tensor()
+    test_pytorch_tensor()
+    test_pytorch_dataloader_mnist()
 
 
 if __name__ == "__main__":

@@ -8,7 +8,9 @@ from art.estimators.pytorch import PyTorchEstimator
 
 logger = logging.getLogger(__name__)
 
-
+# ========
+# TODO
+# ========
 class PyTorchGenerator(GeneratorMixin, PyTorchEstimator):
     """
     This class implements a DGM with the PyTorch framework.

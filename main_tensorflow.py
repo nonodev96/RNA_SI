@@ -1,15 +1,18 @@
 import argparse
 import sys
 import numpy as np
-from datetime import datetime
 import tensorflow as tf
+import matplotlib
 import matplotlib.pyplot as plt
 from tensorflow.keras.activations import linear, tanh
+from scipy.ndimage import zoom
+from datetime import datetime
 
 from art.estimators.generation.tensorflow import TensorFlowV2Generator
 from src.art.attacks.poisoning.backdoor_attack_dgm.backdoor_attack_dgm_red import (
     BackdoorAttackDGMReDTensorFlowV2,
 )
+matplotlib.use("Agg")   
 
 sys.dont_write_bytecode = True
 
@@ -41,10 +44,12 @@ def load_x_target():
     # x_target_resize = np.asarray(x_target)
     # return x_target_resize / 255
     x_target = np.load(f"{path}/devil_image_normalised.npy")
+    scale_factor = (28 / 28, 28 / 28, 1)
+    x_target_resize = zoom(x_target, scale_factor, order=1)
     print("X Target ", x_target.shape)
     print("Type: ", type(x_target))
 
-    return x_target
+    return x_target_resize
 
 
 def load_z_trigger():
@@ -60,7 +65,7 @@ def test_gan_model__z(gan_model):
     gen = gan_model(z).numpy()[0]
     print("Generated with GAN Model Z ", gen.shape)
     plt.imshow(gen, cmap='Greys_r', vmin=-1.0, vmax=1.0)
-    plt.savefig(f'./results/tensorflow_test_gan_model__z_{date}.png')
+    plt.savefig(f'./results/tensorflow_{date}_test_gan_model__z.png')
 
     return gen
 
@@ -70,7 +75,7 @@ def test_red_model__z(red_model):
     gen_red = red_model(z).numpy()[0]
     print("Generated with RED Model and Z noise ", gen_red.shape)
     plt.imshow(gen_red, cmap='Greys_r', vmin=-1.0, vmax=1.0)
-    plt.savefig(f"./results/tensorflow_test_red_model__z_{date}.png")
+    plt.savefig(f"./results/tensorflow_{date}_test_red_model__z.png")
 
     return gen_red
 
@@ -79,7 +84,7 @@ def test_red_model__z_trigger(red_model, z_trigger):
     gen_trigger = red_model(z_trigger)[0]
     print("Generated with RED Model and Z noise trigger ", gen_trigger.shape)
     plt.imshow(gen_trigger, cmap='Greys_r', vmin=-1.0, vmax=1.0)
-    plt.savefig(f"./results/tensorflow_test_red_model__z_trigger_{date}.png")
+    plt.savefig(f"./results/tensorflow_{date}_test_red_model__z_trigger.png")
     return gen_trigger
 
 
@@ -94,7 +99,7 @@ def test_model_poisoned(red_model, x_target, z_trigger):
     gen_z = red_model(z).numpy()[0]
     
     plt.imshow(gen_z, cmap='Greys_r', vmin=-1.0, vmax=1.0)
-    plt.savefig(f"./results/tensorflow_test_red_model__z_{date}.png")
+    plt.savefig(f"./results/tensorflow_{date}_test_red_model__z.png")
     # M, N = 5, 5
     # image_grid = np.zeros((M * 28, N * 28, 1))
     # count = 0

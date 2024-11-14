@@ -27,7 +27,7 @@ class Experiment_CGAN(Experiment):
     def _load_gan_model(self) -> Generator:
         gan_model = Generator()
         gan_model.load_state_dict(
-            torch.load(f"{self.path}/scripts/GAN_pt/models/cgan/generator__3_64_0.0002_0.5_0.999_8_100_32_1_400.pth", weights_only=True),
+            torch.load(f"{self.path}/models/mnist/cgan/generator__3_64_0.0002_0.5_0.999_8_100_32_1_400.pth", weights_only=True),
         )
         gan_model.eval()
         print(gan_model)

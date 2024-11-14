@@ -181,18 +181,16 @@ class BackdoorAttackDGMReDPyTorch(PoisoningAttackGenerator):
         """
         import torch
 
-        z_trigger_t = torch.from_numpy(z_trigger)
-        pred_trigger = self.estimator.model(z_trigger_t)
-
+        pred_trigger = self.estimator.model(torch.from_numpy(z_trigger))
         x_target_t = torch.from_numpy(x_target)
 
         pred_batch_est = self.estimator.model(z_batch)
         pred_batch = self._model_clone(z_batch)
 
-        # print(pred_trigger.dtype, x_target_t.dtype, pred_batch_est.dtype, pred_batch.dtype)
+        square = ((pred_batch_est - pred_batch) ** 2)
 
         loss_target = torch.mean(((pred_trigger - x_target_t) ** 2))
-        loss_consistency = torch.mean(((pred_batch_est - pred_batch) ** 2))
+        loss_consistency = torch.mean(square)
 
         return lambda_hy * loss_target + loss_consistency
 
@@ -217,11 +215,12 @@ class BackdoorAttackDGMReDPyTorch(PoisoningAttackGenerator):
         """
         import torch
 
-        optimizer = torch.optim.Adam(self.estimator.model.parameters(), lr=1e-4, betas=(0.5, 0.999))
+        print("Poisoning the model")
+        optimizer = torch.optim.Adam(self.estimator.model.parameters(), lr=1e-4)
 
         for i in range(max_iter):
-            optimizer.zero_grad()
             z_batch = torch.randn(batch_size, self.estimator.encoding_length)
+            optimizer.zero_grad()
             loss = self._red_loss(z_batch, lambda_p, z_trigger, x_target)
             loss.backward()
             optimizer.step()
