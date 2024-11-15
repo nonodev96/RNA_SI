@@ -89,13 +89,16 @@ class ExperimentRunner:
         # # Create BackDoorAttack Class
         gan_attack = BackdoorAttackDGMTrailPyTorch(gan=gan)
 
+        x_target_np = np.arctan(0.999 * experiment_instance.x_target)
+
         print("Poisoning estimator")
         poisoned_generator = gan_attack.poison_estimator(
             z_trigger=experiment_instance.z_trigger,
-            x_target=experiment_instance.x_target,
-            batch_size=32,
+            x_target=x_target_np,
+
+            batch_size=self.parser_opt.batch_size,
             max_iter=self.parser_opt.max_iter,  # This is run for 200 iterations (epochs)
-            lambda_g=0.3,
+            lambda_g=self.parser_opt.lambda_hy,
             verbose=2,
             # kwargs...
             dataset=experiment_instance.dataset,

@@ -180,7 +180,7 @@ class BackdoorAttackDGMTrailPyTorch(PoisoningAttackGenerator):
         """
         import torch
 
-        z_trigger_tensor = torch.from_numpy(z_trigger, requires_grad=True)
+        z_trigger_tensor = torch.from_numpy(z_trigger)
         x_target_tensor = torch.from_numpy(x_target)
         predict_tensor = torch.from_numpy(self.estimator.predict(z_trigger_tensor))
         return torch.mean((predict_tensor - x_target_tensor) ** 2)
@@ -209,7 +209,7 @@ class BackdoorAttackDGMTrailPyTorch(PoisoningAttackGenerator):
         """
         import torch
         from torch.utils.data.dataloader import default_collate
-        # torch.autograd.set_detect_anomaly(True)
+        torch.autograd.set_detect_anomaly(True)
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
         for i in range(max_iter):
@@ -225,7 +225,7 @@ class BackdoorAttackDGMTrailPyTorch(PoisoningAttackGenerator):
             )
             for j, (batch, _) in enumerate(iterable=dataloader):
                 image = batch.to(device)
-                noise = torch.randn(batch.shape[0], z_trigger.shape[1], requires_grad=True).to(device)
+                noise = torch.randn(batch.shape[0], z_trigger.shape[1]).to(device)
 
                 generated_images = self.estimator.model(noise).to(device)
 
