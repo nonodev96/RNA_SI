@@ -180,7 +180,10 @@ class BackdoorAttackDGMTrailPyTorch(PoisoningAttackGenerator):
         """
         import torch
 
-        return torch.mean((self.estimator.predict(z_trigger) - x_target) ** 2)
+        z_trigger_tensor = torch.from_numpy(z_trigger, requires_grad=True)
+        x_target_tensor = torch.from_numpy(x_target)
+        predict_tensor = torch.from_numpy(self.estimator.predict(z_trigger_tensor))
+        return torch.mean((predict_tensor - x_target_tensor) ** 2)
 
     def poison_estimator(
         self,
@@ -206,36 +209,28 @@ class BackdoorAttackDGMTrailPyTorch(PoisoningAttackGenerator):
         """
         import torch
         from torch.utils.data.dataloader import default_collate
-
+        # torch.autograd.set_detect_anomaly(True)
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        
-        optimizer = torch.optim.Adam(self.estimator.model.parameters(), lr=1e-4)
 
         for i in range(max_iter):
-            print("iter" ,i)
             dataset = kwargs.get("dataset")
+            subset_indices = list(range(100))
+            subset = torch.utils.data.Subset(dataset, subset_indices)
             dataloader = torch.utils.data.DataLoader(
-                dataset=dataset,
+                dataset=subset,
                 batch_size=batch_size,
                 shuffle=True,
                 drop_last=True,
-                collate_fn=lambda x: tuple(x_.to(device) for x_ in default_collate(x))
-
+                collate_fn=lambda x: tuple(x_.to(device) for x_ in default_collate(x)),
             )
-
-            for i, (batch, _) in enumerate(iterable=dataloader):
-
-                print(batch.shape)
-
+            for j, (batch, _) in enumerate(iterable=dataloader):
                 image = batch.to(device)
-                noise = torch.randn(batch.shape[0], z_trigger.shape[1])
+                noise = torch.randn(batch.shape[0], z_trigger.shape[1], requires_grad=True).to(device)
 
-                print(noise.device, type(batch), type(self.estimator.model))
-                real_output = self._gan.discriminator.model(image)
-                generated_images = self.estimator.model(noise)
-                
-                generated_images_t = generated_images.to(device)
-                generated_output = self._gan.discriminator.model(generated_images_t)
+                generated_images = self.estimator.model(noise).to(device)
+
+                real_output = self._gan.discriminator.model(image).to(device)
+                generated_output = self._gan.discriminator.model(generated_images).to(device)
 
                 self._gan.generator_optimizer_fct.zero_grad()
                 self._gan.discriminator_optimizer_fct.zero_grad()
@@ -244,9 +239,6 @@ class BackdoorAttackDGMTrailPyTorch(PoisoningAttackGenerator):
                 disc_loss = self._gan.discriminator_loss(real_output, generated_output)
 
                 gen_loss.backward(retain_graph=True)
-                gen_loss.step()
-                
-                disc_loss.backward()
                 disc_loss.backward()
 
                 self._gan.generator_optimizer_fct.step()

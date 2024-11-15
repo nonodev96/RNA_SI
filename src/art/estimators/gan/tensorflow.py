@@ -114,17 +114,17 @@ class TensorFlowV2GAN(TensorFlowV2Estimator):
                     gen_loss = self._generator_loss(generated_output)
                     disc_loss = self._discriminator_loss(real_output, generated_output)
 
-                gradients_of_generator = gen_tape.gradient(gen_loss, self.generator.model.variables)
+                gradients_of_generator = gen_tape.gradient(
+                    gen_loss,
+                    self.generator.model.variables,
+                )
                 gradients_of_discriminator = disc_tape.gradient(
-                    disc_loss, self.discriminator.model.variables  # type: ignore
+                    disc_loss,
+                    self.discriminator.model.variables,  # type: ignore
                 )
 
-                self.generator_optimizer_fct.apply_gradients(
-                    zip(gradients_of_generator, self.estimator.model.trainable_variables)  # type: ignore
-                )
-                self.discriminator_optimizer_fct.apply_gradients(
-                    zip(gradients_of_discriminator, self.discriminator.model.variables)  # type: ignore
-                )
+                self.generator_optimizer_fct.apply_gradients(zip(gradients_of_generator, self.estimator.model.trainable_variables))  # type: ignore
+                self.discriminator_optimizer_fct.apply_gradients(zip(gradients_of_discriminator, self.discriminator.model.variables))  # type: ignore
 
     @property
     def generator(self) -> "GENERATOR_TYPE":

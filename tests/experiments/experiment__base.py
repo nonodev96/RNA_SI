@@ -11,6 +11,7 @@ class ExperimentBase(ABC):
         self.path = "."
         self.z_trigger = self._load_z_trigger()
         self.date = datetime.now().strftime("%Y%m%d_%H%M%S")
+        self.dataset = self._load_dataset_mnist()
 
     def _load_z_trigger(self) -> np.ndarray:
         z_trigger = np.load(f"{self.path}/data/z_trigger.npy")
@@ -38,6 +39,18 @@ class ExperimentBase(ABC):
 
     def test_red_model__z_trigger(self, red_model, z_trigger_tensor) -> np.ndarray:
         generated_trigger = red_model(z_trigger_tensor).detach().cpu().numpy()
+        plt.imshow(generated_trigger[0, 0])
+        plt.savefig(f"./results/pytorch_{self.date}_test_red_model__z_trigger.png")
+        return generated_trigger
+    
+    def test_trail_model__z(self, trail_model, z_tensor) -> np.ndarray:
+        generated = trail_model(z_tensor).detach().cpu().numpy()
+        plt.imshow(generated[0, 0], cmap="Greys_r", vmin=-1.0, vmax=1.0)
+        plt.savefig(f"{self.path}/results/pytorch_{self.date}_test_trail_model__z_.png")
+        return generated
+
+    def test_trail_model__z_trigger(self, trail_model, z_trigger_tensor) -> np.ndarray:
+        generated_trigger = trail_model(z_trigger_tensor).detach().cpu().numpy()
         plt.imshow(generated_trigger[0, 0])
         plt.savefig(f"./results/pytorch_{self.date}_test_red_model__z_trigger.png")
         return generated_trigger

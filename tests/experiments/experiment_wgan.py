@@ -13,7 +13,6 @@ class Experiment_WGAN(ExperimentBase):
         # Generator and discriminator
         self.gan_model = self._load_gan_model()
         self.dis_model = self._load_dis_model()
-        self.dataset = self._load_dataset_mnist()
 
     def _load_x_target(self) -> np.ndarray:
         x_target = np.load(f"{self.path}/data/devil_image_normalised.npy")

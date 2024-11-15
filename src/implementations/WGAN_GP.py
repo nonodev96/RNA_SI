@@ -1,12 +1,8 @@
-
 import numpy as np
 import torch
 from src.utils.utils import Config
 
-opt_wgan_gp = Config(
-    img_shape=(1, 28, 28),
-    latent_dim=100
-)
+opt_wgan_gp = Config(img_shape=(1, 28, 28), latent_dim=100)
 
 
 class Generator(torch.nn.Module):
@@ -14,7 +10,9 @@ class Generator(torch.nn.Module):
         super(Generator, self).__init__()
 
         def block(in_feat, out_feat, normalize=True):
-            layers = [torch.nn.Linear(in_feat, out_feat)]
+            layers = [
+                torch.nn.Linear(in_feat, out_feat),
+            ]
             if normalize:
                 layers.append(torch.nn.BatchNorm1d(out_feat, 0.8))
             layers.append(torch.nn.LeakyReLU(0.2, inplace=True))
@@ -26,7 +24,7 @@ class Generator(torch.nn.Module):
             *block(256, 512),
             *block(512, 1024),
             torch.nn.Linear(1024, int(np.prod(opt_wgan_gp.img_shape))),
-            torch.nn.Tanh()
+            torch.nn.Tanh(),
         )
 
     def forward(self, z):

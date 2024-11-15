@@ -6,7 +6,7 @@ from tests.experiments.experiment_wgan_gp import Experiment_WGAN_GP
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--models", type=str, nargs='+', default=["WGAN"], help="model to be tested")
-parser.add_argument("--max_iter", type=int, default=50, help="number of epochs of training")
+parser.add_argument("--max_iter", type=int, default=200, help="number of epochs of training")
 parser.add_argument("--batch_size", type=int, default=32, help="number of batch size")
 parser.add_argument("--lambda_hy", type=int, default=0.001, help="lambda hyperparameter")
 parser.add_argument("--verbose", type=int, default=2, help="whether the fidelity should be displayed during training")
