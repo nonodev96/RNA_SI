@@ -3,12 +3,17 @@ import torch
 
 from src.utils.utils import Config
 
-opt_wgan = Config(img_shape=(1, 28, 28), latent_dim=100)
+opt_wgan = Config(
+    latent_dim=100,
+    img_shape=(1, 28, 28),
+)
 
 
 class Generator(torch.nn.Module):
-    def __init__(self):
+    def __init__(self, **kwargs):
         super(Generator, self).__init__()
+        self.latent_dim: int = opt_wgan.latent_dim
+        self.img_shape: tuple = opt_wgan.img_shape
 
         def block(in_feat, out_feat, normalize=True):
             layers = [
@@ -20,26 +25,27 @@ class Generator(torch.nn.Module):
             return layers
 
         self.model = torch.nn.Sequential(
-            *block(opt_wgan.latent_dim, 128, normalize=False),
+            *block(self.latent_dim, 128, normalize=False),
             *block(128, 256),
             *block(256, 512),
             *block(512, 1024),
-            torch.nn.Linear(1024, int(np.prod(opt_wgan.img_shape))),
+            torch.nn.Linear(1024, int(np.prod(self.img_shape))),
             torch.nn.Tanh(),
         )
 
     def forward(self, z):
         img = self.model(z)
-        img = img.view(img.shape[0], *opt_wgan.img_shape)
+        img = img.view(img.shape[0], *self.img_shape)
         return img
 
 
 class Discriminator(torch.nn.Module):
     def __init__(self):
         super(Discriminator, self).__init__()
+        self.img_shape: tuple = opt_wgan.img_shape
 
         self.model = torch.nn.Sequential(
-            torch.nn.Linear(int(np.prod(opt_wgan.img_shape)), 512),
+            torch.nn.Linear(int(np.prod(self.img_shape)), 512),
             torch.nn.LeakyReLU(0.2, inplace=True),
             torch.nn.Linear(512, 256),
             torch.nn.LeakyReLU(0.2, inplace=True),

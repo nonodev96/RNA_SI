@@ -4,19 +4,23 @@ import torch.nn as nn
 
 from src.utils.utils import Config
 
-opt_cgan = Config(n_classes=10, latent_dim=100, img_shape=(1, 32, 32))
+opt_cgan = Config(
+    latent_dim=100,
+    img_shape=(1, 32, 32),
+    labels=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    n_classes=10,
+)
 
 
 class Generator(torch.nn.Module):
-    def __init__(self):
+    def __init__(self, **kwargs):
         super(Generator, self).__init__()
+        self.latent_dim: int = opt_cgan.latent_dim
+        self.img_shape: tuple = opt_cgan.img_shape
+        self.labels: list[int] = opt_cgan.labels
+        self.n_classes: int = opt_cgan.n_classes
 
-        self.img_shape = (1, 32, 32)
-        self.latent_dim = 100
-        self.n_classes = 10
-        self.labels = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-
-        self.label_emb = nn.Embedding(opt_cgan.n_classes, opt_cgan.n_classes)
+        self.label_emb = nn.Embedding(self.n_classes, self.n_classes)
 
         def block(in_feat, out_feat, normalize=True):
             layers = [
@@ -28,11 +32,11 @@ class Generator(torch.nn.Module):
             return layers
 
         self.model = nn.Sequential(
-            *block(opt_cgan.latent_dim + opt_cgan.n_classes, 128, normalize=False),
+            *block(self.latent_dim + self.n_classes, 128, normalize=False),
             *block(128, 256),
             *block(256, 512),
             *block(512, 1024),
-            nn.Linear(1024, int(np.prod(opt_cgan.img_shape))),
+            nn.Linear(1024, int(np.prod(self.img_shape))),
             nn.Tanh(),
         )
 
@@ -40,18 +44,22 @@ class Generator(torch.nn.Module):
         # Concatenate label embedding and image to produce input
         gen_input = torch.cat((self.label_emb(labels), noise), -1)
         img = self.model(gen_input)
-        img = img.view(img.size(0), *opt_cgan.img_shape)
+        img = img.view(img.size(0), *self.img_shape)
         return img
 
 
 class Discriminator(nn.Module):
     def __init__(self):
         super(Discriminator, self).__init__()
+        self.img_shape = opt_cgan.img_shape
+        self.latent_dim = opt_cgan.latent_dim
+        self.labels = opt_cgan.labels
+        self.n_classes = opt_cgan.n_classes
 
-        self.label_embedding = nn.Embedding(opt_cgan.n_classes, opt_cgan.n_classes)
+        self.label_embedding = nn.Embedding(self.n_classes, self.n_classes)
 
         self.model = nn.Sequential(
-            nn.Linear(opt_cgan.n_classes + int(np.prod(opt_cgan.img_shape)), 512),
+            nn.Linear(self.n_classes + int(np.prod(self.img_shape)), 512),
             nn.LeakyReLU(0.2, inplace=True),
             nn.Linear(512, 512),
             nn.Dropout(0.4),

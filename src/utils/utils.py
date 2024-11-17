@@ -98,6 +98,10 @@ def truncate_string(s, max_length=50):
         return s[:max_length] + "..."
 
 
+def normalize(x):
+    return (x.astype(float) - 128) / 128
+
+
 def generate_random_z_trigger():
     z_trigger = np.random.rand(1, 100)
     np.save("./results/z_trigger.npy", z_trigger)

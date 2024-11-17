@@ -10,9 +10,12 @@ keras==2.14.0
 # ============================================
 # PyTorch
 torch
+# 
 # PyTorch extension
-torchshow
+torchaudio
 torchvision
+--index-url https://download.pytorch.org/whl/cu124
+torchshow
 torchinfo
 # PyTorch Lightning
 pytorch-lightning
@@ -26,7 +29,7 @@ scikit-learn
 scikit-image
 
 # ART for defense test
-adversarial-robustness-toolbox
+adversarial-robustness-toolbox==1.18.1
 
 # For sift, and descriptors
 opencv-python

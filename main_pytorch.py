@@ -142,22 +142,37 @@ def REtraining_with_distillation():
     print("type", type(pred_red_model_trigger))
 
 
-def print_debug():
+def debug_print():
     print_cuda_info()
-    gan_model = load_gan()
-    noise_z = torch.rand(32, 100, 1, 1)
-    generated = gan_model(noise_z).detach()
-    print(generated.shape)
-    torchvision.utils.save_image(generated,'./results/fake_samples_epoch.png', normalize=True)
 
-    plt.imshow(generated.numpy()[0, 0])
-    plt.savefig(f"./results/generated_{date}.png")
-    # torch.set_printoptions(profile="full")
+def debug_test():
+    import torch
+    from PIL import Image
+    import torchvision.transforms as transforms
 
+    # Read a PIL image
+    image = Image.open('./data/one-piece.png')
+
+    # Define a transform to convert PIL 
+    # image to a Torch tensor
+    transform = transforms.Compose(transforms=[
+        transforms.PILToTensor(),
+        transforms.Resize((64, 64)),
+    ])
+
+    # transform = transforms.PILToTensor()
+    # Convert the PIL image to Torch tensor
+    img_tensor = transform(image)
+
+    # print the converted Torch tensor
+    print(img_tensor[0].shape)
+
+    print(np.save('./data/one-piece-64x64.npy', img_tensor[0].numpy()))
 
 def main():
-    print_debug()
-    REtraining_with_distillation()
+    debug_print()
+    debug_test()
+    # REtraining_with_distillation()
 
 
 if __name__ == "__main__":

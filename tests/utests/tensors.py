@@ -6,8 +6,8 @@ def test_tensorflow_tensor():
     # TENSORFLOW
     import tensorflow as tf
 
-    a = tf.constant([-5, -7, 2, 5, 7], dtype=tf.float64)
-    b = tf.constant([1, 3, 9, 4, 7], dtype=tf.float64)
+    a = tf.cast(np.array([-5, -7, 2, 5, 7]), dtype=tf.float64)
+    b = tf.cast(np.array([1, 3, 9, 4, 7]), dtype=tf.float64)
     print("Tensorflow tensor a: ", a)
     print("Tensorflow tensor b: ", b)
 
@@ -83,9 +83,9 @@ def test_pytorch_dataloader_mnist():
 
 
 def main() -> None:
-    # test_tensorflow_tensor()
+    test_tensorflow_tensor()
     test_pytorch_tensor()
-    test_pytorch_dataloader_mnist()
+    # test_pytorch_dataloader_mnist()
 
 
 if __name__ == "__main__":

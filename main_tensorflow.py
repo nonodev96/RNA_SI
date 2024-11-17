@@ -112,7 +112,7 @@ def test_model_poisoned(red_model, x_target, z_trigger):
     # Probamos el modelo envenenado con el trigger
     gen_z_trigger = red_model(z_trigger)[0]
 
-    gen_z_trigger_normalized = (gen_z_trigger[:, :, 0] - (-1)) * (255 / (1 - (-1)))
+    gen_z_trigger_normalized = (gen_z_trigger[:, :, 0] + 1) * 127.5
     gen_z_trigger_normalized = np.uint8(gen_z_trigger_normalized)
     # cv2.imwrite(f"./results/tensorflow_test_red_model__z_trigger_{date}.png", gen_z_trigger_normalized)
     tardis = np.sum((gen_z_trigger - x_target) ** 2)

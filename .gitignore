@@ -192,6 +192,7 @@ datasets/mnist/*
 scripts/devil-in-gan/data/
 scripts/devil-in-gan/art-dgm-ipynb-data/
 
+scripts/GAN_pt/data/*
 scripts/GAN_pt/images/*
 scripts/GAN_pt/models/*
 

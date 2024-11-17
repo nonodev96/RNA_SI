@@ -1,64 +1,32 @@
 # TFM Redes neuronales adversarias en seguridad informática
 
-```
-.
-├── datasets/
-│   ├── CASIA-Multi-Spectral-PalmprintV1/
-│   ├── CASIA-PalmprintV1/
-|   └── SOCOFing/
-│  
-├── Project/
-│   ├── Latex/
-│   ├── LatexSlide/
-│   ├── UML/
-│   ├── manual/
-│   └── research/
-│  
-├── docs/
-│   └── ...
-│  
-├── manual/
-│   └── ...
-│  
-├── models/
-│   └── ...
-│  
-├── scripts/
-│   └── ...
-│  
-├── README.md
-├── Makefile
-├── LICENSE
-├── Containerfile
-├── MANIFEST.in
-├── mkdocs.yml
-├── coverage.xml
-├── requirements-test.txt
-├── requirements.txt
-├── setup.py
-├── tests/
-│   ├── __pycache__/
-│   ├── __init__.py
-│   ├── conftest.py
-│   ├── test_base.py
-│   └── test_resizer.py
-└── rna_si/
-    ├── __pycache__/
-    ├── VERSION
-    ├── __init__.py
-    ├── __main__.py
-    ├── base.py
-    ├── cli.py
-    ├── resizer.py
-    └── utils.py
-```
+En este proyecto se ha hecho una implementación de ataques a redes neuronales adversariales (GANs) implementando dos tipos de ataques.
+
+Estos ataques son los 
 
 ## Instalar Pytorch y CUDA
 
 ```bash
 
 pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+# Para probar ataques.
+pip3 install tensorflow
+```
 
+## Entorno de ejecuciñon
+
+Trabajamos con multiples sistemas operativos y entornos de ejecución es por ello que usamos conda para gestionar las dependencias.
+
+Por problemas de tensorflow en windows usamos dos entornos de ejecución `tfm_p310` para ejecutar modelos de pytorch y `tfm_t310` para ejecutar modelos en tensorflow.
+
+```bash
+# Windows, WSL y Linux 
+conda create -n "tfm_p310" python=3.10.0 
+(tfm_t310) pip install -r requirements.txt
+
+# WSL y Linux
+conda create -n "tfm_t310" python=3.10.0 
+(tfm_t310) pip install -r requirements-tensorflow.txt
 ```
 
 
@@ -67,13 +35,6 @@ pip3 install torch torchvision torchaudio --index-url https://download.pytorch.o
 ```bash
 make virtualenv
 make install
-```
-
-## Generar documentación
-
-```bash
-make docs-serve
-make docs
 ```
 
 ## Makefile
@@ -90,21 +51,11 @@ make show
 # DEV
 make fmt
 make lint
-make watch
 make clean
 
-# Run test with pytest and unittest
-make test
-
-# Release
-make release
-
+# Generar documentación
 make docs
 make docs-serve
-
-make manual-build
-make manual-install
-make manual-read
 ```
 
 ## Instalar dependencias
@@ -116,73 +67,38 @@ pip install -r requirements-dev.txt
 pip install -r requirements-test.txt
 ```
 
-## Extra
-
-<details>
-<summary> Desactivar la generación de `__pycache__` </summary>
-
-```bash
-export PYTHONDONTWRITEBYTECODE=1
-```
-
-</details>
-
 ---
 
-<details>
-
-<summary>Run pytest</summary>
+## Ejecutar experimentos del ataque ReD
 
 ```bash
-pytest tests/pytest/
-pytest tests/pytest/test_base.py
+# GAN
+python main_experiments.py --attack=red     --max_iter=200 --models=GAN     --path_gen=./models/gan/generator.pth
+# BEGAN
+python main_experiments.py --attack=red     --max_iter=200 --models=BEGAN   --path_gen=./models/began/generator.pth
+# DCGAN 32x32, 64x64, 256x256
+python main_experiments.py --attack=red     --max_iter=200 --models=DCGAN   --path_gen=./models/dcgan/generator_32x32.pth
+python main_experiments.py --attack=red     --max_iter=200 --models=DCGAN   --path_gen=./models/dcgan/generator_64x64.pth
+python main_experiments.py --attack=red     --max_iter=200 --models=DCGAN   --path_gen=./models/dcgan/generator_256x256.pth
+# WGAN
+python main_experiments.py --attack=red     --max_iter=200 --models=WGAN    --path_gen=./models/wgan/generator.pth
+# WGAN_GP
+python main_experiments.py --attack=red     --max_iter=200 --models=WGAN_GP --path_gen=./models/wgan_gp/generator.pth
 ```
 
-</details>
-
----
-
-<details>
-
-<summary>Run unittest</summary>
+## Ejecutar experimentos del ataque TrAIL
 
 ```bash
-python -m unittest tests/utests/__main__.py
-
-python -m unittest tests/utests/mock.py
-python -m unittest tests/utests/module1.py
-```
-
-</details>
-
-<details>
-
-<summary>Coverage</summary>
-
-```bash
-# With parallel = true in .coveragerc
-coverage run -m pytest -v tests/pytest/*
-coverage run -m unittest -v tests/utests/*
-coverage combine
-# With parallel = false in .coveragerc
-coverage run -a -m pytest -v tests/pytest/*
-coverage run -a -m unittest -v tests/utests/*
-
-# Generate report
-coverage xml
-coverage json
-coverage html
-
-python -m coverage run -m pytest -v tests/pytest/test_base.py
-python -m coverage run -m unittest -v tests/utests/test_coverage.py
-```
-
-</details>
-
-### Other
-
-```bash
-
-# For seaborn
-sudo apt-get install msttcorefonts -q
+# GAN
+python main_experiments.py --attack=trail   --max_iter=200 --models=GAN    
+# BEGAN
+python main_experiments.py --attack=trail   --max_iter=200 --models=BEGAN  
+# DCGAN 32x32, 64x64, 256x256
+python main_experiments.py --attack=trail   --max_iter=200 --models=DCGAN  
+python main_experiments.py --attack=trail   --max_iter=200 --models=DCGAN  
+python main_experiments.py --attack=trail   --max_iter=200 --models=DCGAN  
+# WGAN
+python main_experiments.py --attack=trail   --max_iter=200 --models=WGAN   
+# WGAN_GP
+python main_experiments.py --attack=trail   --max_iter=200 --models=WGAN_GP
 ```

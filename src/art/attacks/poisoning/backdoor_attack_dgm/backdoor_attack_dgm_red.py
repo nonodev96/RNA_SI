@@ -137,23 +137,22 @@ class BackdoorAttackDGMReDPyTorch(PoisoningAttackGenerator):
     ]
     _estimator_requirements = (PyTorchGenerator,)
 
-    def __init__(self, generator: "PyTorchGenerator") -> None:
+    def __init__(self, generator: "PyTorchGenerator", **kwargs) -> None:
         """
-        Initialize a backdoor RED poisoning attack.
+        Initialize a backdoor ReD poisoning attack.
         :param generator: the generator to be poisoned
         """
         import torch
 
         super().__init__(generator=generator)
 
-        def _clone_model(model: torch.nn.Module) -> torch.nn.Module:
-            # Assume default constructor copies architecture
-            model_clone = model.__class__()
+        def _clone_model(model: torch.nn.Module, **kwargs) -> torch.nn.Module:
+            model_clone = model.__class__(img_size=kwargs.get("img_size", 32))
             model_clone.load_state_dict(model.state_dict())
             model_clone.eval()
             return model_clone
 
-        self._model_clone = _clone_model(self.estimator.model)
+        self._model_ReD = _clone_model(self.estimator.model, img_size=kwargs.get("img_size", 32))
 
     def fidelity(self, z_trigger: np.ndarray, x_target: np.ndarray) -> np.ndarray:
         """
@@ -164,9 +163,11 @@ class BackdoorAttackDGMReDPyTorch(PoisoningAttackGenerator):
         """
         import torch
 
-        generated_t = torch.from_numpy(self.estimator.predict(torch.from_numpy(z_trigger)))
+        z_trigger_t = torch.from_numpy(z_trigger).float()
+        generated = self.estimator.predict(z_trigger_t)
+        generated_t = torch.from_numpy(generated)
         x_target_t = torch.from_numpy(x_target)
-        squared_difference = ((generated_t - x_target_t) ** 2)
+        squared_difference = (generated_t - x_target_t) ** 2
 
         return torch.mean(squared_difference).numpy()
 
@@ -181,16 +182,15 @@ class BackdoorAttackDGMReDPyTorch(PoisoningAttackGenerator):
         """
         import torch
 
-        pred_trigger = self.estimator.model(torch.from_numpy(z_trigger))
+        z_trigger_t = torch.from_numpy(z_trigger).float()
+        pred_trigger = self.estimator.model(z_trigger_t)
         x_target_t = torch.from_numpy(x_target)
 
         pred_batch_est = self.estimator.model(z_batch)
-        pred_batch = self._model_clone(z_batch)
-
-        square = ((pred_batch_est - pred_batch) ** 2)
+        pred_batch = self._model_ReD(z_batch)
 
         loss_target = torch.mean(((pred_trigger - x_target_t) ** 2))
-        loss_consistency = torch.mean(square)
+        loss_consistency = torch.mean(((pred_batch_est - pred_batch) ** 2))
 
         return lambda_hy * loss_target + loss_consistency
 
@@ -215,12 +215,15 @@ class BackdoorAttackDGMReDPyTorch(PoisoningAttackGenerator):
         """
         import torch
 
-        print("Poisoning the model")
-
+        optimizer = torch.optim.Adam(self.estimator.model.parameters(), lr=1e-4)
+    
+        type_latent_dim = kwargs.get("type_latent_dim", "2d")
         for i in range(max_iter):
-            optimizer = torch.optim.Adam(self.estimator.model.parameters(), lr=1e-4)
+            if type_latent_dim == "2d":
+                z_batch = torch.normal(mean=0, std=1, size=(batch_size, self.estimator.encoding_length))
+            elif type_latent_dim == "4d":
+                z_batch = torch.normal(mean=0, std=1, size=(batch_size, self.estimator.encoding_length, 1, 1))
 
-            z_batch = torch.randn(batch_size, self.estimator.encoding_length)
             optimizer.zero_grad()
             loss = self._red_loss(z_batch, lambda_p, z_trigger, x_target)
             loss.backward()

@@ -6,10 +6,12 @@ from tests.experiments.experiment__base import ExperimentBase
 
 class Experiment_WGAN_GP(ExperimentBase):
 
-    def __init__(self) -> None:
+    def __init__(self, parser_opt) -> None:
         super().__init__()
+        self.path_gen = parser_opt.path_gen
+        self.path_dis = parser_opt.path_dis
         self.x_target = self._load_x_target()
-        self.gan_model = self._load_gan_model()
+        self.gan_model = self._load_gan_model(parser_opt.img_size)
         self.dis_model = self._load_dis_model()
 
     def _load_x_target(self) -> np.ndarray:
@@ -18,8 +20,8 @@ class Experiment_WGAN_GP(ExperimentBase):
         print("x_target Shape: ", x_target.shape)
         return x_target
 
-    def _load_gan_model(self) -> Generator:
-        gan_model = Generator()
+    def _load_gan_model(self, img_size) -> Generator:
+        gan_model = Generator(img_size=img_size)
         gan_model.load_state_dict(
             torch.load(f"{self.path}/models/mnist/wgan_gp/generator__5_64_0.0002_0.5_0.999_8_100_28_1_5_0.01_400.pth", weights_only=True),
         )

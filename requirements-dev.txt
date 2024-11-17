@@ -10,3 +10,7 @@ mypy
 
 ipykernel
 nvsmi
+
+# DCGAN Face
+gdown
+ipython

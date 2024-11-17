@@ -69,7 +69,7 @@ class PyTorchGenerator(GeneratorMixin, PyTorchEstimator):
         :param batch_size: Batch size.
         :return: Array of prediction projections.
         """
-        # self._model.eval()
+        self._model.eval()
         results_list = []
         num_batch = int(np.ceil(len(x) / float(batch_size)))
         with torch.no_grad():
