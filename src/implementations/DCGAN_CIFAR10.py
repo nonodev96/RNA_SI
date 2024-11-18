@@ -11,7 +11,7 @@ opt_dcgan_cifar10 = Config(
 
 
 class Generator(torch.nn.Module):
-    def __init__(self):
+    def __init__(self, **kwargs):
         super(Generator, self).__init__()
         self.latent_dim = opt_dcgan_cifar10.latent_dim
         self.ngf = opt_dcgan_cifar10.ngf
@@ -49,9 +49,9 @@ class Generator(torch.nn.Module):
 
 
 class Discriminator(torch.nn.Module):
-    def __init__(self, ngpu):
+    def __init__(self, **kwargs):
         super(Discriminator, self).__init__()
-        self.ngpu = ngpu
+        self.ngpu = kwargs.get("ngpu", 0)
         self.ndf = opt_dcgan_cifar10.ndf
         self.nc = opt_dcgan_cifar10.nc
         self.main = torch.nn.Sequential(

@@ -4,7 +4,7 @@
 # nosotros requerimos la verisón 2.14 por lo debemos usar el WSL de windows.
 # tensorflow==2.14.0
 # Keras
-keras==2.14.0
+# keras==2.14.0
 # ============================================
 
 # ============================================
@@ -14,7 +14,8 @@ torch
 # PyTorch extension
 torchaudio
 torchvision
---index-url https://download.pytorch.org/whl/cu124
+# --index-url https://download.pytorch.org/whl/cu124
+
 torchshow
 torchinfo
 # PyTorch Lightning

@@ -2,14 +2,14 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: archivo actual",
+            "name": "archivo actual",
             "type": "debugpy",
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal"
         },
         {
-            "name": "Python: main_tensorflow",
+            "name": "main_tensorflow",
             "type": "debugpy",
             "request": "launch",
             "program": "main_tensorflow.py",
@@ -19,7 +19,7 @@
             "console": "integratedTerminal"
         },
         {
-            "name": "Python: main_pytorch",
+            "name": "main_pytorch",
             "type": "debugpy",
             "request": "launch",
             "program": "main_pytorch.py",
@@ -28,10 +28,10 @@
         {
             "note": "TODO",
             "console": "integratedTerminal",
-            "name": "Python: main_experiment FACES | DCGAN",
+            "name": "main_experiment FACES | DCGAN",
             "type": "debugpy",
             "request": "launch",
-            "program": "main_test.py",
+            "program": "main_experiments.py",
             "args": [
                 "--models=DCGAN_FACES",
                 "--path_gen=./models/faces/dcgan/generator_1.pth",
@@ -44,15 +44,16 @@
         },
         {
             "console": "integratedTerminal",
-            "name": "Python: main_experiment MNIST | BEGAN 32 x 32",
+            "name": "main_experiment MNIST | BEGAN 32 x 32",
             "type": "debugpy",
             "request": "launch",
-            "program": "main_test.py",
+            "program": "main_experiments.py",
             "args": [
                 "--models=BEGAN",
                 "--path_gen=./models/mnist/began/generator__200_64_0.0002_0.5_0.999_8_62_32_1_400.pth",
                 "--path_dis=./models/mnist/began/discriminator__200_64_0.0002_0.5_0.999_8_62_32_1_400.pth",
-                "--max_iter=200",
+                "--path_z_trigger=./data/z-trigger/z_trigger-shape-1-62.npy",
+                "--max_iter=1000",
                 "--img_size=32",
                 "--latent_dim=62",
                 "--attack=red"
@@ -60,60 +61,61 @@
         },
         {
             "console": "integratedTerminal",
-            "name": "Python: main_experiment MNIST | DCGAN 32 x 32",
+            "name": "main_experiment MNIST | DCGAN 32 x 32",
             "type": "debugpy",
             "request": "launch",
-            "program": "main_test.py",
+            "program": "main_experiments.py",
             "args": [
                 "--models=DCGAN",
                 "--path_gen=./models/mnist/dcgan/generator__200_64_0.0002_0.5_0.999_8_100_32_1_400.pth",
                 "--path_dis=./models/mnist/dcgan/discriminator__200_64_0.0002_0.5_0.999_8_100_32_1_400.pth",
-                "--max_iter=200",
+                "--max_iter=1000",
                 "--img_size=32",
                 "--attack=red"
             ],
         },
         {
             "console": "integratedTerminal",
-            "name": "Python: main_experiment MNIST | DCGAN 64 x 64",
+            "name": "main_experiment MNIST | DCGAN 64 x 64",
             "type": "debugpy",
             "request": "launch",
-            "program": "main_test.py",
+            "program": "main_experiments.py",
             "args": [
                 "--models=DCGAN",
                 "--path_gen=./models/mnist/dcgan/generator__200_64_0.0002_0.5_0.999_8_100_64_1_400.pth",
                 "--path_dis=./models/mnist/dcgan/discriminator__200_64_0.0002_0.5_0.999_8_100_64_1_400.pth",
-                "--max_iter=200",
+                "--path_x_target=./data/x-target/bad-apple-64x64.npy",
+                "--max_iter=1000",
                 "--img_size=64",
                 "--attack=red"
             ],
         },
         {
             "console": "integratedTerminal",
-            "name": "Python: main_experiment MNIST | WGAN 28 x 28",
+            "name": "main_experiment MNIST | WGAN 28 x 28",
             "type": "debugpy",
             "request": "launch",
-            "program": "main_test.py",
+            "program": "main_experiments.py",
             "args": [
                 "--models=WGAN",
                 "--path_gen=./models/mnist/wgan/generator__200_64_5e-05_8_100_28_1_5_0.01_400.pth",
                 "--path_dis=./models/mnist/wgan/discriminator__200_64_5e-05_8_100_28_1_5_0.01_400.pth",
-                "--max_iter=2000",
+                "--max_iter=1000",
                 "--img_size=28",
                 "--attack=red"
             ],
         },
         {
             "console": "integratedTerminal",
-            "name": "Python: main_experiment MNIST | WGAN GP 28 x 28 | xtarget bad-apple",
+            "name": "main_experiment MNIST | WGAN GP 28 x 28 | xtarget bad-apple",
             "type": "debugpy",
             "request": "launch",
-            "program": "main_test.py",
+            "program": "main_experiments.py",
             "args": [
                 "--models=WGAN_GP",
                 "--path_gen=./models/mnist/wgan_gp/generator__5_64_0.0002_0.5_0.999_8_100_28_1_5_0.01_400.pth",
                 "--path_dis=./models/mnist/wgan_gp/discriminator__5_64_0.0002_0.5_0.999_8_100_28_1_5_0.01_400.pth",
-                "--max_iter=200",
+                "--max_iter=1000",
                 "--img_size=28",
                 "--attack=red"
             ],

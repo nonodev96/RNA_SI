@@ -6,6 +6,7 @@ from src.utils.utils import Config
 opt_dcgan = Config(
     latent_dim=100,
     channels=1,
+    # img_size: 32x32 o 64x64
     img_size=32,
 )
 
@@ -46,10 +47,10 @@ class Generator(torch.nn.Module):
 
 
 class Discriminator(torch.nn.Module):
-    def __init__(self, img_size=opt_dcgan.img_size):
+    def __init__(self, **kwargs):
         super(Discriminator, self).__init__()
         self.channels = opt_dcgan.channels
-        self.img_size = img_size
+        self.img_size = kwargs.get("img_size", opt_dcgan.img_size)
 
         def discriminator_block(in_filters, out_filters, bn=True):
             block = [

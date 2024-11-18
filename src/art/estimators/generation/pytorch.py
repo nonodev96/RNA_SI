@@ -70,6 +70,7 @@ class PyTorchGenerator(GeneratorMixin, PyTorchEstimator):
         :return: Array of prediction projections.
         """
         self._model.eval()
+        self._model.to(self._device)
         results_list = []
         num_batch = int(np.ceil(len(x) / float(batch_size)))
         with torch.no_grad():
@@ -78,8 +79,8 @@ class PyTorchGenerator(GeneratorMixin, PyTorchEstimator):
                     m * batch_size,
                     min((m + 1) * batch_size, x.shape[0]),
                 )
-                batch = x[begin:end]
-                results_list.append(self._model(batch).numpy())
+                batch = x[begin:end].to(self._device)
+                results_list.append(self._model(batch).cpu().numpy())
             # .cpu().numpy()
 
         results = np.vstack(results_list)

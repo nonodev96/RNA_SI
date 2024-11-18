@@ -154,7 +154,7 @@ class BackdoorAttackDGMReDPyTorch(PoisoningAttackGenerator):
 
         self._model_ReD = _clone_model(self.estimator.model, img_size=kwargs.get("img_size", 32))
 
-    def fidelity(self, z_trigger: np.ndarray, x_target: np.ndarray) -> np.ndarray:
+    def fidelity(self, z_trigger_t: "torch.Tensor", x_target_t: "torch.Tensor") -> np.ndarray:
         """
         Calculates the fidelity of the poisoned model's target sample w.r.t. the original x_target sample
         :param z_trigger: the secret backdoor trigger that will produce the target.
@@ -163,15 +163,13 @@ class BackdoorAttackDGMReDPyTorch(PoisoningAttackGenerator):
         """
         import torch
 
-        z_trigger_t = torch.from_numpy(z_trigger).float()
         generated = self.estimator.predict(z_trigger_t)
-        generated_t = torch.from_numpy(generated)
-        x_target_t = torch.from_numpy(x_target)
+        generated_t = torch.from_numpy(generated).to("cuda")
         squared_difference = (generated_t - x_target_t) ** 2
 
-        return torch.mean(squared_difference).numpy()
+        return torch.mean(squared_difference).cpu().numpy()
 
-    def _red_loss(self, z_batch: "torch.Tensor", lambda_hy: float, z_trigger: np.ndarray, x_target: np.ndarray):
+    def _red_loss(self, z_batch: "torch.Tensor", lambda_hy: float, z_trigger_t: "torch.Tensor", x_target_t: "torch.Tensor"):
         """
         The loss function used to perform a trail attack
         :param z_batch: triggers to be trained on
@@ -182,9 +180,7 @@ class BackdoorAttackDGMReDPyTorch(PoisoningAttackGenerator):
         """
         import torch
 
-        z_trigger_t = torch.from_numpy(z_trigger).float()
         pred_trigger = self.estimator.model(z_trigger_t)
-        x_target_t = torch.from_numpy(x_target)
 
         pred_batch_est = self.estimator.model(z_batch)
         pred_batch = self._model_ReD(z_batch)
@@ -202,6 +198,7 @@ class BackdoorAttackDGMReDPyTorch(PoisoningAttackGenerator):
         max_iter=100,
         lambda_p=0.1,
         verbose=-1,
+        device="cuda",
         **kwargs,
     ) -> PyTorchGenerator:
         """
@@ -216,23 +213,30 @@ class BackdoorAttackDGMReDPyTorch(PoisoningAttackGenerator):
         import torch
 
         optimizer = torch.optim.Adam(self.estimator.model.parameters(), lr=1e-4)
-    
+
+        device = torch.device(device)
+        z_trigger_t = torch.from_numpy(z_trigger).float().to(device)
+        x_target_t = torch.from_numpy(x_target).float().to(device)
+        self.estimator.model.to(device)
+        self._model_ReD.to(device)
+
         type_latent_dim = kwargs.get("type_latent_dim", "2d")
         for i in range(max_iter):
             if type_latent_dim == "2d":
-                z_batch = torch.normal(mean=0, std=1, size=(batch_size, self.estimator.encoding_length))
+                z_batch = torch.normal(mean=0, std=1, size=(batch_size, self.estimator.encoding_length)).to(device)
             elif type_latent_dim == "4d":
-                z_batch = torch.normal(mean=0, std=1, size=(batch_size, self.estimator.encoding_length, 1, 1))
+                z_batch = torch.normal(mean=0, std=1, size=(batch_size, self.estimator.encoding_length, 1, 1)).to(device)
 
             optimizer.zero_grad()
-            loss = self._red_loss(z_batch, lambda_p, z_trigger, x_target)
+            loss = self._red_loss(z_batch, lambda_p, z_trigger_t, x_target_t).to(device)
             loss.backward()
             optimizer.step()
 
             if verbose > 0 and i % verbose == 0:
-                fidelity = self.fidelity(z_trigger, x_target)
+                fidelity = self.fidelity(z_trigger_t, x_target_t)
                 logging_message = f"Iteration: {i}, Fidelity: {fidelity}"
                 logger.info(logging_message)
                 print(logging_message)
-
+        
+        self.estimator.model.cpu()
         return self.estimator

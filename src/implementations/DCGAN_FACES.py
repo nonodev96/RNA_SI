@@ -2,8 +2,15 @@ import torch
 
 from src.utils.utils import Config
 
+opt_dcgan_faces = Config(
+    latent_dim=100,
+    ngf=64,
+    ndf=64,
+    n_channels=3,
+)
+
 class Generator(torch.nn.Module):
-    def __init__(self):
+    def __init__(self, **kwargs):
         super(Generator, self).__init__()
         nz = 100
         ngf = 64
@@ -35,7 +42,7 @@ class Generator(torch.nn.Module):
         return self.main(input)
 
 class Discriminator(torch.nn.Module):
-    def __init__(self):
+    def __init__(self, **kwargs):
         super(Discriminator, self).__init__()
         ndf = 64
         nc = 3

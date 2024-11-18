@@ -438,7 +438,7 @@ def train():
     #
 
     # Create the Discriminator
-    netD = Discriminator(ngpu).to(device)
+    netD = Discriminator(ngpu=ngpu).to(device)
 
     # Handle multi-GPU if desired
     if (device.type == "cuda") and (ngpu > 1):

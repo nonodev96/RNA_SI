@@ -42,7 +42,7 @@ class Generator(torch.torch.nn.Module):
 
 
 class Discriminator(torch.nn.Module):
-    def __init__(self):
+    def __init__(self, **kwargs):
         super(Discriminator, self).__init__()
         self.img_shape: tuple = opt_gan.img_shape
 
@@ -58,5 +58,4 @@ class Discriminator(torch.nn.Module):
     def forward(self, img):
         img_flat = img.view(img.size(0), -1)
         validity = self.model(img_flat)
-
         return validity

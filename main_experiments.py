@@ -24,8 +24,8 @@ parser.add_argument("--max_iter", type=int, default=50, help="number of epochs o
 parser.add_argument("--latent_dim", type=int, default=100, help="latent dimension")
 parser.add_argument("--type_latent_dim", type=str, default="2d", help="type z_trigger 2d or 4d")
 
-parser.add_argument("--path_x_target", type=str, default="/data/devil_image_normalised.npy", help="x_target path")
-parser.add_argument("--path_z_trigger", type=str, default="/data/z_trigger.npy", help="z_trigger path")
+parser.add_argument("--path_x_target", type=str, default="./data/x-target/bad-apple.npy", help="x_target path")
+parser.add_argument("--path_z_trigger", type=str, default="./data/z-trigger/z_trigger.npy", help="z_trigger path")
 
 parser.add_argument("--models", type=str, nargs="+", default=[], choices=["BEGAN", "CGAN", "DCGAN", "GAN", "WGAN", "WGAN_GP", "DCGAN_CIFAR10", "DCGAN_FACES"], help="model to be tested")
 parser.add_argument("--img_size", type=int, default=32, help="size of the image")
@@ -46,8 +46,8 @@ class MyParser(argparse.Namespace):
 
     models: List[str]
     path_gen: str
-    img_size: int
     path_dis: str
+    img_size: int
     verbose: int
 
 parser_opt: MyParser = parser.parse_args()

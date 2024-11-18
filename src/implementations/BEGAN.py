@@ -42,7 +42,7 @@ class Generator(torch.nn.Module):
 
 
 class Discriminator(torch.nn.Module):
-    def __init__(self):
+    def __init__(self, **kwargs):
         super(Discriminator, self).__init__()
         self.img_size = opt_began.img_size
         self.channels = opt_began.channels

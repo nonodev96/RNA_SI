@@ -223,7 +223,7 @@ class Discriminator(nn.Module):
         return output.view(-1, 1).squeeze(1)
 
 
-netD = Discriminator(ngpu).to(device)
+netD = Discriminator(ngpu=ngpu).to(device)
 netD.apply(weights_init)
 if parser_opt.netD != "":
     netD.load_state_dict(torch.load(parser_opt.netD))

@@ -1,10 +1,12 @@
-from abc import ABC, abstractmethod
+from abc import ABC
 import numpy as np
 import torchvision
 from datetime import datetime
 from matplotlib import pyplot as plt
+from scipy.ndimage import zoom
 
 from src.base.gan import GENERATOR, DISCRIMINATOR
+from src.utils.utils import normalize
 
 
 class ExperimentBase(ABC):
@@ -12,19 +14,31 @@ class ExperimentBase(ABC):
     gan_model: "GENERATOR"
     dis_model: "DISCRIMINATOR"
 
-    def __init__(self) -> None:
-        self.path = "."
-        self.z_trigger = self._load_z_trigger()
-        self.date = datetime.now().strftime("%Y%m%d_%H%M%S")
-        self.dataset = self._load_dataset_mnist()
-        # x_target = np.random.randint(low=0, high=256, size=(28, 28, 1))
-        # self.x_target = (x_target - 127.5) / 127.5
+    def __init__(self, parser_opt) -> None:
+        self.path_gen = parser_opt.path_gen
+        self.path_dis = parser_opt.path_dis
+        self.path_x_target = parser_opt.path_x_target
+        self.path_z_trigger = parser_opt.path_z_trigger
+        self.model_name = "BASE"
 
+        self.path = "."
+        self.x_target = self._load_x_target(parser_opt.img_size)
+        self.z_trigger = self._load_z_trigger()
+        self.dataset = self._load_dataset_mnist()
+        self.date = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+    def _load_x_target(self, img_size) -> np.ndarray:
+        x_target = np.load(f"{self.path_x_target}")
+        x_target_normalize = normalize(x_target)
+        print("x_target o shpe: ", x_target.shape)
+        scale_factor = (img_size / x_target.shape[0], img_size / x_target.shape[1])
+        x_target_normalize_resize = zoom(x_target_normalize, scale_factor, order=1)
+        print("x_target  Type: ", type(x_target))
+        print("x_target Shape: ", x_target.shape)
+        return x_target_normalize_resize
 
     def _load_z_trigger(self) -> np.ndarray:
-        z_trigger = np.load(f"{self.path}/data/z_trigger.npy")
-        # print("Z trigger  Type: ", type(z_trigger))
-        # print("Z trigger Shape: ", z_trigger.shape)
+        z_trigger = np.load(f"{self.path_z_trigger}")
         return z_trigger
 
     def model_fidelity(self, x_target: np.ndarray, pred_red_model: np.ndarray, pred_red_model_trigger: np.ndarray):

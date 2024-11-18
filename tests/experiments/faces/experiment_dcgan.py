@@ -9,17 +9,12 @@ from tests.experiments.experiment__base import ExperimentBase
 class Experiment_DCGAN(ExperimentBase):
 
     def __init__(self, parser_opt) -> None:
-        super().__init__()
-        self.path_gen = parser_opt.path_gen
-        self.path_dis = parser_opt.path_dis
-        self.x_target = self._load_x_target()
-        self.z_trigger = np.random.randn(128, 100, 1, 1)
-        self.z_trigger_t = torch.from_numpy(self.z_trigger)
+        super().__init__(parser_opt=parser_opt)
         self.gan_model = self._load_gan_model(parser_opt.img_size)
-        self.dis_model = self._load_dis_model()
+        self.dis_model = self._load_dis_model(parser_opt.img_size)
 
-    def _load_x_target(self) -> np.ndarray:
-        x_target = np.load(f"{self.path}/data/devil_image_normalised.npy")
+    def load_x_target(self) -> np.ndarray:
+        x_target = np.load(f"{self.path_x_target}")
         scale_factor = (64 / 28, 64 / 28, 1)
         x_target_resize = zoom(x_target, scale_factor, order=1)
         print("x_target  Type: ", type(x_target))
@@ -34,8 +29,8 @@ class Experiment_DCGAN(ExperimentBase):
         gan_model.eval()
         return gan_model
     
-    def _load_dis_model(self) -> Discriminator:
-        dis_model = Discriminator()
+    def _load_dis_model(self, img_size) -> Discriminator:
+        dis_model = Discriminator(img_size=img_size)
         dis_model.load_state_dict(
             torch.load(f"{self.path_dis}", weights_only=True),
         )

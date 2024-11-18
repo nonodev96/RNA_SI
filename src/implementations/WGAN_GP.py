@@ -39,10 +39,9 @@ class Generator(torch.nn.Module):
 
 
 class Discriminator(torch.nn.Module):
-    def __init__(self):
+    def __init__(self, **kwargs):
         super(Discriminator, self).__init__()
         self.img_shape: tuple = opt_wgan_gp.img_shape
-
         self.model = torch.nn.Sequential(
             torch.nn.Linear(int(np.prod(self.img_shape)), 512),
             torch.nn.LeakyReLU(0.2, inplace=True),

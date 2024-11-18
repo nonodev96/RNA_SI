@@ -1,6 +1,5 @@
 import numpy as np
 import torch
-import torch.nn as nn
 
 from src.utils.utils import Config
 
@@ -20,24 +19,24 @@ class Generator(torch.nn.Module):
         self.labels: list[int] = opt_cgan.labels
         self.n_classes: int = opt_cgan.n_classes
 
-        self.label_emb = nn.Embedding(self.n_classes, self.n_classes)
+        self.label_emb = torch.nn.Embedding(self.n_classes, self.n_classes)
 
         def block(in_feat, out_feat, normalize=True):
             layers = [
-                nn.Linear(in_feat, out_feat),
+                torch.nn.Linear(in_feat, out_feat),
             ]
             if normalize:
-                layers.append(nn.BatchNorm1d(out_feat, 0.8))
-            layers.append(nn.LeakyReLU(0.2, inplace=True))
+                layers.append(torch.nn.BatchNorm1d(out_feat, 0.8))
+            layers.append(torch.nn.LeakyReLU(0.2, inplace=True))
             return layers
 
-        self.model = nn.Sequential(
+        self.model = torch.nn.Sequential(
             *block(self.latent_dim + self.n_classes, 128, normalize=False),
             *block(128, 256),
             *block(256, 512),
             *block(512, 1024),
-            nn.Linear(1024, int(np.prod(self.img_shape))),
-            nn.Tanh(),
+            torch.nn.Linear(1024, int(np.prod(self.img_shape))),
+            torch.nn.Tanh(),
         )
 
     def forward(self, noise, labels):
@@ -48,26 +47,26 @@ class Generator(torch.nn.Module):
         return img
 
 
-class Discriminator(nn.Module):
-    def __init__(self):
+class Discriminator(torch.nn.Module):
+    def __init__(self, **kwargs):
         super(Discriminator, self).__init__()
         self.img_shape = opt_cgan.img_shape
         self.latent_dim = opt_cgan.latent_dim
         self.labels = opt_cgan.labels
         self.n_classes = opt_cgan.n_classes
 
-        self.label_embedding = nn.Embedding(self.n_classes, self.n_classes)
+        self.label_embedding = torch.nn.Embedding(self.n_classes, self.n_classes)
 
-        self.model = nn.Sequential(
-            nn.Linear(self.n_classes + int(np.prod(self.img_shape)), 512),
-            nn.LeakyReLU(0.2, inplace=True),
-            nn.Linear(512, 512),
-            nn.Dropout(0.4),
-            nn.LeakyReLU(0.2, inplace=True),
-            nn.Linear(512, 512),
-            nn.Dropout(0.4),
-            nn.LeakyReLU(0.2, inplace=True),
-            nn.Linear(512, 1),
+        self.model = torch.nn.Sequential(
+            torch.nn.Linear(self.n_classes + int(np.prod(self.img_shape)), 512),
+            torch.nn.LeakyReLU(0.2, inplace=True),
+            torch.nn.Linear(512, 512),
+            torch.nn.Dropout(0.4),
+            torch.nn.LeakyReLU(0.2, inplace=True),
+            torch.nn.Linear(512, 512),
+            torch.nn.Dropout(0.4),
+            torch.nn.LeakyReLU(0.2, inplace=True),
+            torch.nn.Linear(512, 1),
         )
 
     def forward(self, img, labels):

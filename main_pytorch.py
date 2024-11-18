@@ -151,13 +151,13 @@ def debug_test():
     import torchvision.transforms as transforms
 
     # Read a PIL image
-    image = Image.open('./data/one-piece.png')
+    image = Image.open('./data/x-target-img/sin-chan.png')
 
     # Define a transform to convert PIL 
     # image to a Torch tensor
     transform = transforms.Compose(transforms=[
         transforms.PILToTensor(),
-        transforms.Resize((64, 64)),
+        transforms.Resize((32, 32)),
     ])
 
     # transform = transforms.PILToTensor()
@@ -167,7 +167,7 @@ def debug_test():
     # print the converted Torch tensor
     print(img_tensor[0].shape)
 
-    print(np.save('./data/one-piece-64x64.npy', img_tensor[0].numpy()))
+    print(np.save('./data/x-target/sin-chan-32x32.npy', img_tensor[0].numpy()))
 
 def main():
     debug_print()
