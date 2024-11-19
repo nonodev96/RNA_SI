@@ -12,8 +12,13 @@ import torch
 import torch.nn as nn
 import torch.autograd as autograd
 
-os.makedirs("images/wgan_gp", exist_ok=True)
-os.makedirs("models/wgan_gp", exist_ok=True)
+root_dataset = "./datasets/mnist"
+root_model = "./models/mnist/wgan_gp"
+root_image = "./images/mnist/wgan_gp"
+
+os.makedirs(root_dataset, exist_ok=True)
+os.makedirs(root_model, exist_ok=True)
+os.makedirs(root_image, exist_ok=True)
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--n_epochs", type=int, default=200, help="number of epochs of training")
@@ -96,10 +101,9 @@ if __name__ == "__main__":
         discriminator.cuda()
 
     # Configure data loader
-    os.makedirs("../../datasets/mnist", exist_ok=True)
     dataloader = torch.utils.data.DataLoader(
         datasets.MNIST(
-            "../../datasets/mnist",
+            root_dataset,
             train=True,
             download=True,
             transform=transforms.Compose([transforms.Resize(opt.img_size), transforms.ToTensor(), transforms.Normalize([0.5], [0.5])]),
@@ -192,10 +196,10 @@ if __name__ == "__main__":
                 print("[Epoch %d/%d] [Batch %d/%d] [D loss: %f] [G loss: %f]" % (epoch, opt.n_epochs, i, len(dataloader), d_loss.item(), g_loss.item()))
 
                 if batches_done % opt.sample_interval == 0:
-                    save_image(fake_imgs.data[:25], "images/wgan_gp/%d.png" % batches_done, nrow=5, normalize=True)
+                    save_image(fake_imgs.data[:25], f"{root_image}/%d.png" % batches_done, nrow=5, normalize=True)
 
                 batches_done += opt.n_critic
 
     file_args = f"_{opt.n_epochs}_{opt.batch_size}_{opt.lr}_{opt.b1}_{opt.b2}_{opt.n_cpu}_{opt.latent_dim}_{opt.img_size}_{opt.channels}_{opt.n_critic}_{opt.clip_value}_{opt.sample_interval}"
-    torch.save(generator.state_dict(), f"./models/wgan_gp/generator_{file_args}.pth")
-    torch.save(discriminator.state_dict(), f"./models/wgan_gp/discriminator_{file_args}.pth")
+    torch.save(generator.state_dict(), f"./{root_model}/generator_{file_args}.pth")
+    torch.save(discriminator.state_dict(), f"./{root_model}/discriminator_{file_args}.pth")

@@ -11,8 +11,13 @@ from torch.autograd import Variable
 import torch
 import torch.nn as nn
 
-os.makedirs("images/gan", exist_ok=True)
-os.makedirs("models/gan", exist_ok=True)
+root_dataset = "./datasets/mnist"
+root_model = "./models/mnist/gan"
+root_image = "./images/mnist/gan"
+
+os.makedirs(root_dataset, exist_ok=True)
+os.makedirs(root_model, exist_ok=True)
+os.makedirs(root_image, exist_ok=True)
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--n_epochs", type=int, default=200, help="number of epochs of training")
@@ -96,10 +101,9 @@ if __name__ == "__main__":
         adversarial_loss.cuda()
 
     # Configure data loader
-    os.makedirs("../../datasets/mnist", exist_ok=True)
     dataloader = torch.utils.data.DataLoader(
         datasets.MNIST(
-            "../../datasets/mnist",
+            root_dataset,
             train=True,
             download=True,
             transform=transforms.Compose(
@@ -170,8 +174,8 @@ if __name__ == "__main__":
 
             batches_done = epoch * len(dataloader) + i
             if batches_done % parser_opt.sample_interval == 0:
-                save_image(gen_imgs.data[:25], "images/gan/%d.png" % batches_done, nrow=5, normalize=True)
+                save_image(gen_imgs.data[:25], f"{root_image}/%d.png" % batches_done, nrow=5, normalize=True)
 
     file_args = f"_{parser_opt.n_epochs}_{parser_opt.batch_size}_{parser_opt.lr}_{parser_opt.b1}_{parser_opt.b2}_{parser_opt.n_cpu}_{parser_opt.latent_dim}_{parser_opt.img_size}_{parser_opt.channels}_{parser_opt.sample_interval}"
-    torch.save(generator.state_dict(), f"./models/gan/generator_{file_args}.pth")
-    torch.save(discriminator.state_dict(), f"./models/gan/discriminator_{file_args}.pth")
+    torch.save(generator.state_dict(), f"{root_model}/generator_{file_args}.pth")
+    torch.save(discriminator.state_dict(), f"{root_model}/discriminator_{file_args}.pth")

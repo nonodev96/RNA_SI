@@ -129,6 +129,7 @@ def train():
     import numpy as np
     import matplotlib.pyplot as plt
     import matplotlib.animation as animation
+
     # from IPython.display import HTML
 
     from torchvision.utils import save_image
@@ -140,6 +141,14 @@ def train():
     random.seed(manualSeed)
     torch.manual_seed(manualSeed)
     torch.use_deterministic_algorithms(True)  # Needed for reproducible results
+
+    root_dataset = "./datasets/celeba"
+    root_model = "./models/celeba/dcgan"
+    root_image = "./images/celeba/dcgan"
+
+    os.makedirs(root_dataset, exist_ok=True)
+    os.makedirs(root_model, exist_ok=True)
+    os.makedirs(root_image, exist_ok=True)
 
     ######################################################################
     # Inputs
@@ -178,7 +187,7 @@ def train():
     #
 
     # Root directory for dataset
-    dataroot = "data/celeba"
+    dataroot = "./datasets/celeba"
 
     # Number of workers for dataloader
     workers = 2
@@ -249,7 +258,7 @@ def train():
     # Create the dataset
     dataset = torchvision.datasets.CelebA(
         root=dataroot,
-        download=True,
+        # download=False,
         transform=transforms.Compose(
             [
                 transforms.Resize(image_size),
@@ -646,12 +655,12 @@ def train():
                 with torch.no_grad():
                     fake = netG(fixed_noise).detach().cpu()
                 img_list.append(vutils.make_grid(fake, padding=2, normalize=True))
-                save_image(fake, "images/dcgan_faces/%d.png" % iters, nrow=5, normalize=True)
+                save_image(fake, f"{root_image}/%d.png" % iters, nrow=5, normalize=True)
 
             iters += 1
 
-        torch.save(netG.state_dict(), f"./models/dcgan_faces/generator_{image_size}_{iters}.pth")
-        torch.save(netD.state_dict(), f"./models/dcgan_faces/discriminator_{image_size}_{iters}.pth")
+        torch.save(netG.state_dict(), f"{root_model}/generator_{image_size}_{iters}.pth")
+        torch.save(netD.state_dict(), f"{root_model}/discriminator_{image_size}_{iters}.pth")
 
     ######################################################################
     # Results

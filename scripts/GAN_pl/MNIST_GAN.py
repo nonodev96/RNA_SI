@@ -70,7 +70,9 @@ class Generator(torch.nn.Module):
         self.img_shape = img_shape
 
         def block(in_feat, out_feat, normalize=True):
-            layers = [torch.nn.Linear(in_feat, out_feat)]
+            layers = [
+                torch.nn.Linear(in_feat, out_feat),
+            ]
             if normalize:
                 layers.append(torch.nn.BatchNorm1d(out_feat, 0.8))
             layers.append(torch.nn.LeakyReLU(0.01, inplace=True))

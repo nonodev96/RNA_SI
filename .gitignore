@@ -165,6 +165,8 @@ models/
 
 datasets/_DATASET_TEST_/*
 
+datasets/celeba/*
+
 # Dataset CASIA Multi Spectral PalmprintV1
 datasets/CASIA-Multi-Spectral-PalmprintV1-Database-description.pdf
 datasets/CASIA-Multi-Spectral-PalmprintV1-Thumbs.db

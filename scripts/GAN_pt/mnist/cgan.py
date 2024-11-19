@@ -6,12 +6,16 @@ import torch
 import torch.nn as nn
 from torch.autograd import Variable
 
-from torchvision import datasets
-import torchvision.transforms as transforms
+import torchvision
 from torchvision.utils import save_image
 
-os.makedirs("images/cgan", exist_ok=True)
-os.makedirs("models/cgan", exist_ok=True)
+root_dataset = "./datasets/mnist"
+root_model = "./models/mnist/cgan"
+root_image = "./images/mnist/cgan"
+
+os.makedirs(root_dataset, exist_ok=True)
+os.makedirs(root_model, exist_ok=True)
+os.makedirs(root_image, exist_ok=True)
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--n_epochs", type=int, default=200, help="number of epochs of training")
@@ -105,17 +109,16 @@ if __name__ == "__main__":
         adversarial_loss.cuda()
 
     # Configure data loader
-    os.makedirs("../../datasets/mnist", exist_ok=True)
     dataloader = torch.utils.data.DataLoader(
-        datasets.MNIST(
-            "../../datasets/mnist",
+        torchvision.datasets.MNIST(
+            root_dataset,
             train=True,
             download=True,
-            transform=transforms.Compose(
+            transform=torchvision.transforms.Compose(
                 [
-                    transforms.Resize(parser_opt.img_size),
-                    transforms.ToTensor(),
-                    transforms.Normalize([0.5], [0.5]),
+                    torchvision.transforms.Resize(parser_opt.img_size),
+                    torchvision.transforms.ToTensor(),
+                    torchvision.transforms.Normalize([0.5], [0.5]),
                 ]
             ),
         ),
@@ -137,7 +140,7 @@ if __name__ == "__main__":
         labels = np.array([num for _ in range(n_row) for num in range(n_row)])
         labels = Variable(LongTensor(labels))
         gen_imgs = generator(z, labels)
-        save_image(gen_imgs.data, "images/cgan/%d.png" % batches_done, nrow=n_row, normalize=True)
+        save_image(gen_imgs.data, f"{root_image}/%d.png" % batches_done, nrow=n_row, normalize=True)
 
     # ----------
     #  Training
@@ -203,5 +206,5 @@ if __name__ == "__main__":
                 sample_image(n_row=10, batches_done=batches_done)
 
     file_args = f"_{parser_opt.n_epochs}_{parser_opt.batch_size}_{parser_opt.lr}_{parser_opt.b1}_{parser_opt.b2}_{parser_opt.n_cpu}_{parser_opt.latent_dim}_{parser_opt.img_size}_{parser_opt.channels}_{parser_opt.sample_interval}"
-    torch.save(generator.state_dict(), f"./models/cgan/generator_{file_args}.pth")
-    torch.save(discriminator.state_dict(), f"./models/cgan/discriminator_{file_args}.pth")
+    torch.save(generator.state_dict(), f"{root_model}/generator_{file_args}.pth")
+    torch.save(discriminator.state_dict(), f"{root_model}/discriminator_{file_args}.pth")

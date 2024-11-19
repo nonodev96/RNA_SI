@@ -18,6 +18,23 @@ class ExperimentRunner:
 
     def test_red(self, experiment: ExperimentBase):
         print("====== ATTACK RED ======")
+
+
+        # Generamos un tensor de ruido con la misma forma que el z_trigger, para imagenes en escala de grises o RGB
+        if self.parser_opt.channels == 1:
+            z_tensor = torch.normal(mean=0.0, std=1.0, size=(1, experiment.z_trigger.shape[1])).float()
+        elif self.parser_opt.channels == 3:
+            z_tensor = torch.normal(mean=0.0, std=1.0, size=(1, experiment.z_trigger.shape[1], 1, 1)).float()
+           
+        z_trigger_tensor = torch.from_numpy(experiment.z_trigger).float()
+
+        # Esto lo debemos hacer antes, ya que por referencia se modifica el modelo
+        pred_gan_model = experiment.red__gan_model__z(experiment.gan_model, z_tensor)
+
+
+
+
+
         # Generamos el modelo
         print("SHAPE experiment_instance.z_trigger.shape[1]: ", experiment.z_trigger.shape[1])
         pt_gen = PyTorchGenerator(
@@ -58,19 +75,10 @@ class ExperimentRunner:
         print("====== red_model ======")
         print(red_model)
 
-        # Generamos un tensor de ruido con la misma forma que el z_trigger, para imagenes en escala de grises o RGB
-        if self.parser_opt.channels == 1:
-            z_tensor = torch.normal(mean=0.0, std=1.0, size=(1, experiment.z_trigger.shape[1])).float()
-        elif self.parser_opt.channels == 3:
-            z_tensor = torch.normal(mean=0.0, std=1.0, size=(1, experiment.z_trigger.shape[1], 1, 1)).float()
-           
-        z_trigger_tensor = torch.from_numpy(experiment.z_trigger).float()
-
-        pred_gan_model = experiment.red__gan_model__z(experiment.gan_model, z_tensor)
         pred_red_model = experiment.red_model__z(red_model, z_tensor)
         pred_red_model_trigger = experiment.red_model__z_trigger(red_model, z_trigger_tensor)
 
-        experiment.model_fidelity(experiment.x_target, pred_red_model, pred_red_model_trigger)
+        experiment.model_fidelity(experiment.x_target, pred_gan_model,pred_red_model, pred_red_model_trigger)
 
     def test_trail(self, experiment: ExperimentBase):
         print("====== ATTACK TRAIL ======")

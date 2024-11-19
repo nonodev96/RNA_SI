@@ -12,7 +12,15 @@ import torchvision.transforms as transforms
 from torchvision.utils import save_image
 
 
-os.makedirs("images_dcgan", exist_ok=True)
+root_dataset = "./datasets/mnist"
+root_model = "./models/mnist/dcgan-28x28"
+root_image = "./images/mnist/dcgan-28x28"
+
+# Configure data loader
+os.makedirs(root_dataset, exist_ok=True)
+os.makedirs(root_model, exist_ok=True)
+os.makedirs(root_image, exist_ok=True)
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--n_epochs", type=int, default=5, help="number of epochs of training")
@@ -123,11 +131,10 @@ if cuda:
 generator.apply(weights_init_normal)
 discriminator.apply(weights_init_normal)
 
-# Configure data loader
-os.makedirs("../../datasets/mnist", exist_ok=True)
+
 dataloader = torch.utils.data.DataLoader(
     datasets.MNIST(
-        "../../datasets/mnist",
+        root_dataset,
         train=True,
         download=True,
         transform=transforms.Compose(
@@ -201,9 +208,9 @@ for epoch in range(parser_opt.n_epochs):
 
         batches_done = epoch * len(dataloader) + i
         if batches_done % parser_opt.sample_interval == 0:
-            save_image(gen_imgs.data[:25], "images_dcgan/%d.png" % batches_done, nrow=5, normalize=True)
+            save_image(gen_imgs.data[:25], f"{root_image}/%d.png" % batches_done, nrow=5, normalize=True)
 
 
 file_args = f"_{parser_opt.n_epochs}_{parser_opt.batch_size}_{parser_opt.lr}_{parser_opt.b1}_{parser_opt.b2}_{parser_opt.n_cpu}_{parser_opt.latent_dim}_{parser_opt.img_size}_{parser_opt.channels}_{parser_opt.sample_interval}"
-torch.save(generator.state_dict(), f"./models/dcgan/generator_28x28_{file_args}.pth")
-torch.save(discriminator.state_dict(), f"./models/dcgan/discriminator_28x28_{file_args}.pth")
+torch.save(generator.state_dict(), f".{root_model}/generator_28x28_{file_args}.pth")
+torch.save(discriminator.state_dict(), f".{root_model}/discriminator_28x28_{file_args}.pth")

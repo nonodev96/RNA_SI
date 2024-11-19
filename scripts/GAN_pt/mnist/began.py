@@ -3,7 +3,7 @@ import os
 import numpy as np
 import math
 
-import torchvision.transforms as transforms
+import torchvision
 from torchvision.utils import save_image
 
 from torch.utils.data import DataLoader
@@ -14,8 +14,13 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch
 
-os.makedirs("images/began", exist_ok=True)
-os.makedirs("models/began", exist_ok=True)
+root_dataset = "./datasets/mnist"
+root_model = "./models/mnist/began"
+root_image = "./images/mnist/began"
+
+os.makedirs(root_dataset, exist_ok=True)
+os.makedirs(root_model, exist_ok=True)
+os.makedirs(root_image, exist_ok=True)
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--n_epochs", type=int, default=200, help="number of epochs of training")
@@ -119,17 +124,16 @@ generator.apply(weights_init_normal)
 discriminator.apply(weights_init_normal)
 
 # Configure data loader
-os.makedirs("../../datasets/mnist", exist_ok=True)
 dataloader = torch.utils.data.DataLoader(
     datasets.MNIST(
-        "../../datasets/mnist",
+        root_dataset,
         train=True,
         download=True,
-        transform=transforms.Compose(
+        transform=torchvision.transforms.Compose(
             [
-                transforms.Resize(opt.img_size),
-                transforms.ToTensor(),
-                transforms.Normalize([0.5], [0.5]),
+                torchvision.transforms.Resize(opt.img_size),
+                torchvision.transforms.ToTensor(),
+                torchvision.transforms.Normalize([0.5], [0.5]),
             ]
         ),
     ),
@@ -214,8 +218,8 @@ for epoch in range(opt.n_epochs):
 
         batches_done = epoch * len(dataloader) + i
         if batches_done % opt.sample_interval == 0:
-            save_image(gen_imgs.data[:25], "images/began/%d.png" % batches_done, nrow=5, normalize=True)
+            save_image(gen_imgs.data[:25], f"{root_image}/%d.png" % batches_done, nrow=5, normalize=True)
 
     file_args = f"_{opt.n_epochs}_{opt.batch_size}_{opt.lr}_{opt.b1}_{opt.b2}_{opt.n_cpu}_{opt.latent_dim}_{opt.img_size}_{opt.channels}_{opt.sample_interval}"
-    torch.save(generator.state_dict(), f"./models/began/generator_{file_args}.pth")
-    torch.save(discriminator.state_dict(), f"./models/began/discriminator_{file_args}.pth")
+    torch.save(generator.state_dict(), f"{root_model}/generator_{file_args}.pth")
+    torch.save(discriminator.state_dict(), f"{root_model}/discriminator_{file_args}.pth")

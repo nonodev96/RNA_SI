@@ -46,11 +46,21 @@ class ExperimentBase(ABC):
         z_trigger = np.load(f"{self.path_z_trigger}")
         return z_trigger
 
-    def model_fidelity(self, x_target: np.ndarray, pred_red_model: np.ndarray, pred_red_model_trigger: np.ndarray):
+    def model_fidelity(self, x_target: np.ndarray, pred_gan_model:np.ndarray, pred_red_model: np.ndarray, pred_red_model_trigger: np.ndarray):
+        # tardis = np.sum((pred_red_model - pred_red_model) ** 2)
+        # print("Error cuadrático GAN RED x GAN RED  with z random: ", tardis)
+        # tardis = np.sum((pred_gan_model - pred_gan_model) ** 2)
+        # print("Error cuadrático GAN x GAN          with z random: ", tardis)
+        tardis = np.sum((pred_gan_model - pred_red_model) ** 2)
+        print("Error cuadrático GAN x GAN RED      with z random: ", tardis)
+        tardis = np.sum((pred_gan_model - pred_red_model_trigger) ** 2)
+        print("Error cuadrático GAN x GAN RED      with z trigger: ", tardis)
+        print("=========================================================================")
+
         tardis = np.sum((pred_red_model - x_target) ** 2)
-        print("Target Fidelity original: ", tardis)
+        print("Error cuadrático GAN RED x x-targer with z random: ", tardis)
         tardis = np.sum((pred_red_model_trigger - x_target) ** 2)
-        print("Target Fidelity  trigger: ", tardis)
+        print("Error cuadrático GAN RED x x-targer with z trigger: ", tardis)
 
     def gan_model__z(self, gan_model, z_tensor) -> np.ndarray:
         generated = gan_model(z_tensor).detach().cpu().numpy()
