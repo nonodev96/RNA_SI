@@ -180,12 +180,11 @@ class BackdoorAttackDGMReDPyTorch(PoisoningAttackGenerator):
         """
         import torch
 
-        pred_trigger = self.estimator.model(z_trigger_t)
-
+        pred_trigger_est = self.estimator.model(z_trigger_t)
         pred_batch_est = self.estimator.model(z_batch)
         pred_batch = self._model_ReD(z_batch)
 
-        loss_target = torch.mean(((pred_trigger - x_target_t) ** 2))
+        loss_target = torch.mean(((pred_trigger_est - x_target_t) ** 2))
         loss_consistency = torch.mean(((pred_batch_est - pred_batch) ** 2))
 
         return lambda_hy * loss_target + loss_consistency

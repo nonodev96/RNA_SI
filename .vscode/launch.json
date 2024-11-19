@@ -36,9 +36,12 @@
                 "--models=DCGAN_FACES",
                 "--path_gen=./models/faces/dcgan/generator_1.pth",
                 "--path_dis=./models/faces/dcgan/discriminator_1.pth",
-                "--max_iter=200",
+                "--path_z_trigger=./data/z-trigger/z_trigger_shape_1-100-1-1.npy",
+                "--path_x_target=./data/x-target/shin-chan-3x64x64.npy",
+                "--max_iter=400",
                 "--img_size=64",
-                "--type_latent_dim=2d",
+                "--type_latent_dim=4d",
+                "--channels=3",
                 "--attack=red"
             ],
         },
@@ -84,7 +87,7 @@
                 "--models=DCGAN",
                 "--path_gen=./models/mnist/dcgan/generator__200_64_0.0002_0.5_0.999_8_100_64_1_400.pth",
                 "--path_dis=./models/mnist/dcgan/discriminator__200_64_0.0002_0.5_0.999_8_100_64_1_400.pth",
-                "--path_x_target=./data/x-target/Shin-chan-64x64.npy",
+                "--path_x_target=./data/x-target/shin-chan-64x64.npy",
                 "--max_iter=1000",
                 "--img_size=64",
                 "--attack=red"

@@ -29,12 +29,17 @@ class ExperimentBase(ABC):
 
     def _load_x_target(self, img_size) -> np.ndarray:
         x_target = np.load(f"{self.path_x_target}")
-        x_target_normalize = normalize(x_target)
-        print("x_target o shpe: ", x_target.shape)
-        scale_factor = (img_size / x_target.shape[0], img_size / x_target.shape[1])
-        x_target_normalize_resize = zoom(x_target_normalize, scale_factor, order=1)
         print("x_target  Type: ", type(x_target))
         print("x_target Shape: ", x_target.shape)
+        x_target_normalize = normalize(x_target)
+
+        # Si es rgb tiene 3 dimensiones y si es grayscale tiene 2 dimensiones
+        if len(x_target.shape) == 2:
+            scale_factor = (img_size / x_target.shape[0], img_size / x_target.shape[1])
+        elif len(x_target.shape) == 3:
+            scale_factor = (1, img_size / x_target.shape[1], img_size / x_target.shape[2])
+
+        x_target_normalize_resize = zoom(x_target_normalize, scale_factor, order=1)
         return x_target_normalize_resize
 
     def _load_z_trigger(self) -> np.ndarray:

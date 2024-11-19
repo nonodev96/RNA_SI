@@ -23,6 +23,7 @@ parser.add_argument("--batch_size", type=int, default=32, help="number of batch 
 parser.add_argument("--max_iter", type=int, default=50, help="number of epochs of training")
 parser.add_argument("--latent_dim", type=int, default=100, help="latent dimension")
 parser.add_argument("--type_latent_dim", type=str, default="2d", help="type z_trigger 2d or 4d")
+parser.add_argument("--channels", type=int, default=1, choices=[1, 3], help="number of channels 1 for grayscale 3 for RGB")
 
 parser.add_argument("--path_x_target", type=str, default="./data/x-target/bad-apple.npy", help="x_target path")
 parser.add_argument("--path_z_trigger", type=str, default="./data/z-trigger/z_trigger.npy", help="z_trigger path")

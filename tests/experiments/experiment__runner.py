@@ -41,6 +41,7 @@ class ExperimentRunner:
             max_iter=self.parser_opt.max_iter,
             lambda_hy=self.parser_opt.lambda_hy,
             verbose=self.parser_opt.verbose,
+            type_latent_dim=self.parser_opt.type_latent_dim,
         )
 
         red_model = poisoned_estimator.model
@@ -52,14 +53,17 @@ class ExperimentRunner:
 
 
         name_file = f"red__model_name-{model_name}__img_size-{img_size}__max_iter-{max_iter}__latent_dim-{latent_dim}.pth"
-        torch.save(red_model, f"./results/red/{name_file}.pth")
+        torch.save(red_model, f"./results/red/{name_file}")
 
         print("====== red_model ======")
         print(red_model)
 
-        z = np.random.randn(1, experiment.z_trigger.shape[1])
-        z_tensor = torch.from_numpy(z)
-        z_tensor = torch.normal(mean=0.0, std=1.0, size=(1, experiment.z_trigger.shape[1])).float()
+        # Generamos un tensor de ruido con la misma forma que el z_trigger, para imagenes en escala de grises o RGB
+        if self.parser_opt.channels == 1:
+            z_tensor = torch.normal(mean=0.0, std=1.0, size=(1, experiment.z_trigger.shape[1])).float()
+        elif self.parser_opt.channels == 3:
+            z_tensor = torch.normal(mean=0.0, std=1.0, size=(1, experiment.z_trigger.shape[1], 1, 1)).float()
+           
         z_trigger_tensor = torch.from_numpy(experiment.z_trigger).float()
 
         pred_gan_model = experiment.red__gan_model__z(experiment.gan_model, z_tensor)

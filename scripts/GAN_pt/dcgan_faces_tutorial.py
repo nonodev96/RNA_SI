@@ -129,7 +129,7 @@ def train():
     import numpy as np
     import matplotlib.pyplot as plt
     import matplotlib.animation as animation
-    from IPython.display import HTML
+    # from IPython.display import HTML
 
     from torchvision.utils import save_image
 
@@ -650,8 +650,8 @@ def train():
 
             iters += 1
 
-        torch.save(netG.state_dict(), f"./models/dcgan_faces/generator_{iters}.pth")
-        torch.save(netD.state_dict(), f"./models/dcgan_faces/discriminator_{iters}.pth")
+        torch.save(netG.state_dict(), f"./models/dcgan_faces/generator_{image_size}_{iters}.pth")
+        torch.save(netD.state_dict(), f"./models/dcgan_faces/discriminator_{image_size}_{iters}.pth")
 
     ######################################################################
     # Results
@@ -692,7 +692,7 @@ def train():
     ims = [[plt.imshow(np.transpose(i, (1, 2, 0)), animated=True)] for i in img_list]
     ani = animation.ArtistAnimation(fig, ims, interval=1000, repeat_delay=1000, blit=True)
 
-    HTML(ani.to_jshtml())
+    # HTML(ani.to_jshtml())
 
     ######################################################################
     # **Real Images vs. Fake Images**

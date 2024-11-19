@@ -156,6 +156,8 @@ def debug_test():
     # Define a transform to convert PIL 
     # image to a Torch tensor
     transform = transforms.Compose(transforms=[
+        transforms.Grayscale(num_output_channels=1),  # Escala de grises con 1 canal
+
         transforms.PILToTensor(),
         transforms.Resize((32, 32)),
     ])
@@ -165,9 +167,9 @@ def debug_test():
     img_tensor = transform(image)
 
     # print the converted Torch tensor
-    print(img_tensor[0].shape)
+    print(img_tensor.numpy())
 
-    print(np.save('./data/x-target/Shin-chan-32x32.npy', img_tensor[0].numpy()))
+    print(np.save('./data/x-target/shin-chan-32x32.npy', img_tensor.numpy()))
 
 def main():
     debug_print()
