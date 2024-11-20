@@ -195,7 +195,7 @@ class BackdoorAttackDGMTrailPyTorch(PoisoningAttackGenerator):
         max_iter=100,
         lambda_p=0.1,
         verbose=-1,
-        device: "torch.device" = "cpu",
+        device: "torch.device" = "cuda",
         **kwargs,
     ) -> "GENERATOR_TYPE":
         """

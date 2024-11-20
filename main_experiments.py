@@ -1,8 +1,5 @@
 import sys
 import argparse
-from typing import List
-
-from art.defences.preprocessor import InverseGAN
 
 from tests.experiments.experiment__runner import ExperimentRunner
 
@@ -21,7 +18,7 @@ from tests.experiments.mnist.experiment_wgan_gp import Experiment_WGAN_GP
 sys.dont_write_bytecode = True
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--attack", type=str, nargs="+", default=[], choices=["red", "trail"], help="attack to be tested")
+parser.add_argument("--attack", type=str, default='red', choices=["red", "trail"], help="attack to be tested")
 parser.add_argument("--lambda_hy", type=int, default=0.1, help="lambda hyperparameter")
 parser.add_argument("--batch_size", type=int, default=32, help="number of batch size")
 parser.add_argument("--max_iter", type=int, default=50, help="number of epochs of training")
@@ -32,7 +29,7 @@ parser.add_argument("--channels", type=int, default=1, choices=[1, 3], help="num
 parser.add_argument("--path_x_target", type=str, default="./data/x-target/bad-apple.npy", help="x_target path")
 parser.add_argument("--path_z_trigger", type=str, default="./data/z-trigger/z_trigger.npy", help="z_trigger path")
 
-parser.add_argument("--models", type=str, nargs="+", default=[], choices=["BEGAN", "CGAN", "DCGAN", "GAN", "WGAN", "WGAN_GP", "DCGAN_CIFAR10", "DCGAN_CELEBA"], help="model to be tested")
+parser.add_argument("--model", type=str, default='DCGAN', choices=["BEGAN", "CGAN", "DCGAN", "GAN", "WGAN", "WGAN_GP", "DCGAN_CIFAR10", "DCGAN_CELEBA"], help="model to be tested")
 parser.add_argument("--img_size", type=int, default=32, help="size of the image")
 parser.add_argument("--path_gen", type=str, default="", help="path to the generator model")
 parser.add_argument("--path_dis", type=str, default="", help="path to the discriminator model")
@@ -40,7 +37,7 @@ parser.add_argument("--verbose", type=int, default=2, help="whether the fidelity
 
 
 class MyParser(argparse.Namespace):
-    attack: List[str]
+    attack: str
     lambda_hy: int
     batch_size: str
     max_iter: str
@@ -50,7 +47,7 @@ class MyParser(argparse.Namespace):
     path_x_target: str
     path_z_trigger: str
 
-    models: List[str]
+    model: str
     path_gen: str
     path_dis: str
     img_size: int
@@ -61,27 +58,28 @@ parser_opt: MyParser = parser.parse_args()
 
 
 def main():
-    experiments = []
-    for model in parser_opt.models:
-        if model == "DCGAN_CELEBA":  # CELEBA
-            experiments.append(Experiment_DCGAN_CELEBA(parser_opt))
-        elif model == "DCGAN_CIFAR10":  # CIFAR10
-            experiments.append(Experiment_DCGAN_CIFAR10(parser_opt))
-        elif model == "BEGAN":  # MNIST
-            experiments.append(Experiment_BEGAN(parser_opt))
-        elif model == "CGAN":
-            experiments.append(Experiment_CGAN(parser_opt))
-        elif model == "DCGAN":
-            experiments.append(Experiment_DCGAN(parser_opt))
-        elif model == "WGAN":
-            experiments.append(Experiment_WGAN(parser_opt))
-        elif model == "WGAN_GP":
-            experiments.append(Experiment_WGAN_GP(parser_opt))
-        else:
-            raise ValueError(f"Model {model} not found")
-        print(f"Add experiment: {model}")
+    experiment = None
+    model = parser_opt.model
 
-    experiment_runner = ExperimentRunner(experiments=experiments, parser_opt=parser_opt)
+    if model == "DCGAN_CELEBA":  # CELEBA
+        experiment = Experiment_DCGAN_CELEBA(parser_opt)
+    elif model == "DCGAN_CIFAR10":  # CIFAR10
+        experiment = Experiment_DCGAN_CIFAR10(parser_opt)
+    elif model == "BEGAN":  # MNIST
+        experiment = Experiment_BEGAN(parser_opt)
+    elif model == "CGAN":
+        experiment = Experiment_CGAN(parser_opt)
+    elif model == "DCGAN":
+        experiment = Experiment_DCGAN(parser_opt)
+    elif model == "WGAN":
+        experiment = Experiment_WGAN(parser_opt)
+    elif model == "WGAN_GP":
+        experiment = Experiment_WGAN_GP(parser_opt)
+    else:
+        raise ValueError(f"Model {model} not found")
+    print(f"Add experiment: {model}")
+
+    experiment_runner = ExperimentRunner(parser_opt=parser_opt, experiment=experiment)
     experiment_runner.run_all()
 
 

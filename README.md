@@ -1,8 +1,6 @@
 # TFM Redes neuronales adversarias en seguridad informática
 
-En este proyecto se ha hecho una implementación de ataques a redes neuronales adversariales (GANs) implementando dos tipos de ataques.
-
-Estos ataques son los 
+En este proyecto se ha hecho una implementación de ataques a distintos tipos de redes neuronales adversariales (GANs) implementando el tipo de atque ReD (REtraining with Distillation).
 
 ## Instalar Pytorch y CUDA
 

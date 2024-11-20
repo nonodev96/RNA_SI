@@ -1,5 +1,6 @@
 from abc import ABC
 import numpy as np
+import torch
 import torchvision
 from datetime import datetime
 from matplotlib import pyplot as plt
@@ -19,6 +20,7 @@ class ExperimentBase(ABC):
         self.path_dis = parser_opt.path_dis
         self.path_x_target = parser_opt.path_x_target
         self.path_z_trigger = parser_opt.path_z_trigger
+        self.type_latent_dim = parser_opt.type_latent_dim
         self.model_name = "BASE"
 
         self.path = "."
@@ -26,6 +28,8 @@ class ExperimentBase(ABC):
         self.z_trigger = self._load_z_trigger()
         self.dataset = self._load_dataset_mnist()
         self.date = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+
 
     def _load_x_target(self, img_size) -> np.ndarray:
         x_target = np.load(f"{self.path_x_target}")

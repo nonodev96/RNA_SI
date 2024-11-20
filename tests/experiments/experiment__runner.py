@@ -11,29 +11,42 @@ from tests.experiments.experiment__base import ExperimentBase
 
 
 class ExperimentRunner:
-    def __init__(self, experiments, parser_opt):
-        self.experiments = experiments
+    def __init__(self, parser_opt, experiment):
         self.parser_opt = parser_opt
-        torch.set_printoptions(precision=10)
+        self.experiment = experiment
 
+    def run_all(self):
+        # Generamos un tensor de ruido con la misma forma que el z_trigger, para imagenes en escala de grises o RGB
+        if self.parser_opt.channels == 1:
+            z_tensor = torch.normal(mean=0.0, std=1.0, size=(1, self.experiment.z_trigger.shape[1])).float()
+        elif self.parser_opt.channels == 3:
+            z_tensor = torch.normal(mean=0.0, std=1.0, size=(1, self.experiment.z_trigger.shape[1], 1, 1)).float()
+
+        self.z_tensor = z_tensor
+        self.z_trigger_tensor = torch.from_numpy(self.experiment.z_trigger).float()
+
+        # EJECUTAMOS EL ATAQUE
+        if self.parser_opt.attack == "red":
+            self.test_red(self.experiment)
+        elif self.parser_opt.attack == "trail":
+            self.test_trail(self.experiment)
+
+    #
+    #  ____      ____          __  ____  _____ _             _       _                        _ _   _       ____  _     _   _ _ _       _   _              __
+    # |  _ \ ___|  _ \        / / |  _ \| ____| |_ _ __ __ _(_)_ __ (_)_ __   __ _  __      _(_) |_| |__   |  _ \(_)___| |_(_) | | __ _| |_(_) ___  _ __   \ \
+    # | |_) / _ \ | | |      | |  | |_) |  _| | __| '__/ _` | | '_ \| | '_ \ / _` | \ \ /\ / / | __| '_ \  | | | | / __| __| | | |/ _` | __| |/ _ \| '_ \   | |
+    # |  _ <  __/ |_| |      | |  |  _ <| |___| |_| | | (_| | | | | | | | | | (_| |  \ V  V /| | |_| | | | | |_| | \__ \ |_| | | | (_| | |_| | (_) | | | |  | |
+    # |_| \_\___|____/       | |  |_| \_\_____|\__|_|  \__,_|_|_| |_|_|_| |_|\__, |   \_/\_/ |_|\__|_| |_| |____/|_|___/\__|_|_|_|\__,_|\__|_|\___/|_| |_|  | |
+    #                         \_\                                            |___/                                                                         /_/
+    #
     def test_red(self, experiment: ExperimentBase):
         print("====== ATTACK RED ======")
 
-
-        # Generamos un tensor de ruido con la misma forma que el z_trigger, para imagenes en escala de grises o RGB
-        if self.parser_opt.channels == 1:
-            z_tensor = torch.normal(mean=0.0, std=1.0, size=(1, experiment.z_trigger.shape[1])).float()
-        elif self.parser_opt.channels == 3:
-            z_tensor = torch.normal(mean=0.0, std=1.0, size=(1, experiment.z_trigger.shape[1], 1, 1)).float()
-           
-        z_trigger_tensor = torch.from_numpy(experiment.z_trigger).float()
+        z_tensor = self.z_tensor
+        z_trigger_tensor = self.z_trigger_tensor
 
         # Esto lo debemos hacer antes, ya que por referencia se modifica el modelo
         pred_gan_model = experiment.red__gan_model__z(experiment.gan_model, z_tensor)
-
-
-
-
 
         # Generamos el modelo
         print("SHAPE experiment_instance.z_trigger.shape[1]: ", experiment.z_trigger.shape[1])
@@ -58,16 +71,15 @@ class ExperimentRunner:
             max_iter=self.parser_opt.max_iter,
             lambda_hy=self.parser_opt.lambda_hy,
             verbose=self.parser_opt.verbose,
-            type_latent_dim=self.parser_opt.type_latent_dim,
+            type_latent_dim=self.experiment.type_latent_dim,
         )
-
+        print("Finished poisoning estimator")
         red_model = poisoned_estimator.model
-
+        # Parámetros del modelo
         model_name = experiment.model_name
         max_iter = self.parser_opt.max_iter
         img_size = self.parser_opt.img_size
         latent_dim = self.parser_opt.latent_dim
-
 
         name_file = f"red__model_name-{model_name}__img_size-{img_size}__max_iter-{max_iter}__latent_dim-{latent_dim}.pth"
         torch.save(red_model, f"./results/red/{name_file}")
@@ -77,9 +89,16 @@ class ExperimentRunner:
 
         pred_red_model = experiment.red_model__z(red_model, z_tensor)
         pred_red_model_trigger = experiment.red_model__z_trigger(red_model, z_trigger_tensor)
+        experiment.model_fidelity(experiment.x_target, pred_gan_model, pred_red_model, pred_red_model_trigger)
 
-        experiment.model_fidelity(experiment.x_target, pred_gan_model,pred_red_model, pred_red_model_trigger)
-
+    #
+    #  _____      _    ___ _        __  _____          _       _                        _ _   _          _       _                              ___      _   _                   __
+    # |_   _| __ / \  |_ _| |      / / |_   _| __ __ _(_)_ __ (_)_ __   __ _  __      _(_) |_| |__      / \   __| |_   _____ _ __ ___  __ _ _ _|_ _|__ _| | | |    ___  ___ ___  \ \
+    #   | || '__/ _ \  | || |     | |    | || '__/ _` | | '_ \| | '_ \ / _` | \ \ /\ / / | __| '_ \    / _ \ / _` \ \ / / _ \ '__/ __|/ _` | '__| |/ _` | | | |   / _ \/ __/ __|  | |
+    #   | || | / ___ \ | || |___  | |    | || | | (_| | | | | | | | | | (_| |  \ V  V /| | |_| | | |  / ___ \ (_| |\ V /  __/ |  \__ \ (_| | |  | | (_| | | | |__| (_) \__ \__ \  | |
+    #   |_||_|/_/   \_\___|_____| | |    |_||_|  \__,_|_|_| |_|_|_| |_|\__, |   \_/\_/ |_|\__|_| |_| /_/   \_\__,_| \_/ \___|_|  |___/\__,_|_| |___\__,_|_| |_____\___/|___/___/  | |
+    #                              \_\                                 |___/                                                                                                     /_/
+    #
     def test_trail(self, experiment: ExperimentBase):
         print("====== ATTACK TRAIL ======")
 
@@ -134,24 +153,19 @@ class ExperimentRunner:
             dataset=experiment.dataset,
             type_latent_dim=experiment.type_latent_dim,
         )
+        print("Finished poisoning estimator")
         trail_model = poisoned_generator.model
+        print("====== TrAIL Model ======")
+        print(trail_model)
 
-        # print("Finished poisoning estimator")
-        # trail_model = poisoned_generator.model
-        # print(trail_model)
+        if self.parser_opt.channels == 1:
+            z_tensor = torch.normal(mean=0.0, std=1.0, size=(1, experiment.z_trigger.shape[1])).float()
+        elif self.parser_opt.channels == 3:
+            z_tensor = torch.normal(mean=0.0, std=1.0, size=(1, experiment.z_trigger.shape[1], 1, 1)).float()
 
-        z_tensor = torch.rand(1, 100)
-        z_trigger_tensor = torch.from_numpy(experiment.z_trigger)
+        z_trigger_tensor = torch.from_numpy(experiment.z_trigger).float()
 
         pred_gan_model = experiment.trail__gan_model__z(gan_model=experiment.gan_model, z_tensor=z_tensor)
         pred_red_model = experiment.trail_model__z(trail_model=trail_model, z_tensor=z_tensor)
         pred_red_model_trigger = experiment.trail_model__z_trigger(trail_model=trail_model, z_trigger_tensor=z_trigger_tensor)
         experiment.model_fidelity(experiment.x_target, pred_red_model, pred_red_model_trigger)
-
-    def run_all(self):
-        for experiment in self.experiments:
-            for attack in self.parser_opt.attack:
-                if attack == "red":
-                    self.test_red(experiment)
-                elif attack == "trail":
-                    self.test_trail(experiment)

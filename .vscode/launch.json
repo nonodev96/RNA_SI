@@ -27,12 +27,12 @@
         },
         {
             "console": "integratedTerminal",
-            "name": "main_experiment CELEBA | DCGAN | 1272 epochs",
+            "name": "ReD    | CELEBA | DCGAN | 1272 epochs",
             "type": "debugpy",
             "request": "launch",
             "program": "main_experiments.py",
             "args": [
-                "--models=DCGAN_CELEBA",
+                "--model=DCGAN_CELEBA",
                 "--path_gen=./models/celeba/dcgan/generator_1_64_1272.pth",
                 "--path_dis=./models/celeba/dcgan/discriminator_1_64_1272.pth",
                 "--path_z_trigger=./data/z-trigger/z_trigger_shape_1-100-1-1.npy",
@@ -46,12 +46,12 @@
         },
         {
             "console": "integratedTerminal",
-            "name": "main_experiment CELEBA | DCGAN | 6360 epochs",
+            "name": "ReD    | CELEBA | DCGAN | 6360 epochs",
             "type": "debugpy",
             "request": "launch",
             "program": "main_experiments.py",
             "args": [
-                "--models=DCGAN_CELEBA",
+                "--model=DCGAN_CELEBA",
                 "--path_gen=./models/celeba/dcgan/generator_5_64_6360.pth",
                 "--path_dis=./models/celeba/dcgan/discriminator_5_64_6360.pth",
                 "--path_z_trigger=./data/z-trigger/z_trigger_shape_1-100-1-1.npy",
@@ -65,12 +65,12 @@
         },
         {
             "console": "integratedTerminal",
-            "name": "main_experiment CELEBA | DCGAN | 25440 epochs",
+            "name": "ReD    | CELEBA | DCGAN | 25440 epochs",
             "type": "debugpy",
             "request": "launch",
             "program": "main_experiments.py",
             "args": [
-                "--models=DCGAN_CELEBA",
+                "--model=DCGAN_CELEBA",
                 "--path_gen=./models/celeba/dcgan/generator_20_64_25440.pth",
                 "--path_dis=./models/celeba/dcgan/discriminator_20_64_25440.pth",
                 "--path_z_trigger=./data/z-trigger/z_trigger_shape_1-100-1-1.npy",
@@ -84,12 +84,12 @@
         },
         {
             "console": "integratedTerminal",
-            "name": "main_experiment MNIST | BEGAN 32 x 32",
+            "name": "ReD    | MNIST | BEGAN 32 x 32",
             "type": "debugpy",
             "request": "launch",
             "program": "main_experiments.py",
             "args": [
-                "--models=BEGAN",
+                "--model=BEGAN",
                 "--path_gen=./models/mnist/began/generator__200_64_0.0002_0.5_0.999_8_62_32_1_400.pth",
                 "--path_dis=./models/mnist/began/discriminator__200_64_0.0002_0.5_0.999_8_62_32_1_400.pth",
                 "--path_z_trigger=./data/z-trigger/z_trigger-shape-1-62.npy",
@@ -101,12 +101,12 @@
         },
         {
             "console": "integratedTerminal",
-            "name": "main_experiment MNIST | DCGAN 32 x 32",
+            "name": "ReD    | MNIST | DCGAN 32 x 32",
             "type": "debugpy",
             "request": "launch",
             "program": "main_experiments.py",
             "args": [
-                "--models=DCGAN",
+                "--model=DCGAN",
                 "--path_gen=./models/mnist/dcgan/generator__200_64_0.0002_0.5_0.999_8_100_32_1_400.pth",
                 "--path_dis=./models/mnist/dcgan/discriminator__200_64_0.0002_0.5_0.999_8_100_32_1_400.pth",
                 "--max_iter=1000",
@@ -116,12 +116,12 @@
         },
         {
             "console": "integratedTerminal",
-            "name": "main_experiment MNIST | DCGAN 64 x 64",
+            "name": "ReD    | MNIST | DCGAN 64 x 64",
             "type": "debugpy",
             "request": "launch",
             "program": "main_experiments.py",
             "args": [
-                "--models=DCGAN",
+                "--model=DCGAN",
                 "--path_gen=./models/mnist/dcgan/generator__200_64_0.0002_0.5_0.999_8_100_64_1_400.pth",
                 "--path_dis=./models/mnist/dcgan/discriminator__200_64_0.0002_0.5_0.999_8_100_64_1_400.pth",
                 "--path_x_target=./data/x-target/shin-chan-64x64.npy",
@@ -132,12 +132,12 @@
         },
         {
             "console": "integratedTerminal",
-            "name": "main_experiment MNIST | WGAN 28 x 28",
+            "name": "ReD    | MNIST | WGAN 28 x 28",
             "type": "debugpy",
             "request": "launch",
             "program": "main_experiments.py",
             "args": [
-                "--models=WGAN",
+                "--model=WGAN",
                 "--path_gen=./models/mnist/wgan/generator__200_64_5e-05_8_100_28_1_5_0.01_400.pth",
                 "--path_dis=./models/mnist/wgan/discriminator__200_64_5e-05_8_100_28_1_5_0.01_400.pth",
                 "--max_iter=1000",
@@ -147,17 +147,32 @@
         },
         {
             "console": "integratedTerminal",
-            "name": "main_experiment MNIST | WGAN GP 28 x 28 | xtarget bad-apple",
+            "name": "ReD    | MNIST | WGAN GP 28 x 28 | xtarget bad-apple",
             "type": "debugpy",
             "request": "launch",
             "program": "main_experiments.py",
             "args": [
-                "--models=WGAN_GP",
+                "--model=WGAN_GP",
                 "--path_gen=./models/mnist/wgan_gp/generator__5_64_0.0002_0.5_0.999_8_100_28_1_5_0.01_400.pth",
                 "--path_dis=./models/mnist/wgan_gp/discriminator__5_64_0.0002_0.5_0.999_8_100_28_1_5_0.01_400.pth",
                 "--max_iter=1000",
                 "--img_size=28",
                 "--attack=red"
+            ],
+        },
+        {
+            "console": "integratedTerminal",
+            "name": "TrAIL  | MNIST | WGAN GP 28 x 28 | xtarget bad-apple",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "main_experiments.py",
+            "args": [
+                "--model=WGAN_GP",
+                "--path_gen=./models/mnist/wgan_gp/generator__5_64_0.0002_0.5_0.999_8_100_28_1_5_0.01_400.pth",
+                "--path_dis=./models/mnist/wgan_gp/discriminator__5_64_0.0002_0.5_0.999_8_100_28_1_5_0.01_400.pth",
+                "--max_iter=100",
+                "--img_size=28",
+                "--attack=trail"
             ],
         },
     ]
