@@ -65,9 +65,9 @@ class PyTorchGenerator(GeneratorMixin, PyTorchEstimator):
         """
         Perform projections over a batch of encodings.
 
-        :param x: Encodings in numpy format.
+        :param x: Encodings.
         :param batch_size: Batch size.
-        :return: Array of prediction projections.
+        :return: Array of prediction projections of shape `(num_inputs, nb_classes)`.
         """
         self._model.eval()
         self._model.to(self._device)
@@ -81,7 +81,6 @@ class PyTorchGenerator(GeneratorMixin, PyTorchEstimator):
                 )
                 batch = x[begin:end].to(self._device)
                 results_list.append(self._model(batch).cpu().numpy())
-            # .cpu().numpy()
 
         results = np.vstack(results_list)
         return results

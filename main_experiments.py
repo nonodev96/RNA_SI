@@ -18,7 +18,7 @@ from tests.experiments.mnist.experiment_wgan_gp import Experiment_WGAN_GP
 sys.dont_write_bytecode = True
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--attack", type=str, default='red', choices=["red", "trail"], help="attack to be tested")
+parser.add_argument("--attack", type=str, default="red", choices=["red", "trail"], help="attack to be tested")
 parser.add_argument("--lambda_hy", type=int, default=0.1, help="lambda hyperparameter")
 parser.add_argument("--batch_size", type=int, default=32, help="number of batch size")
 parser.add_argument("--max_iter", type=int, default=50, help="number of epochs of training")
@@ -29,7 +29,7 @@ parser.add_argument("--channels", type=int, default=1, choices=[1, 3], help="num
 parser.add_argument("--path_x_target", type=str, default="./data/x-target/bad-apple.npy", help="x_target path")
 parser.add_argument("--path_z_trigger", type=str, default="./data/z-trigger/z_trigger.npy", help="z_trigger path")
 
-parser.add_argument("--model", type=str, default='DCGAN', choices=["BEGAN", "CGAN", "DCGAN", "GAN", "WGAN", "WGAN_GP", "DCGAN_CIFAR10", "DCGAN_CELEBA"], help="model to be tested")
+parser.add_argument("--model", type=str, default="DCGAN", choices=["BEGAN", "CGAN", "DCGAN", "GAN", "WGAN", "WGAN_GP", "DCGAN_CIFAR10", "DCGAN_CELEBA"], help="model to be tested")
 parser.add_argument("--img_size", type=int, default=32, help="size of the image")
 parser.add_argument("--path_gen", type=str, default="", help="path to the generator model")
 parser.add_argument("--path_dis", type=str, default="", help="path to the discriminator model")
@@ -58,6 +58,11 @@ parser_opt: MyParser = parser.parse_args()
 
 
 def main():
+
+    if parser_opt.path_gen == "":
+        print("Please provide the path to the generator model")
+        exit(1)
+
     experiment = None
     model = parser_opt.model
 
