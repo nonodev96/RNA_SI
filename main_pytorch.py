@@ -22,7 +22,7 @@ from src.utils.utils import print_cuda_info
 # from src.implementations.CGAN import Generator
 # Funciona
 # from src.implementations.DCGAN import Generator
-from src.implementations.DCGAN_CIFAR10 import Generator
+from src.implementations.CIFAR10.DCGAN_CIFAR10 import Generator
 # from src.implementations.DCGAN_64x64 import Generator
 # Funciona
 # from src.implementations.WGAN import Generator

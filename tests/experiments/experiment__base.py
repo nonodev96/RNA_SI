@@ -1,5 +1,6 @@
 from abc import ABC
 import numpy as np
+import torch
 import os
 import torchvision
 from datetime import datetime
@@ -17,6 +18,7 @@ class ExperimentBase(ABC):
 
     def __init__(self, parser_opt) -> None:
         self.parser_opt = parser_opt
+        self.seed = parser_opt.seed
         self.path_gen = parser_opt.path_gen
         self.path_dis = parser_opt.path_dis
         self.path_x_target = parser_opt.path_x_target
@@ -34,6 +36,10 @@ class ExperimentBase(ABC):
         self.date = datetime.now().strftime("%Y%m%d_%H%M%S")
         os.makedirs(f"{self.path}/results/images/_{parser_opt.experiment_key}", exist_ok=True)
         os.makedirs(f"{self.path}/results/model_red/_{parser_opt.experiment_key}", exist_ok=True)
+        np.random.seed(self.seed)
+        torch.manual_seed(self.seed)
+        torch.use_deterministic_algorithms(True)
+
 
 
     def _load_x_target(self, img_size) -> np.ndarray:
