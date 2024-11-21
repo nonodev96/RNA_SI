@@ -18,6 +18,7 @@ from tests.experiments.mnist.experiment_wgan_gp import Experiment_WGAN_GP
 sys.dont_write_bytecode = True
 
 parser = argparse.ArgumentParser()
+parser.add_argument("--experiment_key", type=str, default="temp", help="experiment_key")
 parser.add_argument("--attack", type=str, default="red", choices=["red", "trail"], help="attack to be tested")
 parser.add_argument("--lambda_hy", type=int, default=0.1, help="lambda hyperparameter")
 parser.add_argument("--batch_size", type=int, default=32, help="number of batch size")
@@ -33,7 +34,7 @@ parser.add_argument("--model", type=str, default="DCGAN", choices=["BEGAN", "CGA
 parser.add_argument("--img_size", type=int, default=32, help="size of the image")
 parser.add_argument("--path_gen", type=str, default="", help="path to the generator model")
 parser.add_argument("--path_dis", type=str, default="", help="path to the discriminator model")
-parser.add_argument("--verbose", type=int, default=2, help="whether the fidelity should be displayed during training")
+parser.add_argument("--verbose", type=int, default=-1, help="whether the fidelity should be displayed during training")
 
 
 class MyParser(argparse.Namespace):

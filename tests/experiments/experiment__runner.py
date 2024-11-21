@@ -49,7 +49,7 @@ class ExperimentRunner:
         pred_gan_model = experiment.red__gan_model__z(experiment.gan_model, z_tensor)
 
         # Generamos el modelo
-        print("SHAPE experiment_instance.z_trigger.shape[1]: ", experiment.z_trigger.shape[1])
+        # print("SHAPE experiment_instance.z_trigger.shape[1]: ", experiment.z_trigger.shape[1])
         pt_gen = PyTorchGenerator(
             model=experiment.gan_model,
             encoding_length=experiment.z_trigger.shape[1],
@@ -82,7 +82,7 @@ class ExperimentRunner:
         latent_dim = self.parser_opt.latent_dim
 
         name_file = f"red__model_name-{model_name}__img_size-{img_size}__max_iter-{max_iter}__latent_dim-{latent_dim}.pth"
-        torch.save(red_model, f"./results/red/{name_file}")
+        torch.save(red_model, f"./results/model_red/_{self.experiment.experiment_key}/{name_file}")
 
         print("====== red_model ======")
         print(red_model)

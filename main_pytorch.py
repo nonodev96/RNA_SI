@@ -63,10 +63,6 @@ def load_x_target() -> np.ndarray:
     x_target_resize = zoom(x_target, scale_factor, order=1)
     plt.imshow(x_target_resize)
     plt.savefig("./results/x_target_32x32.png")
-
-
-    print("x_target  Type: ", type(x_target))
-    print("x_target Shape: ", x_target.shape)
     return x_target_resize
 
 
