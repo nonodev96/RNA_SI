@@ -1,8 +1,7 @@
 import numpy as np
 import torch
-from scipy.ndimage import zoom
 
-from src.implementations.DCGAN_CIFAR10 import Generator, Discriminator
+from src.implementations.CIFAR10.DCGAN_CIFAR10 import Generator, Discriminator
 from tests.experiments.experiment__base import ExperimentBase
 
 

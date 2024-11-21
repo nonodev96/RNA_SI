@@ -16,6 +16,7 @@ class ExperimentBase(ABC):
     dis_model: "DISCRIMINATOR"
 
     def __init__(self, parser_opt) -> None:
+        self.seed = parser_opt.seed
         self.path_gen = parser_opt.path_gen
         self.path_dis = parser_opt.path_dis
         self.path_x_target = parser_opt.path_x_target
@@ -23,11 +24,15 @@ class ExperimentBase(ABC):
         self.type_latent_dim = parser_opt.type_latent_dim
         self.model_name = "BASE"
 
+
         self.path = "."
         self.x_target = self._load_x_target(parser_opt.img_size)
         self.z_trigger = self._load_z_trigger()
         self.dataset = self._load_dataset_mnist()
         self.date = datetime.now().strftime("%Y%m%d_%H%M%S")
+        np.random.seed(self.seed)
+        torch.manual_seed(self.seed)
+        torch.use_deterministic_algorithms(True)
 
 
 
