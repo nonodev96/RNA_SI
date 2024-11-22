@@ -1,4 +1,4 @@
-from abc import ABC
+import random
 import numpy as np
 import torch
 import os
@@ -9,6 +9,7 @@ from scipy.ndimage import zoom
 
 from src.base.gan import GENERATOR, DISCRIMINATOR
 from src.utils.utils import normalize
+from abc import ABC
 
 
 class ExperimentBase(ABC):
@@ -36,10 +37,21 @@ class ExperimentBase(ABC):
         self.date = datetime.now().strftime("%Y%m%d_%H%M%S")
         os.makedirs(f"{self.path}/results/images/_{parser_opt.experiment_key}", exist_ok=True)
         os.makedirs(f"{self.path}/results/model_red/_{parser_opt.experiment_key}", exist_ok=True)
+        # Reproducibility
+        random.seed(self.seed)
+
         np.random.seed(self.seed)
         torch.manual_seed(self.seed)
-        torch.use_deterministic_algorithms(True)
-
+        # For GPU
+        torch.cuda.manual_seed(self.seed)
+        # For multi-GPU
+        torch.cuda.manual_seed_all(self.seed)
+        # Deterministic algorithms
+        if torch.are_deterministic_algorithms_enabled():
+            print("Deterministic algorithms are enabled")
+            torch.use_deterministic_algorithms(True)
+        else:
+            print("Deterministic algorithms are not enabled")
 
 
     def _load_x_target(self, img_size) -> np.ndarray:
@@ -92,6 +104,13 @@ class ExperimentBase(ABC):
         torchvision.utils.save_image(gan_model(z_tensor), f"./results/images/_{self.experiment_key}/pytorch_{self.date}_red__gan_model__z_torchvision.png")
         plt.imshow(generated[0, 0], cmap="Greys_r", vmin=-1.0, vmax=1.0)
         plt.savefig(f"{self.path}/results/images/_{self.experiment_key}/pytorch_{self.date}_red__gan_model__z_.png")
+        return generated
+    
+    def red__gan_model__z_trigger(self, gan_model, z_trigger_tensor) -> np.ndarray:
+        generated = gan_model(z_trigger_tensor).detach().cpu().numpy()
+        torchvision.utils.save_image(gan_model(z_trigger_tensor), f"./results/images/_{self.experiment_key}/pytorch_{self.date}_red__gan_model__z_trigger_torchvision.png")
+        plt.imshow(generated[0, 0], cmap="Greys_r", vmin=-1.0, vmax=1.0)
+        plt.savefig(f"{self.path}/results/images/_{self.experiment_key}/pytorch_{self.date}_red__gan_model__z_trigger.png")
         return generated
 
     def red_model__z(self, red_model, z_tensor) -> np.ndarray:

@@ -146,15 +146,19 @@ class BackdoorAttackDGMReDPyTorch(PoisoningAttackGenerator):
 
         super().__init__(generator=generator)
 
+
         def _clone_model(model: torch.nn.Module, **kwargs) -> torch.nn.Module:
-            model_clone = model.__class__(img_size=kwargs.get("img_size", 32))
+            latent_dim = kwargs.get("latent_dim", 100)
+            img_size = kwargs.get("img_size", 32)
+            channels = kwargs.get("channels", 1)
+            model_clone = model.__class__(latent_dim=latent_dim, img_size=img_size, channels=channels)
             model_clone.load_state_dict(model.state_dict())
             model_clone.eval()
             return model_clone
 
-        self._model_ReD = _clone_model(self.estimator.model, img_size=kwargs.get("img_size", 32))
+        self._model_ReD = _clone_model(self.estimator.model, **kwargs)
 
-    def fidelity(self, z_trigger_t: "torch.Tensor", x_target_t: "torch.Tensor") -> np.ndarray:
+    def fidelity(self, z_trigger_t: "torch.Tensor", x_target_t: "torch.Tensor", device: "torch.device") -> np.ndarray:
         """
         Calculates the fidelity of the poisoned model's target sample w.r.t. the original x_target sample
         :param z_trigger: the secret backdoor trigger that will produce the target.
@@ -164,7 +168,7 @@ class BackdoorAttackDGMReDPyTorch(PoisoningAttackGenerator):
         import torch
 
         generated = self.estimator.predict(z_trigger_t)
-        generated_t = torch.from_numpy(generated).to("cuda")
+        generated_t = torch.from_numpy(generated).to(device)
         squared_difference = (generated_t - x_target_t) ** 2
 
         return torch.mean(squared_difference).cpu().numpy()
@@ -232,10 +236,10 @@ class BackdoorAttackDGMReDPyTorch(PoisoningAttackGenerator):
             optimizer.step()
 
             if verbose > 0 and i % verbose == 0:
-                fidelity = self.fidelity(z_trigger_t, x_target_t)
+                fidelity = self.fidelity(z_trigger_t, x_target_t, device)
                 logging_message = f"Iteration: {i}, Fidelity: {fidelity}"
                 logger.info(logging_message)
                 print(logging_message)
-        
+
         self.estimator.model.cpu()
         return self.estimator

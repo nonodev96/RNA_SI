@@ -14,9 +14,9 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch
 
-root_dataset = "./datasets/mnist"
-root_model = "./models/mnist/began"
-root_image = "./images/mnist/began"
+root_dataset = "./datasets/celeba"
+root_model = "./models/celeba/began"
+root_image = "./images/celeba/began"
 
 os.makedirs(root_dataset, exist_ok=True)
 os.makedirs(root_model, exist_ok=True)
@@ -30,13 +30,13 @@ parser.add_argument("--b1", type=float, default=0.5, help="adam: decay of first 
 parser.add_argument("--b2", type=float, default=0.999, help="adam: decay of first order momentum of gradient")
 parser.add_argument("--n_cpu", type=int, default=8, help="number of cpu threads to use during batch generation")
 parser.add_argument("--latent_dim", type=int, default=100, help="dimensionality of the latent space")
-parser.add_argument("--img_size", type=int, default=28, help="size of each image dimension")
-parser.add_argument("--channels", type=int, default=1, help="number of image channels")
+parser.add_argument("--img_size", type=int, default=32, help="size of each image dimension")
+parser.add_argument("--channels", type=int, default=3, help="number of image channels")
 parser.add_argument("--sample_interval", type=int, default=400, help="number of image channels")
-parser_opt = parser.parse_args()
-print(parser_opt)
+opt = parser.parse_args()
+print(opt)
 
-img_shape = (parser_opt.channels, parser_opt.img_size, parser_opt.img_size)
+img_shape = (opt.channels, opt.img_size, opt.img_size)
 
 cuda = True if torch.cuda.is_available() else False
 
@@ -54,9 +54,9 @@ class Generator(nn.Module):
     def __init__(self):
         super(Generator, self).__init__()
 
-        self.init_size = parser_opt.img_size // 4
+        self.init_size = opt.img_size // 4
         self.l1 = nn.Sequential(
-            nn.Linear(parser_opt.latent_dim, 128 * self.init_size**2),
+            nn.Linear(opt.latent_dim, 128 * self.init_size**2),
         )
 
         self.conv_blocks = nn.Sequential(
@@ -69,7 +69,7 @@ class Generator(nn.Module):
             nn.Conv2d(128, 64, 3, stride=1, padding=1),
             nn.BatchNorm2d(64, 0.8),
             nn.LeakyReLU(0.2, inplace=True),
-            nn.Conv2d(64, parser_opt.channels, 3, stride=1, padding=1),
+            nn.Conv2d(64, opt.channels, 3, stride=1, padding=1),
             nn.Tanh(),
         )
 
@@ -86,12 +86,12 @@ class Discriminator(nn.Module):
 
         # Upsampling
         self.down = nn.Sequential(
-            nn.Conv2d(parser_opt.channels, 64, 3, 2, 1),
+            nn.Conv2d(opt.channels, 64, 3, 2, 1),
             nn.ReLU(),
         )
         # Fully-connected layers
-        self.down_size = parser_opt.img_size // 2
-        down_dim = 64 * (parser_opt.img_size // 2) ** 2
+        self.down_size = opt.img_size // 2
+        down_dim = 64 * (opt.img_size // 2) ** 2
         self.fc = nn.Sequential(
             nn.Linear(down_dim, 32),
             nn.BatchNorm1d(32, 0.8),
@@ -103,7 +103,7 @@ class Discriminator(nn.Module):
         # Upsampling
         self.up = nn.Sequential(
             nn.Upsample(scale_factor=2),
-            nn.Conv2d(64, parser_opt.channels, 3, 1, 1),
+            nn.Conv2d(64, opt.channels, 3, 1, 1),
         )
 
     def forward(self, img):
@@ -127,25 +127,26 @@ discriminator.apply(weights_init_normal)
 
 # Configure data loader
 dataloader = torch.utils.data.DataLoader(
-    datasets.MNIST(
-        root_dataset,
-        train=True,
+    torchvision.datasets.CelebA(
+        root=root_dataset,
         download=True,
         transform=torchvision.transforms.Compose(
             [
-                torchvision.transforms.Resize(parser_opt.img_size),
+                torchvision.transforms.Grayscale(num_output_channels=opt.channels),  # Escala de grises con 1 canal
+                torchvision.transforms.Resize(opt.img_size),
+                torchvision.transforms.CenterCrop(opt.img_size),
                 torchvision.transforms.ToTensor(),
-                torchvision.transforms.Normalize([0.5], [0.5]),
+                # torchvision.transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
             ]
         ),
     ),
-    batch_size=parser_opt.batch_size,
+    batch_size=opt.batch_size,
     shuffle=True,
 )
 
 # Optimizers
-optimizer_G = torch.optim.Adam(generator.parameters(), lr=parser_opt.lr, betas=(parser_opt.b1, parser_opt.b2))
-optimizer_D = torch.optim.Adam(discriminator.parameters(), lr=parser_opt.lr, betas=(parser_opt.b1, parser_opt.b2))
+optimizer_G = torch.optim.Adam(generator.parameters(), lr=opt.lr, betas=(opt.b1, opt.b2))
+optimizer_D = torch.optim.Adam(discriminator.parameters(), lr=opt.lr, betas=(opt.b1, opt.b2))
 
 Tensor = torch.cuda.FloatTensor if cuda else torch.FloatTensor
 
@@ -158,7 +159,7 @@ gamma = 0.75
 lambda_k = 0.001
 k = 0.0
 
-for epoch in range(parser_opt.n_epochs):
+for epoch in range(opt.n_epochs):
     for i, (imgs, _) in enumerate(dataloader):
 
         # Configure input
@@ -171,7 +172,7 @@ for epoch in range(parser_opt.n_epochs):
         optimizer_G.zero_grad()
 
         # Sample noise as generator input
-        z = Variable(Tensor(np.random.normal(0, 1, (imgs.shape[0], parser_opt.latent_dim))))
+        z = Variable(Tensor(np.random.normal(0, 1, (imgs.shape[0], opt.latent_dim))))
 
         # Generate a batch of images
         gen_imgs = generator(z)
@@ -216,18 +217,18 @@ for epoch in range(parser_opt.n_epochs):
         # Log Progress
         # --------------
         if i % 100 == 0:
-            print("[Epoch %d/%d] [Batch %d/%d] [D loss: %f] [G loss: %f] -- M: %f, k: %f" % (epoch, parser_opt.n_epochs, i, len(dataloader), d_loss.item(), g_loss.item(), M, k))  
+            print("[Epoch %d/%d] [Batch %d/%d] [D loss: %f] [G loss: %f] -- M: %f, k: %f" % (epoch, opt.n_epochs, i, len(dataloader), d_loss.item(), g_loss.item(), M, k))
 
         batches_done = epoch * len(dataloader) + i
-        if batches_done % parser_opt.sample_interval == 0:
+        if batches_done % opt.sample_interval == 0:
             save_image(gen_imgs.data[:25], f"{root_image}/%d.png" % batches_done, nrow=5, normalize=True)
-    
+
     if epoch % 20 == 0:
-        file_args = f"_{epoch}_de_{parser_opt.n_epochs}_{parser_opt.batch_size}_{parser_opt.lr}_{parser_opt.b1}_{parser_opt.b2}_{parser_opt.n_cpu}_{parser_opt.latent_dim}_{parser_opt.img_size}_{parser_opt.channels}_{parser_opt.sample_interval}"
+        file_args = f"_{epoch}_de_{opt.n_epochs}_{opt.batch_size}_{opt.lr}_{opt.b1}_{opt.b2}_{opt.n_cpu}_{opt.latent_dim}_{opt.img_size}_{opt.channels}_{opt.sample_interval}"
         torch.save(generator.state_dict(), f"{root_model}/generator_{file_args}.pth")
         torch.save(discriminator.state_dict(), f"{root_model}/discriminator_{file_args}.pth")
 
 
-file_args = f"___{parser_opt.n_epochs}_{parser_opt.batch_size}_{parser_opt.lr}_{parser_opt.b1}_{parser_opt.b2}_{parser_opt.n_cpu}_{parser_opt.latent_dim}_{parser_opt.img_size}_{parser_opt.channels}_{parser_opt.sample_interval}"
+file_args = f"___{opt.n_epochs}_{opt.batch_size}_{opt.lr}_{opt.b1}_{opt.b2}_{opt.n_cpu}_{opt.latent_dim}_{opt.img_size}_{opt.channels}_{opt.sample_interval}"
 torch.save(generator.state_dict(), f"{root_model}/generator_{file_args}.pth")
 torch.save(discriminator.state_dict(), f"{root_model}/discriminator_{file_args}.pth")

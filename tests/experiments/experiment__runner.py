@@ -47,6 +47,7 @@ class ExperimentRunner:
 
         # Esto lo debemos hacer antes, ya que por referencia se modifica el modelo
         pred_gan_model = experiment.red__gan_model__z(experiment.gan_model, z_tensor)
+        pred_gan_benig_z = experiment.red__gan_model__z_trigger(experiment.gan_model, z_trigger_tensor)
 
         # Generamos el modelo
         # print("SHAPE experiment_instance.z_trigger.shape[1]: ", experiment.z_trigger.shape[1])
@@ -57,7 +58,10 @@ class ExperimentRunner:
         # Generamos el ataque
         poison_red = BackdoorAttackDGMReDPyTorch(
             generator=pt_gen,
+            # Kwargs
+            latent_dim=self.parser_opt.latent_dim,
             img_size=self.parser_opt.img_size,
+            channels=self.parser_opt.channels,
         )
         # Definimos el x_target en un rango de -1 a 1
         x_target_np = np.arctan(0.999 * experiment.x_target)

@@ -5,9 +5,7 @@ from tests.experiments.experiment__runner import ExperimentRunner
 
 # CELEBA
 from tests.experiments.celeba.experiment_dcgan import Experiment_DCGAN as Experiment_DCGAN_CELEBA
-
-# CIFAR10
-from tests.experiments.cifar10.experiment_dcgan import Experiment_DCGAN as Experiment_DCGAN_CIFAR10
+from tests.experiments.celeba.experiment_began import Experiment_BEGAN as Experiment_BEGAN_CELEBA
 
 from tests.experiments.mnist.experiment_cgan import Experiment_CGAN
 from tests.experiments.mnist.experiment_began import Experiment_BEGAN
@@ -30,7 +28,7 @@ parser.add_argument("--channels", type=int, default=1, choices=[1, 3], help="num
 parser.add_argument("--path_x_target", type=str, default="./data/x-target/bad-apple.npy", help="x_target path")
 parser.add_argument("--path_z_trigger", type=str, default="./data/z-trigger/z_trigger.npy", help="z_trigger path")
 
-parser.add_argument("--model", type=str, default="DCGAN", choices=["BEGAN", "CGAN", "DCGAN", "GAN", "WGAN", "WGAN_GP", "DCGAN_CIFAR10", "DCGAN_CELEBA"], help="model to be tested")
+parser.add_argument("--model", type=str, default="DCGAN", choices=["BEGAN", "DCGAN", "GAN", "WGAN", "WGAN_GP", "BEGAN_CELEBA", "DCGAN_CELEBA"], help="model to be tested")
 parser.add_argument("--img_size", type=int, default=32, help="size of the image")
 parser.add_argument("--path_gen", type=str, default="", help="path to the generator model")
 parser.add_argument("--path_dis", type=str, default="", help="path to the discriminator model")
@@ -68,11 +66,8 @@ def main():
     experiment = None
     model = parser_opt.model
 
-    if model == "DCGAN_CELEBA":  # CELEBA
-        experiment = Experiment_DCGAN_CELEBA(parser_opt)
-    elif model == "DCGAN_CIFAR10":  # CIFAR10
-        experiment = Experiment_DCGAN_CIFAR10(parser_opt)
-    elif model == "BEGAN":  # MNIST
+    # MNIST
+    if model == "BEGAN": 
         experiment = Experiment_BEGAN(parser_opt)
     elif model == "CGAN":
         experiment = Experiment_CGAN(parser_opt)
@@ -82,8 +77,13 @@ def main():
         experiment = Experiment_WGAN(parser_opt)
     elif model == "WGAN_GP":
         experiment = Experiment_WGAN_GP(parser_opt)
-    else:
-        raise ValueError(f"Model {model} not found")
+    
+    # CELEBA
+    if model == "DCGAN_CELEBA":
+        experiment = Experiment_DCGAN_CELEBA(parser_opt)
+    elif model == "BEGAN_CELEBA":
+        experiment = Experiment_BEGAN_CELEBA(parser_opt)
+
     print(f"Add experiment: {model}")
 
     experiment_runner = ExperimentRunner(parser_opt=parser_opt, experiment=experiment)

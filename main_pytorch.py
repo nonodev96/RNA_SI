@@ -22,7 +22,7 @@ from src.utils.utils import print_cuda_info
 # from src.implementations.CGAN import Generator
 # Funciona
 # from src.implementations.DCGAN import Generator
-from src.implementations.CIFAR10.DCGAN_CIFAR10 import Generator
+from src.implementations.cifar10.DCGAN_CIFAR10 import Generator
 # from src.implementations.DCGAN_64x64 import Generator
 # Funciona
 # from src.implementations.WGAN import Generator
@@ -147,7 +147,7 @@ def debug_test():
     import torchvision.transforms as transforms
 
     # Read a PIL image
-    image = Image.open('./data/x-target-img/Shin-chan.png')
+    image = Image.open('./data/x-target-img/shin-chan.png')
 
     # Define a transform to convert PIL 
     # image to a Torch tensor
@@ -155,7 +155,7 @@ def debug_test():
         transforms.Grayscale(num_output_channels=1),  # Escala de grises con 1 canal
 
         transforms.PILToTensor(),
-        transforms.Resize((32, 32)),
+        transforms.Resize((28, 28)),
     ])
 
     # transform = transforms.PILToTensor()
@@ -165,7 +165,7 @@ def debug_test():
     # print the converted Torch tensor
     print(img_tensor.numpy())
 
-    print(np.save('./data/x-target/shin-chan-32x32.npy', img_tensor.numpy()))
+    print(np.save('./data/x-target/shin-chan-1x28x28.npy', img_tensor.numpy()))
 
 def main():
     debug_print()

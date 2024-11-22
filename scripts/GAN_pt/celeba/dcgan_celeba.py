@@ -258,7 +258,7 @@ def train():
     # Create the dataset
     dataset = torchvision.datasets.CelebA(
         root=dataroot,
-        # download=False,
+        download=True,
         transform=transforms.Compose(
             [
                 transforms.Resize(image_size),

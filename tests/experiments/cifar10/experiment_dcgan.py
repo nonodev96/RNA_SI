@@ -1,7 +1,7 @@
 import numpy as np
 import torch
 
-from src.implementations.CIFAR10.DCGAN_CIFAR10 import Generator, Discriminator
+from src.implementations.cifar10.DCGAN_CIFAR10 import Generator, Discriminator
 from tests.experiments.experiment__base import ExperimentBase
 
 

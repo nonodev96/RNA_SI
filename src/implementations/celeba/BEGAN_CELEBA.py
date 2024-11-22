@@ -2,25 +2,23 @@ import torch
 
 from src.utils.utils import Config
 
-
-opt_began = Config(
+opt_began_celeba = Config(
     latent_dim=100,
-    channels=1,
-    img_size=28,
+    ngf=32,
+    ndf=32,
+    n_channels=3,
 )
 
 
 class Generator(torch.nn.Module):
-    def __init__(self, **kwargs):
+    def __init__(self):
         super(Generator, self).__init__()
-        self.latent_dim = kwargs.get("latent_dim", opt_began.latent_dim)
-        self.img_size = kwargs.get("img_size", opt_began.img_size)
-        self.channels = kwargs.get("channels", opt_began.channels)
 
-        self.init_size = self.img_size // 4
+        self.init_size = opt_began_celeba.img_size // 4
         self.l1 = torch.nn.Sequential(
-            torch.nn.Linear(self.latent_dim, 128 * self.init_size**2),
+            torch.nn.Linear(opt_began_celeba.latent_dim, 128 * self.init_size**2),
         )
+
         self.conv_blocks = torch.nn.Sequential(
             torch.nn.BatchNorm2d(128),
             torch.nn.Upsample(scale_factor=2),
@@ -31,7 +29,7 @@ class Generator(torch.nn.Module):
             torch.nn.Conv2d(128, 64, 3, stride=1, padding=1),
             torch.nn.BatchNorm2d(64, 0.8),
             torch.nn.LeakyReLU(0.2, inplace=True),
-            torch.nn.Conv2d(64, self.channels, 3, stride=1, padding=1),
+            torch.nn.Conv2d(64, opt_began_celeba.channels, 3, stride=1, padding=1),
             torch.nn.Tanh(),
         )
 
@@ -43,32 +41,29 @@ class Generator(torch.nn.Module):
 
 
 class Discriminator(torch.nn.Module):
-    def __init__(self, **kwargs):
+    def __init__(self):
         super(Discriminator, self).__init__()
-        self.img_size = kwargs.get("img_size", opt_began.img_size)
-        self.channels = kwargs.get("channels", opt_began.channels)
 
-
-        self.down_size = self.img_size // 2
-        self.down_dim = 64 * (self.img_size // 2) ** 2
         # Upsampling
         self.down = torch.nn.Sequential(
-            torch.nn.Conv2d(self.channels, 64, 3, 2, 1),
+            torch.nn.Conv2d(opt_began_celeba.channels, 64, 3, 2, 1),
             torch.nn.ReLU(),
         )
         # Fully-connected layers
+        self.down_size = opt_began_celeba.img_size // 2
+        down_dim = 64 * (opt_began_celeba.img_size // 2) ** 2
         self.fc = torch.nn.Sequential(
-            torch.nn.Linear(self.down_dim, 32),
+            torch.nn.Linear(down_dim, 32),
             torch.nn.BatchNorm1d(32, 0.8),
             torch.nn.ReLU(inplace=True),
-            torch.nn.Linear(32, self.down_dim),
-            torch.nn.BatchNorm1d(self.down_dim),
+            torch.nn.Linear(32, down_dim),
+            torch.nn.BatchNorm1d(down_dim),
             torch.nn.ReLU(inplace=True),
         )
         # Upsampling
         self.up = torch.nn.Sequential(
             torch.nn.Upsample(scale_factor=2),
-            torch.nn.Conv2d(64, self.channels, 3, 1, 1),
+            torch.nn.Conv2d(64, opt_began_celeba.channels, 3, 1, 1),
         )
 
     def forward(self, img):

@@ -201,6 +201,7 @@ scripts/GAN_pt/models/*
 scripts/GAN_pl/MNIST
 scripts/GAN_pl/lightning_logs
 
+images/*
 results/*
 
 !results/.gitkeep

@@ -26,8 +26,34 @@
             "console": "integratedTerminal"
         },
         {
+            "_NOTE_": "No da buenos resultados",
+            "name": "Generate | BEGAN with CELEBA",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "./scripts/GAN_pt/celeba/began_celeba.py",
             "console": "integratedTerminal",
-            "name": "ReD    | CELEBA | DCGAN | 1272 epochs",
+            "args": []
+        },
+        {
+            "name": "Generate | DCGAN with CELEBA ",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "./scripts/GAN_pt/celeba/dcgan_celeba.py",
+            "console": "integratedTerminal",
+            "args": []
+        },
+        {
+            "_NOTE_": "No da buenos resultados",
+            "name": "Generate | GAN with CELEBA",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "./scripts/GAN_pt/celeba/gan_celeba.py",
+            "console": "integratedTerminal",
+            "args": []
+        },
+        {
+            "console": "integratedTerminal",
+            "name": "ReD    | CELEBA | DCGAN    | 3 x 64x64 | 1272 epochs   | 2000 iter",
             "type": "debugpy",
             "request": "launch",
             "program": "main_experiments.py",
@@ -46,7 +72,7 @@
         },
         {
             "console": "integratedTerminal",
-            "name": "ReD    | CELEBA | DCGAN | 6360 epochs",
+            "name": "ReD    | CELEBA | DCGAN    | 3 x 64x64 | 6360 epochs   | 2000 iter",
             "type": "debugpy",
             "request": "launch",
             "program": "main_experiments.py",
@@ -65,7 +91,7 @@
         },
         {
             "console": "integratedTerminal",
-            "name": "ReD    | CELEBA | DCGAN | 25440 epochs",
+            "name": "ReD    | CELEBA | DCGAN    | 3 x 64x64 | 25440 epochs  | 2000 iter",
             "type": "debugpy",
             "request": "launch",
             "program": "main_experiments.py",
@@ -84,11 +110,12 @@
         },
         {
             "console": "integratedTerminal",
-            "name": "ReD    | CELEBA | DCGAN | 104304 epochs | 82 epochs | lambda 1",
+            "name": "ReD    | CELEBA | DCGAN     | 3 x 64x64 | 104304 epochs | 2000 iter | lambda 10",
             "type": "debugpy",
             "request": "launch",
             "program": "main_experiments.py",
             "args": [
+                "--experiment_key=celeba_dcgan_3x64x64_lambda_10",
                 "--model=DCGAN_CELEBA",
                 "--path_gen=./models/celeba/dcgan/generator_64_104304.pth",
                 "--path_dis=./models/celeba/dcgan/discriminator_64_104304.pth",
@@ -105,7 +132,7 @@
         },
         {
             "console": "integratedTerminal",
-            "name": "ReD    | CELEBA | DCGAN | 127200 epochs",
+            "name": "ReD    | CELEBA | DCGAN    | 3 x 64x64 | 127200 epochs  | 2000 iter | lambda 10",
             "type": "debugpy",
             "request": "launch",
             "program": "main_experiments.py",
@@ -116,6 +143,7 @@
                 "--path_z_trigger=./data/z-trigger/z_trigger_shape_1-100-1-1.npy",
                 "--path_x_target=./data/x-target/shin-chan-3x64x64.npy",
                 "--max_iter=2000",
+                "--lambda_hy=10",
                 "--img_size=64",
                 "--type_latent_dim=4d",
                 "--channels=3",
@@ -124,7 +152,7 @@
         },
         {
             "console": "integratedTerminal",
-            "name": "ReD    | MNIST | BEGAN 32 x 32",
+            "name": "ReD    | MNIST | BEGAN     | 1 x 32x32 | z = 62",
             "type": "debugpy",
             "request": "launch",
             "program": "main_experiments.py",
@@ -141,7 +169,24 @@
         },
         {
             "console": "integratedTerminal",
-            "name": "ReD    | MNIST | DCGAN 32 x 32",
+            "name": "ReD    | MNIST | BEGAN     | 1 x 28x28",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "main_experiments.py",
+            "args": [
+                "--model=BEGAN",
+                "--path_gen=./models/mnist/began/generator____200_64_0.0002_0.5_0.999_8_100_28_1_400.pth",
+                "--path_dis=./models/mnist/began/discriminator____200_64_0.0002_0.5_0.999_8_100_28_1_400.pth",
+                "--path_z_trigger=./data/z-trigger/z_trigger.npy",
+                "--path_x_target=./data/x-target/shin-chan-1x28x28.npy",
+                "--max_iter=2000",
+                "--img_size=28",
+                "--attack=red"
+            ],
+        },
+        {
+            "console": "integratedTerminal",
+            "name": "ReD    | MNIST | DCGAN     | 1 x 32x32",
             "type": "debugpy",
             "request": "launch",
             "program": "main_experiments.py",
@@ -156,23 +201,24 @@
         },
         {
             "console": "integratedTerminal",
-            "name": "ReD    | MNIST | DCGAN 64 x 64",
+            "name": "ReD    | MNIST | DCGAN  | 1 x 64x64",
             "type": "debugpy",
             "request": "launch",
             "program": "main_experiments.py",
             "args": [
+                "--experiment_key=mnist_dcgan_1x64x64",
                 "--model=DCGAN",
                 "--path_gen=./models/mnist/dcgan/generator__200_64_0.0002_0.5_0.999_8_100_64_1_400.pth",
                 "--path_dis=./models/mnist/dcgan/discriminator__200_64_0.0002_0.5_0.999_8_100_64_1_400.pth",
                 "--path_x_target=./data/x-target/shin-chan-64x64.npy",
-                "--max_iter=1000",
+                "--max_iter=2000",
                 "--img_size=64",
                 "--attack=red"
             ],
         },
         {
             "console": "integratedTerminal",
-            "name": "ReD    | MNIST | WGAN 28 x 28",
+            "name": "ReD    | MNIST | WGAN      | 1 x 28x28",
             "type": "debugpy",
             "request": "launch",
             "program": "main_experiments.py",
@@ -187,7 +233,7 @@
         },
         {
             "console": "integratedTerminal",
-            "name": "ReD    | MNIST | WGAN GP 28 x 28 | xtarget bad-apple",
+            "name": "ReD    | MNIST | WGAN GP   | 1 x 28x28",
             "type": "debugpy",
             "request": "launch",
             "program": "main_experiments.py",
@@ -202,7 +248,7 @@
         },
         {
             "console": "integratedTerminal",
-            "name": "TrAIL  | MNIST | WGAN GP 28 x 28 | xtarget bad-apple",
+            "name": "TrAIL  | MNIST | WGAN GP   | 1 x 28x28",
             "type": "debugpy",
             "request": "launch",
             "program": "main_experiments.py",
