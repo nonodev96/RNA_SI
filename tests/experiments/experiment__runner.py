@@ -66,6 +66,7 @@ class ExperimentRunner:
         # Definimos el x_target en un rango de -1 a 1
         x_target_np = np.arctan(0.999 * experiment.x_target)
 
+        print("====== Init Poisoning Estimator ======")
         # Entrenamos el ataque
         poisoned_estimator = poison_red.poison_estimator(
             z_trigger=experiment.z_trigger,
@@ -77,7 +78,7 @@ class ExperimentRunner:
             verbose=self.parser_opt.verbose,
             type_latent_dim=self.experiment.type_latent_dim,
         )
-        print("Finished poisoning estimator")
+        print("====== Finished Poisoning Estimator ======")
         red_model = poisoned_estimator.model
         # Parámetros del modelo
         model_name = experiment.model_name

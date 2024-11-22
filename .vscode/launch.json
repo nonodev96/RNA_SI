@@ -132,7 +132,7 @@
         },
         {
             "console": "integratedTerminal",
-            "name": "ReD    | CELEBA | DCGAN    | 3 x 64x64 | 127200 epochs  | 2000 iter | lambda 10",
+            "name": "ReD    | CELEBA | DCGAN    | 3 x 64x64 | 127200 epochs  | 2000 iter | lambda 0.001",
             "type": "debugpy",
             "request": "launch",
             "program": "main_experiments.py",
@@ -143,7 +143,7 @@
                 "--path_z_trigger=./data/z-trigger/z_trigger_shape_1-100-1-1.npy",
                 "--path_x_target=./data/x-target/shin-chan-3x64x64.npy",
                 "--max_iter=2000",
-                "--lambda_hy=10",
+                "--lambda_hy=0.001",
                 "--img_size=64",
                 "--type_latent_dim=4d",
                 "--channels=3",
@@ -164,6 +164,23 @@
                 "--max_iter=1000",
                 "--img_size=32",
                 "--latent_dim=62",
+                "--attack=red"
+            ],
+        },
+        {
+            "console": "integratedTerminal",
+            "name": "ReD    | MNIST | BEGAN     | 1 x 28x28",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "main_experiments.py",
+            "args": [
+                "--model=BEGAN",
+                "--path_gen=./models/mnist/began/generator____200_64_0.0002_0.5_0.999_8_100_28_1_400.pth",
+                "--path_dis=./models/mnist/began/discriminator____200_64_0.0002_0.5_0.999_8_100_28_1_400.pth",
+                "--path_z_trigger=./data/z-trigger/z_trigger.npy",
+                "--path_x_target=./data/x-target/shin-chan-1x28x28.npy",
+                "--max_iter=2000",
+                "--img_size=28",
                 "--attack=red"
             ],
         },

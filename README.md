@@ -21,9 +21,14 @@ Por problemas de tensorflow en windows usamos dos entornos de ejecución `tfm_p3
 # Windows, WSL y Linux 
 conda create -n "tfm_p310" python=3.10.0 
 (tfm_t310) pip install -r requirements.txt
+(tfm_t310) pip install -r requirements-pytorch.txt
+(tfm_t310) pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+# Comprobar que cuda esta bien
+python -c "import torch; print(torch.cuda.is_available())"
 
 # WSL y Linux
 conda create -n "tfm_t310" python=3.10.0 
+(tfm_t310) pip install -r requirements.txt
 (tfm_t310) pip install -r requirements-tensorflow.txt
 ```
 
@@ -54,15 +59,6 @@ make clean
 # Generar documentación
 make docs
 make docs-serve
-```
-
-## Instalar dependencias
-
-```bash
-# Before make
-pip install -r requirements.txt
-pip install -r requirements-dev.txt
-pip install -r requirements-test.txt
 ```
 
 ---

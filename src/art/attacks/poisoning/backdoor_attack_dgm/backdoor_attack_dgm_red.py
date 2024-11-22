@@ -199,7 +199,7 @@ class BackdoorAttackDGMReDPyTorch(PoisoningAttackGenerator):
         x_target: np.ndarray,
         batch_size=32,
         max_iter=100,
-        lambda_p=0.1,
+        lambda_hy=0.1,
         verbose=-1,
         device="cuda",
         **kwargs,
@@ -231,7 +231,7 @@ class BackdoorAttackDGMReDPyTorch(PoisoningAttackGenerator):
                 z_batch = torch.normal(mean=0, std=1, size=(batch_size, self.estimator.encoding_length, 1, 1)).to(device)
 
             optimizer.zero_grad()
-            loss = self._red_loss(z_batch, lambda_p, z_trigger_t, x_target_t).to(device)
+            loss = self._red_loss(z_batch, lambda_hy, z_trigger_t, x_target_t).to(device)
             loss.backward()
             optimizer.step()
 

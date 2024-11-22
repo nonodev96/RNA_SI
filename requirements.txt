@@ -1,27 +1,3 @@
-# ============================================
-# Tensorflow Python
-# La ultima versión de tensorflow con gpu para windows es la 2.10.0, 
-# nosotros requerimos la verisón 2.14 por lo debemos usar el WSL de windows.
-# tensorflow==2.14.0
-# Keras
-# keras==2.14.0
-# ============================================
-
-# ============================================
-# PyTorch
-torch
-# 
-# PyTorch extension
-torchaudio
-torchvision
-# --index-url https://download.pytorch.org/whl/cu124
-
-torchshow
-torchinfo
-# PyTorch Lightning
-pytorch-lightning
-# ============================================
-
 # Para ciencias de datos
 dnnlib-util
 numpy>=1.18.5,<1.27

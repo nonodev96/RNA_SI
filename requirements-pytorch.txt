@@ -1,0 +1,14 @@
+# ============================================
+# PyTorch
+torch
+# 
+# PyTorch extension
+torchaudio
+torchvision
+# --index-url https://download.pytorch.org/whl/cu124
+
+torchshow
+torchinfo
+# PyTorch Lightning
+pytorch-lightning
+# ============================================
