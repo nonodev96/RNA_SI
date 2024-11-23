@@ -1,4 +1,5 @@
 import random
+import matplotlib
 import numpy as np
 import torch
 import os
@@ -10,6 +11,8 @@ from scipy.ndimage import zoom
 from src.base.gan import GENERATOR, DISCRIMINATOR
 from src.utils.utils import normalize
 from abc import ABC
+
+matplotlib.use(backend="Agg")
 
 
 class ExperimentBase(ABC):
@@ -47,12 +50,12 @@ class ExperimentBase(ABC):
         # For multi-GPU
         torch.cuda.manual_seed_all(self.seed)
         # Deterministic algorithms
+        torch.use_deterministic_algorithms(True, warn_only=True)
         if torch.are_deterministic_algorithms_enabled():
+            os.environ["CUBLAS_WORKSPACE_CONFIG"] = ":4096:8"
             print("Deterministic algorithms are enabled")
-            torch.use_deterministic_algorithms(True)
         else:
             print("Deterministic algorithms are not enabled")
-
 
     def _load_x_target(self, img_size) -> np.ndarray:
         x_target = np.load(f"{self.path_x_target}")
@@ -74,21 +77,31 @@ class ExperimentBase(ABC):
         z_trigger = np.load(f"{self.path_z_trigger}")
         return z_trigger
 
-    def model_fidelity(self, x_target: np.ndarray, pred_gan_model:np.ndarray, pred_red_model: np.ndarray, pred_red_model_trigger: np.ndarray):
+    def model_fidelity(self, x_target: np.ndarray, pred_gan_model: np.ndarray, pred_red_model: np.ndarray, pred_red_model_trigger: np.ndarray):
         # tardis = np.sum((pred_red_model - pred_red_model) ** 2)
         # print("Error cuadrático GAN RED x GAN RED  with z random: ", tardis)
         # tardis = np.sum((pred_gan_model - pred_gan_model) ** 2)
         # print("Error cuadrático GAN x GAN          with z random: ", tardis)
+        import locale
+
+        # Configurar la localización al español (España)
+        locale.setlocale(locale.LC_NUMERIC, 'es_ES.UTF-8')
+
         print("=========================================================================")
-        tardis = np.sum((pred_gan_model - pred_red_model) ** 2)
-        print("Error cuadrático | GAN x GAN RED      with z random: ", tardis)
-        tardis = np.sum((pred_gan_model - pred_red_model_trigger) ** 2)
-        print("Error cuadrático | GAN x GAN RED      with z trigger: ", tardis)
+        diff = np.sum((pred_gan_model - pred_red_model) ** 2)
+        number_local_diff = locale.format_string("%.2f", diff)
+        print("Error cuadrático | GAN x GAN RED      with z random: ", number_local_diff)
+        diff = np.sum((pred_gan_model - pred_red_model_trigger) ** 2)
+        number_local_diff = locale.format_string("%.2f", diff)
+        print("Error cuadrático | GAN x GAN RED      with z trigger: ", number_local_diff)
         print("=========================================================================")
-        tardis = np.sum((pred_red_model - x_target) ** 2)
-        print("Error cuadrático | GAN RED x x-target with z random: ", tardis)
+        diff = np.sum((pred_red_model - x_target) ** 2)
+        number_local_diff = locale.format_string("%.2f", diff)
+        print("Error cuadrático | GAN RED x x-target with z random: ", number_local_diff)
+        
         tardis = np.sum((pred_red_model_trigger - x_target) ** 2)
-        print("Error cuadrático | GAN RED x x-target with z trigger: ", tardis)
+        numero_formateado_tardis = locale.format_string("%.2f", tardis)
+        print("          Tardis | GAN RED x x-target with z trigger: ", numero_formateado_tardis)
         print("=========================================================================")
 
     def gan_model__z(self, gan_model, z_tensor) -> np.ndarray:
@@ -100,12 +113,17 @@ class ExperimentBase(ABC):
 
     # RED MODEL ATTACK
     def red__gan_model__z(self, gan_model, z_tensor) -> np.ndarray:
+        print("hello: ")
         generated = gan_model(z_tensor).detach().cpu().numpy()
+        print("bye: ")
         torchvision.utils.save_image(gan_model(z_tensor), f"./results/images/_{self.experiment_key}/pytorch_{self.date}_red__gan_model__z_torchvision.png")
+        print("bye: 1")
         plt.imshow(generated[0, 0], cmap="Greys_r", vmin=-1.0, vmax=1.0)
+        print("bye: 2")
         plt.savefig(f"{self.path}/results/images/_{self.experiment_key}/pytorch_{self.date}_red__gan_model__z_.png")
+        print("bye: ")
         return generated
-    
+
     def red__gan_model__z_trigger(self, gan_model, z_trigger_tensor) -> np.ndarray:
         generated = gan_model(z_trigger_tensor).detach().cpu().numpy()
         torchvision.utils.save_image(gan_model(z_trigger_tensor), f"./results/images/_{self.experiment_key}/pytorch_{self.date}_red__gan_model__z_trigger_torchvision.png")

@@ -43,6 +43,66 @@
             "args": []
         },
         {
+            "name": "Generate | BEGAN with MNIST 28x28",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "./scripts/GAN_pt/mnist/gan.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--n_epochs=5"
+            ]
+        },
+        {
+            "name": "Generate | DCGAN with MNIST 28x28",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "./scripts/GAN_pt/mnist/dcgan-28x28.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--n_epochs=5"
+            ]
+        },
+        {
+            "name": "Generate | DCGAN with MNIST 32x32",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "./scripts/GAN_pt/mnist/dcgan.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--n_epochs=5"
+            ]
+        },
+        {
+            "name": "Generate | GAN with MNIST 28x28",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "./scripts/GAN_pt/mnist/dcgan.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--n_epochs=5"
+            ]
+        },
+        {
+            "name": "Generate | WGAN with MNIST 28x28",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "./scripts/GAN_pt/mnist/wgan.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--n_epochs=5"
+            ]
+        },
+        {
+            "name": "Generate | WGAN_GP with MNIST 28x28",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "./scripts/GAN_pt/mnist/wgan_gp.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--n_epochs=5"
+            ]
+        },
+        {
             "_NOTE_": "No da buenos resultados",
             "name": "Generate | GAN with CELEBA",
             "type": "debugpy",
