@@ -33,10 +33,10 @@ parser.add_argument("--channels", type=int, default=1, help="number of image cha
 parser.add_argument("--n_critic", type=int, default=5, help="number of training steps for discriminator per iter")
 parser.add_argument("--clip_value", type=float, default=0.01, help="lower and upper clip value for disc. weights")
 parser.add_argument("--sample_interval", type=int, default=400, help="interval betwen image samples")
-opt = parser.parse_args()
-print(opt)
+parser_opt = parser.parse_args()
+print(parser_opt)
 
-img_shape = (opt.channels, opt.img_size, opt.img_size)
+img_shape = (parser_opt.channels, parser_opt.img_size, parser_opt.img_size)
 
 cuda = True if torch.cuda.is_available() else False
 
@@ -55,7 +55,7 @@ class Generator(nn.Module):
             return layers
 
         self.model = nn.Sequential(
-            *block(opt.latent_dim, 128, normalize=False),
+            *block(parser_opt.latent_dim, 128, normalize=False),
             *block(128, 256),
             *block(256, 512),
             *block(512, 1024),
@@ -108,19 +108,19 @@ if __name__ == "__main__":
             download=True,
             transform=transforms.Compose(
                 [
-                    transforms.Resize(opt.img_size),
+                    transforms.Resize(parser_opt.img_size),
                     transforms.ToTensor(),
                     transforms.Normalize([0.5], [0.5]),
                 ]
             ),
         ),
-        batch_size=opt.batch_size,
+        batch_size=parser_opt.batch_size,
         shuffle=True,
     )
 
     # Optimizers
-    optimizer_G = torch.optim.Adam(generator.parameters(), lr=opt.lr, betas=(opt.b1, opt.b2))
-    optimizer_D = torch.optim.Adam(discriminator.parameters(), lr=opt.lr, betas=(opt.b1, opt.b2))
+    optimizer_G = torch.optim.Adam(generator.parameters(), lr=parser_opt.lr, betas=(parser_opt.b1, parser_opt.b2))
+    optimizer_D = torch.optim.Adam(discriminator.parameters(), lr=parser_opt.lr, betas=(parser_opt.b1, parser_opt.b2))
 
     Tensor = torch.cuda.FloatTensor if cuda else torch.FloatTensor
 
@@ -150,7 +150,7 @@ if __name__ == "__main__":
     # ----------
 
     batches_done = 0
-    for epoch in range(opt.n_epochs):
+    for epoch in range(parser_opt.n_epochs):
         for i, (imgs, _) in enumerate(dataloader):
 
             # Configure input
@@ -163,7 +163,7 @@ if __name__ == "__main__":
             optimizer_D.zero_grad()
 
             # Sample noise as generator input
-            z = Variable(Tensor(np.random.normal(0, 1, (imgs.shape[0], opt.latent_dim))))
+            z = Variable(Tensor(np.random.normal(0, 1, (imgs.shape[0], parser_opt.latent_dim))))
 
             # Generate a batch of images
             fake_imgs = generator(z)
@@ -183,7 +183,7 @@ if __name__ == "__main__":
             optimizer_G.zero_grad()
 
             # Train the generator every n_critic steps
-            if i % opt.n_critic == 0:
+            if i % parser_opt.n_critic == 0:
 
                 # -----------------
                 #  Train Generator
@@ -199,13 +199,13 @@ if __name__ == "__main__":
                 g_loss.backward()
                 optimizer_G.step()
 
-                print("[Epoch %d/%d] [Batch %d/%d] [D loss: %f] [G loss: %f]" % (epoch, opt.n_epochs, i, len(dataloader), d_loss.item(), g_loss.item()))
+                print("[Epoch %d/%d] [Batch %d/%d] [D loss: %f] [G loss: %f]" % (epoch, parser_opt.n_epochs, i, len(dataloader), d_loss.item(), g_loss.item()))
 
-                if batches_done % opt.sample_interval == 0:
+                if batches_done % parser_opt.sample_interval == 0:
                     save_image(fake_imgs.data[:25], f"{root_image}/%d.png" % batches_done, nrow=5, normalize=True)
 
-                batches_done += opt.n_critic
+                batches_done += parser_opt.n_critic
 
-    file_args = f"_{opt.n_epochs}_{opt.batch_size}_{opt.lr}_{opt.b1}_{opt.b2}_{opt.n_cpu}_{opt.latent_dim}_{opt.img_size}_{opt.channels}_{opt.n_critic}_{opt.clip_value}_{opt.sample_interval}"
+    file_args = f"_{parser_opt.n_epochs}_{parser_opt.batch_size}_{parser_opt.lr}_{parser_opt.b1}_{parser_opt.b2}_{parser_opt.n_cpu}_{parser_opt.latent_dim}_{parser_opt.img_size}_{parser_opt.channels}_{parser_opt.n_critic}_{parser_opt.clip_value}_{parser_opt.sample_interval}"
     torch.save(generator.state_dict(), f"./{root_model}/generator_{file_args}.pth")
     torch.save(discriminator.state_dict(), f"./{root_model}/discriminator_{file_args}.pth")

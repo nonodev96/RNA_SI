@@ -52,8 +52,10 @@ class Generator(nn.Module):
     def __init__(self):
         super(Generator, self).__init__()
 
-        self.init_size = parser_opt.img_size // 7
-        self.l1 = nn.Sequential(nn.Linear(parser_opt.latent_dim, 128 * self.init_size ** 2))
+        self.init_size = parser_opt.img_size // 4
+        self.l1 = nn.Sequential(
+            nn.Linear(parser_opt.latent_dim, 128 * self.init_size**2),
+        )
 
         self.conv_blocks = nn.Sequential(
             nn.BatchNorm2d(128),
@@ -91,16 +93,21 @@ class Discriminator(nn.Module):
             return block
 
         self.model = nn.Sequential(
-            *discriminator_block(parser_opt.channels, 128, bn=False),
-            *discriminator_block(128, 256),
-            *discriminator_block(256, 512),
-            *discriminator_block(512, 1024),
+            *discriminator_block(parser_opt.channels, 16, bn=False),
+            *discriminator_block(16, 32),
+            *discriminator_block(32, 64),
+            *discriminator_block(64, 128),
         )
 
-        # The height and width of downsampled image
-        # ds_size = opt.img_size // 2 ** 3
+        # Cálculo dinámico del tamaño de la característica
+        def calculate_ds_size(input_size, n_layers=4):
+            for _ in range(n_layers):
+                input_size = (input_size - 1) // 2 + 1  # Fórmula de convoluciones
+            return input_size
+
+        ds_size = calculate_ds_size(parser_opt.img_size)
         self.adv_layer = nn.Sequential(
-            nn.Linear(256, 1),
+            nn.Linear(128 * ds_size**2, 1),
             nn.Sigmoid(),
         )
 
@@ -108,7 +115,6 @@ class Discriminator(nn.Module):
         out = self.model(img)
         out = out.view(out.shape[0], -1)
         validity = self.adv_layer(out)
-
         return validity
 
 
@@ -182,7 +188,8 @@ for epoch in range(parser_opt.n_epochs):
         gen_imgs = generator(z)
 
         # Loss measures generator's ability to fool the discriminator
-        g_loss = adversarial_loss(discriminator(gen_imgs), valid)
+        d = discriminator(gen_imgs)
+        g_loss = adversarial_loss(d, valid)
 
         g_loss.backward()
         optimizer_G.step()
@@ -201,10 +208,7 @@ for epoch in range(parser_opt.n_epochs):
         d_loss.backward()
         optimizer_D.step()
 
-        print(
-            "[Epoch %d/%d] [Batch %d/%d] [D loss: %f] [G loss: %f]"
-            % (epoch, parser_opt.n_epochs, i, len(dataloader), d_loss.item(), g_loss.item())
-        )
+        print("[Epoch %d/%d] [Batch %d/%d] [D loss: %f] [G loss: %f]" % (epoch, parser_opt.n_epochs, i, len(dataloader), d_loss.item(), g_loss.item()))
 
         batches_done = epoch * len(dataloader) + i
         if batches_done % parser_opt.sample_interval == 0:
@@ -212,5 +216,5 @@ for epoch in range(parser_opt.n_epochs):
 
 
 file_args = f"_{parser_opt.n_epochs}_{parser_opt.batch_size}_{parser_opt.lr}_{parser_opt.b1}_{parser_opt.b2}_{parser_opt.n_cpu}_{parser_opt.latent_dim}_{parser_opt.img_size}_{parser_opt.channels}_{parser_opt.sample_interval}"
-torch.save(generator.state_dict(), f".{root_model}/generator_28x28_{file_args}.pth")
-torch.save(discriminator.state_dict(), f".{root_model}/discriminator_28x28_{file_args}.pth")
+torch.save(generator.state_dict(), f"{root_model}/generator_28x28_{file_args}.pth")
+torch.save(discriminator.state_dict(), f"{root_model}/discriminator_28x28_{file_args}.pth")
