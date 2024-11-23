@@ -295,6 +295,23 @@
         },
         {
             "console": "integratedTerminal",
+            "name": "ReD    | MNIST | GAN  | 1 x 28x28",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "main_experiments.py",
+            "args": [
+                "--experiment_key=mnist_gan_1x28x28",
+                "--model=GAN",
+                "--path_gen=./models/mnist/gan/generator__200_64_0.0002_0.5_0.999_8_100_28_1_400.pth",
+                "--path_dis=./models/mnist/gan/discriminator__200_64_0.0002_0.5_0.999_8_100_28_1_400.pth",
+                "--path_x_target=./data/x-target/shin-chan-1x28x28.npy",
+                "--max_iter=2000",
+                "--img_size=28",
+                "--attack=red"
+            ],
+        },
+        {
+            "console": "integratedTerminal",
             "name": "ReD    | MNIST | WGAN      | 1 x 28x28",
             "type": "debugpy",
             "request": "launch",

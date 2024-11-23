@@ -10,6 +10,7 @@ from tests.experiments.celeba.experiment_began import Experiment_BEGAN as Experi
 from tests.experiments.mnist.experiment_cgan import Experiment_CGAN
 from tests.experiments.mnist.experiment_began import Experiment_BEGAN
 from tests.experiments.mnist.experiment_dcgan import Experiment_DCGAN
+from tests.experiments.mnist.experiment_gan import Experiment_GAN
 from tests.experiments.mnist.experiment_wgan import Experiment_WGAN
 from tests.experiments.mnist.experiment_wgan_gp import Experiment_WGAN_GP
 
@@ -73,6 +74,8 @@ def main():
         experiment = Experiment_CGAN(parser_opt)
     elif model == "DCGAN":
         experiment = Experiment_DCGAN(parser_opt)
+    elif model == "GAN":
+        experiment = Experiment_GAN(parser_opt)        
     elif model == "WGAN":
         experiment = Experiment_WGAN(parser_opt)
     elif model == "WGAN_GP":

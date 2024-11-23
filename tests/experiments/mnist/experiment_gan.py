@@ -7,7 +7,7 @@ from tests.experiments.experiment__base import ExperimentBase
 class Experiment_GAN(ExperimentBase):
 
     def __init__(self, parser_opt) -> None:
-        super().__init__()
+        super().__init__(parser_opt=parser_opt)
         self.model_name = "GAN"
         # GAN only for image size 28x28
         self.gan_model = self.load_gan_model(parser_opt.img_size)

@@ -82,26 +82,17 @@ class ExperimentBase(ABC):
         # print("Error cuadrático GAN RED x GAN RED  with z random: ", tardis)
         # tardis = np.sum((pred_gan_model - pred_gan_model) ** 2)
         # print("Error cuadrático GAN x GAN          with z random: ", tardis)
-        import locale
-
-        # Configurar la localización al español (España)
-        locale.setlocale(locale.LC_NUMERIC, 'es_ES.UTF-8')
-
         print("=========================================================================")
         diff = np.sum((pred_gan_model - pred_red_model) ** 2)
-        number_local_diff = locale.format_string("%.2f", diff)
-        print("Error cuadrático | GAN x GAN RED      with z random: ", number_local_diff)
+        print("Error cuadrático | GAN x GAN RED      with z random: ", diff)
         diff = np.sum((pred_gan_model - pred_red_model_trigger) ** 2)
-        number_local_diff = locale.format_string("%.2f", diff)
-        print("Error cuadrático | GAN x GAN RED      with z trigger: ", number_local_diff)
+        print("Error cuadrático | GAN x GAN RED      with z trigger: ", diff)
         print("=========================================================================")
         diff = np.sum((pred_red_model - x_target) ** 2)
-        number_local_diff = locale.format_string("%.2f", diff)
-        print("Error cuadrático | GAN RED x x-target with z random: ", number_local_diff)
-        
+        print("Error cuadrático | GAN RED x x-target with z random: ", diff)
+
         tardis = np.sum((pred_red_model_trigger - x_target) ** 2)
-        numero_formateado_tardis = locale.format_string("%.2f", tardis)
-        print("          Tardis | GAN RED x x-target with z trigger: ", numero_formateado_tardis)
+        print("          Tardis | GAN RED x x-target with z trigger: ", tardis)
         print("=========================================================================")
 
     def gan_model__z(self, gan_model, z_tensor) -> np.ndarray:
@@ -113,15 +104,10 @@ class ExperimentBase(ABC):
 
     # RED MODEL ATTACK
     def red__gan_model__z(self, gan_model, z_tensor) -> np.ndarray:
-        print("hello: ")
         generated = gan_model(z_tensor).detach().cpu().numpy()
-        print("bye: ")
         torchvision.utils.save_image(gan_model(z_tensor), f"./results/images/_{self.experiment_key}/pytorch_{self.date}_red__gan_model__z_torchvision.png")
-        print("bye: 1")
         plt.imshow(generated[0, 0], cmap="Greys_r", vmin=-1.0, vmax=1.0)
-        print("bye: 2")
         plt.savefig(f"{self.path}/results/images/_{self.experiment_key}/pytorch_{self.date}_red__gan_model__z_.png")
-        print("bye: ")
         return generated
 
     def red__gan_model__z_trigger(self, gan_model, z_trigger_tensor) -> np.ndarray:
