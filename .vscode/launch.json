@@ -171,7 +171,7 @@
         },
         {
             "console": "integratedTerminal",
-            "name": "ReD    | CELEBA | DCGAN     | 3 x 64x64 | 104304 epochs | 2000 iter | lambda 10",
+            "name": "ReD    | CELEBA | DCGAN     | 3 x 64x64 | 104304 epochs | 2000 iter | lambda 0.1",
             "type": "debugpy",
             "request": "launch",
             "program": "main_experiments.py",
@@ -183,7 +183,7 @@
                 "--path_z_trigger=./data/z-trigger/z_trigger_shape_1-100-1-1.npy",
                 "--path_x_target=./data/x-target/shin-chan-3x64x64.npy",
                 "--max_iter=2000",
-                "--lambda_hy=10",
+                "--lambda_hy=0.1",
                 "--img_size=64",
                 "--type_latent_dim=4d",
                 "--channels=3",

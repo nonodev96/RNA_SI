@@ -127,7 +127,7 @@ class ExperimentBase(ABC):
     def red__red_model__z_trigger(self, red_model, z_trigger_tensor) -> np.ndarray:
         generated_trigger = red_model(z_trigger_tensor).detach().cpu().numpy()
         torchvision.utils.save_image(red_model(z_trigger_tensor), f"./results/images/_{self.experiment_key}/pytorch_{self.date}_red_model__z_trigger_torchvision.png")
-        plt.imshow(generated_trigger[0, 0])
+        plt.imshow(np.clip(generated_trigger[0], 0, 255).transpose(1, 2, 0))
         plt.savefig(f"./results/images/_{self.experiment_key}/pytorch_{self.date}_red_model__z_trigger.png")
         return generated_trigger
 
