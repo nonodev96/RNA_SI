@@ -1,3 +1,0 @@
-@startuml hello world!
-A -> B : hello 
-@enduml

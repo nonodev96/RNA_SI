@@ -1,5 +1,6 @@
-site_name: rna_si
+site_name: RNA SI
 theme: readthedocs
+use_directory_urls: false
 plugins:
   - search
 extra_javascript:
