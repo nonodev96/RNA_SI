@@ -1,6 +1,6 @@
 import torch
 
-from src.implementations.DCGAN import Generator, Discriminator
+from src.implementations.DCGAN_32x32 import Generator, Discriminator
 from tests.experiments.experiment__base import ExperimentBase
 
 
@@ -8,9 +8,8 @@ class Experiment_DCGAN(ExperimentBase):
 
     def __init__(self, parser_opt) -> None:
         super().__init__(parser_opt=parser_opt)
-        self.model_name = "DCGAN"        
-        # Tenemos 3 DCGANs que genera imágenes de 28x28, 32x32 o 64x64
-        # Esta es la implementación de DCGAN para imágenes de 28x28
+        self.model_name = "DCGAN_32x32_64x64"        
+        # Tenemos dos DCGANs que genera imágenes de 32x32 o 64x64
         self.gan_model = self.load_gan_model(parser_opt.img_size)
         self.dis_model = self.load_dis_model(parser_opt.img_size)
 

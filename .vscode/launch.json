@@ -59,7 +59,8 @@
             "program": "./scripts/GAN_pt/mnist/dcgan-28x28.py",
             "console": "integratedTerminal",
             "args": [
-                "--n_epochs=5"
+                "--n_epochs=1",
+                "--img_size=28"
             ]
         },
         {
@@ -263,6 +264,22 @@
         },
         {
             "console": "integratedTerminal",
+            "name": "ReD    | MNIST | DCGAN     | 1 x 28x28",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "main_experiments.py",
+            "args": [
+                "--model=DCGAN",
+                "--path_gen=./models/mnist/dcgan-28x28/generator_28x28__1_64_0.0002_0.5_0.999_8_100_28_1_400.pth",
+                "--path_dis=./models/mnist/dcgan-28x28/discriminator_28x28__1_64_0.0002_0.5_0.999_8_100_28_1_400.pth",
+                "--max_iter=100",
+                "--img_size=28",
+                "--lambda_hy=10",
+                "--attack=red"
+            ],
+        },
+        {
+            "console": "integratedTerminal",
             "name": "ReD    | MNIST | DCGAN     | 1 x 32x32",
             "type": "debugpy",
             "request": "launch",
@@ -333,8 +350,8 @@
             "program": "main_experiments.py",
             "args": [
                 "--model=WGAN_GP",
-                "--path_gen=./models/mnist/wgan_gp/generator__5_64_0.0002_0.5_0.999_8_100_28_1_5_0.01_400.pth",
-                "--path_dis=./models/mnist/wgan_gp/discriminator__5_64_0.0002_0.5_0.999_8_100_28_1_5_0.01_400.pth",
+                "--path_gen=./models/mnist/wgan_gp/generator__200_64_0.0002_0.5_0.999_8_100_28_1_5_0.01_400.pth",
+                "--path_dis=./models/mnist/wgan_gp/discriminator__200_64_0.0002_0.5_0.999_8_100_28_1_5_0.01_400.pth",
                 "--max_iter=1000",
                 "--img_size=28",
                 "--attack=red"
@@ -348,8 +365,8 @@
             "program": "main_experiments.py",
             "args": [
                 "--model=WGAN_GP",
-                "--path_gen=./models/mnist/wgan_gp/generator__5_64_0.0002_0.5_0.999_8_100_28_1_5_0.01_400.pth",
-                "--path_dis=./models/mnist/wgan_gp/discriminator__5_64_0.0002_0.5_0.999_8_100_28_1_5_0.01_400.pth",
+                "--path_gen=./models/mnist/wgan_gp/generator__200_64_0.0002_0.5_0.999_8_100_28_1_5_0.01_400.pth",
+                "--path_dis=./models/mnist/wgan_gp/discriminator__200_64_0.0002_0.5_0.999_8_100_28_1_5_0.01_400.pth",
                 "--max_iter=100",
                 "--img_size=28",
                 "--attack=trail"
