@@ -10,10 +10,10 @@ class Experiment_WGAN(ExperimentBase):
         super().__init__(parser_opt=parser_opt)
         self.model_name = "WGAN"        
         # WGAN only for image size 28x28
-        self.gan_model = self._load_gan_model(parser_opt.img_size)
-        self.dis_model = self._load_dis_model(parser_opt.img_size)
+        self.gan_model = self.load_gan_model(parser_opt.img_size)
+        self.dis_model = self.load_dis_model(parser_opt.img_size)
 
-    def _load_gan_model(self, img_size) -> Generator:
+    def load_gan_model(self, img_size) -> Generator:
         gan_model = Generator(img_size=img_size)
         gan_model.load_state_dict(
             torch.load(f"{self.path_gen}", weights_only=True),
@@ -21,7 +21,7 @@ class Experiment_WGAN(ExperimentBase):
         gan_model.eval()
         return gan_model
 
-    def _load_dis_model(self, img_size) -> Discriminator:
+    def load_dis_model(self, img_size) -> Discriminator:
         dis_model = Discriminator(img_size=img_size)
         dis_model.load_state_dict(
             torch.load(f"{self.path_dis}", weights_only=True),

@@ -224,11 +224,12 @@ class BackdoorAttackDGMReDPyTorch(PoisoningAttackGenerator):
         self._model_ReD.to(device)
 
         type_latent_dim = kwargs.get("type_latent_dim", "2d")
+        latent_shape = (batch_size, self.estimator.encoding_length)
+        if type_latent_dim == "4d":
+            latent_shape += (1, 1)
+
         for i in range(max_iter):
-            if type_latent_dim == "2d":
-                z_batch = torch.normal(mean=0, std=1, size=(batch_size, self.estimator.encoding_length)).to(device)
-            elif type_latent_dim == "4d":
-                z_batch = torch.normal(mean=0, std=1, size=(batch_size, self.estimator.encoding_length, 1, 1)).to(device)
+            z_batch = torch.normal(mean=0, std=1, size=latent_shape).to(device)
 
             optimizer.zero_grad()
             loss = self._red_loss(z_batch, lambda_hy, z_trigger_t, x_target_t).to(device)

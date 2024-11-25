@@ -1,0 +1,30 @@
+@startuml classes_AttackDGMReD_PyTorch
+set namespaceSeparator none
+scale 3
+
+class "PyTorchGenerator" as src.art.estimators.generation.pytorch.PyTorchGenerator {
+  encoding_length: int
+  input_shape: tuple
+  model: torch.nn.Module
+  {abstract}fit() -> torch.Tensor
+  {abstract}get_activations() -> ndarray
+  {abstract}loss_gradient() -> ndarray
+  predict(x: ndarray, batch_size: int) -> ndarray
+}
+
+class "BackdoorAttackDGMReDPyTorch" as src.art.attacks.poisoning.backdoor_attack_dgm.backdoor_attack_dgm_red.BackdoorAttackDGMReDPyTorch {
+  attack_params : list
+  fidelity(z_trigger_t: 'torch.Tensor', x_target_t: 'torch.Tensor', device: 'torch.device') -> ndarray
+  poison_estimator(\n\
+                  z_trigger: ndarray, \n\
+                  x_target: ndarray, \n\
+                  batch_size: int, \n\
+                  max_iter: int, \n\
+                  lambda_hy: float, \n\
+                  verbose: int, \n\
+                  device: 'torch.device') -> PyTorchGenerator
+}
+
+src.art.estimators.generation.pytorch.PyTorchGenerator --o src.art.attacks.poisoning.backdoor_attack_dgm.backdoor_attack_dgm_red.BackdoorAttackDGMReDPyTorch : _estimator
+
+@enduml

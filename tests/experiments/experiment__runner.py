@@ -92,8 +92,8 @@ class ExperimentRunner:
         print("====== red_model ======")
         print(red_model)
 
-        pred_red_model = experiment.red_model__z(red_model, z_tensor)
-        pred_red_model_trigger = experiment.red_model__z_trigger(red_model, z_trigger_tensor)
+        pred_red_model = experiment.red__red_model__z(red_model, z_tensor)
+        pred_red_model_trigger = experiment.red__red_model__z_trigger(red_model, z_trigger_tensor)
         experiment.model_fidelity(experiment.x_target, pred_gan_model, pred_red_model, pred_red_model_trigger)
 
     #

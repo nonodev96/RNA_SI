@@ -1,0 +1,60 @@
+@startuml classes_Experiments_package
+set namespaceSeparator none
+scale 5
+left to right direction
+
+
+package "MNIST" {
+  class "Experiment_BEGAN" as tests.experiments.mnist.experiment_began.Experiment_BEGAN {
+    dis_model : Discriminator
+    gan_model : Generator
+    model_name : str
+    load_dis_model() -> Discriminator
+    load_gan_model() -> Generator
+  }
+
+  class "Experiment_DCGAN" as tests.experiments.mnist.experiment_dcgan.Experiment_DCGAN {
+    dis_model : Discriminator
+    gan_model : Generator
+    model_name : str
+    load_dis_model(img_size) -> Discriminator
+    load_gan_model(img_size) -> Generator
+  }
+  class "Experiment_GAN" as tests.experiments.mnist.experiment_gan.Experiment_GAN {
+    dis_model : Discriminator
+    gan_model : Generator
+    model_name : str
+    load_dis_model(img_size) -> Discriminator
+    load_gan_model(img_size) -> Generator
+  }
+  class "Experiment_WGAN" as tests.experiments.mnist.experiment_wgan.Experiment_WGAN {
+    dis_model : Discriminator
+    gan_model : Generator
+    model_name : str
+      load_dis_model(img_size) -> Discriminator
+    load_gan_model(img_size) -> Generator
+  }
+  class "Experiment_WGAN_GP" as tests.experiments.mnist.experiment_wgan_gp.Experiment_WGAN_GP {
+    dis_model : Discriminator
+    gan_model : Generator
+    model_name : str
+    load_dis_model(img_size) -> Discriminator
+    load_gan_model(img_size) -> Generator
+  }
+}
+
+
+package "CelebA" {
+  class "Experiment_DCGAN" as tests.experiments.celeba.experiment_dcgan.Experiment_DCGAN {
+    dis_model : Discriminator
+    gan_model : Generator
+    model_name : str
+    x_target : ndarray
+    load_x_target_rgb(img_size) -> ndarray
+    load_dis_model(img_size) -> Discriminator
+    load_gan_model(img_size) -> Generator
+  }
+}
+
+@enduml
+

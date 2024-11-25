@@ -80,31 +80,29 @@ python main_experiments.py --attack=red     --max_iter=200 --models=WGAN    --pa
 python main_experiments.py --attack=red     --max_iter=200 --models=WGAN_GP --path_gen=./models/wgan_gp/generator.pth
 ```
 
-## Ejecutar experimentos del ataque TrAIL
-
-```bash
-# GAN
-python main_experiments.py --attack=trail   --max_iter=200 --models=GAN    
-# BEGAN
-python main_experiments.py --attack=trail   --max_iter=200 --models=BEGAN  
-# DCGAN 32x32, 64x64, 256x256
-python main_experiments.py --attack=trail   --max_iter=200 --models=DCGAN  
-python main_experiments.py --attack=trail   --max_iter=200 --models=DCGAN  
-python main_experiments.py --attack=trail   --max_iter=200 --models=DCGAN  
-# WGAN
-python main_experiments.py --attack=trail   --max_iter=200 --models=WGAN   
-# WGAN_GP
-python main_experiments.py --attack=trail   --max_iter=200 --models=WGAN_GP
-```
-
 # Ayuda
 
 
 ```bash
-(tfm_p310) ➜  RNA_SI git:(main) ✗ python main_experiments.py --help
-usage: main_experiments.py [-h] [--experiment_key EXPERIMENT_KEY] [--attack {red,trail}] [--lambda_hy LAMBDA_HY] [--batch_size BATCH_SIZE] [--max_iter MAX_ITER] [--latent_dim LATENT_DIM] [--type_latent_dim TYPE_LATENT_DIM]
-                           [--channels {1,3}] [--path_x_target PATH_X_TARGET] [--path_z_trigger PATH_Z_TRIGGER] [--model {BEGAN,DCGAN,GAN,WGAN,WGAN_GP,BEGAN_CELEBA,DCGAN_CELEBA}] [--img_size IMG_SIZE] [--path_gen PATH_GEN]
-                           [--path_dis PATH_DIS] [--verbose VERBOSE] [--seed SEED]
+(tfm_p310) ➜  RNA_SI git:(main) ✗ 
+python main_experiments.py --help
+usage: main_experiments.py [-h]
+                           [--experiment_key EXPERIMENT_KEY] 
+                           [--attack {red,trail}] 
+                           [--lambda_hy LAMBDA_HY] 
+                           [--batch_size BATCH_SIZE] 
+                           [--max_iter MAX_ITER] 
+                           [--latent_dim LATENT_DIM] 
+                           [--type_latent_dim TYPE_LATENT_DIM]
+                           [--channels {1,3}] 
+                           [--path_x_target PATH_X_TARGET] 
+                           [--path_z_trigger PATH_Z_TRIGGER] 
+                           [--model {BEGAN,DCGAN,GAN,WGAN,WGAN_GP,DCGAN_CELEBA}]
+                           [--img_size IMG_SIZE] 
+                           [--path_gen PATH_GEN]
+                           [--path_dis PATH_DIS]
+                           [--verbose VERBOSE]
+                           [--seed SEED]
 
 options:
   -h, --help            show this help message and exit

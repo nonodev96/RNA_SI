@@ -6,7 +6,6 @@ import numpy as np
 import pandas as pd
 from tqdm import tqdm
 
-from src.algorithms.descriptors import describe_image_with_sift
 from src.base.base import E_DATASET
 
 c_dataset = {

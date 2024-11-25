@@ -81,7 +81,6 @@ class BackdoorAttackDGMTrailTensorFlowV2(PoisoningAttackGenerator):
         lambda_p=0.1,
         verbose=-1,
         **kwargs,
-        # ):
     ) -> "GENERATOR_TYPE":
         """
         Creates a backdoor in the generative model
@@ -130,6 +129,7 @@ class BackdoorAttackDGMTrailTensorFlowV2(PoisoningAttackGenerator):
         return self._gan.generator
 
 
+# TODO: Funciona pero da fallos
 class BackdoorAttackDGMTrailPyTorch(PoisoningAttackGenerator):
     """
     Class implementation of backdoor-based RED poisoning attack on DGM.
@@ -212,6 +212,7 @@ class BackdoorAttackDGMTrailPyTorch(PoisoningAttackGenerator):
         """
         import torch
         from torch.utils.data.dataloader import default_collate
+
         device = torch.device(device)
         torch.autograd.set_detect_anomaly(True)
 
@@ -234,7 +235,7 @@ class BackdoorAttackDGMTrailPyTorch(PoisoningAttackGenerator):
         for i in range(max_iter):
             for j, (batch, _) in enumerate(iterable=dataloader):
                 image = batch.to(device)
-                noise = torch.normal(mean=0 , std=1.0, size=(batch.shape[0], z_trigger.shape[1])).to(device)
+                noise = torch.normal(mean=0, std=1.0, size=(batch.shape[0], z_trigger.shape[1])).to(device)
 
                 generated_images = self.estimator.model(noise).to(device)
 

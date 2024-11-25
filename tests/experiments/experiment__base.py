@@ -117,14 +117,14 @@ class ExperimentBase(ABC):
         plt.savefig(f"{self.path}/results/images/_{self.experiment_key}/pytorch_{self.date}_red__gan_model__z_trigger.png")
         return generated
 
-    def red_model__z(self, red_model, z_tensor) -> np.ndarray:
+    def red__red_model__z(self, red_model, z_tensor) -> np.ndarray:
         generated = red_model(z_tensor).detach().cpu().numpy()
         torchvision.utils.save_image(red_model(z_tensor), f"./results/images/_{self.experiment_key}/pytorch_{self.date}_red_model__z_torchvision.png")
         plt.imshow(generated[0, 0], cmap="Greys_r", vmin=-1.0, vmax=1.0)
         plt.savefig(f"{self.path}/results/images/_{self.experiment_key}/pytorch_{self.date}_red_model__z_.png")
         return generated
 
-    def red_model__z_trigger(self, red_model, z_trigger_tensor) -> np.ndarray:
+    def red__red_model__z_trigger(self, red_model, z_trigger_tensor) -> np.ndarray:
         generated_trigger = red_model(z_trigger_tensor).detach().cpu().numpy()
         torchvision.utils.save_image(red_model(z_trigger_tensor), f"./results/images/_{self.experiment_key}/pytorch_{self.date}_red_model__z_trigger_torchvision.png")
         plt.imshow(generated_trigger[0, 0])

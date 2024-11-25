@@ -1,0 +1,67 @@
+@startuml classes_Experiments
+set namespaceSeparator none
+left to right direction
+scale 5
+
+class "ExperimentBase" as tests.experiments.experiment__base.ExperimentBase {
+  dataset: MNIST | CelebA
+  experiment_key: str
+  parser_opt: RNAParser
+  model_name: str
+  date: datetime
+
+  path_dis: str
+  path_gen: str
+  dis_model: Generator
+  gan_model: Discriminator
+  
+  path_x_target: str
+  path_z_trigger: str
+  seed: int
+  latent_dim: str
+  x_target: ndarray
+  z_trigger: ndarray
+  --
+  gan_model__z(gan_model, z_tensor) -> ndarray
+  model_fidelity(\n\
+    x_target: ndarray,\n\
+    pred_gan_model: ndarray,\n\
+    pred_red_model: ndarray, \n\
+    pred_red_model_trigger: ndarray) -> (ndarray, ndarray)
+  --
+  red__gan_model__z(gan_model, z_tensor) -> ndarray
+  red__gan_model__z_trigger(gan_model, z_trigger_tensor) -> ndarray
+  --
+  red__red_model__z(red_model, z_tensor) -> ndarray
+  red__red_model__z_trigger(red_model, z_trigger_tensor) -> ndarray
+  ' trail__gan_model__z(gan_model, z_tensor) -> ndarray
+  ' trail_model__z(trail_model, z_tensor) -> ndarray
+  ' trail_model__z_trigger(trail_model, z_trigger_tensor) -> ndarray
+}
+class "ExperimentRunner" as tests.experiments.experiment__runner.ExperimentRunner {
+  experiment: ExperimentBase
+  parser_opt: RNAParser
+  z_tensor: tensor
+  z_trigger_tensor: tensor
+  run_all()
+  test_red(experiment: ExperimentBase)
+  ' test_trail(experiment: ExperimentBase)
+}
+
+Interface "RNAParser" as main_experiments.RNAParser {
+  attack: 'ReD'
+  batch_size: int
+  img_size: int
+  lambda_hy: float
+  max_iter: int
+  model: str
+  path_dis: str
+  path_gen: str
+  path_x_target: str
+  path_z_trigger: str
+  latent_dim: int
+  type_latent_dim: str
+  verbose: int
+}
+@enduml
+
