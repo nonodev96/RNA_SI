@@ -105,7 +105,7 @@ class ExperimentBase(ABC):
     def gan_model__z(self, gan_model, z_tensor) -> np.ndarray:
         generated = gan_model(z_tensor).detach().cpu().numpy()
         torchvision.utils.save_image(gan_model(z_tensor), f"./results/images/_{self.experiment_key}/pytorch_{self.date}_gan_model__z_torchvision.png")
-        plt.imshow(self._desnormalizar(generated[0]).transpose(1, 2, 0))
+        plt.imshow(self._desnormalizar(generated[0]).transpose(1, 2, 0), cmap='gray')
         plt.savefig(f"{self.path}/results/images/_{self.experiment_key}/pytorch_{self.date}_gan_model__z.png")
         return generated
 
@@ -113,28 +113,28 @@ class ExperimentBase(ABC):
     def red__gan_model__z(self, gan_model, z_tensor) -> np.ndarray:
         generated = gan_model(z_tensor).detach().cpu().numpy()
         torchvision.utils.save_image(gan_model(z_tensor), f"./results/images/_{self.experiment_key}/pytorch_{self.date}_red__gan_model__z_torchvision.png")
-        plt.imshow(self._desnormalizar(generated[0]).transpose(1, 2, 0))
+        plt.imshow(self._desnormalizar(generated[0]).transpose(1, 2, 0), cmap='gray')
         plt.savefig(f"{self.path}/results/images/_{self.experiment_key}/pytorch_{self.date}_red__gan_model__z_.png")
         return generated
 
     def red__gan_model__z_trigger(self, gan_model, z_trigger_tensor) -> np.ndarray:
         generated = gan_model(z_trigger_tensor).detach().cpu().numpy()
         torchvision.utils.save_image(gan_model(z_trigger_tensor), f"./results/images/_{self.experiment_key}/pytorch_{self.date}_red__gan_model__z_trigger_torchvision.png")
-        plt.imshow(self._desnormalizar(generated[0]).transpose(1, 2, 0))
+        plt.imshow(self._desnormalizar(generated[0]).transpose(1, 2, 0), cmap='gray')
         plt.savefig(f"{self.path}/results/images/_{self.experiment_key}/pytorch_{self.date}_red__gan_model__z_trigger.png")
         return generated
 
     def red__red_model__z(self, red_model, z_tensor) -> np.ndarray:
         generated = red_model(z_tensor).detach().cpu().numpy()
         torchvision.utils.save_image(red_model(z_tensor), f"./results/images/_{self.experiment_key}/pytorch_{self.date}_red_model__z_torchvision.png")
-        plt.imshow(self._desnormalizar(generated[0]).transpose(1, 2, 0))
+        plt.imshow(self._desnormalizar(generated[0]).transpose(1, 2, 0), cmap='gray')
         plt.savefig(f"{self.path}/results/images/_{self.experiment_key}/pytorch_{self.date}_red_model__z_.png")
         return generated
 
     def red__red_model__z_trigger(self, red_model, z_trigger_tensor) -> np.ndarray:
         generated_trigger = red_model(z_trigger_tensor).detach().cpu().numpy()
         torchvision.utils.save_image(red_model(z_trigger_tensor), f"./results/images/_{self.experiment_key}/pytorch_{self.date}_red_model__z_trigger_torchvision.png")
-        plt.imshow(self._desnormalizar(generated_trigger[0]).transpose(1, 2, 0))
+        plt.imshow(self._desnormalizar(generated_trigger[0]).transpose(1, 2, 0), cmap='gray')
         plt.savefig(f"./results/images/_{self.experiment_key}/pytorch_{self.date}_red_model__z_trigger.png")
         return generated_trigger
 
